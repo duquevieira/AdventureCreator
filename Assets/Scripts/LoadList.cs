@@ -2,27 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+public class Level
+{
+    private int sceneID;
+    private string levelName;
+
+    public Level(int id)
+    {
+        if (id == -1)
+        {
+            sceneID = -1;
+            levelName = "Empty";
+        }
+        else
+        {
+            sceneID = id;
+            //Não dá para obter o nome de uma cena unloaded por isso tenho que apanhar o path e tratar o nome
+            string[] path = SceneUtility.GetScenePathByBuildIndex(id).Split("/");
+            levelName = path[path.Length-1].Split(".")[0];
+        }
+    }
+
+    public string getName()
+    {
+        return levelName;
+    }
+
+    public int getID()
+    {
+        return sceneID;
+    }
+}
+
+
 
 public class LoadList : MonoBehaviour
 {
-    public List<string> levels = new List<string>();
-    public Text buttonTop, buttonMiddle, buttonBottom;
-    private int page = 0;
-    private int max = 0;
+    public List<Level> levels = new List<Level>();
+    public Scene LoadingScreen;
+    public Text buttonTopText, buttonMiddleText, buttonBottomText;
+    private int page;
+    private int max;
 
     void Start()
     {
-        //Debug Info (Using strings due to lack of level data structure)
-        levels.Add("level1");
-        levels.Add("level2");
-        levels.Add("level3");
-        levels.Add("level4");
-        levels.Add("level5");
-        levels.Add("level6");
+        populateLevels(levels);
+        page = 0;
         max = levels.Count;
-        buttonTop.text = levels[0 + page * 3];
-        buttonMiddle.text = levels[1 + page * 3];
-        buttonBottom.text = levels[2 + page * 3];
+        updateText();
+        GameObject.Find("LoadingScene").GetComponent<Scene1>();
     }
 
     public void nextPage()
@@ -30,9 +60,7 @@ public class LoadList : MonoBehaviour
         if (2 + (page+1) * 3 < max)
         {
             page++;
-            buttonTop.text = levels[0 + page * 3];
-            buttonMiddle.text = levels[1 + page * 3];
-            buttonBottom.text = levels[2 + page * 3];
+            updateText();
         }
     }
 
@@ -41,14 +69,43 @@ public class LoadList : MonoBehaviour
         if (page > 0)
         {
             page--;
-            buttonTop.text = levels[0 + page * 3];
-            buttonMiddle.text = levels[1 + page * 3];
-            buttonBottom.text = levels[2 + page * 3];
+            updateText();
         }
     }
 
-    public string getLevel(int index)
+    public void pressTop()
     {
-        return levels[index];
+        
+    }
+
+    public void pressMiddle()
+    {
+
+    }
+
+    public void pressBottom()
+    {
+
+    }
+
+
+    private void updateText()
+    {
+        buttonTopText.text = levels[0 + page * 3].getName();
+        buttonMiddleText.text = levels[1 + page * 3].getName();
+        buttonBottomText.text = levels[2 + page * 3].getName();
+    }
+
+    private void populateLevels(List<Level> levels)
+    {
+        int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
+        for(int i = 3; i < sceneCount; i++)
+        {
+            levels.Add(new Level(i));
+        }
+        for(int i = 0; i <= levels.Count%3; i++)
+        {
+            levels.Add(new Level(-1));
+        }
     }
 }

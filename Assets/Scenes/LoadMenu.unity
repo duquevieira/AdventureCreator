@@ -950,10 +950,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d33d0ea5ad56e459e02600a32ffcb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levels: []
-  buttonTop: {fileID: 1385037483}
-  buttonMiddle: {fileID: 453857072}
-  buttonBottom: {fileID: 586142434}
+  buttonTopText: {fileID: 1385037483}
+  buttonMiddleText: {fileID: 453857072}
+  buttonBottomText: {fileID: 586142434}
 --- !u!1001 &1941286435
 PrefabInstance:
   m_ObjectHideFlags: 0
