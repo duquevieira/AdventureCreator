@@ -5,13 +5,44 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
+    private GameObject current;
+    public GameObject MAIN;
+    public GameObject LOAD;
+    public GameObject LOADING;
+
+    void Start()
+    {
+        //Comença no Main Menu
+        current = MAIN;
+    }
+
     public void mainMenu()
     {
-        SceneManager.LoadScene(0);
+        if(current != MAIN)
+        {
+            current.SetActive(false);
+            current = MAIN;
+            current.SetActive(true);
+        }
     }
 
     public void loadMenu()
     {
-        SceneManager.LoadScene(1);
+        if (current != LOAD)
+        {
+            current.SetActive(false);
+            current = LOAD;
+            current.SetActive(true);
+        }
+    }
+
+    public void loadingScreen()
+    {
+        if (current != LOADING)
+        {
+            current.SetActive(false);
+            current = LOADING;
+            current.SetActive(true);
+        }
     }
 }

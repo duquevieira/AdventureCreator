@@ -6,14 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/StartMenuProt.unity
-    guid: acff3f88cb65cdf4f9b035d464ab8070
-  - enabled: 1
-    path: Assets/Scenes/LoadMenu.unity
+    path: Assets/Scenes/MainMenu.unity
     guid: e2aeaf058647da14b8d822c8eaf59e20
-  - enabled: 1
-    path: Assets/Scenes/LoadingScreen.unity
-    guid: 09ecb30c68a8f024bbdd13834f9f9fb7
   - enabled: 1
     path: Assets/Scenes/DuarteScene.unity
     guid: e098e3794dcf0f9478e99e1945a33cf2

@@ -41,7 +41,6 @@ public class Level
 public class LoadList : MonoBehaviour
 {
     public List<Level> levels = new List<Level>();
-    public Scene LoadingScreen;
     public Text buttonTopText, buttonMiddleText, buttonBottomText;
     private int page;
     private int max;
@@ -52,7 +51,6 @@ public class LoadList : MonoBehaviour
         page = 0;
         max = levels.Count;
         updateText();
-        GameObject.Find("LoadingScene").GetComponent<Scene1>();
     }
 
     public void nextPage()
@@ -73,22 +71,6 @@ public class LoadList : MonoBehaviour
         }
     }
 
-    public void pressTop()
-    {
-        
-    }
-
-    public void pressMiddle()
-    {
-
-    }
-
-    public void pressBottom()
-    {
-
-    }
-
-
     private void updateText()
     {
         buttonTopText.text = levels[0 + page * 3].getName();
@@ -99,7 +81,7 @@ public class LoadList : MonoBehaviour
     private void populateLevels(List<Level> levels)
     {
         int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
-        for(int i = 3; i < sceneCount; i++)
+        for(int i = 1; i < sceneCount; i++)
         {
             levels.Add(new Level(i));
         }

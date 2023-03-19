@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LoadingRadial : MonoBehaviour
+public class LoadMenuScript : MonoBehaviour
 {
     public GameObject loadingScreen;
     public Image loadingClock;
@@ -20,7 +20,7 @@ public class LoadingRadial : MonoBehaviour
 
         loadingScreen.SetActive(true);
 
-        while(!operation.isDone)
+        while (!operation.isDone)
         {
             float progressValue = Mathf.Clamp01(operation.progress / 0.9F);
 
@@ -29,5 +29,4 @@ public class LoadingRadial : MonoBehaviour
             yield return null;
         }
     }
-    
 }
