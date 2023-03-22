@@ -19,7 +19,7 @@ public class Level
         else
         {
             sceneID = id;
-            //N„o d· para obter o nome de uma cena unloaded por isso tenho que apanhar o path e tratar o nome
+            //N√£o d√° para obter o nome de uma cena unloaded por isso tenho que apanhar o path e tratar o nome
             string[] path = SceneUtility.GetScenePathByBuildIndex(id).Split("/");
             levelName = path[path.Length-1].Split(".")[0];
         }

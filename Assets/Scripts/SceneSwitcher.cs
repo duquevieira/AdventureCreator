@@ -11,7 +11,7 @@ public class SceneSwitcher : MonoBehaviour
 
     void Start()
     {
-        //Começ a no Main Menu
+        //ComeÃ§ a no Main Menu
         _current = main;
     }
 
