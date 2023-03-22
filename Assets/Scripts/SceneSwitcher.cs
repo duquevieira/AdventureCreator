@@ -8,11 +8,10 @@ public class SceneSwitcher : MonoBehaviour
     private GameObject current;
     public GameObject MAIN;
     public GameObject LOAD;
-    public GameObject LOADING;
 
     void Start()
     {
-        //Comença no Main Menu
+        //Começ a no Main Menu
         current = MAIN;
     }
 
@@ -32,16 +31,6 @@ public class SceneSwitcher : MonoBehaviour
         {
             current.SetActive(false);
             current = LOAD;
-            current.SetActive(true);
-        }
-    }
-
-    public void loadingScreen()
-    {
-        if (current != LOADING)
-        {
-            current.SetActive(false);
-            current = LOADING;
             current.SetActive(true);
         }
     }

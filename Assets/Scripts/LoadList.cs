@@ -42,6 +42,8 @@ public class LoadList : MonoBehaviour
 {
     public List<Level> levels = new List<Level>();
     public Text buttonTopText, buttonMiddleText, buttonBottomText;
+    public GameObject Manager;
+    private LoadMenuScript loadScript;
     private int page;
     private int max;
 
@@ -50,6 +52,7 @@ public class LoadList : MonoBehaviour
         populateLevels(levels);
         page = 0;
         max = levels.Count;
+        loadScript = (LoadMenuScript) Manager.GetComponent(typeof(LoadMenuScript));
         updateText();
     }
 
@@ -69,6 +72,21 @@ public class LoadList : MonoBehaviour
             page--;
             updateText();
         }
+    }
+
+    public void topLoad()
+    {
+        loadScript.loadScene(levels[page * 3].getID());
+    }
+
+    public void midLoad()
+    {
+        loadScript.loadScene(levels[1 + page * 3].getID());
+    }
+
+    public void botLoad()
+    {
+        loadScript.loadScene(levels[2 + page * 3].getID());
     }
 
     private void updateText()

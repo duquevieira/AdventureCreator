@@ -449,7 +449,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MAIN: {fileID: 2011662810}
   LOAD: {fileID: 1677488588}
-  LOADING: {fileID: 0}
 --- !u!114 &1865893908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,6 +475,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 207707177}
     m_Modifications:
+    - target: {fileID: 4911682470555086596, guid: b479ea14d407ea34c869f978b89b04e6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f51df474f1003454fb4f4a9e18e0a1f1, type: 3}
+    - target: {fileID: 4911682470555086597, guid: b479ea14d407ea34c869f978b89b04e6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 134.1399
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911682470555086597, guid: b479ea14d407ea34c869f978b89b04e6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 136.0723
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911682470555086597, guid: b479ea14d407ea34c869f978b89b04e6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000015259
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911682470555086597, guid: b479ea14d407ea34c869f978b89b04e6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0000019073
+      objectReference: {fileID: 0}
     - target: {fileID: 4911682471090233537, guid: b479ea14d407ea34c869f978b89b04e6, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -600,12 +619,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3430366079480814557, guid: 76e7b1414526c954dbca20daf879d4ba, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4071331875319030664, guid: 76e7b1414526c954dbca20daf879d4ba, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 207707176}
+    - target: {fileID: 4071331875319030666, guid: 76e7b1414526c954dbca20daf879d4ba, type: 3}
+      propertyPath: Manager
+      value: 
+      objectReference: {fileID: 1865893904}
     - target: {fileID: 4071331875319030666, guid: 76e7b1414526c954dbca20daf879d4ba, type: 3}
       propertyPath: LoadingScreen
       value: 
@@ -724,7 +747,7 @@ PrefabInstance:
       objectReference: {fileID: 1865893907}
     - target: {fileID: 6708364597123551300, guid: 76e7b1414526c954dbca20daf879d4ba, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76e7b1414526c954dbca20daf879d4ba, type: 3}
