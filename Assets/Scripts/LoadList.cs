@@ -43,57 +43,57 @@ public class LoadList : MonoBehaviour
     public List<Level> levels = new List<Level>();
     public Text buttonTopText, buttonMiddleText, buttonBottomText;
     public GameObject Manager;
-    private LoadMenuScript loadScript;
-    private int page;
-    private int max;
+    private LoadMenuScript _loadScript;
+    private int _page;
+    private int _max;
 
     void Start()
     {
         populateLevels(levels);
-        page = 0;
-        max = levels.Count;
-        loadScript = (LoadMenuScript) Manager.GetComponent(typeof(LoadMenuScript));
+        _page = 0;
+        _max = levels.Count;
+        _loadScript = (LoadMenuScript) Manager.GetComponent(typeof(LoadMenuScript));
         updateText();
     }
 
     public void nextPage()
     {
-        if (2 + (page+1) * 3 < max)
+        if (2 + (_page+1) * 3 < _max)
         {
-            page++;
+            _page++;
             updateText();
         }
     }
 
     public void prevPage()
     {
-        if (page > 0)
+        if (_page > 0)
         {
-            page--;
+            _page--;
             updateText();
         }
     }
 
     public void topLoad()
     {
-        loadScript.loadScene(levels[page * 3].getID());
+        _loadScript.loadScene(levels[_page * 3].getID());
     }
 
     public void midLoad()
     {
-        loadScript.loadScene(levels[1 + page * 3].getID());
+        _loadScript.loadScene(levels[1 + _page * 3].getID());
     }
 
     public void botLoad()
     {
-        loadScript.loadScene(levels[2 + page * 3].getID());
+        _loadScript.loadScene(levels[2 + _page * 3].getID());
     }
 
     private void updateText()
     {
-        buttonTopText.text = levels[0 + page * 3].getName();
-        buttonMiddleText.text = levels[1 + page * 3].getName();
-        buttonBottomText.text = levels[2 + page * 3].getName();
+        buttonTopText.text = levels[0 + _page * 3].getName();
+        buttonMiddleText.text = levels[1 + _page * 3].getName();
+        buttonBottomText.text = levels[2 + _page * 3].getName();
     }
 
     private void populateLevels(List<Level> levels)
