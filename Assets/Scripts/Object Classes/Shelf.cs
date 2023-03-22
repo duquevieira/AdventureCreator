@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Table : Object
+public class Shelf : Object
 {
+
     public override void setAttributes()
     {
         canBeAboveOf = new List<Object>();
@@ -18,10 +19,10 @@ public class Table : Object
         {
             adjacentAvailablePositions[i] = true;
         }
-        adjacentAvailablePositions[1] = false;
-        adjacentAvailablePositions[3] = false;
-        adjacentAvailablePositions[5] = false;
-        adjacentAvailablePositions[7] = false;
+        adjacentAvailablePositions[0] = false;
+        adjacentAvailablePositions[2] = false;
+        adjacentAvailablePositions[4] = false;
+        adjacentAvailablePositions[6] = false;
     }
 
     public override List<Object> getCanBeAboveOf()
@@ -33,5 +34,4 @@ public class Table : Object
     {
         return this.adjacentAvailablePositions;
     }
-
 }

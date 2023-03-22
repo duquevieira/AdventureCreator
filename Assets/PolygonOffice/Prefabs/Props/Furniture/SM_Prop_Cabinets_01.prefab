@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 65275772663651944}
   - component: {fileID: 889860862534745581}
   - component: {fileID: -3039317200820281509}
+  - component: {fileID: 1344937570413378136}
   m_Layer: 0
   m_Name: SM_Prop_Cabinets_01
   m_TagString: Untagged
@@ -131,3 +132,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe6b70c115d019c44a46b81f1f7a327b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1344937570413378136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227193648296024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c96a9864591df49aa902caf7e79457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canBeAboveOf: []
+  canBeBelowOf: []
+  adjacentAvailablePositions: 

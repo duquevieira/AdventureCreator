@@ -443,10 +443,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridLayout: {fileID: 613643066}
   mainTileMap: {fileID: 97893988}
-  cantSpawnTile: {fileID: 11400000, guid: 6ca8a02503ad7d84a92b78d5e5ce698c, type: 2}
   objects:
   - {fileID: 1806102558924936, guid: 1adef6fa84d11fd498808191074be3c6, type: 3}
   - {fileID: 1528432388645246, guid: ef6e42722a04b8545ab910932b7ceefe, type: 3}
+  - {fileID: 1227193648296024, guid: 15fa9e280fc90fe408f14660ac85d0f8, type: 3}
 --- !u!4 &855072684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4631730319309726, guid: 5a2b2aefafe7a2f4bb79271e2b6b2e62, type: 3}

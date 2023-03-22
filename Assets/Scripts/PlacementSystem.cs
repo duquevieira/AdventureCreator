@@ -188,6 +188,12 @@ public class PlacementSystem : MonoBehaviour
             table.setAdjacentAvailablePositions();
             availablePositions = table.getAdjacentAvailablePositions();
         }
+        if (obj.TryGetComponent<Shelf>(out Shelf shelf))
+        {
+
+            shelf.setAdjacentAvailablePositions();
+            availablePositions = shelf.getAdjacentAvailablePositions();
+        }
         return availablePositions;
     }
 
