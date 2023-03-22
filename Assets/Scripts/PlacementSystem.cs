@@ -1,14 +1,19 @@
 using JetBrains.Annotations;
 using MoreMountains.Tools;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Xml.Linq;
+using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 //www.youtube.com/watch?v=rKp9fWvmIww&t=342s
 
-//Notas: Sala nao e escalavel; So o ultimo objeto e pode rodar; Os objetos tao a ser postos sempre na mesma ordem; O random da posicao dos objetos ta feito mal; 
+//Problemas: Destroy nao funciona; so calcula posicoes a volta e nao embaixo ou em cima; as posicoes a volta nao dependem da relacao entre 2 objetos (exemplo: mesa nao pode ter nada na diagonal agora, mas poderia so ter prateleiras na diagonal
 
 public class PlacementSystem : MonoBehaviour
 {
@@ -16,29 +21,31 @@ public class PlacementSystem : MonoBehaviour
     public GridLayout gridLayout;
     private Grid grid;
     [SerializeField] private Tilemap mainTileMap;
-    //[SerializeField] private TileBase usedTile;
     private PlaceableObject objectToPlace;
-    public GameObject[] objects;
-    private List<Vector3> tileWorldLocations;
+    public List<GameObject> objects;
     private List<GameObject> objectsInScene;
+    private List<Vector3Int> availableTiles;
+    private List<Vector3Int> tilesWithObjects;
 
     private void Awake()
     {
         current = this;
         grid = gridLayout.GetComponent<Grid>();
         objectsInScene = new List<GameObject>();
+        availableTiles = new List<Vector3Int>();
+        tilesWithObjects = new List<Vector3Int>();
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            SpawnOnAllTiles();
+            SpawnObjectsWithRules();
         }
         if (!objectToPlace)
         {
             return;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        /*if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             objectToPlace.Rotate();
         }
@@ -53,6 +60,17 @@ public class PlacementSystem : MonoBehaviour
             else
             {
                 Destroy(objectToPlace.gameObject);
+            }
+        }*/
+    }
+
+    private void Start()
+    {
+        for (int i = -5; i < 5; i++)
+        {
+            for (int j = -5; j < 5; j++)
+            {
+                availableTiles.Add(new Vector3Int(i, 0, j));
             }
         }
     }
@@ -72,128 +90,153 @@ public class PlacementSystem : MonoBehaviour
 
     public Vector3 SnapCoordinateToGrid(Vector3 position)
     {
-        Vector3Int cellPos = gridLayout.WorldToCell(position);
+        Vector3Int cellPos = mainTileMap.WorldToCell(position);
         position = grid.GetCellCenterWorld(cellPos);
         return position;
     }
 
-    public void SpawnObjectsRandomlyAldrabado(GameObject[] objects)
+    private void DestroyAllObjects()
     {
         for (int j = 0; j < objectsInScene.Count; j++)
         {
-            Destroy(objectsInScene[j]);
+            DestroyImmediate(objectsInScene[j],true);
         }
         objectsInScene = new List<GameObject>();
-        int i = 0;
-        List<Vector3> usedTiles = new List<Vector3>();
-        while (i < objects.Length)
-        {
-            Vector3 randomTile = new Vector3(Random.Range(-5, 4), 0, Random.Range(-5, 4));
-            if (!usedTiles.Contains(randomTile))
-            {
-                Vector3 position = SnapCoordinateToGrid(randomTile);
-                GameObject obj = Instantiate(objects[i], position, Quaternion.identity);
-                obj.AddComponent<PlaceableObject>();
-                objectToPlace = obj.GetComponent<PlaceableObject>();
-                Debug.Log(objectToPlace);
-                obj.AddComponent<ObjectDrag>();
-                usedTiles.Add(randomTile);
-                objectsInScene.Add(obj);
-                i++;
-            }
-        }
     }
 
-    public void SpawnOnAllTiles()
+    public void SpawnObjectsWithRules()
     {
-        for (int j = 0; j < objectsInScene.Count; j++)
+        DestroyAllObjects();
+        while (availableTiles.Count > 0)
         {
-            Destroy(objectsInScene[j]);
-        }
-        objectsInScene = new List<GameObject>();
-        List<Vector3> usedTiles = new List<Vector3>();
-        for (int i = -5; i < 5; i++)
-        {
-            for (int j = -5; j < 5; j++)
+            List<GameObject> objectsToTry = objects;
+            bool placedObject = false;  
+            //List<Object> canBeAboveOf = getObjectVerticalAttributes(obj);
+            //List<Object> canBeBelowOf = getObjectAttributes(obj)[1];
+            //obj.GetComponent<PlaceableObject>();
+            //Vector3Int start = gridLayout.WorldToCell(randomTile);   
+            //MyTakeArea(randomTile, availableAdjacentPositions);
+            Vector3Int randomTile = availableTiles[Random.Range(0, availableTiles.Count)];
+            while (objectsToTry.Count > 0 && !placedObject)
             {
-                int objectIndex = Random.Range(0, objects.Length);
-                Vector3 tile = new Vector3(i, 0, j);
-                if (!usedTiles.Contains(tile))
+                bool objectIsValid = true;
+                int objectIndex = Random.Range(0, objectsToTry.Count);
+                GameObject obj = objects[objectIndex];
+                bool[] availableAdjacentPositions = getObjectAvailableAdjacentPosition(obj);
+                List<Vector3Int> nonAvailableTiles = checkAvailableArea(randomTile, availableAdjacentPositions);
+                for (int j =0; j< nonAvailableTiles.Count; j++)
                 {
-                    Vector3 position = SnapCoordinateToGrid(tile);
-                    GameObject obj = Instantiate(objects[objectIndex], position, Quaternion.identity);
-                    obj.AddComponent<PlaceableObject>();
-                    objectToPlace = obj.GetComponent<PlaceableObject>();
-                    Debug.Log(objectToPlace);
-                    obj.AddComponent<ObjectDrag>();
-                    usedTiles.Add(tile);
-                    objectsInScene.Add(obj);
+                    if (tilesWithObjects.Contains(nonAvailableTiles[j]))
+                    {
+                        objectIsValid = false;
+                        break;
+                    }
                 }
-            }
+                if (objectIsValid)
+                {
+                    Vector3 position = SnapCoordinateToGrid(randomTile);
+                    Instantiate(objects[objectIndex], position, Quaternion.identity);
+                    objectsInScene.Add(obj);
+                    objectsToTry = objects;
+                    for (int i = 0; i < nonAvailableTiles.Count; i++)
+                    {
+                        if (availableTiles.Contains(nonAvailableTiles[i]))
+                        {
+                            availableTiles.Remove(nonAvailableTiles[i]);
+                        }
+                    }
+                    tilesWithObjects.Add(randomTile);
+                    placedObject = true;
+                }
+                else
+                {
+                    // try another object
+                    objectsToTry.Remove(obj);
+                    if (objectsToTry.Count <= 0)
+                    {
+                        availableTiles.Remove(randomTile);
+                    }
+                }
+            }            
         }
+        Debug.Log("There is no more available tiles to place the object");
     }
 
-    public void SpawnObjectsRandomly(GameObject[] objects)
+    /*private List<Object> getObjectVerticalAttributes(GameObject obj)//, bool[] adjacentAvailablePositions)
     {
-        tileWorldLocations = new List<Vector3>();
-        foreach (var pos in mainTileMap.cellBounds.allPositionsWithin)
+        List<Object> attributes = new List<Object>();
+        if (obj.TryGetComponent<Chair>(out Chair chair))
         {
-            Vector3Int localPlace = new Vector3Int(pos.x, pos.y, pos.z);
-            Vector3 place = mainTileMap.CellToWorld(localPlace);
-            if (mainTileMap.HasTile(localPlace))
-            {
-                tileWorldLocations.Add(place);
-            }
-        }
-    }
-
-    /* public void InitializeFloor(GameObject floor)
-     {
-         BoundsInt bounds = mainTileMap.cellBounds;
-         TileBase[] allTiles = mainTileMap.GetTilesBlock(bounds);
-         for (int x = 0; x< bounds.size.x; x++)
-         {
-             for (int y = 0; y < bounds.size.y; y++)
-             {
-                 TileBase tile = allTiles[x + y * bounds.size.x];
-                 Instantiate(prefab, tile, Quaternion.identity);
-             }
-         }
-     }*/
-
-    private static TileBase[] GetTilesBlock(BoundsInt area, Tilemap tilemap)
-    {
-        TileBase[] array = new TileBase[area.size.x * area.size.y * area.size.z];
-        int counter = 0;
-        foreach (var v in area.allPositionsWithin)
-        {
-            Vector3Int pos = new Vector3Int(v.x, v.y, 0);
-            array[counter] = tilemap.GetTile(pos);
-            counter++;
-        }
-        return array;
-    }
-
-    private bool CanBePlaced(PlaceableObject placeableObject)
-    {
-        BoundsInt area = new BoundsInt();
-        area.position = gridLayout.WorldToCell(objectToPlace.getStartPosition());
-        //area.size = placeableObject.Size;
-        TileBase[] baseArray = GetTilesBlock(area, mainTileMap);
-        /*foreach (var b in baseArray)
-        {
-            if (b == whiteTile)
-            {
-                return false;
-            }
-        } */
-        return true;
-    }
-
-    /*public void TakeArea(Vector3Int start, Vector3 size)
-    {
-        mainTileMap.BoxFill(start, whiteTile, start.x, start.y, 
-            start.x + start.x, start.y + start.y);
+            chair.setAttributes();
+            attributes = chair.getCanBeAboveOf();
+            //attributes[1] = chair.getCanBeBelowOf();
+            //adjacentAvailablePositions = chair.getAdjacentAvailablePositions();
+        }        
+        return attributes;
     }*/
+
+    private bool[] getObjectAvailableAdjacentPosition(GameObject obj)//, bool[] adjacentAvailablePositions)
+    {
+        bool[] availablePositions = new bool[8];
+        if (obj.TryGetComponent<Chair>(out Chair chair))
+        {
+            chair.setAdjacentAvailablePositions();
+            availablePositions = chair.getAdjacentAvailablePositions();
+        }
+        if (obj.TryGetComponent<Table>(out Table table))
+        {
+            table.setAdjacentAvailablePositions();
+            availablePositions = table.getAdjacentAvailablePositions();
+        }
+        return availablePositions;
+    }
+
+    private List<Vector3Int> checkAvailableArea(Vector3Int newPlacement, bool[] objectToPlaceAvailablePositions)
+    {
+        List<Vector3Int> nonAvailableTiles = new List<Vector3Int>();
+        Vector3Int adjacentPositionsUsed = new Vector3Int();
+        nonAvailableTiles.Add(newPlacement);
+        if (objectToPlaceAvailablePositions[0] == false)
+        {
+            adjacentPositionsUsed = newPlacement + new Vector3Int(0, 0, 1);
+            nonAvailableTiles.Add(adjacentPositionsUsed);
+        }
+        if (objectToPlaceAvailablePositions[1] == false)
+        {
+            adjacentPositionsUsed = newPlacement + new Vector3Int(1, 0, 1);
+            nonAvailableTiles.Add(adjacentPositionsUsed);
+        }
+        if (objectToPlaceAvailablePositions[2] == false)
+        {
+            adjacentPositionsUsed = newPlacement + new Vector3Int(1, 0, 0);
+            nonAvailableTiles.Add(adjacentPositionsUsed);
+        }
+        if (objectToPlaceAvailablePositions[3] == false)
+        {
+            adjacentPositionsUsed = newPlacement + new Vector3Int(1, 0, -1);
+            nonAvailableTiles.Add(adjacentPositionsUsed);
+        }
+        if (objectToPlaceAvailablePositions[4] == false)
+        {
+            adjacentPositionsUsed = newPlacement + new Vector3Int(0, 0, -1);
+            nonAvailableTiles.Add(adjacentPositionsUsed);
+        }
+        if (objectToPlaceAvailablePositions[5] == false)
+        {
+            adjacentPositionsUsed = newPlacement + new Vector3Int(-1, 0, -1);
+            nonAvailableTiles.Add(adjacentPositionsUsed);
+        }
+        if (objectToPlaceAvailablePositions[6] == false)
+        {
+            adjacentPositionsUsed = newPlacement + new Vector3Int(-1, 0, 0);
+            nonAvailableTiles.Add(adjacentPositionsUsed);
+        }
+        if (objectToPlaceAvailablePositions[7] == false)
+        {
+            adjacentPositionsUsed = newPlacement + new Vector3Int(-1, 0, 1);
+            nonAvailableTiles.Add(adjacentPositionsUsed);
+        }
+        return nonAvailableTiles;
+    }
 
 }

@@ -149,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97893985}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -215,15 +215,39 @@ Tilemap:
   m_Enabled: 1
   m_Tiles: {}
   m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
+  m_TileAssetArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileMatrixArray:
+  - m_RefCount: 0
+    m_Data:
+      e00: 6.8204215e+13
+      e01: 0
+      e02: -5.877494e-39
+      e03: -5.877494e-39
+      e10: 6.39e-43
+      e11: 0
+      e12: 6.38e-43
+      e13: 6.38e-43
+      e20: -3.5945916e+33
+      e21: 3.9201502e-33
+      e22: 9.293156e-29
+      e23: -8.75599e-40
+      e30: 4.5905e-41
+      e31: 6.43e-43
+      e32: 6.39e-43
+      e33: 6.42e-43
+  m_TileColorArray:
+  - m_RefCount: 0
+    m_Data: {r: 5.582e-41, g: 5.582e-41, b: 5.582e-41, a: 5.582e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
+  m_Origin: {x: -5, y: -6, z: 0}
+  m_Size: {x: 19, y: 12, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 1
   m_TileOrientationMatrix:
@@ -419,9 +443,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridLayout: {fileID: 613643066}
   mainTileMap: {fileID: 97893988}
+  cantSpawnTile: {fileID: 11400000, guid: 6ca8a02503ad7d84a92b78d5e5ce698c, type: 2}
   objects:
   - {fileID: 1806102558924936, guid: 1adef6fa84d11fd498808191074be3c6, type: 3}
-  - {fileID: 1227193648296024, guid: 15fa9e280fc90fe408f14660ac85d0f8, type: 3}
   - {fileID: 1528432388645246, guid: ef6e42722a04b8545ab910932b7ceefe, type: 3}
 --- !u!4 &855072684 stripped
 Transform:
