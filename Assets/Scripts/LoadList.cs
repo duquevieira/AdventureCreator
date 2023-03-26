@@ -11,16 +11,13 @@ public class Level
 
     public Level(int id)
     {
-        if (id == -1)
-        {
-            sceneID = -1;
-            levelName = "Empty";
-        }
+        sceneID = id;
+
+        if (sceneID == -1) levelName = "Empty";
         else
         {
-            sceneID = id;
             //Não dá para obter o nome de uma cena unloaded por isso tenho que apanhar o path e tratar o nome
-            string[] path = SceneUtility.GetScenePathByBuildIndex(id).Split("/");
+            string[] path = SceneUtility.GetScenePathByBuildIndex(sceneID).Split("/");
             levelName = path[path.Length-1].Split(".")[0];
         }
     }
@@ -40,7 +37,12 @@ public class Level
 
 public class LoadList : MonoBehaviour
 {
-    public List<Level> levels = new List<Level>();
+    private static int TOP_OFFSET = 0;
+    private static int MID_OFFSET = 1;
+    private static int BOT_OFFSET = 2;
+    private static int LEVELS_PER_PAGE = 3;
+
+    public List<Level> levels;
     public Text buttonTopText, buttonMiddleText, buttonBottomText;
     public GameObject Manager;
     private LoadMenuScript _loadScript;
@@ -49,6 +51,7 @@ public class LoadList : MonoBehaviour
 
     void Start()
     {
+        levels = new List<Level>();
         populateLevels(levels);
         _page = 0;
         _max = levels.Count;
@@ -58,7 +61,7 @@ public class LoadList : MonoBehaviour
 
     public void nextPage()
     {
-        if (2 + (_page+1) * 3 < _max)
+        if (BOT_OFFSET + (_page+1) * LEVELS_PER_PAGE < _max)
         {
             _page++;
             updateText();
@@ -76,24 +79,24 @@ public class LoadList : MonoBehaviour
 
     public void topLoad()
     {
-        _loadScript.loadScene(levels[_page * 3].getID());
+        _loadScript.loadScene(levels[TOP_OFFSET + _page * LEVELS_PER_PAGE].getID());
     }
 
     public void midLoad()
     {
-        _loadScript.loadScene(levels[1 + _page * 3].getID());
+        _loadScript.loadScene(levels[MID_OFFSET + _page * LEVELS_PER_PAGE].getID());
     }
 
     public void botLoad()
     {
-        _loadScript.loadScene(levels[2 + _page * 3].getID());
+        _loadScript.loadScene(levels[BOT_OFFSET + _page * LEVELS_PER_PAGE].getID());
     }
 
     private void updateText()
     {
-        buttonTopText.text = levels[0 + _page * 3].getName();
-        buttonMiddleText.text = levels[1 + _page * 3].getName();
-        buttonBottomText.text = levels[2 + _page * 3].getName();
+        buttonTopText.text = levels[TOP_OFFSET + _page * LEVELS_PER_PAGE].getName();
+        buttonMiddleText.text = levels[MID_OFFSET + _page * LEVELS_PER_PAGE].getName();
+        buttonBottomText.text = levels[BOT_OFFSET + _page * LEVELS_PER_PAGE].getName();
     }
 
     private void populateLevels(List<Level> levels)
