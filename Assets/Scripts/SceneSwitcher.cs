@@ -37,4 +37,14 @@ public class SceneSwitcher : MonoBehaviour
             _current.SetActive(true);
         }
     }
+
+    public void disableMenu()
+    {
+        _current.SetActive(false);
+    }
+
+    public void enableMenu()
+    {
+        _current.SetActive(true);
+    }
 }
