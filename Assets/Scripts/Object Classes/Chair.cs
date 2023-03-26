@@ -6,17 +6,28 @@ public class Chair : Object
 {
     public override void setAttributes()
     {
-        canBeAboveOf = new List<Object>();
-        canBeAboveOf.Add(new Rug());
+        CanBeAboveOf = new List<Object>
+        {
+            new Rug()
+        };
+    }
+
+    public override void setAdjacentAvailablePositions()
+    {
+        AdjacentAvailablePositions = new bool[8];
+        for (int i = 0; i < AdjacentAvailablePositions.Length; i++)
+        {
+            AdjacentAvailablePositions[i] = true;
+        }
     }
 
     public override List<Object> getCanBeAboveOf()
     {
-        return this.canBeAboveOf;
+        return this.CanBeAboveOf;
     }
 
     public override bool[] getAdjacentAvailablePositions()
     {
-        return this.adjacentAvailablePositions;
+        return this.AdjacentAvailablePositions;
     }
 }

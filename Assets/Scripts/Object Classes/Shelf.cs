@@ -7,31 +7,33 @@ public class Shelf : Object
 
     public override void setAttributes()
     {
-        canBeAboveOf = new List<Object>();
-        canBeAboveOf.Add(new Rug());
+        CanBeAboveOf = new List<Object>
+        {
+            new Rug()
+        };
         //canBeBelowOf.Add(new Prop());
     }
 
     public override void setAdjacentAvailablePositions()
     {
-        adjacentAvailablePositions = new bool[8];
-        for (int i = 0; i < adjacentAvailablePositions.Length; i++)
+        AdjacentAvailablePositions = new bool[8];
+        for (int i = 0; i < AdjacentAvailablePositions.Length; i++)
         {
-            adjacentAvailablePositions[i] = true;
+            AdjacentAvailablePositions[i] = true;
         }
-        adjacentAvailablePositions[0] = false;
-        adjacentAvailablePositions[2] = false;
-        adjacentAvailablePositions[4] = false;
-        adjacentAvailablePositions[6] = false;
+        AdjacentAvailablePositions[0] = false;
+        AdjacentAvailablePositions[2] = false;
+        AdjacentAvailablePositions[4] = false;
+        AdjacentAvailablePositions[6] = false;
     }
 
     public override List<Object> getCanBeAboveOf()
     {
-        return this.canBeAboveOf;
+        return this.CanBeAboveOf;
     }
 
     public override bool[] getAdjacentAvailablePositions()
     {
-        return this.adjacentAvailablePositions;
+        return this.AdjacentAvailablePositions;
     }
 }

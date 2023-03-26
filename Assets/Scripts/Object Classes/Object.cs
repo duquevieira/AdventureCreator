@@ -5,18 +5,19 @@ using UnityEngine;
 
 public class Object : MonoBehaviour
 {
-    [HideInInspector] public List<Object> canBeAboveOf;
-    [HideInInspector] public List<Object> canBeBelowOf;
-    [HideInInspector] public bool[] adjacentAvailablePositions;
+    [HideInInspector] public List<Object> CanBeAboveOf;
+    [HideInInspector] public List<Object> CanBeBelowOf;
+    [HideInInspector] public bool[] AdjacentAvailablePositions;
+    //[HideInInspector] public Dictionary<Object, float> adjacentAvailablePositions;
 
-    public virtual List<Object> getCanBeAboveOf() { return canBeAboveOf; }
-    public virtual List<Object> getCanBeBelowOf() { return canBeBelowOf; }
-    public virtual bool[] getAdjacentAvailablePositions() { return adjacentAvailablePositions; }
+    public virtual List<Object> getCanBeAboveOf() { return CanBeAboveOf; }
+    public virtual List<Object> getCanBeBelowOf() { return CanBeBelowOf; }
+    public virtual bool[] getAdjacentAvailablePositions() { return AdjacentAvailablePositions; }
     public virtual void setAdjacentAvailablePositions()
     {
-        for (int i = 0; i < adjacentAvailablePositions.Length; i++)
+        for (int i = 0; i < AdjacentAvailablePositions.Length; i++)
         {
-            adjacentAvailablePositions[i] = true;
+            AdjacentAvailablePositions[i] = true;
         }
     }
     public virtual void setAttributes() { }

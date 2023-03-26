@@ -5,17 +5,19 @@ using UnityEngine;
 public class ObjectDrag : MonoBehaviour
 {
 
-    private Vector3 offset;
+    private Vector3 _offset;
 
+    // Select an object pressing the mouse
     private void OnMouseDown()
     {
-        offset = transform.position - PlacementSystem.getMouseWorldPosition();
+        _offset = transform.position - PlacementSystem.getMouseWorldPosition();
     }
 
+    // Move an object dragging the mouse
     private void OnMouseDrag()
     {
-        Vector3 pos = PlacementSystem.getMouseWorldPosition() + offset;
-        transform.position = PlacementSystem.current.SnapCoordinateToGrid(pos);
+        Vector3 pos = PlacementSystem.getMouseWorldPosition() + _offset;
+        transform.position = PlacementSystem.Current.SnapCoordinateToGrid(pos);
         if (Input.GetKeyDown(KeyCode.Delete))
         {
             Destroy(this.gameObject);

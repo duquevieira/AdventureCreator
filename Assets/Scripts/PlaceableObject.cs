@@ -6,18 +6,21 @@ using UnityEngine;
 public class PlaceableObject : MonoBehaviour
 {
 
-    public bool placed { get; private set; }
+    public bool Placed { get; private set; }
 
+    // Returns the position of the object
     public Vector3 getStartPosition()
     {
         return this.transform.position;
     }
+    // Events that happen when an object is placed
     public virtual void Place()
     {
-        placed = true;
+        Placed = true;
         // Invoke events on placement
     }
 
+    // Rotate the object
     public void Rotate()
     {
         transform.Rotate(new Vector3(0, 90, 0));
