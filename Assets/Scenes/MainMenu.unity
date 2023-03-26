@@ -447,8 +447,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cedf26aec8b25b4c987d015c22227c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MAIN: {fileID: 2011662810}
-  LOAD: {fileID: 1677488588}
+  _main: {fileID: 2011662810}
+  _load: {fileID: 1677488588}
 --- !u!114 &1865893908
 MonoBehaviour:
   m_ObjectHideFlags: 0
