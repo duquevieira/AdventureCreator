@@ -11,12 +11,14 @@ public class PlayerHandlerScript : MonoBehaviour
     private static string ITEMS_TAG = "items";
     private static string ITEMS_HIGH = "pickupHigh";
     private static string ITEMS_LOW = "pickupGround";
-    private static string CONTROLLER_TAG = "GameController";
 
     //Default value should be 2.5
     [SerializeField]
     private float speed;
-    
+    //Script responsible for processing the events triggered
+    [SerializeField]
+    private StoryEngineScript storyEngineScript;
+
     //Game camera
     private new Camera camera;
     //Player object
@@ -29,6 +31,18 @@ public class PlayerHandlerScript : MonoBehaviour
     private bool canMove;
     //Target coordinates of Player movement
     private Vector3 target;
+
+    //Public function that sets up the Player from StoryEngine
+    public void Setup(Camera camera, GameObject player, string name)
+    {
+        this.camera = camera;
+        this.player = player;
+        character = player.transform.Find(name).gameObject;
+        character.SetActive(true);
+        playerAnimator = character.GetComponent<Animator>();
+        target = player.transform.position;
+        canMove = true;
+    }
 
     void Update()
     {
@@ -84,7 +98,6 @@ public class PlayerHandlerScript : MonoBehaviour
         //If not an item send information to StoryEngine to process
         else
         {
-            StoryEngineScript storyEngineScript = GameObject.FindWithTag(CONTROLLER_TAG).GetComponent<StoryEngineScript>();
             storyEngineScript.ProcessEntry(other);
         }
     }
@@ -94,18 +107,6 @@ public class PlayerHandlerScript : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         animator.SetBool(name, false);
-        canMove = true;
-    }
-
-    //Public function that sets up the Player from StoryEngine
-    public void Setup(Camera camera, GameObject player, string name)
-    {
-        this.camera = camera;
-        this.player = player;
-        character = player.transform.Find(name).gameObject;
-        character.SetActive(true);
-        playerAnimator = character.GetComponent<Animator>();
-        target = player.transform.position;
         canMove = true;
     }
 }

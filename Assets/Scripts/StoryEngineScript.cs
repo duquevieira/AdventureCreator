@@ -4,50 +4,47 @@ using UnityEngine;
 using MoreMountains.Feedbacks;
 using MoreMountains.InventoryEngine;
 using MoreMountains.TopDownEngine;
+using static UnityEditor.Progress;
 
 public class StoryEngineScript : MonoBehaviour
 {
     //String constants
     private static string DOOR = "Door";
     private static string ANIMATION_DOOR = "clicked";
-    private static string PLAYER_INVENTORY = "CharacterInventory";
     private static string KEY = "KeyExample";
+    private static string EXAMPLE = "ExampleItem";
 
     [SerializeField]
     private new Camera camera;
     [SerializeField]
     private GameObject player;
+    [SerializeField]
+    private Inventory inventory;
 
-    private List<StoryboardEvent> story;
-    private List<StoryboardEvent> availableEvents;
+    private List<ItemGroup> storyItems;
+    private Storyboard storyboard;
 
     void Start()
     {
-        story = new List<StoryboardEvent>();
-        availableEvents = new List<StoryboardEvent>();
-        //int id, string actionName, string colliderName, string inventoryItemName,
-        //int inventoryItemChange, string dialog, List<int> nextEvents
+        storyboard = new Storyboard();
+        storyItems = new List<ItemGroup>();
+        
+        //int id, string colliderName, string dialog
+        StoryboardStep event0 = new StoryboardStep(0, "Pot", "pot dialog");
+        event0.addRequirement(new ItemGroup(EXAMPLE, 1));
+        event0.addAcquires(new ItemGroup("id1", 10));
 
-        StoryboardEvent event0 = new StoryboardEvent(0, "actionName", "Pot", "inventoryItemName", 0, "dialog", new List<int>());
-        event0.addNextEvent(1);
-        StoryboardEvent event1 = new StoryboardEvent(1, "actionName", "TallGrass", "inventoryItemName", 0, "dialog", new List<int>());
-        event1.addNextEvent(2);
-        event1.addNextEvent(3);
-        StoryboardEvent event2 = new StoryboardEvent(2, "actionName", "Pot", "inventoryItemName", 0, "dialog", new List<int>());
-        event2.addNextEvent(4);
-        StoryboardEvent event3 = new StoryboardEvent(3, "actionName", "TallGrass", "inventoryItemName", 0, "dialog", new List<int>());
-        event3.addNextEvent(5);
-        StoryboardEvent event4 = new StoryboardEvent(4, "actionName", "Pot", "inventoryItemName", 0, "dialog", new List<int>());
-        StoryboardEvent event5 = new StoryboardEvent(5, "actionName", "TallGrass", "inventoryItemName", 0, "dialog", new List<int>());
+        StoryboardStep event1 = new StoryboardStep(1, "TallGrass", "grass dialog");
+        event1.addRequirement(new ItemGroup("id1", 1));
+        event1.addRequirement(new ItemGroup(EXAMPLE, 5));
+        event1.addAcquires(new ItemGroup("id2", 10));
 
-        story.Add(event0); story.Add(event1); story.Add(event2); story.Add(event3); story.Add(event4); story.Add(event5);
-        availableEvents.Add(event0);
+        storyboard.addStep(event0);
+        storyboard.addStep(event1);
 
-        //Pot, TallGrass
         //Santa, FWorker, MWorker, FAttendant, MAttendant, FClerk, MClerk, FGym, MGym, MHunter, FMusician, MMusician, FShopper, MShopper
         player.GetComponent<PlayerHandlerScript>().Setup(camera, player, "FMusician");
     }
-
     void Update()
     {
         //Check if Player Left-clicked a door in range and in possession of the required key
@@ -59,7 +56,7 @@ public class StoryEngineScript : MonoBehaviour
             {
                 if (hit.collider.name == DOOR &&
                 Vector3.Distance(player.transform.position, hit.collider.transform.position) < 3 &&
-                GameObject.Find(PLAYER_INVENTORY).GetComponent<Inventory>().GetQuantity(KEY) > 0)
+                inventory.GetQuantity(KEY) > 0)
                 {
                     //Open the door
                     Animator doorAnimator = hit.collider.GetComponent<Animator>();
@@ -70,18 +67,37 @@ public class StoryEngineScript : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            foreach (StoryboardEvent iteratedEvent in availableEvents)
+        //DEBUGGING ITEMS
+        if (Input.GetKeyDown(KeyCode.T)) {
+            Debug.Log(Time.realtimeSinceStartup + " ----------------------------------------");
+            Debug.Log(Time.realtimeSinceStartup + " Story Items:");
+            foreach (ItemGroup storyItem in storyItems)
             {
-                Debug.Log(Time.realtimeSinceStartup + " ID: " + iteratedEvent.getId() + " Collider: " + iteratedEvent.getColliderName());
+                Debug.Log(Time.realtimeSinceStartup + " Story item name:" + storyItem.getItemName());
+                Debug.Log(Time.realtimeSinceStartup + " Story item amount:" + storyItem.getItemAmount());
             }
         }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            foreach (StoryboardEvent iteratedEvent in story)
+        //DEBUGGING STORY
+        if (Input.GetKeyDown(KeyCode.S)) {
+            Debug.Log(Time.realtimeSinceStartup + " ----------------------------------------");
+            Debug.Log(Time.realtimeSinceStartup + " Story Steps:");
+            foreach (StoryboardStep step in storyboard.getStorySteps())
             {
-                Debug.Log(Time.realtimeSinceStartup + " ID: " + iteratedEvent.getId() + " Collider: " + iteratedEvent.getColliderName());
+                Debug.Log(Time.realtimeSinceStartup + " Story step id:" + step.getId());
+                Debug.Log(Time.realtimeSinceStartup + " Story step collider name:" + step.getColliderName());
+                Debug.Log(Time.realtimeSinceStartup + " Story step dialog:" + step.getDialog());
+                Debug.Log(Time.realtimeSinceStartup + " Requirements:");
+                foreach (ItemGroup requirement in step.getRequirements())
+                {
+                    Debug.Log(Time.realtimeSinceStartup + " Story step item name:" + requirement.getItemName());
+                    Debug.Log(Time.realtimeSinceStartup + " Story step item amount:" + requirement.getItemAmount());
+                }
+                Debug.Log(Time.realtimeSinceStartup + " Acquired:");
+                foreach (ItemGroup acquires in step.getAcquired())
+                {
+                    Debug.Log(Time.realtimeSinceStartup + " Story step item name:" + acquires.getItemName());
+                    Debug.Log(Time.realtimeSinceStartup + " Story step item amount:" + acquires.getItemAmount());
+                }
             }
         }
     }
@@ -95,19 +111,72 @@ public class StoryEngineScript : MonoBehaviour
 
     public void ProcessEntry(Collider other)
     {
-        foreach(StoryboardEvent iteratedEvent in availableEvents)
+        //Iterate all story steps to find the one that is being triggered by this collider
+        foreach (StoryboardStep iteratedStep in storyboard.getStorySteps())
         {
-            if (other.gameObject.name.Equals(iteratedEvent.getColliderName()))
+            if (other.gameObject.name.Equals(iteratedStep.getColliderName()))
             {
-                Debug.Log(Time.realtimeSinceStartup + " Evento correto");
-                foreach(int i in iteratedEvent.getNextEvents())
+                List<ItemGroup> requirements = iteratedStep.getRequirements();
+                bool completable = true;
+                //Iterate all item requirements of the event to check if the player satisfies every one of them
+                foreach(ItemGroup requirement in requirements)
                 {
-                    availableEvents.Add(story[i]);
+                    int storyAmount = -1;
+                    //Find the player's required story item amount
+                    foreach(ItemGroup storyItem in storyItems)
+                    {
+                        if(storyItem.getItemName() == requirement.getItemName())
+                        {
+                            storyAmount = storyItem.getItemAmount();
+                            break;
+                        }
+                    }
+                    int inventoryAmount = inventory.GetQuantity(requirement.getItemName());
+                    int requiredAmount = requirement.getItemAmount();
+                    //Check if the user does not have enough items to satisfy this steps's requirements
+                    if (inventoryAmount < requiredAmount && storyAmount < requiredAmount)
+                    {
+                        completable = false;
+                        break;
+                    }
                 }
-                availableEvents.Remove(iteratedEvent);
-                if (availableEvents.Count == 0)
+                //If all requirements were met
+                if (completable)
                 {
-                    Debug.Log(Time.realtimeSinceStartup + " Historia Acabou");
+                    //Iterate all item requirements of the event to consume them
+                    foreach (ItemGroup requirement in requirements)
+                    {
+                        //Find the player's required story item to decrease it's amount
+                        foreach (ItemGroup storyItem in storyItems)
+                        {
+                            if (storyItem.getItemName() == requirement.getItemName())
+                            {
+                                storyItem.removeItemAmount(requirement.getItemAmount());
+                                break;
+                            }
+                        }
+                        //Consume the item present in the user's inventory
+                        inventory.RemoveItemByID(requirement.getItemName(), requirement.getItemAmount());
+                    }
+                    //We can now add the story items this step unlocks
+                    foreach(ItemGroup acquires in iteratedStep.getAcquired())
+                    {
+                        bool newItem = true;
+                        //Check if we want to increase the amount of an existing item or add a new one to the list
+                        foreach(ItemGroup storyItem in storyItems)
+                        {
+                            if(storyItem.getItemName() == acquires.getItemName())
+                            {
+                                newItem = false;
+                                storyItem.addItemAmount(acquires.getItemAmount());
+                                break;
+                            }
+                        }
+                        if(newItem)
+                        {
+                            storyItems.Add(acquires);
+                        }
+                    }
                 }
                 break;
             }

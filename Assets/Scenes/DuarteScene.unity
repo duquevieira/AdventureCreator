@@ -26335,7 +26335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855898324080281129, guid: 4903e2258e1d52f4097dcaae1e290f85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.68
+      value: 0.96
       objectReference: {fileID: 0}
     - target: {fileID: 6855898324080281129, guid: 4903e2258e1d52f4097dcaae1e290f85, type: 3}
       propertyPath: m_LocalPosition.y
@@ -26343,7 +26343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6855898324080281129, guid: 4903e2258e1d52f4097dcaae1e290f85, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.48
+      value: -12.83
       objectReference: {fileID: 0}
     - target: {fileID: 6855898324080281129, guid: 4903e2258e1d52f4097dcaae1e290f85, type: 3}
       propertyPath: m_LocalRotation.w
@@ -26376,6 +26376,10 @@ PrefabInstance:
     - target: {fileID: 6860084813567152149, guid: 4903e2258e1d52f4097dcaae1e290f85, type: 3}
       propertyPath: m_Name
       value: Present
+      objectReference: {fileID: 0}
+    - target: {fileID: 6860543198807468045, guid: 4903e2258e1d52f4097dcaae1e290f85, type: 3}
+      propertyPath: Quantity
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4903e2258e1d52f4097dcaae1e290f85, type: 3}
@@ -32564,6 +32568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2.5
+  storyEngineScript: {fileID: 1918232352}
 --- !u!1 &1844543293
 GameObject:
   m_ObjectHideFlags: 0
@@ -33706,6 +33711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 20515230140964947}
   player: {fileID: 1844117575}
+  inventory: {fileID: 485687351}
 --- !u!1 &1919321263
 GameObject:
   m_ObjectHideFlags: 0
