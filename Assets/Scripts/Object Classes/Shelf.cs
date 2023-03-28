@@ -27,23 +27,23 @@ public class Shelf : Object
         AdjacentAvailablePositions[6] = false;
     }*/
 
-    public override Dictionary<ObjectTypes, int[]> getAdjacentAvailablePositions2()
+    public override Dictionary<ObjectTypes, int[]> getProbabilitiesBasedOnAdjacentObject()
     {
-        return this.AdjacentAvailablePositions2;
+        return this.ProbabilitiesBasedOnAdjacentObject;
     }
 
-    public override int[] getAdjacentAvailablePositionsProbabilities(ObjectTypes objectType)
+    public override int[] getAdjacentPositionsProbabilities(ObjectTypes objectType)
     {
-        return this.AdjacentAvailablePositions2.GetValueOrDefault(objectType);
+        return this.ProbabilitiesBasedOnAdjacentObject.GetValueOrDefault(objectType);
     }
 
-    public override void setAdjacentAvailablePositions2()
+    public override void setProbabilitiesBasedOnAdjacentObject()
     {
-        AdjacentAvailablePositions2 = new Dictionary<ObjectTypes, int[]>();
-        AdjacentAvailablePositions2.Add(ObjectTypes.Chair, new int[] { 0, 15, 3, 0, 6, 15, 3, 0, 6 });
-        AdjacentAvailablePositions2.Add(ObjectTypes.Shelf, new int[] { 0, 10, 0, 80, 0, 10, 0, 80, 0 });
-        AdjacentAvailablePositions2.Add(ObjectTypes.Table, new int[] { 0, 25, 10, 0, 10, 25, 10, 0, 10 });
-        AdjacentAvailablePositions2.Add(ObjectTypes.Rug, new int[] { 25, 100, 100, 100, 100, 100, 100, 100, 100 });
+        ProbabilitiesBasedOnAdjacentObject = new Dictionary<ObjectTypes, int[]>();
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Chair, new int[] { 0, 15, 3, 0, 6, 15, 3, 0, 6 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Shelf, new int[] { 0, 10, 0, 80, 0, 10, 0, 80, 0 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Table, new int[] { 0, 25, 10, 0, 10, 25, 10, 0, 10 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Rug, new int[] { 25, 100, 100, 100, 100, 100, 100, 100, 100 });
     }
 
     /*public override List<Object> getCanBeAboveOf()

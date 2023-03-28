@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class Rug : Object
 {
-    public override Dictionary<ObjectTypes, int[]> getAdjacentAvailablePositions2()
+    public override Dictionary<ObjectTypes, int[]> getProbabilitiesBasedOnAdjacentObject()
     {
-        return this.AdjacentAvailablePositions2;
+        return this.ProbabilitiesBasedOnAdjacentObject;
     }
 
-    public override int[] getAdjacentAvailablePositionsProbabilities(ObjectTypes objectType)
+    public override int[] getAdjacentPositionsProbabilities(ObjectTypes objectType)
     {
-        return this.AdjacentAvailablePositions2.GetValueOrDefault(objectType);
+        return this.ProbabilitiesBasedOnAdjacentObject.GetValueOrDefault(objectType);
     }
 
-    public override void setAdjacentAvailablePositions2()
+    public override void setProbabilitiesBasedOnAdjacentObject()
     {
-        AdjacentAvailablePositions2 = new Dictionary<ObjectTypes, int[]>();
-        AdjacentAvailablePositions2.Add(ObjectTypes.Chair, new int[] { 50, 100, 100, 100, 100, 100, 100, 100, 100 });
-        AdjacentAvailablePositions2.Add(ObjectTypes.Shelf, new int[] { 25, 100, 100, 100, 100, 100, 100, 100, 100 });
-        AdjacentAvailablePositions2.Add(ObjectTypes.Table, new int[] { 75, 100, 100, 100, 100, 100, 100, 100, 100 });
-        AdjacentAvailablePositions2.Add(ObjectTypes.Rug, new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100 });
+        ProbabilitiesBasedOnAdjacentObject = new Dictionary<ObjectTypes, int[]>();
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Chair, new int[] { 50, 100, 100, 100, 100, 100, 100, 100, 100 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Shelf, new int[] { 25, 100, 100, 100, 100, 100, 100, 100, 100 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Table, new int[] { 75, 100, 100, 100, 100, 100, 100, 100, 100 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Rug, new int[] { 0, 100, 100, 100, 100, 100, 100, 100, 100 });
     }
 }

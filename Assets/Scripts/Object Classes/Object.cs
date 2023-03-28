@@ -5,52 +5,25 @@ using UnityEngine;
 
 public class Object: MonoBehaviour
 {
-    [HideInInspector] public List<Object> CanBeAboveOf;
-    [HideInInspector] public List<Object> CanBeBelowOf;
-    [HideInInspector] public bool[] AdjacentAvailablePositions;
-    [HideInInspector] public Dictionary<ObjectTypes, int[]> AdjacentAvailablePositions2;
+    [HideInInspector] public Dictionary<ObjectTypes, int[]> ProbabilitiesBasedOnAdjacentObject;
     //[HideInInspector] public enum AdjacentPositions { Top, TopLeft,TopRight, Right,Left,On,BottomLeft,Bottom,BottomRight };
     [HideInInspector] public enum ObjectTypes { Chair, Shelf, Table, Rug, Default};
-    //public virtual List<Object> getCanBeAboveOf() { return CanBeAboveOf; }
-    //public virtual List<Object> getCanBeBelowOf() { return CanBeBelowOf; }
-    //public virtual bool[] getAdjacentAvailablePositions() { return AdjacentAvailablePositions; }
-    /*public virtual void setAdjacentAvailablePositions()
-    {
-        for (int i = 0; i < AdjacentAvailablePositions.Length; i++)
-        {
-            AdjacentAvailablePositions[i] = true;
-        }
-    }*/
+  
 
-    public virtual Dictionary<ObjectTypes, int[]> getAdjacentAvailablePositions2()
+    public virtual Dictionary<ObjectTypes, int[]> getProbabilitiesBasedOnAdjacentObject()
     {
-        return AdjacentAvailablePositions2;
+        return ProbabilitiesBasedOnAdjacentObject;
     }
-    public virtual int[] getAdjacentAvailablePositionsProbabilities(ObjectTypes objectType)
+    public virtual int[] getAdjacentPositionsProbabilities(ObjectTypes objectType)
     {
-        return AdjacentAvailablePositions2.GetValueOrDefault(objectType);
+        return ProbabilitiesBasedOnAdjacentObject.GetValueOrDefault(objectType);
     }
 
-    public virtual void setAdjacentAvailablePositions2()
+    public virtual void setProbabilitiesBasedOnAdjacentObject()
     {
-        AdjacentAvailablePositions2 = new Dictionary<ObjectTypes, int[]>();
+        ProbabilitiesBasedOnAdjacentObject = new Dictionary<ObjectTypes, int[]>();
     }
-    //public virtual void setAttributes() { }
 
 }
-
-/*public class Table : Object
-{
-    public Table()
-    {
-        type = objectTypes.Table;
-        canBeAboveOf[0] = objectTypes.Rug;
-        canBeBelowOf[0] = objectTypes.Prop;
-        adjacentAvailablePositions[1] = false;
-        adjacentAvailablePositions[3] = false;
-        adjacentAvailablePositions[5] = false;
-        adjacentAvailablePositions[7] = false;
-    }
-}*/
 
 

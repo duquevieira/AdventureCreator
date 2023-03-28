@@ -26,8 +26,7 @@ public class PlacementSystem : MonoBehaviour
     private PlaceableObject _objectToPlace;
     private List<GameObject> _objectsInScene;
     private List<Vector3Int> _availableTiles;
-    private List<Vector3Int> _tilesWithObjects;
-    private Dictionary<Vector3Int, Object> _tilesWithObjects2;
+    private Dictionary<Vector3Int, Object> _tilesWithObjects;
 
     private void Awake()
     {
@@ -35,14 +34,13 @@ public class PlacementSystem : MonoBehaviour
         _grid = GridLayout.GetComponent<Grid>();
         _objectsInScene = new List<GameObject>();
         _availableTiles = new List<Vector3Int>();
-        _tilesWithObjects = new List<Vector3Int>();
-        _tilesWithObjects2 = new Dictionary<Vector3Int, Object>();
+        _tilesWithObjects = new Dictionary<Vector3Int, Object>();
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            SpawnObjectsWithRules2();
+            SpawnObjectsWithProbabilities();
         }
         if (!_objectToPlace)
         {
@@ -111,71 +109,8 @@ public class PlacementSystem : MonoBehaviour
         _objectsInScene = new List<GameObject>();
     }
 
-    // Spawn the objects following the object specific adjacent rules 
-    /*public void SpawnObjectsWithRules()
-    {
-        DestroyAllObjects();
-        while (_availableTiles.Count > 0)
-        {
-            List<GameObject> objectsToTry = _objects;
-            Debug.Log("wtff " + _objects.Count);
-            bool placedObject = false;  
-            //List<Object> canBeAboveOf = getObjectVerticalAttributes(obj);
-            //List<Object> canBeBelowOf = getObjectAttributes(obj)[1];
-            //obj.GetComponent<PlaceableObject>();
-            //Vector3Int start = GridLayout.WorldToCell(randomTile);   
-            //MyTakeArea(randomTile, availableAdjacentPositions);
-            Vector3Int randomTile = _availableTiles[Random.Range(0, _availableTiles.Count)];
-            while (objectsToTry.Count > 0 && !placedObject)
-            {
-                bool objectIsValid = true;
-                int objectIndex = Random.Range(0, objectsToTry.Count);
-                GameObject obj = _objects[objectIndex];
-                bool[] availableAdjacentPositions = getObjectAvailableAdjacentPosition(obj);
-                List<Vector3Int> nonAvailableTiles = checkAvailableArea(randomTile, availableAdjacentPositions);
-                for (int j =0; j< nonAvailableTiles.Count; j++)
-                {
-                    if (_tilesWithObjects.Contains(nonAvailableTiles[j]))
-                    {
-                        objectIsValid = false;
-                        break;
-                    }
-                }
-                if (objectIsValid)
-                {
-                    Vector3 position = SnapCoordinateToGrid(randomTile);
-                    Instantiate(_objects[objectIndex], position, Quaternion.identity);
-                    _objectsInScene.Add(obj);
-                    objectsToTry = _objects;
-                    for (int i = 0; i < nonAvailableTiles.Count; i++)
-                    {
-                        if (_availableTiles.Contains(nonAvailableTiles[i]))
-                        {
-                            _availableTiles.Remove(nonAvailableTiles[i]);
-                        }
-                    }
-                    _tilesWithObjects.Add(randomTile);
-                    placedObject = true;
-                    Debug.Log("Coloquei");
-                }
-                else
-                {
-                    // try another object
-                    objectsToTry.Remove(obj);
-                    Debug.Log("Não coloquei");
-                    Debug.Log("Object count " + objectsToTry.Count);
-                    Debug.Log("tiles available: " + _availableTiles.Count);
-                    if (objectsToTry.Count <= 0)
-                    {
-                        _availableTiles.Remove(randomTile);
-                    }
-                }
-            }            
-        }
-        Debug.Log("There is no more available tiles to place the object");
-    }*/
 
-    private void SpawnObjectsWithRules2()
+    private void SpawnObjectsWithProbabilities()
     {
         DestroyAllObjects();
         while (_availableTiles.Count > 0)
@@ -206,7 +141,7 @@ public class PlacementSystem : MonoBehaviour
                     Instantiate(_objects[objectsToTryIndexes[objectIndex]], position, Quaternion.identity);
                     _objectsInScene.Add(obj);
                     _availableTiles.Remove(randomTile);
-                    _tilesWithObjects2.Add(randomTile,getObjectType(obj));
+                    _tilesWithObjects.Add(randomTile,getObjectType(obj));
                     placedObject = true;
                     Debug.Log("Coloquei");
                 } else
@@ -230,51 +165,27 @@ public class PlacementSystem : MonoBehaviour
         Debug.Log("There is no more available tiles to place the object");
     }
 
-    // Returns a bool[] of size 8, representing the available adjacent position of a given object.
-    // The first position a the array is the top, and goes clock-wise until the last position, which is the diagonal top-left
-    /*private bool[] getObjectAvailableAdjacentPosition(GameObject obj)//, bool[] adjacentAvailablePositions)
-    {
-        bool[] availablePositions = new bool[8];
-        if (obj.TryGetComponent<Chair>(out Chair chair))
-        {
-            chair.setAdjacentAvailablePositions();
-            availablePositions = chair.getAdjacentAvailablePositions();
-        }
-        if (obj.TryGetComponent<Table>(out Table table))
-        {
-            table.setAdjacentAvailablePositions();
-            availablePositions = table.getAdjacentAvailablePositions();
-        }
-        if (obj.TryGetComponent<Shelf>(out Shelf shelf))
-        {
-
-            shelf.setAdjacentAvailablePositions();
-            availablePositions = shelf.getAdjacentAvailablePositions();
-        }
-        return availablePositions;
-    }*/
-
     private Dictionary<ObjectTypes,int[]> getObjectAvailableAdjacentPosition2(GameObject obj)
     {
         Dictionary<ObjectTypes, int[]> objectAvailablePosition2 = new Dictionary<ObjectTypes, int[]>();
         if (obj.TryGetComponent<Chair>(out Chair chair)){
-            chair.setAdjacentAvailablePositions2();
-            objectAvailablePosition2 = chair.getAdjacentAvailablePositions2();
+            chair.setProbabilitiesBasedOnAdjacentObject();
+            objectAvailablePosition2 = chair.getProbabilitiesBasedOnAdjacentObject();
         }
         if (obj.TryGetComponent<Table>(out Table table))
         {
-            table.setAdjacentAvailablePositions2();
-            objectAvailablePosition2 = table.getAdjacentAvailablePositions2();
+            table.setProbabilitiesBasedOnAdjacentObject();
+            objectAvailablePosition2 = table.getProbabilitiesBasedOnAdjacentObject();
         }
         if (obj.TryGetComponent<Shelf>(out Shelf shelf))
         {
-            shelf.setAdjacentAvailablePositions2();
-            objectAvailablePosition2 = shelf.getAdjacentAvailablePositions2();
+            shelf.setProbabilitiesBasedOnAdjacentObject();
+            objectAvailablePosition2 = shelf.getProbabilitiesBasedOnAdjacentObject();
         }
         if (obj.TryGetComponent<Rug>(out Rug rug))
         {
-            rug.setAdjacentAvailablePositions2();
-            objectAvailablePosition2 = rug.getAdjacentAvailablePositions2();
+            rug.setProbabilitiesBasedOnAdjacentObject();
+            objectAvailablePosition2 = rug.getProbabilitiesBasedOnAdjacentObject();
         }
         return objectAvailablePosition2;
     }
@@ -312,9 +223,9 @@ public class PlacementSystem : MonoBehaviour
         } 
         for (int i = 0; i < adjacentTiles.Count; i++)
         {
-            if (_tilesWithObjects2.ContainsKey(adjacentTiles[i]))
+            if (_tilesWithObjects.ContainsKey(adjacentTiles[i]))
             {
-                adjacentObjectsAndPositions.Add(adjacentTiles[i], _tilesWithObjects2.GetValueOrDefault(adjacentTiles[i]));
+                adjacentObjectsAndPositions.Add(adjacentTiles[i], _tilesWithObjects.GetValueOrDefault(adjacentTiles[i]));
             }
         }
         Debug.Log("Nº de objetos adjacentes: " + adjacentObjectsAndPositions.Count);
@@ -437,80 +348,5 @@ public class PlacementSystem : MonoBehaviour
             return -1;
         }
     }
-
-    // Checks what adjacent positions are valid and returns the position of the adjacent tiles not available to put the object
-    private List<Vector3Int> checkAvailableArea(Vector3Int newPlacement, bool[] objectToPlaceAvailablePositions)
-    {
-        List<Vector3Int> nonAvailableTiles = new List<Vector3Int>();
-        Vector3Int adjacentPositionsUsed = new Vector3Int();
-        nonAvailableTiles.Add(newPlacement);
-        if (objectToPlaceAvailablePositions[0] == false)
-        {
-            adjacentPositionsUsed = newPlacement + new Vector3Int(0, 0, 1);
-            nonAvailableTiles.Add(adjacentPositionsUsed);
-        }
-        if (objectToPlaceAvailablePositions[1] == false)
-        {
-            adjacentPositionsUsed = newPlacement + new Vector3Int(1, 0, 1);
-            nonAvailableTiles.Add(adjacentPositionsUsed);
-        }
-        if (objectToPlaceAvailablePositions[2] == false)
-        {
-            adjacentPositionsUsed = newPlacement + new Vector3Int(1, 0, 0);
-            nonAvailableTiles.Add(adjacentPositionsUsed);
-        }
-        if (objectToPlaceAvailablePositions[3] == false)
-        {
-            adjacentPositionsUsed = newPlacement + new Vector3Int(1, 0, -1);
-            nonAvailableTiles.Add(adjacentPositionsUsed);
-        }
-        if (objectToPlaceAvailablePositions[4] == false)
-        {
-            adjacentPositionsUsed = newPlacement + new Vector3Int(0, 0, -1);
-            nonAvailableTiles.Add(adjacentPositionsUsed);
-        }
-        if (objectToPlaceAvailablePositions[5] == false)
-        {
-            adjacentPositionsUsed = newPlacement + new Vector3Int(-1, 0, -1);
-            nonAvailableTiles.Add(adjacentPositionsUsed);
-        }
-        if (objectToPlaceAvailablePositions[6] == false)
-        {
-            adjacentPositionsUsed = newPlacement + new Vector3Int(-1, 0, 0);
-            nonAvailableTiles.Add(adjacentPositionsUsed);
-        }
-        if (objectToPlaceAvailablePositions[7] == false)
-        {
-            adjacentPositionsUsed = newPlacement + new Vector3Int(-1, 0, 1);
-            nonAvailableTiles.Add(adjacentPositionsUsed);
-        }
-        return nonAvailableTiles;
-    }
-
-    private List<Vector3Int> checkAvailableArea2(Vector3Int newPlacement, int[] adjacentPositionProbabilities)
-    {
-        List<Vector3Int> nonAvailableTiles = new List<Vector3Int>();
-        Vector3Int adjacentPositionsUsed = new Vector3Int();
-        for (int i = 0; i<adjacentPositionProbabilities.Length; i++)
-        {
-            return null;
-        }
-        return null;
-    }
-
-
-    /*private List<Object> getObjectVerticalAttributes(GameObject obj)//, bool[] adjacentAvailablePositions)
-        {
-            List<Object> attributes = new List<Object>();
-            if (obj.TryGetComponent<Chair>(out Chair chair))
-            {
-                chair.setAttributes();
-                attributes = chair.getCanBeAboveOf();
-                //attributes[1] = chair.getCanBeBelowOf();
-                //adjacentAvailablePositions = chair.getAdjacentAvailablePositions();
-            }        
-            return attributes;
-        }*/
-
 
 }
