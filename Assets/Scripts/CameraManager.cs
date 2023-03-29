@@ -26,7 +26,6 @@ public class CameraManager : MonoBehaviour
         time = 0f;
         sceneSwitcher.disableMenu();
         LoadText.SetActive(false);
-        Debug.Log("LoadPressed");
         StartCoroutine(MoveCameraCoroutine(STARTPOS, LOADPOS, STARTROT, LOADROT, time, "load"));
     }
 
@@ -48,7 +47,6 @@ public class CameraManager : MonoBehaviour
             time += Time.deltaTime;
             float t = Mathf.Clamp01(time / ANIMDURATION);
             mainCamera.transform.position = Vector3.Lerp(startPos, endPos, t);
-            Debug.Log(mainCamera.transform.position);
             mainCamera.transform.rotation = Quaternion.Lerp(startQuat, endQuat, t);
             yield return null;
         }
