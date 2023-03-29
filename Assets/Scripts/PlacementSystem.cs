@@ -26,7 +26,7 @@ public class PlacementSystem : MonoBehaviour
     private PlaceableObject _objectToPlace;
     private List<GameObject> _objectsInScene;
     private List<Vector3Int> _availableTiles;
-    private Dictionary<Vector3Int, Object> _tilesWithObjects;
+    private Dictionary<Vector3Int, List<Object>> _tilesWithObjects;
 
     private void Awake()
     {
@@ -34,7 +34,7 @@ public class PlacementSystem : MonoBehaviour
         _grid = GridLayout.GetComponent<Grid>();
         _objectsInScene = new List<GameObject>();
         _availableTiles = new List<Vector3Int>();
-        _tilesWithObjects = new Dictionary<Vector3Int, Object>();
+        _tilesWithObjects = new Dictionary<Vector3Int, List<Object>>();
     }
     private void Update()
     {
@@ -126,22 +126,27 @@ public class PlacementSystem : MonoBehaviour
             Debug.Log("RandomTile: " + randomTile);
             while (numberObjectsAvailable > 0 && !placedObject)
             {
-                Debug.Log("Numero de objetos a tentar = " + numberObjectsAvailable);
                 int objectIndex = Random.Range(0, numberObjectsAvailable);
-                Debug.Log("ObjectIndex= " + objectIndex);
-                Debug.Log("ObjectToTryIndex = " + objectsToTryIndexes[objectIndex]);
                 GameObject obj = _objects[objectsToTryIndexes[objectIndex]];
                 Debug.Log("Objeto: " + obj);
                 Dictionary<ObjectTypes, int[]> availableAdjacentPositionsPercentages = getObjectAvailableAdjacentPosition2(obj);
-                Dictionary<Vector3Int, Object> adjacentObjectsAndPositions = getAdjacentObjects(randomTile);
+                Dictionary<Vector3Int, List<Object>> adjacentObjectsAndPositions = getAdjacentObjects(randomTile);
                 bool canPlace = compareProbabilities(availableAdjacentPositionsPercentages, adjacentObjectsAndPositions, randomTile);
                 if (canPlace)
                 {
                     Vector3 position = SnapCoordinateToGrid(randomTile);
                     Instantiate(_objects[objectsToTryIndexes[objectIndex]], position, Quaternion.identity);
                     _objectsInScene.Add(obj);
-                    _availableTiles.Remove(randomTile);
-                    _tilesWithObjects.Add(randomTile,getObjectType(obj));
+                    //_availableTiles.Remove(randomTile);
+                    List<Object> objectsInOneTile = getObjectsInOneTile(randomTile);
+                    if (objectsInOneTile == null)
+                    {
+                        objectsInOneTile = new List<Object>();
+                        
+                    }
+                    objectsInOneTile.Add(getObjectType(obj));
+                    _tilesWithObjects.Remove(randomTile);
+                    _tilesWithObjects.Add(randomTile,objectsInOneTile);
                     placedObject = true;
                     Debug.Log("Coloquei");
                 } else
@@ -149,15 +154,11 @@ public class PlacementSystem : MonoBehaviour
                     // try another object
                     numberObjectsAvailable--;
                     objectsToTryIndexes.RemoveAt(objectIndex);
-                    for (int i=0;i<numberObjectsAvailable;i++)
-                    {
-                        Debug.Log("Indices disponiveis: " + objectsToTryIndexes[i]);
-                    }
                     Debug.Log("Não coloquei");
                     if (numberObjectsAvailable == 0)
                     {
                         _availableTiles.Remove(randomTile);
-                        Debug.Log("Não coloquei nada neste tile");
+                        Debug.Log("Nothing placed on this tile");
                     }
                 }
             }
@@ -165,6 +166,11 @@ public class PlacementSystem : MonoBehaviour
         Debug.Log("There is no more available tiles to place the object");
     }
 
+    private List<Object> getObjectsInOneTile(Vector3Int tile)
+    {
+        return _tilesWithObjects.GetValueOrDefault(tile);
+    }
+    
     private Dictionary<ObjectTypes,int[]> getObjectAvailableAdjacentPosition2(GameObject obj)
     {
         Dictionary<ObjectTypes, int[]> objectAvailablePosition2 = new Dictionary<ObjectTypes, int[]>();
@@ -210,10 +216,10 @@ public class PlacementSystem : MonoBehaviour
         return null;
     }
 
-    private Dictionary<Vector3Int,Object> getAdjacentObjects(Vector3Int newPlacement)
+    private Dictionary<Vector3Int,List<Object>> getAdjacentObjects(Vector3Int newPlacement)
     {
         List<Vector3Int> adjacentTiles = new List<Vector3Int>();
-        Dictionary<Vector3Int, Object> adjacentObjectsAndPositions = new Dictionary<Vector3Int, Object>();
+        Dictionary<Vector3Int, List<Object>> adjacentObjectsAndPositions = new Dictionary<Vector3Int, List<Object>>();
         for (int i = -1; i < 2; i++)
         {
             for (int j = -1; j < 2; j++)
@@ -232,57 +238,71 @@ public class PlacementSystem : MonoBehaviour
         return adjacentObjectsAndPositions;
     }
 
-    private bool compareProbabilities(Dictionary<ObjectTypes, int[]> probabilities, Dictionary<Vector3Int,Object> adjacentObjects,Vector3Int newPlacement)
+    private bool compareProbabilities(Dictionary<ObjectTypes, int[]> probabilities, Dictionary<Vector3Int,List<Object>> adjacentObjects,Vector3Int newPlacement)
     {
         bool canPlace = true;
         int placementProbability = 0;
         foreach(Vector3Int pos in adjacentObjects.Keys)
         {
-            Object adjacentObj = adjacentObjects.GetValueOrDefault(pos);
-            ObjectTypes objectType = convertObjectToObjectType(adjacentObj);
-            int relativePositionIndex = convertCoordinatesToRelativePosition(pos, newPlacement);
-            switch (relativePositionIndex)
+            List<Object> adjacentObjInPosition = adjacentObjects[pos];
+            for (int i = 0; i < adjacentObjInPosition.Count; i++)
             {
-                case 0:
-                    placementProbability = probabilities.GetValueOrDefault(objectType)[0];
-                    break;
-                case 1:
-                    placementProbability = probabilities.GetValueOrDefault(objectType)[1];
-                    break;
-                case 2:
-                    placementProbability = probabilities.GetValueOrDefault(objectType)[2];
-                    break;
-                case 3:
-                    placementProbability = probabilities.GetValueOrDefault(objectType)[3];
-                    break;
-                case 4:
-                    placementProbability = probabilities.GetValueOrDefault(objectType)[4];
-                    break;
-                case 5:
-                    placementProbability = probabilities.GetValueOrDefault(objectType)[5];
-                    break;
-                case 6:
-                    placementProbability = probabilities.GetValueOrDefault(objectType)[6];
-                    break;
-                case 7:
-                    placementProbability = probabilities.GetValueOrDefault(objectType)[7];
-                    break;
-                case 8:
-                    placementProbability = probabilities.GetValueOrDefault(objectType)[8];
-                    break;
-                default:
-                    Debug.Log("Alguma coisa deu errado");
-                    break;
+                ObjectTypes objectType = convertObjectToObjectType(adjacentObjInPosition[i]);
+                int relativePositionIndex = convertCoordinatesToRelativePosition(pos, newPlacement);
+                switch (relativePositionIndex)
+                {
+                    case 0:
+                        placementProbability = probabilities.GetValueOrDefault(objectType)[0];
+                        break;
+                    case 1:
+                        placementProbability = probabilities.GetValueOrDefault(objectType)[1];
+                        break;
+                    case 2:
+                        placementProbability = probabilities.GetValueOrDefault(objectType)[2];
+                        break;
+                    case 3:
+                        placementProbability = probabilities.GetValueOrDefault(objectType)[3];
+                        break;
+                    case 4:
+                        placementProbability = probabilities.GetValueOrDefault(objectType)[4];
+                        break;
+                    case 5:
+                        placementProbability = probabilities.GetValueOrDefault(objectType)[5];
+                        break;
+                    case 6:
+                        placementProbability = probabilities.GetValueOrDefault(objectType)[6];
+                        break;
+                    case 7:
+                        placementProbability = probabilities.GetValueOrDefault(objectType)[7];
+                        break;
+                    case 8:
+                        placementProbability = probabilities.GetValueOrDefault(objectType)[8];
+                        break;
+                    default:
+                        Debug.Log("Alguma coisa deu errado");
+                        break;
+                }
+                Debug.Log("Probabilidade: " + placementProbability);
+                int random = Random.Range(1, 101);
+                Debug.Log("Random number: " + random);
+                if (placementProbability == -1)
+                {
+                    canPlace = false;
+                }
+                else
+                {
+                    if (random > placementProbability)
+                    {
+                        canPlace = false;
+                        return canPlace;
+                    }
+                    else
+                    {
+                        canPlace = true;
+                    }
+                }
             }
-            Debug.Log("Probabilidade: " + placementProbability);
-            int random = Random.Range(1, 101);
-            Debug.Log("Random number: " + random);
-            if (random > placementProbability)
-            {
-                canPlace = false;
-                break;
-            }
-        }
+        }         
         return canPlace;
     }
 

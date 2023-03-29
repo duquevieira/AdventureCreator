@@ -40,10 +40,10 @@ public class Shelf : Object
     public override void setProbabilitiesBasedOnAdjacentObject()
     {
         ProbabilitiesBasedOnAdjacentObject = new Dictionary<ObjectTypes, int[]>();
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Chair, new int[] { 0, 15, 3, 0, 6, 15, 3, 0, 6 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Chair, new int[] { 0, 0, 15, 0, 15, 0, 15, 0, 15 });
         ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Shelf, new int[] { 0, 10, 0, 80, 0, 10, 0, 80, 0 });
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Table, new int[] { 0, 25, 10, 0, 10, 25, 10, 0, 10 });
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Rug, new int[] { 25, 100, 100, 100, 100, 100, 100, 100, 100 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Table, new int[] { 0, 0, 10, 0, 10, 0, 10, 0, 10 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Rug, new int[] { 10, -1, -1, -1, -1, -1, -1, -1, -1 });
     }
 
     /*public override List<Object> getCanBeAboveOf()

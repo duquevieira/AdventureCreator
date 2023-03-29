@@ -46,8 +46,8 @@ public class Chair : Object
     {
         ProbabilitiesBasedOnAdjacentObject = new Dictionary<ObjectTypes, int[]>();
         ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Chair, new int[] { 0, 0, 90, 20, 90, 0, 90, 20, 90 });
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Shelf, new int[] { 0, 15, 3, 0, 6, 15, 3, 0, 6 });
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Table, new int[] { 0, 50, 0, 50, 0, 50, 0, 50, 0});
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Rug, new int[] { 50, 100, 100, 100, 100, 100, 100, 100, 100 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Shelf, new int[] { 0, 0, 15, 0, 15, 0, 15, 0, 15 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Table, new int[] { 0, 80, 0, 80, 0, 80, 0, 80, 0});
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Rug, new int[] { 85, -1, -1, -1, -1, -1, -1, -1, -1 });
     }
 }
