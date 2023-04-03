@@ -5671,6 +5671,10 @@ MonoBehaviour:
   InventoryScript: {fileID: 7375375977602804862}
   Overlay: {fileID: 893060313}
   TargetInventoryContainer: {fileID: 605272175}
+  _character: {fileID: 1844117575}
+  _dunderMifflin: {fileID: 2128843278}
+  _items: {fileID: 485687351}
+  _interactables: {fileID: 1449934603}
 --- !u!1 &374735002
 GameObject:
   m_ObjectHideFlags: 0
@@ -13201,11 +13205,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1576994329081446, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Name
-      value: ButtonRound (1)
+      value: SaveButton
       objectReference: {fileID: 0}
     - target: {fileID: 114122550869409914, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Text
       value: SAVE
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 360718954}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SaveGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InGamePauseMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 224176556579183792, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Pivot.x
@@ -26595,7 +26611,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1576994329081446, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Name
-      value: ButtonRound (3)
+      value: QuitButton
       objectReference: {fileID: 0}
     - target: {fileID: 114122550869409914, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Text
@@ -26865,7 +26881,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1576994329081446, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Name
-      value: ButtonRound
+      value: PlayButton
       objectReference: {fileID: 0}
     - target: {fileID: 114122550869409914, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Text
@@ -31206,11 +31222,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1576994329081446, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Name
-      value: ButtonRound (2)
+      value: LoadButton
       objectReference: {fileID: 0}
     - target: {fileID: 114122550869409914, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Text
       value: LOAD
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 360718954}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InGamePauseMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 224176556579183792, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Pivot.x
