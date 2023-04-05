@@ -5,20 +5,20 @@ using UnityEngine;
 public class Storyboard
 {
 
-    private List<StoryboardStep> steps;
+    private List<StoryboardStep> _steps;
 
     public Storyboard()
     {
-        steps = new List<StoryboardStep>();
+        _steps = new List<StoryboardStep>();
     }
 
     public void addStep (StoryboardStep step)
     {
-        steps.Add(step);
+        _steps.Add(step);
     }
 
     public List<StoryboardStep> getStorySteps()
     {
-        return steps;
+        return _steps;
     }
 }
