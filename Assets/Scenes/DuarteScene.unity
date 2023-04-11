@@ -5674,7 +5674,6 @@ MonoBehaviour:
   _character: {fileID: 1844117575}
   _dunderMifflin: {fileID: 2128843278}
   _items: {fileID: 485687351}
-  _interactables: {fileID: 1449934603}
 --- !u!1 &374735002
 GameObject:
   m_ObjectHideFlags: 0
@@ -26617,6 +26616,30 @@ PrefabInstance:
       propertyPath: m_Text
       value: QUIT
       objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 360718954}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitToMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InGamePauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 224176556579183792, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -33382,6 +33405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2.5
+  Target: {x: 0, y: 0, z: 0}
 --- !u!1 &1844543293
 GameObject:
   m_ObjectHideFlags: 0

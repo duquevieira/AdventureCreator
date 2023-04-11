@@ -75,6 +75,10 @@ public class InGamePauseMenu : MonoBehaviour
         _playerScript.Target = new Vector3(load.TargetPosX, load.TargetPosY, load.TargetPosZ);
     }
 
+    public void QuitToMainMenu() {
+        SceneManager.LoadScene(0);
+    }
+
     private void OpenPauseMenu()
     {
         TargetInventoryContainer.blocksRaycasts = true;
