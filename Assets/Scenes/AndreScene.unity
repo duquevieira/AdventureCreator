@@ -443,10 +443,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridLayout: {fileID: 613643066}
   _mainTileMap: {fileID: 97893988}
-  _objects:
+  _objectsStage2:
   - {fileID: 1227193648296024, guid: 15fa9e280fc90fe408f14660ac85d0f8, type: 3}
   - {fileID: 1806102558924936, guid: 1adef6fa84d11fd498808191074be3c6, type: 3}
   - {fileID: 1528432388645246, guid: ef6e42722a04b8545ab910932b7ceefe, type: 3}
+  _objectsStage3:
   - {fileID: 1179280299288082, guid: 6e4e5f27baecf0042a048cb9eeb99171, type: 3}
 --- !u!4 &855072684 stripped
 Transform:

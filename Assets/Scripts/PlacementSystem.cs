@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+ï»¿using JetBrains.Annotations;
 using MoreMountains.Tools;
 using System;
 using System.Collections;
@@ -22,11 +22,13 @@ public class PlacementSystem : MonoBehaviour
     public GridLayout GridLayout;
     private Grid _grid;
     [SerializeField] private Tilemap _mainTileMap;
-    [SerializeField] private List<GameObject> _objects;
+    [SerializeField] private List<GameObject> _objectsStage2;
+    [SerializeField] private List<GameObject> _objectsStage3;
     private PlaceableObject _objectToPlace;
     private List<GameObject> _objectsInScene;
     private List<Vector3Int> _availableTiles;
     private Dictionary<Vector3Int, List<Object>> _tilesWithObjects;
+    private int phase;
 
     private void Awake()
     {
@@ -35,12 +37,14 @@ public class PlacementSystem : MonoBehaviour
         _objectsInScene = new List<GameObject>();
         _availableTiles = new List<Vector3Int>();
         _tilesWithObjects = new Dictionary<Vector3Int, List<Object>>();
+        phase = 0;
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
             SpawnObjectsWithProbabilities();
+            SpawnObjectsWithProbabilities3();
         }
         if (!_objectToPlace)
         {
@@ -66,6 +70,11 @@ public class PlacementSystem : MonoBehaviour
     }
 
     private void Start()
+    {
+        ResetAvailableTiles();
+    }
+
+    private void ResetAvailableTiles()
     {
         for (int i = -5; i < 5; i++)
         {
@@ -104,7 +113,7 @@ public class PlacementSystem : MonoBehaviour
     {
         for (int j = 0; j < _objectsInScene.Count; j++)
         {
-            DestroyImmediate(_objectsInScene[j],true);
+            DestroyImmediate(_objectsInScene[j], true);
         }
         _objectsInScene = new List<GameObject>();
     }
@@ -112,49 +121,109 @@ public class PlacementSystem : MonoBehaviour
 
     private void SpawnObjectsWithProbabilities()
     {
-        DestroyAllObjects();
+        //DestroyAllObjects();
+        ResetAvailableTiles();
         while (_availableTiles.Count > 0)
         {
             List<int> objectsToTryIndexes = new List<int>();
-            for (int i = 0; i < _objects.Count; i++)
+            for (int i = 0; i < _objectsStage2.Count; i++)
             {
                 objectsToTryIndexes.Add(i);
             }
-            int numberObjectsAvailable = _objects.Count;
+            int numberObjectsAvailable = _objectsStage2.Count;
             bool placedObject = false;
             Vector3Int randomTile = _availableTiles[Random.Range(0, _availableTiles.Count)];
             Debug.Log("RandomTile: " + randomTile);
             while (numberObjectsAvailable > 0 && !placedObject)
             {
                 int objectIndex = Random.Range(0, numberObjectsAvailable);
-                GameObject obj = _objects[objectsToTryIndexes[objectIndex]];
+                GameObject obj = _objectsStage2[objectsToTryIndexes[objectIndex]];
                 Debug.Log("Objeto: " + obj);
-                Dictionary<ObjectTypes, int[]> availableAdjacentPositionsPercentages = getObjectAvailableAdjacentPosition2(obj);
+                Dictionary<ObjectTypes, int[]> availableAdjacentPositionsPercentages = getObjectAvailableAdjacentPosition(obj);
                 Dictionary<Vector3Int, List<Object>> adjacentObjectsAndPositions = getAdjacentObjects(randomTile);
                 bool canPlace = compareProbabilities(availableAdjacentPositionsPercentages, adjacentObjectsAndPositions, randomTile);
                 if (canPlace)
                 {
                     Vector3 position = SnapCoordinateToGrid(randomTile);
-                    Instantiate(_objects[objectsToTryIndexes[objectIndex]], position, Quaternion.identity);
+                    Instantiate(_objectsStage2[objectsToTryIndexes[objectIndex]], position, Quaternion.identity);
                     _objectsInScene.Add(obj);
                     //_availableTiles.Remove(randomTile);
                     List<Object> objectsInOneTile = getObjectsInOneTile(randomTile);
                     if (objectsInOneTile == null)
                     {
                         objectsInOneTile = new List<Object>();
-                        
+
                     }
                     objectsInOneTile.Add(getObjectType(obj));
                     _tilesWithObjects.Remove(randomTile);
-                    _tilesWithObjects.Add(randomTile,objectsInOneTile);
+                    _tilesWithObjects.Add(randomTile, objectsInOneTile);
                     placedObject = true;
                     Debug.Log("Coloquei");
-                } else
+                }
+                else
                 {
                     // try another object
                     numberObjectsAvailable--;
                     objectsToTryIndexes.RemoveAt(objectIndex);
-                    Debug.Log("Não coloquei");
+                    Debug.Log("Nao coloquei");
+                    if (numberObjectsAvailable == 0)
+                    {
+                        _availableTiles.Remove(randomTile);
+                        Debug.Log("Nothing placed on this tile");
+                    }
+                }
+            }
+        }
+        Debug.Log("There is no more available tiles to place the object");
+    }
+
+    private void SpawnObjectsWithProbabilities3()
+    {
+        //DestroyAllObjects();
+        ResetAvailableTiles();
+        while (_availableTiles.Count > 0)
+        {
+            List<int> objectsToTryIndexes = new List<int>();
+            for (int i = 0; i < _objectsStage3.Count; i++)
+            {
+                objectsToTryIndexes.Add(i);
+            }
+            int numberObjectsAvailable = _objectsStage3.Count;
+            bool placedObject = false;
+            Vector3Int randomTile = _availableTiles[Random.Range(0, _availableTiles.Count)];
+            Debug.Log("RandomTile: " + randomTile);
+            while (numberObjectsAvailable > 0 && !placedObject)
+            {
+                int objectIndex = Random.Range(0, numberObjectsAvailable);
+                GameObject obj = _objectsStage3[objectsToTryIndexes[objectIndex]];
+                Debug.Log("Objeto: " + obj);
+                Dictionary<ObjectTypes, int[]> availableAdjacentPositionsPercentages = getObjectAvailableAdjacentPosition(obj);
+                Dictionary<Vector3Int, List<Object>> adjacentObjectsAndPositions = getAdjacentObjects(randomTile);
+                bool canPlace = compareProbabilities(availableAdjacentPositionsPercentages, adjacentObjectsAndPositions, randomTile);
+                if (canPlace)
+                {
+                    Vector3 position = SnapCoordinateToGrid(randomTile);
+                    Instantiate(_objectsStage3[objectsToTryIndexes[objectIndex]], position, Quaternion.identity);
+                    _objectsInScene.Add(obj);
+                    //_availableTiles.Remove(randomTile);
+                    List<Object> objectsInOneTile = getObjectsInOneTile(randomTile);
+                    if (objectsInOneTile == null)
+                    {
+                        objectsInOneTile = new List<Object>();
+
+                    }
+                    objectsInOneTile.Add(getObjectType(obj));
+                    _tilesWithObjects.Remove(randomTile);
+                    _tilesWithObjects.Add(randomTile, objectsInOneTile);
+                    placedObject = true;
+                    Debug.Log("Coloquei");
+                }
+                else
+                {
+                    // try another object
+                    numberObjectsAvailable--;
+                    objectsToTryIndexes.RemoveAt(objectIndex);
+                    Debug.Log("Nao coloquei");
                     if (numberObjectsAvailable == 0)
                     {
                         _availableTiles.Remove(randomTile);
@@ -170,11 +239,12 @@ public class PlacementSystem : MonoBehaviour
     {
         return _tilesWithObjects.GetValueOrDefault(tile);
     }
-    
-    private Dictionary<ObjectTypes,int[]> getObjectAvailableAdjacentPosition2(GameObject obj)
+
+    private Dictionary<ObjectTypes, int[]> getObjectAvailableAdjacentPosition(GameObject obj)
     {
         Dictionary<ObjectTypes, int[]> objectAvailablePosition2 = new Dictionary<ObjectTypes, int[]>();
-        if (obj.TryGetComponent<Chair>(out Chair chair)){
+        if (obj.TryGetComponent<Chair>(out Chair chair))
+        {
             chair.setProbabilitiesBasedOnAdjacentObject();
             objectAvailablePosition2 = chair.getProbabilitiesBasedOnAdjacentObject();
         }
@@ -198,7 +268,8 @@ public class PlacementSystem : MonoBehaviour
 
     private Object getObjectType(GameObject obj)
     {
-        if (obj.TryGetComponent<Chair>(out Chair chair)){
+        if (obj.TryGetComponent<Chair>(out Chair chair))
+        {
             return chair;
         }
         if (obj.TryGetComponent<Table>(out Table table))
@@ -216,7 +287,7 @@ public class PlacementSystem : MonoBehaviour
         return null;
     }
 
-    private Dictionary<Vector3Int,List<Object>> getAdjacentObjects(Vector3Int newPlacement)
+    private Dictionary<Vector3Int, List<Object>> getAdjacentObjects(Vector3Int newPlacement)
     {
         List<Vector3Int> adjacentTiles = new List<Vector3Int>();
         Dictionary<Vector3Int, List<Object>> adjacentObjectsAndPositions = new Dictionary<Vector3Int, List<Object>>();
@@ -226,7 +297,7 @@ public class PlacementSystem : MonoBehaviour
             {
                 adjacentTiles.Add(newPlacement + new Vector3Int(i, 0, j));
             }
-        } 
+        }
         for (int i = 0; i < adjacentTiles.Count; i++)
         {
             if (_tilesWithObjects.ContainsKey(adjacentTiles[i]))
@@ -234,15 +305,19 @@ public class PlacementSystem : MonoBehaviour
                 adjacentObjectsAndPositions.Add(adjacentTiles[i], _tilesWithObjects.GetValueOrDefault(adjacentTiles[i]));
             }
         }
-        Debug.Log("Nº de objetos adjacentes: " + adjacentObjectsAndPositions.Count);
+        Debug.Log("N de objetos adjacentes: " + adjacentObjectsAndPositions.Count);
         return adjacentObjectsAndPositions;
     }
 
-    private bool compareProbabilities(Dictionary<ObjectTypes, int[]> probabilities, Dictionary<Vector3Int,List<Object>> adjacentObjects,Vector3Int newPlacement)
+    private bool compareProbabilities(Dictionary<ObjectTypes, int[]> probabilities, Dictionary<Vector3Int, List<Object>> adjacentObjects, Vector3Int newPlacement)
     {
-        bool canPlace = true;
+        bool canPlace = false;
+        if (adjacentObjects.Count == 0)
+        {
+            canPlace = true;
+        }
         int placementProbability = 0;
-        foreach(Vector3Int pos in adjacentObjects.Keys)
+        foreach (Vector3Int pos in adjacentObjects.Keys)
         {
             List<Object> adjacentObjInPosition = adjacentObjects[pos];
             for (int i = 0; i < adjacentObjInPosition.Count; i++)
@@ -285,11 +360,7 @@ public class PlacementSystem : MonoBehaviour
                 Debug.Log("Probabilidade: " + placementProbability);
                 int random = Random.Range(1, 101);
                 Debug.Log("Random number: " + random);
-                if (placementProbability == -1)
-                {
-                    canPlace = false;
-                }
-                else
+                if (placementProbability != -1)
                 {
                     if (random > placementProbability)
                     {
@@ -302,7 +373,7 @@ public class PlacementSystem : MonoBehaviour
                     }
                 }
             }
-        }         
+        }
         return canPlace;
     }
 
@@ -331,39 +402,48 @@ public class PlacementSystem : MonoBehaviour
         if (adjacentPosition == newPlacement)
         {
             return 0;
-        } else
+        }
+        else
         if (adjacentPosition == newPlacement + new Vector3Int(0, 0, 1))
         {
             return 1;
-        } else
+        }
+        else
         if (adjacentPosition == newPlacement + new Vector3Int(1, 0, 1))
         {
             return 2;
-        } else
+        }
+        else
         if (adjacentPosition == newPlacement + new Vector3Int(1, 0, 0))
         {
             return 3;
-        } else
+        }
+        else
         if (adjacentPosition == newPlacement + new Vector3Int(1, 0, -1))
         {
             return 4;
-        } else
+        }
+        else
         if (adjacentPosition == newPlacement + new Vector3Int(0, 0, -1))
         {
             return 5;
-        } else
+        }
+        else
         if (adjacentPosition == newPlacement + new Vector3Int(-1, 0, -1))
         {
             return 6;
-        } else
+        }
+        else
         if (adjacentPosition == newPlacement + new Vector3Int(-1, 0, 0))
         {
             return 7;
-        } else
+        }
+        else
         if (adjacentPosition == newPlacement + new Vector3Int(-1, 0, 1))
         {
             return 8;
-        } else
+        }
+        else
         {
             return -1;
         }
