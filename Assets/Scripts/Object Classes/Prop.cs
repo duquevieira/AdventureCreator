@@ -23,5 +23,7 @@ public class Prop : Object
         ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Table, new int[] { 40, -1, -1, -1, -1, -1, -1, -1, -1 });
         ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Rug, new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 });
         ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Prop, new int[] { 0, -1, -1, -1, -1, -1, -1, -1, -1 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Wall, new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 });
+
     }
 }

@@ -443,6 +443,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridLayout: {fileID: 613643066}
   _mainTileMap: {fileID: 97893988}
+  _objectsStage1:
+  - {fileID: 1097924984486478, guid: 5a2b2aefafe7a2f4bb79271e2b6b2e62, type: 3}
   _objectsStage2:
   - {fileID: 1227193648296024, guid: 15fa9e280fc90fe408f14660ac85d0f8, type: 3}
   - {fileID: 1806102558924936, guid: 1adef6fa84d11fd498808191074be3c6, type: 3}
@@ -1053,7 +1055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2076695171
 Transform:
   m_ObjectHideFlags: 0

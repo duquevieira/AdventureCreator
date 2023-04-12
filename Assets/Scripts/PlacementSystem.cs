@@ -9,6 +9,7 @@ using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 using static Object;
 using Random = UnityEngine.Random;
 
@@ -22,6 +23,7 @@ public class PlacementSystem : MonoBehaviour
     public GridLayout GridLayout;
     private Grid _grid;
     [SerializeField] private Tilemap _mainTileMap;
+    [SerializeField] private List<GameObject> _objectsStage1;
     [SerializeField] private List<GameObject> _objectsStage2;
     [SerializeField] private List<GameObject> _objectsStage3;
     private PlaceableObject _objectToPlace;
@@ -41,7 +43,8 @@ public class PlacementSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            SpawnObjectsWithProbabilities();
+            SpawnObjectsWithProbabilities1();
+            SpawnObjectsWithProbabilities2();
             SpawnObjectsWithProbabilities3();
         }
         if (!_objectToPlace)
@@ -69,7 +72,7 @@ public class PlacementSystem : MonoBehaviour
 
     private void Start()
     {
-        ResetAvailableTiles();
+        //ResetAvailableTiles();
     }
 
     private void ResetAvailableTiles()
@@ -103,6 +106,7 @@ public class PlacementSystem : MonoBehaviour
     {
         Vector3Int cellPos = _mainTileMap.WorldToCell(position);
         position = _grid.GetCellCenterWorld(cellPos);
+
         return position;
     }
 
@@ -116,8 +120,100 @@ public class PlacementSystem : MonoBehaviour
         _objectsInScene = new List<GameObject>();
     }
 
+    private void SpawnObjectsWithProbabilities1()
+    {
+        Vector3Int position;
+        int counter = 0;
+        int min;
+        int max;
+        Quaternion rotation = Quaternion.identity;
+        while (counter < 4)
+        {
+            if (counter == 1 || counter == 3 )
+            {
+                min = -4;
+                max = 6;
+            }
+            else
+            {
+                min = -5;
+                max = 5;
+            }
+            for (int i = min; i < max; i++)
+            {
+                if (counter == 0)
+                {
+                    position = new Vector3Int(-5, 0, i);
+                    rotation = Quaternion.Euler(0f, 90f, 0f);
+                } else if (counter == 1)
+                {
+                    position = new Vector3Int(i, 0, -5);
+                    rotation = Quaternion.identity;
+                }
+                else if (counter == 2)
+                {
+                    position = new Vector3Int(i, 0, 5);
+                    rotation = Quaternion.Euler(0f, -180f, 0f);
+                }
+                else
+                {
+                    position = new Vector3Int(5, 0, i);
+                    rotation = Quaternion.Euler(0f, 270f, 0f);
+                }
 
-    private void SpawnObjectsWithProbabilities()
+                List<int> objectsToTryIndexes = new List<int>();
+                for (int j = 0; j < _objectsStage1.Count; j++)
+                {
+                    objectsToTryIndexes.Add(j);
+                }
+                int numberObjectsAvailable = _objectsStage1.Count;
+                bool placedObject = false;
+                while (numberObjectsAvailable > 0 && !placedObject)
+                {
+                    int objectIndex = Random.Range(0, numberObjectsAvailable);
+                    GameObject obj = _objectsStage1[objectsToTryIndexes[objectIndex]];
+                    Debug.Log("Objeto: " + obj);
+                    Dictionary<ObjectTypes, int[]> availableAdjacentPositionsPercentages = getObjectAvailableAdjacentPosition(obj);
+                    Dictionary<Vector3Int, List<Object>> adjacentObjectsAndPositions = getAdjacentObjects(position);
+                    bool canPlace = compareProbabilities(availableAdjacentPositionsPercentages, adjacentObjectsAndPositions, position);
+                    if (canPlace)
+                    {
+                        //Vector3 position = SnapCoordinateToGrid(randomTile);
+                        Instantiate(_objectsStage1[objectsToTryIndexes[objectIndex]], position, rotation);
+                        _objectsInScene.Add(obj);
+                        //_availableTiles.Remove(randomTile);
+                        List<Object> objectsInOneTile = getObjectsInOneTile(position);
+                        if (objectsInOneTile == null)
+                        {
+                            objectsInOneTile = new List<Object>();
+
+                        }
+                        objectsInOneTile.Add(getObjectType(obj));
+                        _tilesWithObjects.Remove(position);
+                        _tilesWithObjects.Add(position, objectsInOneTile);
+                        placedObject = true;
+                        Debug.Log("Coloquei");
+                    }
+                    else
+                    {
+                        // try another object
+                        numberObjectsAvailable--;
+                        objectsToTryIndexes.RemoveAt(objectIndex);
+                        Debug.Log("Nao coloquei");
+                        if (numberObjectsAvailable == 0)
+                        {
+                            //_availableTiles.Remove(randomTile);
+                            Debug.Log("Nothing placed on this tile");
+                        }
+                    }
+                }
+            }
+            counter++;
+        }
+        
+        Debug.Log("There is no more available tiles to place the object");
+    }
+    private void SpawnObjectsWithProbabilities2()
     {
         //DestroyAllObjects();
         ResetAvailableTiles();
@@ -284,6 +380,11 @@ public class PlacementSystem : MonoBehaviour
             prop.setProbabilitiesBasedOnAdjacentObject();
             objectAvailablePosition2 = prop.getProbabilitiesBasedOnAdjacentObject();
         }
+        if (obj.TryGetComponent<Wall>(out Wall wall))
+        {
+            wall.setProbabilitiesBasedOnAdjacentObject();
+            objectAvailablePosition2 = wall.getProbabilitiesBasedOnAdjacentObject();
+        }
         return objectAvailablePosition2;
     }
 
@@ -308,6 +409,10 @@ public class PlacementSystem : MonoBehaviour
         if (obj.TryGetComponent<Prop>(out Prop prop))
         {
             return prop;
+        }
+        if (obj.TryGetComponent<Wall>(out Wall wall))
+        {
+            return wall;
         }
         return null;
     }
@@ -423,6 +528,10 @@ public class PlacementSystem : MonoBehaviour
         if (obj.TryGetComponent<Prop>(out Prop prop))
         {
             return ObjectTypes.Prop;
+        }
+        if (obj.TryGetComponent<Wall>(out Wall wall))
+        {
+            return ObjectTypes.Wall;
         }
         return ObjectTypes.Default;
     }

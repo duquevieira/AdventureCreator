@@ -50,5 +50,6 @@ public class Chair : Object
         ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Table, new int[] { 0, 80, 0, 80, 0, 80, 0, 80, 0});
         ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Rug, new int[] { 100, -1, -1, -1, -1, -1, -1, -1, -1 });
         ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Prop, new int[] { 5, -1, -1, -1, -1, -1, -1, -1, -1 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Wall, new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 });
     }
 }

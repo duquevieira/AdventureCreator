@@ -45,6 +45,7 @@ public class Shelf : Object
         ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Table, new int[] { 0, 0, 10, 0, 10, 0, 10, 0, 10 });
         ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Rug, new int[] { 10, -1, -1, -1, -1, -1, -1, -1, -1 });
         ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Prop, new int[] { 20, -1, -1, -1, -1, -1, -1, -1, -1 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Wall, new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 });
     }
 
     /*public override List<Object> getCanBeAboveOf()
