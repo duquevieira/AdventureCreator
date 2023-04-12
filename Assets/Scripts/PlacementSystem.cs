@@ -28,7 +28,6 @@ public class PlacementSystem : MonoBehaviour
     private List<GameObject> _objectsInScene;
     private List<Vector3Int> _availableTiles;
     private Dictionary<Vector3Int, List<Object>> _tilesWithObjects;
-    private int phase;
 
     private void Awake()
     {
@@ -37,7 +36,6 @@ public class PlacementSystem : MonoBehaviour
         _objectsInScene = new List<GameObject>();
         _availableTiles = new List<Vector3Int>();
         _tilesWithObjects = new Dictionary<Vector3Int, List<Object>>();
-        phase = 0;
     }
     private void Update()
     {
@@ -202,11 +200,17 @@ public class PlacementSystem : MonoBehaviour
                 bool canPlace = compareProbabilities(availableAdjacentPositionsPercentages, adjacentObjectsAndPositions, randomTile);
                 if (canPlace)
                 {
+                    List<Object> objectsInOneTile = getObjectsInOneTile(randomTile);
                     Vector3 position = SnapCoordinateToGrid(randomTile);
+                    if (convertObjectToObjectType(getObjectType(obj)) == ObjectTypes.Prop)
+                    {
+                        //position.y = getObjectHeight(objectsInOneTile);
+                        position.y = 0.5f;
+                    }
                     Instantiate(_objectsStage3[objectsToTryIndexes[objectIndex]], position, Quaternion.identity);
                     _objectsInScene.Add(obj);
                     //_availableTiles.Remove(randomTile);
-                    List<Object> objectsInOneTile = getObjectsInOneTile(randomTile);
+                    
                     if (objectsInOneTile == null)
                     {
                         objectsInOneTile = new List<Object>();
@@ -235,6 +239,18 @@ public class PlacementSystem : MonoBehaviour
         Debug.Log("There is no more available tiles to place the object");
     }
 
+    private float getObjectHeight(List<Object> objects)
+    {
+        float height = 0f;
+        for (int i = 0; i<objects.Count; i++)
+        { 
+            if (objects[0].gameObject.transform.lossyScale.y > height)
+            {
+                height = objects[0].gameObject.transform.localScale.y;
+            }
+        }
+        return height;
+    }
     private List<Object> getObjectsInOneTile(Vector3Int tile)
     {
         return _tilesWithObjects.GetValueOrDefault(tile);
@@ -263,6 +279,11 @@ public class PlacementSystem : MonoBehaviour
             rug.setProbabilitiesBasedOnAdjacentObject();
             objectAvailablePosition2 = rug.getProbabilitiesBasedOnAdjacentObject();
         }
+        if (obj.TryGetComponent<Prop>(out Prop prop))
+        {
+            prop.setProbabilitiesBasedOnAdjacentObject();
+            objectAvailablePosition2 = prop.getProbabilitiesBasedOnAdjacentObject();
+        }
         return objectAvailablePosition2;
     }
 
@@ -283,6 +304,10 @@ public class PlacementSystem : MonoBehaviour
         if (obj.TryGetComponent<Rug>(out Rug rug))
         {
             return rug;
+        }
+        if (obj.TryGetComponent<Prop>(out Prop prop))
+        {
+            return prop;
         }
         return null;
     }
@@ -394,6 +419,10 @@ public class PlacementSystem : MonoBehaviour
         if (obj.TryGetComponent<Rug>(out Rug rug))
         {
             return ObjectTypes.Rug;
+        }
+        if (obj.TryGetComponent<Prop>(out Prop prop))
+        {
+            return ObjectTypes.Prop;
         }
         return ObjectTypes.Default;
     }

@@ -7,7 +7,7 @@ public class Object: MonoBehaviour
 {
     [HideInInspector] public Dictionary<ObjectTypes, int[]> ProbabilitiesBasedOnAdjacentObject;
     //[HideInInspector] public enum AdjacentPositions { Top, TopLeft,TopRight, Right,Left,On,BottomLeft,Bottom,BottomRight };
-    [HideInInspector] public enum ObjectTypes { Chair, Shelf, Table, Rug, Default};
+    [HideInInspector] public enum ObjectTypes { Chair, Shelf, Table, Rug, Prop, Default};
   
 
     public virtual Dictionary<ObjectTypes, int[]> getProbabilitiesBasedOnAdjacentObject()

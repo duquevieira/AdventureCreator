@@ -18,8 +18,9 @@ public class Rug : Object
     {
         ProbabilitiesBasedOnAdjacentObject = new Dictionary<ObjectTypes, int[]>();
         ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Chair, new int[] { 100, -1, -1, -1, -1, -1, -1, -1, -1 }); //85
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Shelf, new int[] { 100, -1, -1, -1, -1, -1, -1, -1, -1 }); //10
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Shelf, new int[] { 10, -1, -1, -1, -1, -1, -1, -1, -1 }); //10
         ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Table, new int[] { 100, -1, -1, -1, -1, -1, -1, -1, -1 }); //95
         ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Rug, new int[] { 0, -1, -1, -1, -1, -1, -1, -1, -1 });
+        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Prop, new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 });
     }
 }

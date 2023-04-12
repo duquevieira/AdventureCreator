@@ -449,6 +449,7 @@ MonoBehaviour:
   - {fileID: 1528432388645246, guid: ef6e42722a04b8545ab910932b7ceefe, type: 3}
   _objectsStage3:
   - {fileID: 1179280299288082, guid: 6e4e5f27baecf0042a048cb9eeb99171, type: 3}
+  - {fileID: 1717453355936620, guid: 12a152d065b61e94d8f19b014ec97c83, type: 3}
 --- !u!4 &855072684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4631730319309726, guid: 5a2b2aefafe7a2f4bb79271e2b6b2e62, type: 3}
