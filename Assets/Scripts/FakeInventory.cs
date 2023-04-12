@@ -15,12 +15,8 @@ namespace MoreMountains.InventoryEngine
         {
             int amount = 0;
             foreach (ItemGroup item in Items)
-            {
                 if(item.getItemName().Equals(itemName))
-                {
                     amount += item.getItemAmount();
-                }
-            }
             return amount;
         }
 
@@ -30,7 +26,6 @@ namespace MoreMountains.InventoryEngine
             bool foundItem = false;
             List<ItemGroup> listToRemove = new List<ItemGroup>();
             foreach (ItemGroup item in Items)
-            {
                 if (item.getItemName().Equals(itemName))
                 {
                     foundItem = true;
@@ -45,15 +40,10 @@ namespace MoreMountains.InventoryEngine
                         item.removeItemAmount(item.getItemAmount());
                     }
                     if(item.getItemAmount() == 0)
-                    {
                         listToRemove.Add(item);
-                    }
                 }
-            }
             foreach (ItemGroup toRemove in listToRemove)
-            {
                 Items.Remove(toRemove);
-            }
             return foundItem;
         }
     }

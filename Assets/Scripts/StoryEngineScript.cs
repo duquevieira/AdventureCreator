@@ -22,9 +22,11 @@ public class StoryEngineScript : MonoBehaviour
     [HideInInspector]
     public Storyboard Storyboard;
 
-    //TODO
-    [SerializeField]
-    private GameObject _ui;
+    void Start()
+    {
+        StoryItems = new List<ItemGroup>();
+        Storyboard = new Storyboard();
+    }
 
     void Update()
     {
@@ -45,18 +47,6 @@ public class StoryEngineScript : MonoBehaviour
                     StartCoroutine(ExecuteAfter(3, doorAnimator, ANIMATION_DOOR));
                 }
             }
-        }
-        //TODO
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            StoryboardStep firstStep = Storyboard.getStorySteps()[0];
-            _ui.SetActive(true);
-            UIScript uIScript = _ui.GetComponent<UIScript>();
-            uIScript.setupText(firstStep.getColliderName(), firstStep.getDialog(), firstStep.getRequirements()[0].getItemName() + " " + firstStep.getRequirements()[0].getItemAmount());
-        }
-        if (Input.GetKeyUp(KeyCode.U))
-        {
-            _ui.SetActive(false);
         }
         //DEBUGGING ITEMS
         if (Input.GetKeyDown(KeyCode.T)) {
@@ -102,7 +92,6 @@ public class StoryEngineScript : MonoBehaviour
     public void ProcessEntry(string colliderName)
     {
         foreach (StoryboardStep iteratedStep in Storyboard.getStorySteps())
-        {
             if (colliderName.Equals(iteratedStep.getColliderName()))
             {
                 List<ItemGroup> requirements = iteratedStep.getRequirements();
@@ -111,13 +100,11 @@ public class StoryEngineScript : MonoBehaviour
                 {
                     int storyAmount = -1;
                     foreach(ItemGroup storyItem in StoryItems)
-                    {
                         if(storyItem.getItemName() == requirement.getItemName())
                         {
                             storyAmount = storyItem.getItemAmount();
                             break;
                         }
-                    }
                     int inventoryAmount = Inventory.GetQuantity(requirement.getItemName());
                     int requiredAmount = requirement.getItemAmount();
                     if (inventoryAmount < requiredAmount && storyAmount < requiredAmount)
@@ -131,21 +118,21 @@ public class StoryEngineScript : MonoBehaviour
                     foreach (ItemGroup requirement in requirements)
                     {
                         foreach (ItemGroup storyItem in StoryItems)
-                        {
                             if (storyItem.getItemName() == requirement.getItemName())
                             {
                                 storyItem.removeItemAmount(requirement.getItemAmount());
+                                if(storyItem.getItemAmount() == 0)
+                                    StoryItems.Remove(storyItem);
                                 break;
                             }
-                        }
                         Inventory.RemoveItemByID(requirement.getItemName(), requirement.getItemAmount());
                     }
-                    foreach(ItemGroup acquires in iteratedStep.getAcquired())
+                    foreach (ItemGroup acquires in iteratedStep.getAcquired())
                     {
                         bool newItem = true;
-                        foreach(ItemGroup storyItem in StoryItems)
+                        foreach (ItemGroup storyItem in StoryItems)
                         {
-                            if(storyItem.getItemName() == acquires.getItemName())
+                            if (storyItem.getItemName() == acquires.getItemName())
                             {
                                 newItem = false;
                                 storyItem.addItemAmount(acquires.getItemAmount());
@@ -154,18 +141,18 @@ public class StoryEngineScript : MonoBehaviour
                         }
                         if(newItem)
                         {
-                            StoryItems.Add(acquires);
+                            ItemGroup item = new ItemGroup(acquires.getItemName(), acquires.getItemAmount());
+                            StoryItems.Add(item);
                         }
                     }
                 }
             }
-        }
     }
 
     public string getCharacterSkin()
     {
         //Santa, FWorker, MWorker, FAttendant, MAttendant, FClerk, MClerk,
         //FGym, MGym, MHunter, FMusician, MMusician, FShopper, MShopper
-        return "FMusician";
+        return "FAttendant";
     }
 }

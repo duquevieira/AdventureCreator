@@ -25,11 +25,11 @@ public class ItemGroup
 
     public void addItemAmount(int amount)
     {
-        _amount = _amount + amount;
+        _amount += amount;
     }
 
     public void removeItemAmount(int amount)
     {
-        _amount = _amount - amount;
+        _amount -= amount;
     }
 }
