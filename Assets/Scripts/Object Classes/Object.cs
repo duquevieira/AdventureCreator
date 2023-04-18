@@ -5,23 +5,23 @@ using UnityEngine;
 
 public class Object: MonoBehaviour
 {
-    [HideInInspector] public Dictionary<ObjectTypes, int[]> ProbabilitiesBasedOnAdjacentObject;
+    [HideInInspector] public Dictionary<ObjectTypes, int[]> Probabilities;
     //[HideInInspector] public enum AdjacentPositions { Top, TopLeft,TopRight, Right,Left,On,BottomLeft,Bottom,BottomRight };
     [HideInInspector] public enum ObjectTypes { Chair, Shelf, Table, Rug, Prop, Wall, Default};
   
 
-    public virtual Dictionary<ObjectTypes, int[]> getProbabilitiesBasedOnAdjacentObject()
+    public virtual Dictionary<ObjectTypes, int[]> getProbabilities()
     {
-        return ProbabilitiesBasedOnAdjacentObject;
+        return Probabilities;
     }
-    public virtual int[] getAdjacentPositionsProbabilities(ObjectTypes objectType)
+    /*public virtual int[] getAdjacentPositionsProbabilities(ObjectTypes objectType)
     {
-        return ProbabilitiesBasedOnAdjacentObject.GetValueOrDefault(objectType);
-    }
+        return Probabilities.GetValueOrDefault(objectType);
+    }*/
 
-    public virtual void setProbabilitiesBasedOnAdjacentObject()
+    public virtual void setProbabilities()
     {
-        ProbabilitiesBasedOnAdjacentObject = new Dictionary<ObjectTypes, int[]>();
+        Probabilities = new Dictionary<ObjectTypes, int[]>();
     }
 
 }

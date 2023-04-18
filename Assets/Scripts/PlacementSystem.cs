@@ -24,9 +24,9 @@ public class PlacementSystem : MonoBehaviour
     private Grid _grid;
     [SerializeField] private Tilemap _mainTileMap;
     [SerializeField] private GameObject floor;
-    [SerializeField] private List<GameObject> _objectsStage1;
-    [SerializeField] private List<GameObject> _objectsStage2;
-    [SerializeField] private List<GameObject> _objectsStage3;
+    [SerializeField] private List<GameObject> _structureObjects;
+    [SerializeField] private List<GameObject> _mainObjects;
+    [SerializeField] private List<GameObject> _extraObjects;
     [SerializeField] private int width = 5;
     [SerializeField] private int height = 5;
     private PlaceableObject _objectToPlace;
@@ -54,9 +54,9 @@ public class PlacementSystem : MonoBehaviour
                     Instantiate(floor, pos, Quaternion.identity);
                 }
             }
-            SpawnObjectsWithProbabilities1();
-            SpawnObjectsWithProbabilities2();
-            SpawnObjectsWithProbabilities3();
+            SpawnStructure();
+            SpawnMainObjects();
+            SpawnExtras();
         }
         if (!_objectToPlace)
         {
@@ -81,10 +81,6 @@ public class PlacementSystem : MonoBehaviour
         }*/
     }
 
-    private void Start()
-    {
-    }
-
     private void ResetAvailableTiles()
     {
         for (int i = 0; i < width-1; i++)
@@ -95,8 +91,6 @@ public class PlacementSystem : MonoBehaviour
             }
         }
     }
-
-    // returns the position of the mouse in World coordinates
     public static Vector3 getMouseWorldPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -109,9 +103,6 @@ public class PlacementSystem : MonoBehaviour
             return Vector3.zero;
         }
     }
-
-    // gets the world position of the object 
-    // returns the position of the object snapped to the grid
     public Vector3 SnapCoordinateToGrid(Vector3 position)
     {
         Vector3Int cellPos = _mainTileMap.WorldToCell(position);
@@ -119,8 +110,6 @@ public class PlacementSystem : MonoBehaviour
 
         return position;
     }
-
-    // Destroy all objects that are currently in the scene
     private void DestroyAllObjects()
     {
         for (int j = 0; j < _objectsInScene.Count; j++)
@@ -130,7 +119,7 @@ public class PlacementSystem : MonoBehaviour
         _objectsInScene = new List<GameObject>();
     }
 
-    private void SpawnObjectsWithProbabilities1()
+    private void SpawnStructure()
     {
         Vector3Int position;
         int counter = 0;
@@ -181,24 +170,24 @@ public class PlacementSystem : MonoBehaviour
                 }
 
                 List<int> objectsToTryIndexes = new List<int>();
-                for (int j = 0; j < _objectsStage1.Count; j++)
+                for (int j = 0; j < _structureObjects.Count; j++)
                 {
                     objectsToTryIndexes.Add(j);
                 }
-                int numberObjectsAvailable = _objectsStage1.Count;
+                int numberObjectsAvailable = _structureObjects.Count;
                 bool placedObject = false;
                 while (numberObjectsAvailable > 0 && !placedObject)
                 {
                     int objectIndex = Random.Range(0, numberObjectsAvailable);
-                    GameObject obj = _objectsStage1[objectsToTryIndexes[objectIndex]];
+                    GameObject obj = _structureObjects[objectsToTryIndexes[objectIndex]];
                     Debug.Log("Objeto: " + obj);
-                    Dictionary<ObjectTypes, int[]> availableAdjacentPositionsPercentages = getObjectAvailableAdjacentPosition(obj);
-                    Dictionary<Vector3Int, List<Object>> adjacentObjectsAndPositions = getAdjacentObjects(position);
-                    bool canPlace = compareProbabilities(availableAdjacentPositionsPercentages, adjacentObjectsAndPositions, position);
+                    Dictionary<ObjectTypes, int[]> objectProbabilities = getObjectProbabilities(obj);
+                    Dictionary<Vector3Int, List<Object>> adjacentObjects = getAdjacentObjects(position);
+                    bool canPlace = compareProbabilities(objectProbabilities, adjacentObjects, position);
                     if (canPlace)
                     {
                         //Vector3 position = SnapCoordinateToGrid(randomTile);
-                        Instantiate(_objectsStage1[objectsToTryIndexes[objectIndex]], position, rotation);
+                        Instantiate(_structureObjects[objectsToTryIndexes[objectIndex]], position, rotation);
                         _objectsInScene.Add(obj);
                         //_availableTiles.Remove(randomTile);
                         List<Object> objectsInOneTile = getObjectsInOneTile(position);
@@ -232,126 +221,81 @@ public class PlacementSystem : MonoBehaviour
         
         Debug.Log("There is no more available tiles to place the object");
     }
-    private void SpawnObjectsWithProbabilities2()
+    private void SpawnMainObjects()
     {
         //DestroyAllObjects();
         ResetAvailableTiles();
         while (_availableTiles.Count > 0)
         {
-            List<int> objectsToTryIndexes = new List<int>();
-            for (int i = 0; i < _objectsStage2.Count; i++)
-            {
-                objectsToTryIndexes.Add(i);
-            }
-            int numberObjectsAvailable = _objectsStage2.Count;
-            bool placedObject = false;
-            Vector3Int randomTile = _availableTiles[Random.Range(0, _availableTiles.Count)];
-            Debug.Log("RandomTile: " + randomTile);
-            while (numberObjectsAvailable > 0 && !placedObject)
-            {
-                int objectIndex = Random.Range(0, numberObjectsAvailable);
-                GameObject obj = _objectsStage2[objectsToTryIndexes[objectIndex]];
-                Debug.Log("Objeto: " + obj);
-                Dictionary<ObjectTypes, int[]> availableAdjacentPositionsPercentages = getObjectAvailableAdjacentPosition(obj);
-                Dictionary<Vector3Int, List<Object>> adjacentObjectsAndPositions = getAdjacentObjects(randomTile);
-                bool canPlace = compareProbabilities(availableAdjacentPositionsPercentages, adjacentObjectsAndPositions, randomTile);
-                if (canPlace)
-                {
-                    Vector3 position = SnapCoordinateToGrid(randomTile);
-                    Instantiate(_objectsStage2[objectsToTryIndexes[objectIndex]], position, Quaternion.identity);
-                    _objectsInScene.Add(obj);
-                    //_availableTiles.Remove(randomTile);
-                    List<Object> objectsInOneTile = getObjectsInOneTile(randomTile);
-                    if (objectsInOneTile == null)
-                    {
-                        objectsInOneTile = new List<Object>();
-
-                    }
-                    objectsInOneTile.Add(getObjectType(obj));
-                    _tilesWithObjects.Remove(randomTile);
-                    _tilesWithObjects.Add(randomTile, objectsInOneTile);
-                    placedObject = true;
-                    Debug.Log("Coloquei");
-                }
-                else
-                {
-                    // try another object
-                    numberObjectsAvailable--;
-                    objectsToTryIndexes.RemoveAt(objectIndex);
-                    Debug.Log("Nao coloquei");
-                    if (numberObjectsAvailable == 0)
-                    {
-                        _availableTiles.Remove(randomTile);
-                        Debug.Log("Nothing placed on this tile");
-                    }
-                }
-            }
+            GenerationProcess(_mainObjects);
+        }
+        Debug.Log("There is no more available tiles to place the object");
+    }
+    private void SpawnExtras()
+    {
+        //DestroyAllObjects();
+        ResetAvailableTiles();
+        while (_availableTiles.Count > 0)
+        {
+            GenerationProcess(_extraObjects);
         }
         Debug.Log("There is no more available tiles to place the object");
     }
 
-    private void SpawnObjectsWithProbabilities3()
-    {
-        //DestroyAllObjects();
-        ResetAvailableTiles();
-        while (_availableTiles.Count > 0)
+    private void GenerationProcess(List<GameObject> listObjects) {
+        List<int> objectsToTryIndexes = new List<int>();
+        for (int i = 0; i < listObjects.Count; i++)
         {
-            List<int> objectsToTryIndexes = new List<int>();
-            for (int i = 0; i < _objectsStage3.Count; i++)
+            objectsToTryIndexes.Add(i);
+        }
+        int numberObjectsAvailable = listObjects.Count;
+        bool placedObject = false;
+        Vector3Int randomTile = _availableTiles[Random.Range(0, _availableTiles.Count)];
+        Debug.Log("RandomTile: " + randomTile);
+        while (numberObjectsAvailable > 0 && !placedObject)
+        {
+            int objectIndex = Random.Range(0, numberObjectsAvailable);
+            GameObject obj = listObjects[objectsToTryIndexes[objectIndex]];
+            Debug.Log("Objeto: " + obj);
+            Dictionary<ObjectTypes, int[]> objectProbabilities = getObjectProbabilities(obj);
+            Dictionary<Vector3Int, List<Object>> adjacentObjects = getAdjacentObjects(randomTile);
+            bool canPlace = compareProbabilities(objectProbabilities, adjacentObjects, randomTile);
+            if (canPlace)
             {
-                objectsToTryIndexes.Add(i);
-            }
-            int numberObjectsAvailable = _objectsStage3.Count;
-            bool placedObject = false;
-            Vector3Int randomTile = _availableTiles[Random.Range(0, _availableTiles.Count)];
-            Debug.Log("RandomTile: " + randomTile);
-            while (numberObjectsAvailable > 0 && !placedObject)
-            {
-                int objectIndex = Random.Range(0, numberObjectsAvailable);
-                GameObject obj = _objectsStage3[objectsToTryIndexes[objectIndex]];
-                Debug.Log("Objeto: " + obj);
-                Dictionary<ObjectTypes, int[]> availableAdjacentPositionsPercentages = getObjectAvailableAdjacentPosition(obj);
-                Dictionary<Vector3Int, List<Object>> adjacentObjectsAndPositions = getAdjacentObjects(randomTile);
-                bool canPlace = compareProbabilities(availableAdjacentPositionsPercentages, adjacentObjectsAndPositions, randomTile);
-                if (canPlace)
+                List<Object> objectsInOneTile = getObjectsInOneTile(randomTile);
+                Vector3 position = SnapCoordinateToGrid(randomTile);
+                if (convertObjectToObjectType(getObjectType(obj)) == ObjectTypes.Prop)
                 {
-                    List<Object> objectsInOneTile = getObjectsInOneTile(randomTile);
-                    Vector3 position = SnapCoordinateToGrid(randomTile);
-                    if (convertObjectToObjectType(getObjectType(obj)) == ObjectTypes.Prop)
-                    {
-                        //position.y = getObjectHeight(objectsInOneTile);
-                        position.y = 0.5f;
-                    }
-                    Instantiate(_objectsStage3[objectsToTryIndexes[objectIndex]], position, Quaternion.identity);
-                    _objectsInScene.Add(obj);
-                    //_availableTiles.Remove(randomTile);
-                    
-                    if (objectsInOneTile == null)
-                    {
-                        objectsInOneTile = new List<Object>();
-
-                    }
-                    objectsInOneTile.Add(getObjectType(obj));
-                    _tilesWithObjects.Remove(randomTile);
-                    _tilesWithObjects.Add(randomTile, objectsInOneTile);
-                    placedObject = true;
-                    Debug.Log("Coloquei");
+                    position.y = 0.5f;
                 }
-                else
+                Instantiate(listObjects[objectsToTryIndexes[objectIndex]], position, Quaternion.identity);
+                _objectsInScene.Add(obj);
+                //_availableTiles.Remove(randomTile);
+                
+                if (objectsInOneTile == null)
                 {
-                    // try another object
-                    numberObjectsAvailable--;
-                    objectsToTryIndexes.RemoveAt(objectIndex);
-                    Debug.Log("Nao coloquei");
-                    if (numberObjectsAvailable == 0)
-                    {
-                        _availableTiles.Remove(randomTile);
-                        Debug.Log("Nothing placed on this tile");
-                    }
+                    objectsInOneTile = new List<Object>();
+
+                }
+                objectsInOneTile.Add(getObjectType(obj));
+                _tilesWithObjects.Remove(randomTile);
+                _tilesWithObjects.Add(randomTile, objectsInOneTile);
+                placedObject = true;
+                Debug.Log("Coloquei");
+            }
+            else
+            {
+                // try another object
+                numberObjectsAvailable--;
+                objectsToTryIndexes.RemoveAt(objectIndex);
+                Debug.Log("Nao coloquei");
+                if (numberObjectsAvailable == 0)
+                {
+                    _availableTiles.Remove(randomTile);
+                    Debug.Log("Nothing placed on this tile");
                 }
             }
         }
-        Debug.Log("There is no more available tiles to place the object");
     }
 
     private float getObjectHeight(List<Object> objects)
@@ -371,38 +315,38 @@ public class PlacementSystem : MonoBehaviour
         return _tilesWithObjects.GetValueOrDefault(tile);
     }
 
-    private Dictionary<ObjectTypes, int[]> getObjectAvailableAdjacentPosition(GameObject obj)
+    private Dictionary<ObjectTypes, int[]> getObjectProbabilities(GameObject obj)
     {
         Dictionary<ObjectTypes, int[]> objectAvailablePosition2 = new Dictionary<ObjectTypes, int[]>();
         if (obj.TryGetComponent<Chair>(out Chair chair))
         {
-            chair.setProbabilitiesBasedOnAdjacentObject();
-            objectAvailablePosition2 = chair.getProbabilitiesBasedOnAdjacentObject();
+            chair.setProbabilities();
+            objectAvailablePosition2 = chair.getProbabilities();
         }
         if (obj.TryGetComponent<Table>(out Table table))
         {
-            table.setProbabilitiesBasedOnAdjacentObject();
-            objectAvailablePosition2 = table.getProbabilitiesBasedOnAdjacentObject();
+            table.setProbabilities();
+            objectAvailablePosition2 = table.getProbabilities();
         }
         if (obj.TryGetComponent<Shelf>(out Shelf shelf))
         {
-            shelf.setProbabilitiesBasedOnAdjacentObject();
-            objectAvailablePosition2 = shelf.getProbabilitiesBasedOnAdjacentObject();
+            shelf.setProbabilities();
+            objectAvailablePosition2 = shelf.getProbabilities();
         }
         if (obj.TryGetComponent<Rug>(out Rug rug))
         {
-            rug.setProbabilitiesBasedOnAdjacentObject();
-            objectAvailablePosition2 = rug.getProbabilitiesBasedOnAdjacentObject();
+            rug.setProbabilities();
+            objectAvailablePosition2 = rug.getProbabilities();
         }
         if (obj.TryGetComponent<Prop>(out Prop prop))
         {
-            prop.setProbabilitiesBasedOnAdjacentObject();
-            objectAvailablePosition2 = prop.getProbabilitiesBasedOnAdjacentObject();
+            prop.setProbabilities();
+            objectAvailablePosition2 = prop.getProbabilities();
         }
         if (obj.TryGetComponent<Wall>(out Wall wall))
         {
-            wall.setProbabilitiesBasedOnAdjacentObject();
-            objectAvailablePosition2 = wall.getProbabilitiesBasedOnAdjacentObject();
+            wall.setProbabilities();
+            objectAvailablePosition2 = wall.getProbabilities();
         }
         return objectAvailablePosition2;
     }

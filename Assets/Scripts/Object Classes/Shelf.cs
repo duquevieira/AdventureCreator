@@ -4,57 +4,25 @@ using UnityEngine;
 
 public class Shelf : Object
 {
-
-    /*public override void setAttributes()
+    public override Dictionary<ObjectTypes, int[]> getProbabilities()
     {
-        CanBeAboveOf = new List<Object>
-        {
-            new Rug()
-        };
-        //canBeBelowOf.Add(new Prop());
-    }*/
-
-    /*public override void setAdjacentAvailablePositions()
-    {
-        AdjacentAvailablePositions = new bool[8];
-        for (int i = 0; i < AdjacentAvailablePositions.Length; i++)
-        {
-            AdjacentAvailablePositions[i] = true;
-        }
-        AdjacentAvailablePositions[0] = false;
-        AdjacentAvailablePositions[2] = false;
-        AdjacentAvailablePositions[4] = false;
-        AdjacentAvailablePositions[6] = false;
-    }*/
-
-    public override Dictionary<ObjectTypes, int[]> getProbabilitiesBasedOnAdjacentObject()
-    {
-        return this.ProbabilitiesBasedOnAdjacentObject;
+        return this.Probabilities;
     }
 
-    public override int[] getAdjacentPositionsProbabilities(ObjectTypes objectType)
+    /*public override int[] getAdjacentPositionsProbabilities(ObjectTypes objectType)
     {
-        return this.ProbabilitiesBasedOnAdjacentObject.GetValueOrDefault(objectType);
-    }
-
-    public override void setProbabilitiesBasedOnAdjacentObject()
-    {
-        ProbabilitiesBasedOnAdjacentObject = new Dictionary<ObjectTypes, int[]>();
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Chair, new int[] { 0, 0, 15, 0, 15, 0, 15, 0, 15 });
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Shelf, new int[] { 0, 10, 0, 80, 0, 10, 0, 80, 0 });
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Table, new int[] { 0, 0, 10, 0, 10, 0, 10, 0, 10 });
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Rug, new int[] { 10, -1, -1, -1, -1, -1, -1, -1, -1 });
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Prop, new int[] { 20, -1, -1, -1, -1, -1, -1, -1, -1 });
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Wall, new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 });
-    }
-
-    /*public override List<Object> getCanBeAboveOf()
-    {
-        return this.CanBeAboveOf;
+        return this.Probabilities.GetValueOrDefault(objectType);
     }*/
 
-    /*public override bool[] getAdjacentAvailablePositions()
+    public override void setProbabilities()
     {
-        return this.AdjacentAvailablePositions;
-    }*/
+        Probabilities = new Dictionary<ObjectTypes, int[]>();
+        Probabilities.Add(ObjectTypes.Chair, new int[] { 0, 0, 15, 0, 15, 0, 15, 0, 15 });
+        Probabilities.Add(ObjectTypes.Shelf, new int[] { 0, 10, 0, 80, 0, 10, 0, 80, 0 });
+        Probabilities.Add(ObjectTypes.Table, new int[] { 0, 0, 10, 0, 10, 0, 10, 0, 10 });
+        Probabilities.Add(ObjectTypes.Rug, new int[] { 10, -1, -1, -1, -1, -1, -1, -1, -1 });
+        Probabilities.Add(ObjectTypes.Prop, new int[] { 0, -1, -1, -1, -1, -1, -1, -1, -1 });
+        Probabilities.Add(ObjectTypes.Wall, new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 });
+    }
+
 }

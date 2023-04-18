@@ -5,25 +5,25 @@ using static Object;
 
 public class Prop : Object
 {
-    public override int[] getAdjacentPositionsProbabilities(ObjectTypes objectType)
+    /*public override int[] getAdjacentPositionsProbabilities(ObjectTypes objectType)
     {
-        return this.ProbabilitiesBasedOnAdjacentObject.GetValueOrDefault(objectType);
+        return this.Probabilities.GetValueOrDefault(objectType);
+    }*/
+
+    public override Dictionary<ObjectTypes, int[]> getProbabilities()
+    {
+        return this.Probabilities;
     }
 
-    public override Dictionary<ObjectTypes, int[]> getProbabilitiesBasedOnAdjacentObject()
+    public override void setProbabilities()
     {
-        return this.ProbabilitiesBasedOnAdjacentObject;
-    }
-
-    public override void setProbabilitiesBasedOnAdjacentObject()
-    {
-        ProbabilitiesBasedOnAdjacentObject = new Dictionary<ObjectTypes, int[]>();
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Chair, new int[] { 5, -1, -1, -1, -1, -1, -1, -1, -1 });
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Shelf, new int[] { 20, -1, -1, -1, -1, -1, -1, -1, -1 });
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Table, new int[] { 40, -1, -1, -1, -1, -1, -1, -1, -1 });
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Rug, new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 });
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Prop, new int[] { 0, -1, -1, -1, -1, -1, -1, -1, -1 });
-        ProbabilitiesBasedOnAdjacentObject.Add(ObjectTypes.Wall, new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 });
+        Probabilities = new Dictionary<ObjectTypes, int[]>();
+        Probabilities.Add(ObjectTypes.Chair, new int[] { 5, -1, -1, -1, -1, -1, -1, -1, -1 });
+        Probabilities.Add(ObjectTypes.Shelf, new int[] { 0, -1, -1, -1, -1, -1, -1, -1, -1 });
+        Probabilities.Add(ObjectTypes.Table, new int[] { 40, -1, -1, -1, -1, -1, -1, -1, -1 });
+        Probabilities.Add(ObjectTypes.Rug, new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 });
+        Probabilities.Add(ObjectTypes.Prop, new int[] { 0, -1, -1, -1, -1, -1, -1, -1, -1 });
+        Probabilities.Add(ObjectTypes.Wall, new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1 });
 
     }
 }
