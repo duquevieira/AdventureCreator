@@ -23,9 +23,12 @@ public class PlacementSystem : MonoBehaviour
     public GridLayout GridLayout;
     private Grid _grid;
     [SerializeField] private Tilemap _mainTileMap;
+    [SerializeField] private GameObject floor;
     [SerializeField] private List<GameObject> _objectsStage1;
     [SerializeField] private List<GameObject> _objectsStage2;
     [SerializeField] private List<GameObject> _objectsStage3;
+    [SerializeField] private int width = 5;
+    [SerializeField] private int height = 5;
     private PlaceableObject _objectToPlace;
     private List<GameObject> _objectsInScene;
     private List<Vector3Int> _availableTiles;
@@ -43,6 +46,14 @@ public class PlacementSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    Vector3 pos = new Vector3(i, 0.001f, j);
+                    Instantiate(floor, pos, Quaternion.identity);
+                }
+            }
             SpawnObjectsWithProbabilities1();
             SpawnObjectsWithProbabilities2();
             SpawnObjectsWithProbabilities3();
@@ -72,14 +83,13 @@ public class PlacementSystem : MonoBehaviour
 
     private void Start()
     {
-        //ResetAvailableTiles();
     }
 
     private void ResetAvailableTiles()
     {
-        for (int i = -5; i < 5; i++)
+        for (int i = 0; i < width-1; i++)
         {
-            for (int j = -5; j < 5; j++)
+            for (int j = 0; j < height-1; j++)
             {
                 _availableTiles.Add(new Vector3Int(i, 0, j));
             }
@@ -129,35 +139,44 @@ public class PlacementSystem : MonoBehaviour
         Quaternion rotation = Quaternion.identity;
         while (counter < 4)
         {
-            if (counter == 1 || counter == 3 )
+            if (counter == 0)
             {
-                min = -4;
-                max = 6;
+                min = 0;
+                max = height;
+            } else if (counter == 1)
+            {
+                min = 0;
+                max = width;
+            }
+            else if (counter == 2)
+            {
+                min = -1;
+                max = width-1;
             }
             else
             {
-                min = -5;
-                max = 5;
+                min = 1;
+                max = height+1;
             }
             for (int i = min; i < max; i++)
             {
-                if (counter == 0)
+                if (counter == 0) //esquerda
                 {
-                    position = new Vector3Int(-5, 0, i);
+                    position = new Vector3Int(-1, 0, i);
                     rotation = Quaternion.Euler(0f, 90f, 0f);
-                } else if (counter == 1)
+                } else if (counter == 1) //baixo
                 {
-                    position = new Vector3Int(i, 0, -5);
+                    position = new Vector3Int(i, 0, 0);
                     rotation = Quaternion.identity;
                 }
-                else if (counter == 2)
+                else if (counter == 2) //cima
                 {
-                    position = new Vector3Int(i, 0, 5);
+                    position = new Vector3Int(i, 0, height);
                     rotation = Quaternion.Euler(0f, -180f, 0f);
                 }
-                else
+                else //direita
                 {
-                    position = new Vector3Int(5, 0, i);
+                    position = new Vector3Int(width-1, 0, i);
                     rotation = Quaternion.Euler(0f, 270f, 0f);
                 }
 

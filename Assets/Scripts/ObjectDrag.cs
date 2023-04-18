@@ -22,5 +22,9 @@ public class ObjectDrag : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            transform.Rotate(new Vector3(0, 90, 0));
+        }
     }
 }
