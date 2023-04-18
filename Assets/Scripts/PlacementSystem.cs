@@ -128,47 +128,56 @@ public class PlacementSystem : MonoBehaviour
         Quaternion rotation = Quaternion.identity;
         while (counter < 4)
         {
-            if (counter == 0)
+            switch (counter)
             {
-                min = 0;
-                max = height;
-            } else if (counter == 1)
-            {
-                min = 0;
-                max = width;
-            }
-            else if (counter == 2)
-            {
-                min = -1;
-                max = width-1;
-            }
-            else
-            {
-                min = 1;
-                max = height+1;
+                case 0:
+                    min = 0;
+                    max = height;
+                    break;
+                case 1:
+                    min = 0;
+                    max = width;
+                    break;
+                case 2:
+                    min = -1;
+                    max = width - 1;
+                    break;
+                case 3:
+                    min = 1;
+                    max = height + 1;
+                    break;
+                default:
+                    min = 0;
+                    max = 0;
+                    break;
+
             }
             for (int i = min; i < max; i++)
             {
-                if (counter == 0) //esquerda
+                switch (counter)
                 {
-                    position = new Vector3Int(-1, 0, i);
-                    rotation = Quaternion.Euler(0f, 90f, 0f);
-                } else if (counter == 1) //baixo
-                {
-                    position = new Vector3Int(i, 0, 0);
-                    rotation = Quaternion.identity;
+                    case 0: //left
+                        position = new Vector3Int(-1, 0, i);
+                        rotation = Quaternion.Euler(0f, 90f, 0f);
+                        break;
+                    case 1: //down
+                        position = new Vector3Int(i, 0, 0);
+                        rotation = Quaternion.identity;
+                        break;
+                    case 2: //up
+                        position = new Vector3Int(i, 0, height);
+                        rotation = Quaternion.Euler(0f, -180f, 0f);
+                        break;
+                    case 3: //right
+                        position = new Vector3Int(width - 1, 0, i);
+                        rotation = Quaternion.Euler(0f, 270f, 0f);
+                        break;
+                    default:
+                        position = new Vector3Int();
+                        rotation = new Quaternion();
+                        break;
                 }
-                else if (counter == 2) //cima
-                {
-                    position = new Vector3Int(i, 0, height);
-                    rotation = Quaternion.Euler(0f, -180f, 0f);
-                }
-                else //direita
-                {
-                    position = new Vector3Int(width-1, 0, i);
-                    rotation = Quaternion.Euler(0f, 270f, 0f);
-                }
-
+     
                 List<int> objectsToTryIndexes = new List<int>();
                 for (int j = 0; j < _structureObjects.Count; j++)
                 {
@@ -317,38 +326,38 @@ public class PlacementSystem : MonoBehaviour
 
     private Dictionary<ObjectTypes, int[]> getObjectProbabilities(GameObject obj)
     {
-        Dictionary<ObjectTypes, int[]> objectAvailablePosition2 = new Dictionary<ObjectTypes, int[]>();
+        Dictionary<ObjectTypes, int[]> objectProbabilities = new Dictionary<ObjectTypes, int[]>();
         if (obj.TryGetComponent<Chair>(out Chair chair))
         {
             chair.setProbabilities();
-            objectAvailablePosition2 = chair.getProbabilities();
+            objectProbabilities = chair.getProbabilities();
         }
         if (obj.TryGetComponent<Table>(out Table table))
         {
             table.setProbabilities();
-            objectAvailablePosition2 = table.getProbabilities();
+            objectProbabilities = table.getProbabilities();
         }
         if (obj.TryGetComponent<Shelf>(out Shelf shelf))
         {
             shelf.setProbabilities();
-            objectAvailablePosition2 = shelf.getProbabilities();
+            objectProbabilities = shelf.getProbabilities();
         }
         if (obj.TryGetComponent<Rug>(out Rug rug))
         {
             rug.setProbabilities();
-            objectAvailablePosition2 = rug.getProbabilities();
+            objectProbabilities = rug.getProbabilities();
         }
         if (obj.TryGetComponent<Prop>(out Prop prop))
         {
             prop.setProbabilities();
-            objectAvailablePosition2 = prop.getProbabilities();
+            objectProbabilities = prop.getProbabilities();
         }
         if (obj.TryGetComponent<Wall>(out Wall wall))
         {
             wall.setProbabilities();
-            objectAvailablePosition2 = wall.getProbabilities();
+            objectProbabilities = wall.getProbabilities();
         }
-        return objectAvailablePosition2;
+        return objectProbabilities;
     }
 
     private Object getObjectType(GameObject obj)
