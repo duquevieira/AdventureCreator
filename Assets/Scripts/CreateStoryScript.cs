@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CreateStoryScript : MonoBehaviour
@@ -47,7 +48,12 @@ public class CreateStoryScript : MonoBehaviour
             story.addStep(storyboardStep);
             Destroy(step);
         }
-        _storyEngineScript.Storyboard = story;
-        _canvas.gameObject.SetActive(false);
+        //_storyEngineScript.Storyboard = story;
+        //_canvas.gameObject.SetActive(false);
+        //TODO apagar
+        _buttonNewStep.gameObject.SetActive(false);
+        _buttonCreateStory.gameObject.SetActive(false);
+        _storyEngineScript.TestCanvas = _canvas;
+        _storyEngineScript.PrefabNewStep = _prefabNewStep;
     }
 }

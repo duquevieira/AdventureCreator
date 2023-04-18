@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerHandlerScript : MonoBehaviour
 {
-    private static string FLOOR = "floor";
+    //private static string FLOOR = "floor";
     private static string ANIMATION_WALK = "walking";
     private static string ITEMS_TAG = "items";
     private static string ITEMS_HIGH = "pickupHigh";
@@ -39,7 +39,7 @@ public class PlayerHandlerScript : MonoBehaviour
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-                if (hit.collider.CompareTag(FLOOR))
+                //if (hit.collider.CompareTag(FLOOR))
                 {
                     _playerAnimator.SetBool(ANIMATION_WALK, true);
                     _target = hit.point;

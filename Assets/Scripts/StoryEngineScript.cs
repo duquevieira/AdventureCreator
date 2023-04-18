@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Feedbacks;
 using MoreMountains.InventoryEngine;
+using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class StoryEngineScript : MonoBehaviour
 {
@@ -22,10 +24,39 @@ public class StoryEngineScript : MonoBehaviour
     [HideInInspector]
     public Storyboard Storyboard;
 
+    //TODO apagar
+    [HideInInspector]
+    public Canvas TestCanvas;
+    [HideInInspector]
+    public GameObject PrefabNewStep;
+    private List<GameObject> _allSteps;
+    public Text DialogPrefab;
+
     void Start()
     {
         StoryItems = new List<ItemGroup>();
         Storyboard = new Storyboard();
+        //TODO apagar
+        _allSteps = new List<GameObject>();
+        StoryboardStep step = new StoryboardStep(Storyboard.getStorySteps().Count, "Lookout", "Talk to the pirate leaders for funding");
+        step.addAcquires(new ItemGroup("Talk to the Pirate Leaders", 1));
+        Storyboard.addStep(step);
+        step = new StoryboardStep(Storyboard.getStorySteps().Count, "PirateLeaders", "We won't help you join LeChuck's crew");
+        step.addRequirement(new ItemGroup("Talk to the Pirate Leaders", 1));
+        step.addAcquires(new ItemGroup("Talk to Elaine", 1));
+        Storyboard.addStep(step);
+        step = new StoryboardStep(Storyboard.getStorySteps().Count, "Elaine", "Hey GuyBrush");
+        step.addRequirement(new ItemGroup("Talk to Elaine", 1));
+        step.addAcquires(new ItemGroup("Talk to Prisoner", 1));
+        Storyboard.addStep(step);
+        step = new StoryboardStep(Storyboard.getStorySteps().Count, "Prisoner", "Can you help me out?");
+        step.addRequirement(new ItemGroup("Talk to Prisoner", 1));
+        step.addAcquires(new ItemGroup("Talk to Locksmith", 1));
+        Storyboard.addStep(step);
+        step = new StoryboardStep(Storyboard.getStorySteps().Count, "Locksmith", "Here you go boss");
+        step.addRequirement(new ItemGroup("Talk to Locksmith", 1));
+        step.addAcquires(new ItemGroup("Key", 1));
+        Storyboard.addStep(step);
     }
 
     void Update()
@@ -60,25 +91,44 @@ public class StoryEngineScript : MonoBehaviour
         }
         //DEBUGGING STORY
         if (Input.GetKeyDown(KeyCode.S)) {
-            Debug.Log(Time.realtimeSinceStartup + " ----------------------------------------");
-            Debug.Log(Time.realtimeSinceStartup + " Story Steps:");
-            foreach (StoryboardStep step in Storyboard.getStorySteps())
+            /*foreach (StoryboardStep step in Storyboard.getStorySteps())
             {
-                Debug.Log(Time.realtimeSinceStartup + " Story step id:" + step.getId());
-                Debug.Log(Time.realtimeSinceStartup + " Story step collider name:" + step.getColliderName());
-                Debug.Log(Time.realtimeSinceStartup + " Story step dialog:" + step.getDialog());
-                Debug.Log(Time.realtimeSinceStartup + " Requirements:");
-                foreach (ItemGroup requirement in step.getRequirements())
-                {
-                    Debug.Log(Time.realtimeSinceStartup + " Story step item name:" + requirement.getItemName());
-                    Debug.Log(Time.realtimeSinceStartup + " Story step item amount:" + requirement.getItemAmount());
-                }
-                Debug.Log(Time.realtimeSinceStartup + " Acquired:");
-                foreach (ItemGroup acquires in step.getAcquired())
-                {
-                    Debug.Log(Time.realtimeSinceStartup + " Story step item name:" + acquires.getItemName());
-                    Debug.Log(Time.realtimeSinceStartup + " Story step item amount:" + acquires.getItemAmount());
-                }
+                GameObject newStep = Instantiate(PrefabNewStep, TestCanvas.transform);
+                newStep.transform.SetParent(TestCanvas.transform, false);
+                _allSteps.Add(newStep);
+                InputField[] inputFields = newStep.GetComponentsInChildren<InputField>();
+                inputFields[0].SetTextWithoutNotify(step.getColliderName());
+                inputFields[1].SetTextWithoutNotify(step.getDialog());
+                List<ItemGroup> requirements = step.getRequirements();
+                List<ItemGroup> acquires = step.getAcquired();
+                if (requirements.Count > 0)
+                    inputFields[2].SetTextWithoutNotify(requirements[0].getItemAmount() + " " + requirements[0].getItemName());
+                if (acquires.Count > 0)
+                    inputFields[3].SetTextWithoutNotify(acquires[0].getItemAmount() + " " + acquires[0].getItemName());
+            }*/
+            List<StoryboardStep> storySteps = Storyboard.getStorySteps();
+            for (int i = storySteps.Count; i > 0; i--)
+            {
+                StoryboardStep step = storySteps[i-1];
+                GameObject newStep = Instantiate(PrefabNewStep, TestCanvas.transform);
+                newStep.transform.SetParent(TestCanvas.transform, false);
+                _allSteps.Add(newStep);
+                InputField[] inputFields = newStep.GetComponentsInChildren<InputField>();
+                inputFields[0].SetTextWithoutNotify(step.getColliderName());
+                inputFields[1].SetTextWithoutNotify(step.getDialog());
+                List<ItemGroup> requirements = step.getRequirements();
+                List<ItemGroup> acquires = step.getAcquired();
+                if (requirements.Count > 0)
+                    inputFields[2].SetTextWithoutNotify(requirements[0].getItemAmount() + " " + requirements[0].getItemName());
+                if (acquires.Count > 0)
+                    inputFields[3].SetTextWithoutNotify(acquires[0].getItemAmount() + " " + acquires[0].getItemName());
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            foreach (GameObject step in _allSteps)
+            {
+                Destroy(step);
             }
         }
     }
@@ -87,6 +137,13 @@ public class StoryEngineScript : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         animator.SetBool(name, false);
+    }
+
+    //TODO apagar
+    IEnumerator APAGAR(float time, Text apagar)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(apagar);
     }
 
     public void ProcessEntry(string colliderName)
@@ -115,6 +172,11 @@ public class StoryEngineScript : MonoBehaviour
                 }
                 if (completable)
                 {
+                    //TODO apagar
+                    Text newDialog = Instantiate(DialogPrefab, TestCanvas.transform);
+                    newDialog.transform.SetParent(TestCanvas.transform, false);
+                    newDialog.text = iteratedStep.getDialog();
+                    StartCoroutine(APAGAR(3f, newDialog));
                     foreach (ItemGroup requirement in requirements)
                     {
                         foreach (ItemGroup storyItem in StoryItems)
@@ -151,8 +213,12 @@ public class StoryEngineScript : MonoBehaviour
 
     public string getCharacterSkin()
     {
-        //Santa, FWorker, MWorker, FAttendant, MAttendant, FClerk, MClerk,
+        //Santa, FWorker, MWorker, FAttendant, MAttendant, FClerk, MClerk
         //FGym, MGym, MHunter, FMusician, MMusician, FShopper, MShopper
-        return "FAttendant";
+        //EnglishCaptain, EnglishGovernor, EnglishSoldier, FPirate, FWench
+        //Gentleman, GovernorsDaughter, PirateBlackbeard, PirateCaptain
+        //PirateDeckHand, PirateFirstMate, PirateSeaman
+        //Skeleton1, Skeleton2, Skeleton3
+        return "PirateBlackbeard";
     }
 }
