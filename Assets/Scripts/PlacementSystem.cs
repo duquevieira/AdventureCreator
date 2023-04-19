@@ -5,11 +5,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
+using TMPro;
 using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
+using UnityEngine.WSA;
 using static Object;
 using Random = UnityEngine.Random;
 
@@ -19,6 +21,7 @@ using Random = UnityEngine.Random;
 
 public class PlacementSystem : MonoBehaviour
 {
+    public TMP_Dropdown Dropdown;
     public static PlacementSystem Current;
     public GridLayout GridLayout;
     private Grid _grid;
@@ -33,6 +36,7 @@ public class PlacementSystem : MonoBehaviour
     private List<GameObject> _objectsInScene;
     private List<Vector3Int> _availableTiles;
     private Dictionary<Vector3Int, List<Object>> _tilesWithObjects;
+    private Vector3 clickedTile;
 
     private void Awake()
     {
@@ -58,6 +62,10 @@ public class PlacementSystem : MonoBehaviour
             SpawnMainObjects();
             SpawnExtras();
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            getClickedTile();
+        }
         if (!_objectToPlace)
         {
             return;
@@ -80,7 +88,25 @@ public class PlacementSystem : MonoBehaviour
             }
         }*/
     }
+    private void Start()
+    {
+        Dropdown.ClearOptions();
+        Dropdown.AddOptions(_mainObjects.ConvertAll(gameObject => gameObject.name));
+        Dropdown.onValueChanged.AddListener(index => OnDropDownChange(_mainObjects, index));
+    }
 
+    private void OnDropDownChange(List<GameObject> selectedObject, int index)
+    {
+        Instantiate(selectedObject[index], clickedTile, Quaternion.identity);
+    }
+
+    private void getClickedTile()
+    {
+        Vector3 mousePos = getMouseWorldPosition();
+        Vector3 pos = SnapCoordinateToGrid(mousePos);
+        clickedTile = pos;
+
+    }
     private void ResetAvailableTiles()
     {
         for (int i = 0; i < width-1; i++)
