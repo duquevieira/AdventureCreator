@@ -23,6 +23,7 @@ public class LoadMenuScript : MonoBehaviour
         LoadingScreenText.SetActive(false);
         _mainCamera.transform.position = CAM_POS;
         _mainCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
+        _mainCamera.backgroundColor = Color.black;
         _mainCamera.orthographic = true;
         _mainCamera.orthographicSize = 243.5f;
         LoadScreen.SetActive(false);
