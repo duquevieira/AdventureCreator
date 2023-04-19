@@ -27,8 +27,8 @@ public class PlayerHandlerScript : MonoBehaviour
     private Animator playerAnimator;
     //Used to check if user is locked in an animation
     private bool canMove;
-    //Target coordinates of Player movement
-    private Vector3 target;
+    //Target coordinates of Player movement (Made public for saving purposes)
+    public Vector3 Target;
 
     void Update()
     {
@@ -42,18 +42,18 @@ public class PlayerHandlerScript : MonoBehaviour
                 if (hit.collider.CompareTag(FLOOR))
                 {
                     playerAnimator.SetBool(ANIMATION_WALK, true);
-                    target = hit.point;
+                    Target = hit.point;
                 }
             }
         }
         //Player Movement and Animation
         if (canMove)
         {
-            if (Vector3.Distance(player.transform.position, target) > 0.2)
+            if (Vector3.Distance(player.transform.position, Target) > 0.2)
             {
                 playerAnimator.SetBool(ANIMATION_WALK, true);
-                player.transform.position = Vector3.MoveTowards(player.transform.position, target, speed * Time.deltaTime);
-                player.transform.LookAt(new Vector3(target.x, player.transform.position.y, target.z));
+                player.transform.position = Vector3.MoveTowards(player.transform.position, Target, speed * Time.deltaTime);
+                player.transform.LookAt(new Vector3(Target.x, player.transform.position.y, Target.z));
             }
             else
             {
@@ -105,7 +105,7 @@ public class PlayerHandlerScript : MonoBehaviour
         character = player.transform.Find(name).gameObject;
         character.SetActive(true);
         playerAnimator = character.GetComponent<Animator>();
-        target = player.transform.position;
+        Target = player.transform.position;
         canMove = true;
     }
 }
