@@ -31,13 +31,13 @@ public class StoryTests
         Storyboard storyboard = new Storyboard();
         StoryboardStep step0 = new StoryboardStep(storyboard.getStorySteps().Count, "collider", "dialog");
         step0.addAcquires(new ItemGroup("acquires", 1));
-        step0.addRequirement(new ItemGroup("recquires", 2));
+        step0.addRequirement(new ItemGroup("requires", 2));
         storyboard.addStep(step0);
 
 
         StoryboardStep step1 = new StoryboardStep(storyboard.getStorySteps().Count, "collider1", "dialog1");
         step1.addAcquires(new ItemGroup("acquires1", 2));
-        step1.addRequirement(new ItemGroup("recquires1", 3));
+        step1.addRequirement(new ItemGroup("requires1", 3));
         storyboard.addStep(step1);
 
         Assert.That(storyboard.getStorySteps()[0].getId(), Is.EqualTo(0));
@@ -45,7 +45,7 @@ public class StoryTests
         Assert.That(storyboard.getStorySteps()[0].getDialog(), Is.EqualTo("dialog"));
         Assert.That(storyboard.getStorySteps()[0].getAcquired()[0].getItemName(), Is.EqualTo("acquires"));
         Assert.That(storyboard.getStorySteps()[0].getAcquired()[0].getItemAmount(), Is.EqualTo(1));
-        Assert.That(storyboard.getStorySteps()[0].getRequirements()[0].getItemName(), Is.EqualTo("recquires"));
+        Assert.That(storyboard.getStorySteps()[0].getRequirements()[0].getItemName(), Is.EqualTo("requires"));
         Assert.That(storyboard.getStorySteps()[0].getRequirements()[0].getItemAmount(), Is.EqualTo(2));
 
         Assert.That(storyboard.getStorySteps()[1].getId(), Is.EqualTo(1));
@@ -53,7 +53,7 @@ public class StoryTests
         Assert.That(storyboard.getStorySteps()[1].getDialog(), Is.EqualTo("dialog1"));
         Assert.That(storyboard.getStorySteps()[1].getAcquired()[0].getItemName(), Is.EqualTo("acquires1"));
         Assert.That(storyboard.getStorySteps()[1].getAcquired()[0].getItemAmount(), Is.EqualTo(2));
-        Assert.That(storyboard.getStorySteps()[1].getRequirements()[0].getItemName(), Is.EqualTo("recquires1"));
+        Assert.That(storyboard.getStorySteps()[1].getRequirements()[0].getItemName(), Is.EqualTo("requires1"));
         Assert.That(storyboard.getStorySteps()[1].getRequirements()[0].getItemAmount(), Is.EqualTo(3));
     }
 
