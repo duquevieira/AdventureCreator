@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class Level
 {
@@ -44,8 +45,10 @@ public class LoadList : MonoBehaviour
 
     public List<Level> levels;
     public Text buttonTopText, buttonMiddleText, buttonBottomText;
+    public MoreMountains.Tools.MMTouchButton resumeButton;
     public GameObject Manager;
     private LoadMenuScript _loadScript;
+    private TransitionScript _transitionScript;
     private int _page;
     private int _max;
 
@@ -56,6 +59,7 @@ public class LoadList : MonoBehaviour
         _page = 0;
         _max = levels.Count;
         _loadScript = (LoadMenuScript) Manager.GetComponent(typeof(LoadMenuScript));
+        _transitionScript = (TransitionScript) Manager.GetComponent(typeof(TransitionScript));
         updateText();
     }
 
@@ -79,17 +83,25 @@ public class LoadList : MonoBehaviour
 
     public void topLoad()
     {
-        _loadScript.loadScene(levels[TOP_OFFSET + _page * LEVELS_PER_PAGE].getID());
+        _transitionScript.transition(0);
+        resumeButton.ButtonPressed.RemoveAllListeners();
+        resumeButton.ButtonPressed.AddListener(() => changeResume(1));
     }
 
     public void midLoad()
     {
-        _loadScript.loadScene(levels[MID_OFFSET + _page * LEVELS_PER_PAGE].getID());
+        _transitionScript.transition(1);
+        resumeButton.ButtonPressed.RemoveAllListeners();
+        resumeButton.ButtonPressed.AddListener(() => changeResume(2));
     }
 
     public void botLoad()
     {
         _loadScript.loadScene(levels[BOT_OFFSET + _page * LEVELS_PER_PAGE].getID());
+    }
+
+    private void changeResume(int i) {
+        _loadScript.loadScene(i);
     }
 
     private void updateText()
