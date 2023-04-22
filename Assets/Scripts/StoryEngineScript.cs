@@ -3,65 +3,74 @@ using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Feedbacks;
 using MoreMountains.InventoryEngine;
-using MoreMountains.TopDownEngine;
+using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class StoryEngineScript : MonoBehaviour
 {
-    //String constants
     private static string DOOR = "Door";
     private static string ANIMATION_DOOR = "clicked";
-    private static string PLAYER_INVENTORY = "CharacterInventory";
     private static string KEY = "KeyExample";
+    //private static string EXAMPLE = "ExampleItem";
 
     [SerializeField]
-    private new Camera camera;
+    public Camera Camera;
     [SerializeField]
-    private GameObject player;
+    public GameObject Player;
+    public Inventory Inventory;
 
-    private List<StoryboardEvent> story;
-    private List<StoryboardEvent> availableEvents;
+    [HideInInspector]
+    public List<ItemGroup> StoryItems;
+    [HideInInspector]
+    public Storyboard Storyboard;
+
+    //TODO apagar
+    [HideInInspector]
+    public Canvas TestCanvas;
+    [HideInInspector]
+    public GameObject PrefabNewStep;
+    private List<GameObject> _allSteps;
+    public Text DialogPrefab;
 
     void Start()
     {
-        story = new List<StoryboardEvent>();
-        availableEvents = new List<StoryboardEvent>();
-        //int id, string actionName, string colliderName, string inventoryItemName,
-        //int inventoryItemChange, string dialog, List<int> nextEvents
-
-        StoryboardEvent event0 = new StoryboardEvent(0, "actionName", "Pot", "inventoryItemName", 0, "dialog", new List<int>());
-        event0.addNextEvent(1);
-        StoryboardEvent event1 = new StoryboardEvent(1, "actionName", "TallGrass", "inventoryItemName", 0, "dialog", new List<int>());
-        event1.addNextEvent(2);
-        event1.addNextEvent(3);
-        StoryboardEvent event2 = new StoryboardEvent(2, "actionName", "Pot", "inventoryItemName", 0, "dialog", new List<int>());
-        event2.addNextEvent(4);
-        StoryboardEvent event3 = new StoryboardEvent(3, "actionName", "TallGrass", "inventoryItemName", 0, "dialog", new List<int>());
-        event3.addNextEvent(5);
-        StoryboardEvent event4 = new StoryboardEvent(4, "actionName", "Pot", "inventoryItemName", 0, "dialog", new List<int>());
-        StoryboardEvent event5 = new StoryboardEvent(5, "actionName", "TallGrass", "inventoryItemName", 0, "dialog", new List<int>());
-
-        story.Add(event0); story.Add(event1); story.Add(event2); story.Add(event3); story.Add(event4); story.Add(event5);
-        availableEvents.Add(event0);
-
-        //Pot, TallGrass
-        //Santa, FWorker, MWorker, FAttendant, MAttendant, FClerk, MClerk, FGym, MGym, MHunter, FMusician, MMusician, FShopper, MShopper
-        player.GetComponent<PlayerHandlerScript>().Setup(camera, player, "FMusician");
+        StoryItems = new List<ItemGroup>();
+        Storyboard = new Storyboard();
+        //TODO apagar
+        _allSteps = new List<GameObject>();
+        StoryboardStep step = new StoryboardStep(Storyboard.getStorySteps().Count, "Lookout", "Talk to the pirate leaders for funding");
+        step.addAcquires(new ItemGroup("Talk to the Pirate Leaders", 1));
+        Storyboard.addStep(step);
+        step = new StoryboardStep(Storyboard.getStorySteps().Count, "PirateLeaders", "We won't help you join LeChuck's crew");
+        step.addRequirement(new ItemGroup("Talk to the Pirate Leaders", 1));
+        step.addAcquires(new ItemGroup("Talk to Elaine", 1));
+        Storyboard.addStep(step);
+        step = new StoryboardStep(Storyboard.getStorySteps().Count, "Elaine", "Hey GuyBrush");
+        step.addRequirement(new ItemGroup("Talk to Elaine", 1));
+        step.addAcquires(new ItemGroup("Talk to Prisoner", 1));
+        Storyboard.addStep(step);
+        step = new StoryboardStep(Storyboard.getStorySteps().Count, "Prisoner", "Can you help me out?");
+        step.addRequirement(new ItemGroup("Talk to Prisoner", 1));
+        step.addAcquires(new ItemGroup("Talk to Locksmith", 1));
+        Storyboard.addStep(step);
+        step = new StoryboardStep(Storyboard.getStorySteps().Count, "Locksmith", "Here you go boss");
+        step.addRequirement(new ItemGroup("Talk to Locksmith", 1));
+        step.addAcquires(new ItemGroup("Key", 1));
+        Storyboard.addStep(step);
     }
 
     void Update()
     {
-        //Check if Player Left-clicked a door in range and in possession of the required key
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 if (hit.collider.name == DOOR &&
-                Vector3.Distance(player.transform.position, hit.collider.transform.position) < 3 &&
-                GameObject.Find(PLAYER_INVENTORY).GetComponent<Inventory>().GetQuantity(KEY) > 0)
+                Vector3.Distance(Player.transform.position, hit.collider.transform.position) < 3 &&
+                Inventory.GetQuantity(KEY) > 0)
                 {
-                    //Open the door
                     Animator doorAnimator = hit.collider.GetComponent<Animator>();
                     MMFeedbacks clickFeedBack = hit.collider.gameObject.transform.GetChild(0).gameObject.GetComponent<MMFeedbacks>();
                     doorAnimator.SetBool(ANIMATION_DOOR, true);
@@ -70,47 +79,146 @@ public class StoryEngineScript : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            foreach (StoryboardEvent iteratedEvent in availableEvents)
+        //DEBUGGING ITEMS
+        if (Input.GetKeyDown(KeyCode.T)) {
+            Debug.Log(Time.realtimeSinceStartup + " ----------------------------------------");
+            Debug.Log(Time.realtimeSinceStartup + " Story Items:");
+            foreach (ItemGroup storyItem in StoryItems)
             {
-                Debug.Log(Time.realtimeSinceStartup + " ID: " + iteratedEvent.getId() + " Collider: " + iteratedEvent.getColliderName());
+                Debug.Log(Time.realtimeSinceStartup + " Story item name:" + storyItem.getItemName());
+                Debug.Log(Time.realtimeSinceStartup + " Story item amount:" + storyItem.getItemAmount());
             }
         }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            foreach (StoryboardEvent iteratedEvent in story)
+        //DEBUGGING STORY
+        if (Input.GetKeyDown(KeyCode.S)) {
+            /*foreach (StoryboardStep step in Storyboard.getStorySteps())
             {
-                Debug.Log(Time.realtimeSinceStartup + " ID: " + iteratedEvent.getId() + " Collider: " + iteratedEvent.getColliderName());
+                GameObject newStep = Instantiate(PrefabNewStep, TestCanvas.transform);
+                newStep.transform.SetParent(TestCanvas.transform, false);
+                _allSteps.Add(newStep);
+                InputField[] inputFields = newStep.GetComponentsInChildren<InputField>();
+                inputFields[0].SetTextWithoutNotify(step.getColliderName());
+                inputFields[1].SetTextWithoutNotify(step.getDialog());
+                List<ItemGroup> requirements = step.getRequirements();
+                List<ItemGroup> acquires = step.getAcquired();
+                if (requirements.Count > 0)
+                    inputFields[2].SetTextWithoutNotify(requirements[0].getItemAmount() + " " + requirements[0].getItemName());
+                if (acquires.Count > 0)
+                    inputFields[3].SetTextWithoutNotify(acquires[0].getItemAmount() + " " + acquires[0].getItemName());
+            }*/
+            List<StoryboardStep> storySteps = Storyboard.getStorySteps();
+            for (int i = storySteps.Count; i > 0; i--)
+            {
+                StoryboardStep step = storySteps[i-1];
+                GameObject newStep = Instantiate(PrefabNewStep, TestCanvas.transform);
+                newStep.transform.SetParent(TestCanvas.transform, false);
+                _allSteps.Add(newStep);
+                InputField[] inputFields = newStep.GetComponentsInChildren<InputField>();
+                inputFields[0].SetTextWithoutNotify(step.getColliderName());
+                inputFields[1].SetTextWithoutNotify(step.getDialog());
+                List<ItemGroup> requirements = step.getRequirements();
+                List<ItemGroup> acquires = step.getAcquired();
+                if (requirements.Count > 0)
+                    inputFields[2].SetTextWithoutNotify(requirements[0].getItemAmount() + " " + requirements[0].getItemName());
+                if (acquires.Count > 0)
+                    inputFields[3].SetTextWithoutNotify(acquires[0].getItemAmount() + " " + acquires[0].getItemName());
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            foreach (GameObject step in _allSteps)
+            {
+                Destroy(step);
             }
         }
     }
 
-    //Auxiliary function to update an Animator after the animation is over
     IEnumerator ExecuteAfter(float time, Animator animator, string name)
     {
         yield return new WaitForSeconds(time);
         animator.SetBool(name, false);
     }
 
-    public void ProcessEntry(Collider other)
+    //TODO apagar
+    IEnumerator APAGAR(float time, Text apagar)
     {
-        foreach(StoryboardEvent iteratedEvent in availableEvents)
-        {
-            if (other.gameObject.name.Equals(iteratedEvent.getColliderName()))
+        yield return new WaitForSeconds(time);
+        Destroy(apagar);
+    }
+
+    public void ProcessEntry(string colliderName)
+    {
+        foreach (StoryboardStep iteratedStep in Storyboard.getStorySteps())
+            if (colliderName.Equals(iteratedStep.getColliderName()))
             {
-                Debug.Log(Time.realtimeSinceStartup + " Evento correto");
-                foreach(int i in iteratedEvent.getNextEvents())
+                List<ItemGroup> requirements = iteratedStep.getRequirements();
+                bool completable = true;
+                foreach(ItemGroup requirement in requirements)
                 {
-                    availableEvents.Add(story[i]);
+                    int storyAmount = -1;
+                    foreach(ItemGroup storyItem in StoryItems)
+                        if(storyItem.getItemName() == requirement.getItemName())
+                        {
+                            storyAmount = storyItem.getItemAmount();
+                            break;
+                        }
+                    int inventoryAmount = Inventory.GetQuantity(requirement.getItemName());
+                    int requiredAmount = requirement.getItemAmount();
+                    if (inventoryAmount < requiredAmount && storyAmount < requiredAmount)
+                    {
+                        completable = false;
+                        break;
+                    }
                 }
-                availableEvents.Remove(iteratedEvent);
-                if (availableEvents.Count == 0)
+                if (completable)
                 {
-                    Debug.Log(Time.realtimeSinceStartup + " Historia Acabou");
+                    //TODO apagar
+                    Text newDialog = Instantiate(DialogPrefab, TestCanvas.transform);
+                    newDialog.transform.SetParent(TestCanvas.transform, false);
+                    newDialog.text = iteratedStep.getDialog();
+                    StartCoroutine(APAGAR(3f, newDialog));
+                    foreach (ItemGroup requirement in requirements)
+                    {
+                        foreach (ItemGroup storyItem in StoryItems)
+                            if (storyItem.getItemName() == requirement.getItemName())
+                            {
+                                storyItem.removeItemAmount(requirement.getItemAmount());
+                                if(storyItem.getItemAmount() == 0)
+                                    StoryItems.Remove(storyItem);
+                                break;
+                            }
+                        Inventory.RemoveItemByID(requirement.getItemName(), requirement.getItemAmount());
+                    }
+                    foreach (ItemGroup acquires in iteratedStep.getAcquired())
+                    {
+                        bool newItem = true;
+                        foreach (ItemGroup storyItem in StoryItems)
+                        {
+                            if (storyItem.getItemName() == acquires.getItemName())
+                            {
+                                newItem = false;
+                                storyItem.addItemAmount(acquires.getItemAmount());
+                                break;
+                            }
+                        }
+                        if(newItem)
+                        {
+                            ItemGroup item = new ItemGroup(acquires.getItemName(), acquires.getItemAmount());
+                            StoryItems.Add(item);
+                        }
+                    }
                 }
-                break;
             }
-        }
+    }
+
+    public string getCharacterSkin()
+    {
+        //Santa, FWorker, MWorker, FAttendant, MAttendant, FClerk, MClerk
+        //FGym, MGym, MHunter, FMusician, MMusician, FShopper, MShopper
+        //EnglishCaptain, EnglishGovernor, EnglishSoldier, FPirate, FWench
+        //Gentleman, GovernorsDaughter, PirateBlackbeard, PirateCaptain
+        //PirateDeckHand, PirateFirstMate, PirateSeaman
+        //Skeleton1, Skeleton2, Skeleton3
+        return "PirateBlackbeard";
     }
 }
