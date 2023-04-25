@@ -19,7 +19,8 @@ public class PlayerHandlerScript : MonoBehaviour
     private GameObject _character;
     private Animator _playerAnimator;
     private bool _canMove;
-    private Vector3 _target;
+    [HideInInspector]
+    public Vector3 Target;
 
     void Start()
     {
@@ -28,7 +29,7 @@ public class PlayerHandlerScript : MonoBehaviour
         _character = _player.transform.Find(_storyEngineScript.getCharacterSkin()).gameObject;
         _character.SetActive(true);
         _playerAnimator = _character.GetComponent<Animator>();
-        _target = _player.transform.position;
+        Target = _player.transform.position;
         _canMove = true;
     }
 
@@ -42,16 +43,16 @@ public class PlayerHandlerScript : MonoBehaviour
                 //if (hit.collider.CompareTag(FLOOR))
                 {
                     _playerAnimator.SetBool(ANIMATION_WALK, true);
-                    _target = hit.point;
+                    Target = hit.point;
                 }
         }
         if (_canMove)
         {
-            if (Vector3.Distance(_player.transform.position, _target) > 0.2)
+            if (Vector3.Distance(_player.transform.position, Target) > 0.2)
             {
                 _playerAnimator.SetBool(ANIMATION_WALK, true);
-                _player.transform.position = Vector3.MoveTowards(_player.transform.position, _target, _speed * Time.deltaTime);
-                _player.transform.LookAt(new Vector3(_target.x, _player.transform.position.y, _target.z));
+                _player.transform.position = Vector3.MoveTowards(_player.transform.position, Target, _speed * Time.deltaTime);
+                _player.transform.LookAt(new Vector3(Target.x, _player.transform.position.y, Target.z));
             }
             else
                 _playerAnimator.SetBool(ANIMATION_WALK, false);
