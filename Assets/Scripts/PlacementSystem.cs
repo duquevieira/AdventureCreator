@@ -3,6 +3,7 @@ using MoreMountains.Tools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using TMPro;
@@ -21,14 +22,14 @@ using Random = UnityEngine.Random;
 
 public class PlacementSystem : MonoBehaviour
 {
-    public TMP_Dropdown Dropdown;
     public static PlacementSystem Current;
     public GridLayout GridLayout;
     private Grid _grid;
+    [SerializeField] private PlacementUI _placementUI;
     [SerializeField] private Tilemap _mainTileMap;
     [SerializeField] private GameObject floor;
     [SerializeField] private List<GameObject> _structureObjects;
-    [SerializeField] private List<GameObject> _mainObjects;
+    [SerializeField] public List<GameObject> _mainObjects;
     [SerializeField] private List<GameObject> _extraObjects;
     [SerializeField] private int width = 5;
     [SerializeField] private int height = 5;
@@ -50,12 +51,15 @@ public class PlacementSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
+            DestroyAllObjects();
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
                     Vector3 pos = new Vector3(i, 0.001f, j);
-                    Instantiate(floor, pos, Quaternion.identity);
+                    var cloneObj = Instantiate(floor, pos, Quaternion.identity);
+                    _objectsInScene.Add(cloneObj);
+
                 }
             }
             SpawnStructure();
@@ -88,24 +92,35 @@ public class PlacementSystem : MonoBehaviour
             }
         }*/
     }
-    private void Start()
-    {
-        Dropdown.ClearOptions();
-        Dropdown.AddOptions(_mainObjects.ConvertAll(gameObject => gameObject.name));
-        Dropdown.onValueChanged.AddListener(index => OnDropDownChange(_mainObjects, index));
-    }
 
-    private void OnDropDownChange(List<GameObject> selectedObject, int index)
+    public Vector3Int convertFloatPosToTile(Vector3 pos)
     {
-        Instantiate(selectedObject[index], clickedTile, Quaternion.identity);
+       Vector3Int convertedPos = new Vector3Int(Mathf.CeilToInt(pos.x), Mathf.FloorToInt(pos.y), Mathf.FloorToInt(pos.z));
+        return convertedPos;
     }
+    public void AddObjectManually()
+    {
+       
+        //List<TMP_Dropdown.OptionData> dropdownOptions = _placementUI._dropdown.options;
+        int dropdownIndex = _placementUI._dropdown.value;
+        var cloneObj = Instantiate(_mainObjects[dropdownIndex], clickedTile, Quaternion.identity);
+        _objectsInScene.Add(cloneObj);
+        List<Object> objectsInOneTile = getObjectsInOneTile(convertFloatPosToTile(clickedTile));
+        if (objectsInOneTile == null)
+        {
+            objectsInOneTile = new List<Object>();
 
-    private void getClickedTile()
+        }
+        objectsInOneTile.Add(getObjectType(cloneObj));
+        _tilesWithObjects.Remove(convertFloatPosToTile(clickedTile));
+        _tilesWithObjects.Add(convertFloatPosToTile(clickedTile), objectsInOneTile);
+    }
+    public Vector3 getClickedTile()
     {
         Vector3 mousePos = getMouseWorldPosition();
         Vector3 pos = SnapCoordinateToGrid(mousePos);
         clickedTile = pos;
-
+        return clickedTile;
     }
     private void ResetAvailableTiles()
     {
@@ -138,13 +153,14 @@ public class PlacementSystem : MonoBehaviour
     }
     private void DestroyAllObjects()
     {
+        List<Transform> childs = new List<Transform>();
         for (int j = 0; j < _objectsInScene.Count; j++)
         {
-            DestroyImmediate(_objectsInScene[j], true);
+            GameObject.Destroy(_objectsInScene[j]);
         }
-        _objectsInScene = new List<GameObject>();
+        _tilesWithObjects.Clear();
+        ResetAvailableTiles();
     }
-
     private void SpawnStructure()
     {
         Vector3Int position;
@@ -222,8 +238,8 @@ public class PlacementSystem : MonoBehaviour
                     if (canPlace)
                     {
                         //Vector3 position = SnapCoordinateToGrid(randomTile);
-                        Instantiate(_structureObjects[objectsToTryIndexes[objectIndex]], position, rotation);
-                        _objectsInScene.Add(obj);
+                        var cloneObj = Instantiate(_structureObjects[objectsToTryIndexes[objectIndex]], position, rotation);
+                        _objectsInScene.Add(cloneObj);
                         //_availableTiles.Remove(randomTile);
                         List<Object> objectsInOneTile = getObjectsInOneTile(position);
                         if (objectsInOneTile == null)
@@ -303,8 +319,8 @@ public class PlacementSystem : MonoBehaviour
                 {
                     position.y = 0.5f;
                 }
-                Instantiate(listObjects[objectsToTryIndexes[objectIndex]], position, Quaternion.identity);
-                _objectsInScene.Add(obj);
+                var cloneObj = Instantiate(listObjects[objectsToTryIndexes[objectIndex]], position, Quaternion.identity);
+                _objectsInScene.Add(cloneObj);
                 //_availableTiles.Remove(randomTile);
                 
                 if (objectsInOneTile == null)
