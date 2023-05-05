@@ -39,11 +39,10 @@ public class PlayerHandlerScript : MonoBehaviour
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-                //if (hit.collider.CompareTag(FLOOR))
-                {
-                    _playerAnimator.SetBool(ANIMATION_WALK, true);
-                    _target = hit.point;
-                }
+            {
+               _playerAnimator.SetBool(ANIMATION_WALK, true);
+                _target = hit.point;
+            }
         }
         if (_canMove)
         {
