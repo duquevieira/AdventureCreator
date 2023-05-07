@@ -25,12 +25,10 @@ public class PrefabMenuScript : MonoBehaviour
             var menuSlot = Instantiate(_menuSlotPrefab, _panel.transform);
             var instantiated = Instantiate(prefab, menuSlot.transform);
             instantiated.layer = UILAYER;
-            //Vector3 size = instantiated.GetComponentInChildren<MeshRenderer>().bounds.size;
+            //TODO
             instantiated.transform.localScale = new Vector3(25, 25, 25);
             foreach (Transform child in instantiated.transform)
-            {
                 child.gameObject.layer = UILAYER;
-            }
         }
     }
 

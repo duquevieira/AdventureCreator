@@ -31,8 +31,8 @@ public class CreateStoryScript : MonoBehaviour
     private void AddNewStoryStep()
     {
         GameObject newStep = Instantiate(_prefabNewStep, _canvas.transform);
-        newStep.transform.SetParent(_canvas.transform, false);
-        _allSteps.Add(newStep);
+        newStep.transform.SetParent(_canvas.transform, true);
+        _allSteps.Add(newStep);//
     }
 
     private void SaveStoryState()

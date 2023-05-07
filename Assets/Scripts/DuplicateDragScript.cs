@@ -8,35 +8,35 @@ using UnityEngine.UI;
 public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
-    private Vector3 _lastPosition;
-    private GameObject clone;
+    private Camera _uiCamera;
+    private GameObject _clone;
+
+    private static string CAMERA_NAME = "UICamera";
+    private static string STEP_PREFAB_NAME = "Step";
+    private static string PARENTHESIS = "(";
+
+    void Start()
+    {
+        _uiCamera = GameObject.Find(transform.root.name).transform.Find(CAMERA_NAME).GetComponent<Camera>();
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        _lastPosition = Input.mousePosition;
-        clone = Instantiate(gameObject, gameObject.transform);
+        _clone = Instantiate(gameObject.transform.GetChild(0).gameObject, gameObject.transform);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        clone.transform.position += (Input.mousePosition - _lastPosition) / 25;
-        _lastPosition = Input.mousePosition;
+        _clone.transform.position = _uiCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, _clone.transform.position.z));
     }
 
     public void OnEndDrag(PointerEventData eventData)
-    {
-        foreach (Transform child in clone.transform)
-        {
-            Debug.Log(child.name.Split("(")[0]);
-        }
-        /*Camera uiCamera = GameObject.Find(transform.root.name).transform.Find("UICamera").GetComponent<Camera>();
-        Ray ray = uiCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            Debug.Log(hit.collider.name);
-        }*/
-        
-        Debug.Log(eventData);
-        Destroy(clone);
+    {   
+        Ray ray = _uiCamera.ScreenPointToRay(Input.mousePosition);
+        var hits = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, hits);
+        foreach (RaycastResult hit in hits)
+            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(STEP_PREFAB_NAME))
+                hit.gameObject.GetComponentsInChildren<InputField>()[0].SetTextWithoutNotify(_clone.name.Split(PARENTHESIS)[0]);
+        Destroy(_clone);
     }
 }

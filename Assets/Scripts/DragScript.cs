@@ -4,18 +4,20 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragScript : MonoBehaviour, IBeginDragHandler, IDragHandler
+public class DragScript : MonoBehaviour, IDragHandler
 {
 
-    private Vector3 _lastPosition;
-    public void OnBeginDrag(PointerEventData eventData)
+    private Camera _uiCamera;
+
+    private static string CAMERA_NAME = "UICamera";
+
+    void Start()
     {
-        _lastPosition = Input.mousePosition;
+        _uiCamera = GameObject.Find(transform.root.name).transform.Find(CAMERA_NAME).GetComponent<Camera>();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position += (Input.mousePosition - _lastPosition)/25;
-        _lastPosition = Input.mousePosition;
+        transform.position = _uiCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z));
     }
 }
