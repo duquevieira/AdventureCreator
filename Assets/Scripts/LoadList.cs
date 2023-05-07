@@ -2,53 +2,125 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+
+public class Level
+{
+    private int sceneID;
+    private string levelName;
+
+    public Level(int id)
+    {
+        sceneID = id;
+
+        if (sceneID == -1) levelName = "Empty";
+        else
+        {
+            //Não dá para obter o nome de uma cena unloaded por isso tenho que apanhar o path e tratar o nome
+            string[] path = SceneUtility.GetScenePathByBuildIndex(sceneID).Split("/");
+            levelName = path[path.Length-1].Split(".")[0];
+        }
+    }
+
+    public string getName()
+    {
+        return levelName;
+    }
+
+    public int getID()
+    {
+        return sceneID;
+    }
+}
+
+
 
 public class LoadList : MonoBehaviour
 {
-    public List<string> levels = new List<string>();
-    public Text buttonTop, buttonMiddle, buttonBottom;
-    private int page = 0;
-    private int max = 0;
+    private static int TOP_OFFSET = 0;
+    private static int MID_OFFSET = 1;
+    private static int BOT_OFFSET = 2;
+    private static int LEVELS_PER_PAGE = 3;
+
+    public List<Level> levels;
+    public Text buttonTopText, buttonMiddleText, buttonBottomText;
+    public MoreMountains.Tools.MMTouchButton resumeButton;
+    public GameObject Manager;
+    private LoadMenuScript _loadScript;
+    private TransitionScript _transitionScript;
+    private int _page;
+    private int _max;
 
     void Start()
     {
-        //Debug Info (Using strings due to lack of level data structure)
-        levels.Add("level1");
-        levels.Add("level2");
-        levels.Add("level3");
-        levels.Add("level4");
-        levels.Add("level5");
-        levels.Add("level6");
-        max = levels.Count;
-        buttonTop.text = levels[0 + page * 3];
-        buttonMiddle.text = levels[1 + page * 3];
-        buttonBottom.text = levels[2 + page * 3];
+        levels = new List<Level>();
+        populateLevels(levels);
+        _page = 0;
+        _max = levels.Count;
+        _loadScript = (LoadMenuScript) Manager.GetComponent(typeof(LoadMenuScript));
+        _transitionScript = (TransitionScript) Manager.GetComponent(typeof(TransitionScript));
+        updateText();
     }
 
     public void nextPage()
     {
-        if (2 + (page+1) * 3 < max)
+        if (BOT_OFFSET + (_page+1) * LEVELS_PER_PAGE < _max)
         {
-            page++;
-            buttonTop.text = levels[0 + page * 3];
-            buttonMiddle.text = levels[1 + page * 3];
-            buttonBottom.text = levels[2 + page * 3];
+            _page++;
+            updateText();
         }
     }
 
     public void prevPage()
     {
-        if (page > 0)
+        if (_page > 0)
         {
-            page--;
-            buttonTop.text = levels[0 + page * 3];
-            buttonMiddle.text = levels[1 + page * 3];
-            buttonBottom.text = levels[2 + page * 3];
+            _page--;
+            updateText();
         }
     }
 
-    public string getLevel(int index)
+    public void topLoad()
     {
-        return levels[index];
+        _transitionScript.transition(0);
+        resumeButton.ButtonPressed.RemoveAllListeners();
+        resumeButton.ButtonPressed.AddListener(() => changeResume(1));
+    }
+
+    public void midLoad()
+    {
+        _transitionScript.transition(1);
+        resumeButton.ButtonPressed.RemoveAllListeners();
+        resumeButton.ButtonPressed.AddListener(() => changeResume(2));
+    }
+
+    public void botLoad()
+    {
+        _loadScript.loadScene(levels[BOT_OFFSET + _page * LEVELS_PER_PAGE].getID());
+    }
+
+    private void changeResume(int i) {
+        _loadScript.loadScene(i);
+    }
+
+    private void updateText()
+    {
+        buttonTopText.text = levels[TOP_OFFSET + _page * LEVELS_PER_PAGE].getName();
+        buttonMiddleText.text = levels[MID_OFFSET + _page * LEVELS_PER_PAGE].getName();
+        buttonBottomText.text = levels[BOT_OFFSET + _page * LEVELS_PER_PAGE].getName();
+    }
+
+    private void populateLevels(List<Level> levels)
+    {
+        int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
+        for(int i = 1; i < sceneCount; i++)
+        {
+            levels.Add(new Level(i));
+        }
+        for(int i = 0; i <= levels.Count%3; i++)
+        {
+            levels.Add(new Level(-1));
+        }
     }
 }
