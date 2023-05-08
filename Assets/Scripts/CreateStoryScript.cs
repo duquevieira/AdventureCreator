@@ -1,3 +1,4 @@
+using MeadowGames.UINodeConnect4;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ using UnityEngine.UI;
 public class CreateStoryScript : MonoBehaviour
 {
 
+    private static string PARENTHESIS = "(";
+
     [SerializeField]
     private Button _buttonNewStep;
     [SerializeField]
@@ -15,6 +18,8 @@ public class CreateStoryScript : MonoBehaviour
     private GameObject _prefabNewStep;
     [SerializeField]
     private Canvas _canvas;
+    [SerializeField]
+    private Canvas _nodeCanvas;
 
     private List<GameObject> _allSteps;
 
@@ -30,30 +35,36 @@ public class CreateStoryScript : MonoBehaviour
 
     private void AddNewStoryStep()
     {
-        GameObject newStep = Instantiate(_prefabNewStep, _canvas.transform);
-        newStep.transform.SetParent(_canvas.transform, true);
-        _allSteps.Add(newStep);//
+        GameObject newStep = Instantiate(_prefabNewStep, _nodeCanvas.transform);
+        Node nodeScript = newStep.GetComponent<Node>();
+        nodeScript.ID = _allSteps.Count.ToString();
+        _allSteps.Add(newStep);
     }
 
     private void SaveStoryState()
     {
         Storyboard story = new Storyboard();
-        int id = 0;
         foreach(GameObject step in _allSteps)
         {
-            InputField[] inputFields = step.GetComponentsInChildren<InputField>();
-            StoryboardStep storyboardStep = new StoryboardStep(id++, inputFields[0].text, inputFields[1].text);
-            storyboardStep.addRequirement(new ItemGroup(inputFields[2].text.Split(" ")[1], int.Parse(inputFields[2].text.Split(" ")[0])));
-            storyboardStep.addAcquires(new ItemGroup(inputFields[3].text.Split(" ")[1], int.Parse(inputFields[3].text.Split(" ")[0])));
+            StoryboardStep storyboardStep = new StoryboardStep(int.Parse(step.GetComponent<Node>().ID), step.transform.GetChild(2).GetChild(0).name.Split(PARENTHESIS)[0]);
             story.addStep(storyboardStep);
-            Destroy(step);
         }
-        //_storyEngineScript.Storyboard = story;
-        //_canvas.gameObject.SetActive(false);
-        //TODO apagar
-        _buttonNewStep.gameObject.SetActive(false);
-        _buttonCreateStory.gameObject.SetActive(false);
-        _storyEngineScript.TestCanvas = _canvas;
-        _storyEngineScript.PrefabNewStep = _prefabNewStep;
+        int i = 0;
+        foreach(GameObject step in _allSteps)
+        {
+            Node nodeScript = step.GetComponent<Node>();
+            List<Node> previous = nodeScript.GetNodesConnectedToPolarity(Port.PolarityType._in);
+            StoryboardStep storyboardStep = story.getStorySteps()[i];
+            foreach (Node requirement in previous)
+            {
+                storyboardStep.addRequirement(new ItemGroup(requirement.ID, 1));
+            }
+            List<Node> next = nodeScript.GetNodesConnectedToPolarity(Port.PolarityType._out);
+            storyboardStep.addAcquires(new ItemGroup(nodeScript.ID, next.Count));
+            Destroy(step);
+            i++;
+        }
+        _storyEngineScript.Storyboard = story;
+        _canvas.gameObject.SetActive(false);
     }
 }

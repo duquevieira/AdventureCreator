@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -31,12 +29,19 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
 
     public void OnEndDrag(PointerEventData eventData)
     {   
-        Ray ray = _uiCamera.ScreenPointToRay(Input.mousePosition);
         var hits = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, hits);
+        bool noStep = true;
         foreach (RaycastResult hit in hits)
             if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(STEP_PREFAB_NAME))
-                hit.gameObject.GetComponentsInChildren<InputField>()[0].SetTextWithoutNotify(_clone.name.Split(PARENTHESIS)[0]);
-        Destroy(_clone);
+            {
+                noStep = false;
+                if(hit.gameObject.transform.GetChild(2).childCount != 0)
+                    Destroy(hit.gameObject.transform.GetChild(2).GetChild(0).gameObject);
+                _clone.transform.SetParent(hit.gameObject.transform.GetChild(2), false);
+                _clone.transform.localPosition = Vector3.zero;
+            }
+        if (noStep)
+            Destroy(_clone);
     }
 }
