@@ -7,15 +7,13 @@ public class StoryboardStep
     private int _id;
     private string _colliderName;
     private List<ItemGroup> _requirements;
-    private string _dialog;
     private List<ItemGroup> _acquired;
 
-    public StoryboardStep(int id, string colliderName, string dialog)
+    public StoryboardStep(int id, string colliderName)
     {
         _id = id;
         _colliderName = colliderName;
         _requirements = new List<ItemGroup>();
-        _dialog = dialog;
         _acquired = new List<ItemGroup>();
     }
 
@@ -42,11 +40,6 @@ public class StoryboardStep
     public List<ItemGroup> getRequirements()
     {
         return _requirements;
-    }
-
-    public string getDialog()
-    {
-        return _dialog;
     }
 
     public List<ItemGroup> getAcquired()

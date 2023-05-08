@@ -1,13 +1,18 @@
+using MoreMountains.Feedbacks;
+using MoreMountains.InventoryEngine;
 using System.Collections;
 using UnityEngine;
 
 public class PlayerHandlerScript : MonoBehaviour
 {
-    //private static string FLOOR = "floor";
     private static string ANIMATION_WALK = "walking";
-    private static string ITEMS_TAG = "items";
     private static string ITEMS_HIGH = "pickupHigh";
     private static string ITEMS_LOW = "pickupGround";
+
+    /*private static string DOOR = "Door";
+    private static string ANIMATION_DOOR = "clicked";
+    private static string KEY = "KeyExample";
+    private static string EXAMPLE = "ExampleItem";*/
 
     [SerializeField]
     private float _speed;
@@ -40,12 +45,33 @@ public class PlayerHandlerScript : MonoBehaviour
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-                //if (hit.collider.CompareTag(FLOOR))
-                {
-                    _playerAnimator.SetBool(ANIMATION_WALK, true);
-                    Target = hit.point;
-                }
+            {
+               _playerAnimator.SetBool(ANIMATION_WALK, true);
+                Target = hit.point;
+            }
         }
+        /*if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                if (hit.collider.name == DOOR &&
+                Vector3.Distance(Player.transform.position, hit.collider.transform.position) < 3 &&
+                Inventory.GetQuantity(KEY) > 0)
+                {
+                    Animator doorAnimator = hit.collider.GetComponent<Animator>();
+                    MMFeedbacks clickFeedBack = hit.collider.gameObject.transform.GetChild(0).gameObject.GetComponent<MMFeedbacks>();
+                    doorAnimator.SetBool(ANIMATION_DOOR, true);
+                    clickFeedBack?.PlayFeedbacks();
+                    StartCoroutine(ExecuteAfter(3, doorAnimator, ANIMATION_DOOR));
+                }
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            
+        }*/
         if (_canMove)
         {
             if (Vector3.Distance(_player.transform.position, Target) > 0.2)
@@ -61,20 +87,17 @@ public class PlayerHandlerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag(ITEMS_TAG))
+        if (other.gameObject.transform.position.y > (gameObject.transform.position.y + 0.5))
         {
-            if (other.gameObject.transform.position.y > (gameObject.transform.position.y + 0.5))
-            {
-                _playerAnimator.SetBool(ITEMS_HIGH, true);
-                StartCoroutine(ExecuteAfter(1.5f, _playerAnimator, ITEMS_HIGH));
-            }
-            else
-            {
-                _playerAnimator.SetBool(ITEMS_LOW, true);
-                StartCoroutine(ExecuteAfter(1.5f, _playerAnimator, ITEMS_LOW));
-            }
-            _canMove = false;
+            _playerAnimator.SetBool(ITEMS_HIGH, true);
+            StartCoroutine(ExecuteAfter(1.5f, _playerAnimator, ITEMS_HIGH));
         }
+        else
+        {
+            _playerAnimator.SetBool(ITEMS_LOW, true);
+            StartCoroutine(ExecuteAfter(1.5f, _playerAnimator, ITEMS_LOW));
+        }
+        _canMove = false;
         _storyEngineScript.ProcessEntry(other.gameObject.name);
     }
 
