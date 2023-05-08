@@ -70,3 +70,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+Assets/Prefabs(Dontcommit).meta
+Assets/Prefabs(Dontcommit)/LoadingScreen.prefab
+Assets/Prefabs(Dontcommit)/LoadMenu.prefab
+Assets/Prefabs(Dontcommit)/LoadMenu.prefab.meta
+Assets/Prefabs(Dontcommit)/MainMenu.prefab
+Assets/Prefabs(Dontcommit)/MainMenu.prefab.meta
