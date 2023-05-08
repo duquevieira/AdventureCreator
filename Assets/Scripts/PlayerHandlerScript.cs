@@ -1,111 +1,110 @@
+using MoreMountains.Feedbacks;
+using MoreMountains.InventoryEngine;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 
 public class PlayerHandlerScript : MonoBehaviour
 {
-    //String constants
-    private static string FLOOR = "floor";
     private static string ANIMATION_WALK = "walking";
-    private static string ITEMS_TAG = "items";
     private static string ITEMS_HIGH = "pickupHigh";
     private static string ITEMS_LOW = "pickupGround";
-    private static string CONTROLLER_TAG = "GameController";
 
-    //Default value should be 2.5
+    /*private static string DOOR = "Door";
+    private static string ANIMATION_DOOR = "clicked";
+    private static string KEY = "KeyExample";
+    private static string EXAMPLE = "ExampleItem";*/
+
     [SerializeField]
-    private float speed;
-    
-    //Game camera
-    private new Camera camera;
-    //Player object
-    private GameObject player;
-    //Player Skin
-    private GameObject character;
-    //Player Animator
-    private Animator playerAnimator;
-    //Used to check if user is locked in an animation
-    private bool canMove;
-    //Target coordinates of Player movement (Made public for saving purposes)
+    private float _speed;
+    [SerializeField]
+    private StoryEngineScript _storyEngineScript;
+
+    private Camera _camera;
+    private GameObject _player;
+    private GameObject _character;
+    private Animator _playerAnimator;
+    private bool _canMove;
+    [HideInInspector]
     public Vector3 Target;
+
+    void Start()
+    {
+        _camera = _storyEngineScript.Camera;
+        _player = _storyEngineScript.Player;
+        _character = _player.transform.Find(_storyEngineScript.getCharacterSkin()).gameObject;
+        _character.SetActive(true);
+        _playerAnimator = _character.GetComponent<Animator>();
+        Target = _player.transform.position;
+        _canMove = true;
+    }
 
     void Update()
     {
-        //Register Player right-click to define new target coordinates
         if (Input.GetMouseButton(1))
         {
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                if (hit.collider.CompareTag(FLOOR))
+               _playerAnimator.SetBool(ANIMATION_WALK, true);
+                Target = hit.point;
+            }
+        }
+        /*if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                if (hit.collider.name == DOOR &&
+                Vector3.Distance(Player.transform.position, hit.collider.transform.position) < 3 &&
+                Inventory.GetQuantity(KEY) > 0)
                 {
-                    playerAnimator.SetBool(ANIMATION_WALK, true);
-                    Target = hit.point;
+                    Animator doorAnimator = hit.collider.GetComponent<Animator>();
+                    MMFeedbacks clickFeedBack = hit.collider.gameObject.transform.GetChild(0).gameObject.GetComponent<MMFeedbacks>();
+                    doorAnimator.SetBool(ANIMATION_DOOR, true);
+                    clickFeedBack?.PlayFeedbacks();
+                    StartCoroutine(ExecuteAfter(3, doorAnimator, ANIMATION_DOOR));
                 }
             }
         }
-        //Player Movement and Animation
-        if (canMove)
+        if (Input.GetKeyUp(KeyCode.S))
         {
-            if (Vector3.Distance(player.transform.position, Target) > 0.2)
+            
+        }*/
+        if (_canMove)
+        {
+            if (Vector3.Distance(_player.transform.position, Target) > 0.2)
             {
-                playerAnimator.SetBool(ANIMATION_WALK, true);
-                player.transform.position = Vector3.MoveTowards(player.transform.position, Target, speed * Time.deltaTime);
-                player.transform.LookAt(new Vector3(Target.x, player.transform.position.y, Target.z));
+                _playerAnimator.SetBool(ANIMATION_WALK, true);
+                _player.transform.position = Vector3.MoveTowards(_player.transform.position, Target, _speed * Time.deltaTime);
+                _player.transform.LookAt(new Vector3(Target.x, _player.transform.position.y, Target.z));
             }
             else
-            {
-                playerAnimator.SetBool(ANIMATION_WALK, false);
-            }
+                _playerAnimator.SetBool(ANIMATION_WALK, false);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        //Check if Player is colliding with items to display the correct animation
-        if(other.CompareTag(ITEMS_TAG))
+        if (other.gameObject.transform.position.y > (gameObject.transform.position.y + 0.5))
         {
-            //Check if item has higher Y than Player
-            if (other.gameObject.transform.position.y > (gameObject.transform.position.y + 0.5))
-            {
-                playerAnimator.SetBool(ITEMS_HIGH, true);
-                StartCoroutine(ExecuteAfter(1.5f, playerAnimator, ITEMS_HIGH));
-            }
-            else
-            {
-                playerAnimator.SetBool(ITEMS_LOW, true);
-                StartCoroutine(ExecuteAfter(1.5f, playerAnimator, ITEMS_LOW));
-            }
-            //Lock Player Movement
-            canMove = false;
+            _playerAnimator.SetBool(ITEMS_HIGH, true);
+            StartCoroutine(ExecuteAfter(1.5f, _playerAnimator, ITEMS_HIGH));
         }
-        //If not an item send information to StoryEngine to process
         else
         {
-            StoryEngineScript storyEngineScript = GameObject.FindWithTag(CONTROLLER_TAG).GetComponent<StoryEngineScript>();
-            storyEngineScript.ProcessEntry(other);
+            _playerAnimator.SetBool(ITEMS_LOW, true);
+            StartCoroutine(ExecuteAfter(1.5f, _playerAnimator, ITEMS_LOW));
         }
+        _canMove = false;
+        _storyEngineScript.ProcessEntry(other.gameObject.name);
     }
 
-    //Auxiliary function to update Animator after the animation is over
     IEnumerator ExecuteAfter(float time, Animator animator, string name)
     {
         yield return new WaitForSeconds(time);
         animator.SetBool(name, false);
-        canMove = true;
-    }
-
-    //Public function that sets up the Player from StoryEngine
-    public void Setup(Camera camera, GameObject player, string name)
-    {
-        this.camera = camera;
-        this.player = player;
-        character = player.transform.Find(name).gameObject;
-        character.SetActive(true);
-        playerAnimator = character.GetComponent<Animator>();
-        Target = player.transform.position;
-        canMove = true;
+        _canMove = true;
     }
 }

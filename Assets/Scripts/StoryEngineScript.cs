@@ -3,114 +3,120 @@ using System.Collections.Generic;
 using UnityEngine;
 using MoreMountains.Feedbacks;
 using MoreMountains.InventoryEngine;
-using MoreMountains.TopDownEngine;
+using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class StoryEngineScript : MonoBehaviour
 {
-    //String constants
-    private static string DOOR = "Door";
-    private static string ANIMATION_DOOR = "clicked";
-    private static string PLAYER_INVENTORY = "CharacterInventory";
-    private static string KEY = "KeyExample";
 
     [SerializeField]
-    private new Camera camera;
+    public Camera Camera;
     [SerializeField]
-    private GameObject player;
+    public GameObject Player;
+    public Inventory Inventory;
 
-    private List<StoryboardEvent> story;
-    private List<StoryboardEvent> availableEvents;
+    [HideInInspector]
+    public List<ItemGroup> StoryItems;
+    [HideInInspector]
+    public Storyboard Storyboard;
 
     void Start()
     {
-        story = new List<StoryboardEvent>();
-        availableEvents = new List<StoryboardEvent>();
-        //int id, string actionName, string colliderName, string inventoryItemName,
-        //int inventoryItemChange, string dialog, List<int> nextEvents
-
-        StoryboardEvent event0 = new StoryboardEvent(0, "actionName", "Pot", "inventoryItemName", 0, "dialog", new List<int>());
-        event0.addNextEvent(1);
-        StoryboardEvent event1 = new StoryboardEvent(1, "actionName", "TallGrass", "inventoryItemName", 0, "dialog", new List<int>());
-        event1.addNextEvent(2);
-        event1.addNextEvent(3);
-        StoryboardEvent event2 = new StoryboardEvent(2, "actionName", "Pot", "inventoryItemName", 0, "dialog", new List<int>());
-        event2.addNextEvent(4);
-        StoryboardEvent event3 = new StoryboardEvent(3, "actionName", "TallGrass", "inventoryItemName", 0, "dialog", new List<int>());
-        event3.addNextEvent(5);
-        StoryboardEvent event4 = new StoryboardEvent(4, "actionName", "Pot", "inventoryItemName", 0, "dialog", new List<int>());
-        StoryboardEvent event5 = new StoryboardEvent(5, "actionName", "TallGrass", "inventoryItemName", 0, "dialog", new List<int>());
-
-        story.Add(event0); story.Add(event1); story.Add(event2); story.Add(event3); story.Add(event4); story.Add(event5);
-        availableEvents.Add(event0);
-
-        //Pot, TallGrass
-        //Santa, FWorker, MWorker, FAttendant, MAttendant, FClerk, MClerk, FGym, MGym, MHunter, FMusician, MMusician, FShopper, MShopper
-        player.GetComponent<PlayerHandlerScript>().Setup(camera, player, "FMusician");
+        StoryItems = new List<ItemGroup>();
+        Storyboard = new Storyboard();
     }
 
     void Update()
     {
-        //Check if Player Left-clicked a door in range and in possession of the required key
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyUp(KeyCode.S))
         {
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            foreach(StoryboardStep step in Storyboard.getStorySteps())
             {
-                if (hit.collider.name == DOOR &&
-                Vector3.Distance(player.transform.position, hit.collider.transform.position) < 3 &&
-                GameObject.Find(PLAYER_INVENTORY).GetComponent<Inventory>().GetQuantity(KEY) > 0)
+                Debug.Log(Time.realtimeSinceStartup + "-----------------------------");
+                Debug.Log(Time.realtimeSinceStartup + " ID " + step.getId());
+                Debug.Log(Time.realtimeSinceStartup + " COLLIDER " + step.getColliderName());
+                Debug.Log(Time.realtimeSinceStartup + " REQUIREMENTS");
+                foreach(ItemGroup requirement in step.getRequirements())
                 {
-                    //Open the door
-                    Animator doorAnimator = hit.collider.GetComponent<Animator>();
-                    MMFeedbacks clickFeedBack = hit.collider.gameObject.transform.GetChild(0).gameObject.GetComponent<MMFeedbacks>();
-                    doorAnimator.SetBool(ANIMATION_DOOR, true);
-                    clickFeedBack?.PlayFeedbacks();
-                    StartCoroutine(ExecuteAfter(3, doorAnimator, ANIMATION_DOOR));
+                    Debug.Log(Time.realtimeSinceStartup + " " + requirement.getItemName() + " " + requirement.getItemAmount());
                 }
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            foreach (StoryboardEvent iteratedEvent in availableEvents)
-            {
-                Debug.Log(Time.realtimeSinceStartup + " ID: " + iteratedEvent.getId() + " Collider: " + iteratedEvent.getColliderName());
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            foreach (StoryboardEvent iteratedEvent in story)
-            {
-                Debug.Log(Time.realtimeSinceStartup + " ID: " + iteratedEvent.getId() + " Collider: " + iteratedEvent.getColliderName());
+                Debug.Log(Time.realtimeSinceStartup + " ACQUIRES");
+                foreach (ItemGroup acquires in step.getAcquired())
+                {
+                    Debug.Log(Time.realtimeSinceStartup + " " + acquires.getItemName() + " " + acquires.getItemAmount());
+                }
             }
         }
     }
 
-    //Auxiliary function to update an Animator after the animation is over
-    IEnumerator ExecuteAfter(float time, Animator animator, string name)
+    public void ProcessEntry(string colliderName)
     {
-        yield return new WaitForSeconds(time);
-        animator.SetBool(name, false);
+        foreach (StoryboardStep iteratedStep in Storyboard.getStorySteps())
+            if (colliderName.Equals(iteratedStep.getColliderName()))
+            {
+                List<ItemGroup> requirements = iteratedStep.getRequirements();
+                bool completable = true;
+                foreach(ItemGroup requirement in requirements)
+                {
+                    int storyAmount = -1;
+                    foreach(ItemGroup storyItem in StoryItems)
+                        if(storyItem.getItemName() == requirement.getItemName())
+                        {
+                            storyAmount = storyItem.getItemAmount();
+                            break;
+                        }
+                    int inventoryAmount = Inventory.GetQuantity(requirement.getItemName());
+                    int requiredAmount = requirement.getItemAmount();
+                    if (inventoryAmount < requiredAmount && storyAmount < requiredAmount)
+                    {
+                        completable = false;
+                        break;
+                    }
+                }
+                if (completable)
+                {
+                    foreach (ItemGroup requirement in requirements)
+                    {
+                        foreach (ItemGroup storyItem in StoryItems)
+                            if (storyItem.getItemName() == requirement.getItemName())
+                            {
+                                storyItem.removeItemAmount(requirement.getItemAmount());
+                                if(storyItem.getItemAmount() == 0)
+                                    StoryItems.Remove(storyItem);
+                                break;
+                            }
+                        Inventory.RemoveItemByID(requirement.getItemName(), requirement.getItemAmount());
+                    }
+                    foreach (ItemGroup acquires in iteratedStep.getAcquired())
+                    {
+                        bool newItem = true;
+                        foreach (ItemGroup storyItem in StoryItems)
+                        {
+                            if (storyItem.getItemName() == acquires.getItemName())
+                            {
+                                newItem = false;
+                                storyItem.addItemAmount(acquires.getItemAmount());
+                                break;
+                            }
+                        }
+                        if(newItem)
+                        {
+                            ItemGroup item = new ItemGroup(acquires.getItemName(), acquires.getItemAmount());
+                            StoryItems.Add(item);
+                        }
+                    }
+                }
+            }
     }
 
-    public void ProcessEntry(Collider other)
+    public string getCharacterSkin()
     {
-        foreach(StoryboardEvent iteratedEvent in availableEvents)
-        {
-            if (other.gameObject.name.Equals(iteratedEvent.getColliderName()))
-            {
-                Debug.Log(Time.realtimeSinceStartup + " Evento correto");
-                foreach(int i in iteratedEvent.getNextEvents())
-                {
-                    availableEvents.Add(story[i]);
-                }
-                availableEvents.Remove(iteratedEvent);
-                if (availableEvents.Count == 0)
-                {
-                    Debug.Log(Time.realtimeSinceStartup + " Historia Acabou");
-                }
-                break;
-            }
-        }
+        //Santa, FWorker, MWorker, FAttendant, MAttendant, FClerk, MClerk
+        //FGym, MGym, MHunter, FMusician, MMusician, FShopper, MShopper
+        //EnglishCaptain, EnglishGovernor, EnglishSoldier, FPirate, FWench
+        //Gentleman, GovernorsDaughter, PirateBlackbeard, PirateCaptain
+        //PirateDeckHand, PirateFirstMate, PirateSeaman
+        //Skeleton1, Skeleton2, Skeleton3
+        return "PirateBlackbeard";
     }
 }
