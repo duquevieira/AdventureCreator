@@ -14,16 +14,18 @@ public class TransitionScript : MonoBehaviour
     private GameObject _nature;
     private int currentIndex;
 
-    void Start() 
+    void Awake() 
     {
         _current = GameObject.Instantiate(officeLevel);
         _nature = GameObject.Instantiate(natureLevel);
         _office = _current;
+        _nature.SetActive(false);
         fade.enabled = false;
         currentIndex = 0;
     }
 
     public void transition(int i) {
+        Debug.Log("Switching to: " + i);
         if(i == 0 && i != currentIndex) {
             StartCoroutine(fadeToLoad(_office));
             currentIndex = 0;
@@ -36,7 +38,7 @@ public class TransitionScript : MonoBehaviour
 
     private IEnumerator fadeToLoad(GameObject next) {
         fade.enabled = true;
-        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / 0.5f)
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / 2.0f)
         {
             Color c = fade.color;
             c.a = Mathf.Lerp(0.0f, 1.0f, t);
@@ -50,7 +52,7 @@ public class TransitionScript : MonoBehaviour
 
         _current.SetActive(true);
 
-        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / 0.5f)
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / 2.0f)
         {
             Color c = fade.color;
             c.a = Mathf.Lerp(1.0f, 0.0f, t);

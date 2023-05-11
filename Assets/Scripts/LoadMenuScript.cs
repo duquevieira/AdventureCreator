@@ -8,7 +8,7 @@ public class LoadMenuScript : MonoBehaviour
     private static Vector3 CAM_POS = new Vector3(605.5f,243.5f,-20);
     private static Vector3 START_CHAR = new Vector3(107.400002f,94.8999939f,0);
     private static Vector3 END_CHAR = new Vector3(1103.5f,94.8999939f,0);
-    public GameObject LoadScreen;
+    public GameObject StartMenu;
     public GameObject LoadingScreen;
     public Image loadingBar;
     public GameObject Character;
@@ -26,7 +26,7 @@ public class LoadMenuScript : MonoBehaviour
         _mainCamera.backgroundColor = Color.black;
         _mainCamera.orthographic = true;
         _mainCamera.orthographicSize = 243.5f;
-        LoadScreen.SetActive(false);
+        StartMenu.SetActive(false);
         StartCoroutine(LoadSceneAsync(sceneId));
     }
 

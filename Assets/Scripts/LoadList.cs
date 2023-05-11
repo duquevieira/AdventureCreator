@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Events;
 
 public class Level
 {
@@ -43,23 +41,25 @@ public class LoadList : MonoBehaviour
     private static int BOT_OFFSET = 2;
     private static int LEVELS_PER_PAGE = 3;
 
+    [SerializeField]
+    private LoadMenuScript _loadScript;
+    [SerializeField]
+    private TransitionScript _transitionScript;
+
     public List<Level> levels;
     public Text buttonTopText, buttonMiddleText, buttonBottomText;
     public MoreMountains.Tools.MMTouchButton resumeButton;
-    public GameObject Manager;
-    private LoadMenuScript _loadScript;
-    private TransitionScript _transitionScript;
     private int _page;
     private int _max;
 
-    void Start()
+    void Awake()
     {
         levels = new List<Level>();
         populateLevels(levels);
         _page = 0;
         _max = levels.Count;
-        _loadScript = (LoadMenuScript) Manager.GetComponent(typeof(LoadMenuScript));
-        _transitionScript = (TransitionScript) Manager.GetComponent(typeof(TransitionScript));
+        resumeButton.ButtonPressed.RemoveAllListeners();
+        resumeButton.ButtonPressed.AddListener(() => changeResume(1));
         updateText();
     }
 
