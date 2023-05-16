@@ -61,11 +61,11 @@ namespace MoreMountains.Tools
 				style.normal.textColor = Color.yellow;	 
 				Handles.Label(t.PointPosition(i) + (Vector3.down*0.4f) + (Vector3.right*0.4f), ""+i,style);
 
-				// draws a movable handle
-				var fmh_65_57_638148430316772334 = Quaternion.identity; Vector3 newPoint = Handles.FreeMoveHandle(oldPoint,.5f,new Vector3(.25f,.25f,.25f),Handles.CircleHandleCap);
+                // draws a movable handle
+                Vector3 newPoint = Handles.FreeMoveHandle(oldPoint, Quaternion.identity, .5f, new Vector3(.25f, .25f, .25f), Handles.CircleHandleCap);
 
-				// records changes
-				if (EditorGUI.EndChangeCheck())
+                // records changes
+                if (EditorGUI.EndChangeCheck())
 				{
 					Undo.RecordObject(target, "Free Move Handle");
 					t.PathElements[i].PathElementPosition = newPoint - t.GetOriginalTransformPosition();
