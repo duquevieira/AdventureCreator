@@ -45,6 +45,7 @@ public class StoryEngineScript : MonoBehaviour
                 {
                     Debug.Log(Time.realtimeSinceStartup + " " + acquires.getItemName() + " " + acquires.getItemAmount());
                 }
+                Debug.Log(Time.realtimeSinceStartup + " COORDINATES " + step.getStepCoordinates());
             }
         }
     }

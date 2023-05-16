@@ -11,16 +11,19 @@ public class PrefabMenuScript : MonoBehaviour
     private GameObject _panel;
     [SerializeField]
     private GameObject _menuSlotPrefab;
+    [HideInInspector]
+    public List<GameObject> AllPrefabs;
 
     private static int UILAYER = 5;
 
     private static string[] foldersToSearch = {"Assets/Resources/Interactables"/*//, "Assets/Resources/Items"
      ,"Assets/PolygonOffice/Prefabs/Characters", "Assets/PolygonShops/Prefabs/Characters", "Assets/PolygonPirates/Prefabs/Characters", 
      "Assets/PolygonCity/Prefabs/Characters", "Assets/PolygonAncientEmpire/Prefabs/Characters"*/};
+
     public void Start()
     {
-        List<GameObject> allPrefabs = GetAssets<GameObject>(foldersToSearch, "t:prefab");
-        foreach (GameObject prefab in allPrefabs)
+        AllPrefabs = GetAssets<GameObject>(foldersToSearch, "t:prefab");
+        foreach (GameObject prefab in AllPrefabs)
         {
             var menuSlot = Instantiate(_menuSlotPrefab, _panel.transform);
             var instantiated = Instantiate(prefab, menuSlot.transform);
