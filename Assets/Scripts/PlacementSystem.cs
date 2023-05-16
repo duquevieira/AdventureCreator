@@ -40,7 +40,7 @@ public class PlacementSystem : MonoBehaviour
     private Dictionary<Vector3Int, List<Object>> _tilesWithObjects;
     private Vector3 clickedTile;
     private GameObject _selectedObject;
-
+    
     private void Awake()
     {
         Current = this;
@@ -48,6 +48,21 @@ public class PlacementSystem : MonoBehaviour
         _objectsInScene = new List<GameObject>();
         _availableTiles = new List<Vector3Int>();
         _tilesWithObjects = new Dictionary<Vector3Int, List<Object>>();
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                Vector3 pos = new Vector3(i, 0.001f, j);
+                var cloneObj = Instantiate(floor, pos, Quaternion.identity);
+                _objectsInScene.Add(cloneObj);
+
+            }
+        }
+        SpawnStructure();
     }
     private void Update()
     {
