@@ -8,7 +8,9 @@ public class PlacementUI : MonoBehaviour
 {
     [SerializeField] public TMP_Dropdown _dropdown;
     [SerializeField] private TMP_Text _clickedTileText;
+    [SerializeField] private TMP_Text _clickedObjectText;
     [SerializeField] private Button _addButton;
+    //[SerializeField] private Button _delButton;
     [SerializeField] private PlacementSystem _placementSys;
     private List<GameObject> _mainObjects;
 
@@ -16,7 +18,9 @@ public class PlacementUI : MonoBehaviour
     {
         _dropdown.ClearOptions();
         _clickedTileText.text = "Clicked Tile: ";
+        _clickedObjectText.text = "Clicked Object: ";
         _addButton.interactable = false;
+        //_delButton.interactable = false;
     }
 
     private void Awake()
@@ -27,7 +31,11 @@ public class PlacementUI : MonoBehaviour
 
     private void Update()
     {
-        if (_dropdown.options.Count > 0)
+        //if (_dropdown.options.Count > 0)
+        //{
+        //    _addButton.interactable = true;
+        //}
+        if (!_clickedObjectText.text.Equals("Clicked Object: "))
         {
             _addButton.interactable = true;
         }
@@ -41,5 +49,10 @@ public class PlacementUI : MonoBehaviour
             Vector3Int roundedClickedTile = _placementSys.convertFloatPosToTile(clickedTile);
             _clickedTileText.text = "Clicked Tile: " + roundedClickedTile;
         }
+    }
+
+    public void UpdateSelectectObject(string selectedObject)
+    {
+        _clickedObjectText.text = "Clicked Object: " + selectedObject;
     }
 }

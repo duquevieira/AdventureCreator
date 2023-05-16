@@ -25,13 +25,13 @@ namespace MeadowGames.UINodeConnect4.EditorScript
                     {
                         var g = AssetDatabase.FindAssets($"t:Script {field.GetType()}");
                         string path = AssetDatabase.GUIDToAssetPath(g[0]);
-                        obj = AssetDatabase.LoadAssetAtPath(path, typeof(Object));
+                        obj = (Object)AssetDatabase.LoadAssetAtPath(path, typeof(Object));
                     }
                     else
                     {
                         var g = AssetDatabase.FindAssets($"t:Script {typeof(T).Name}");
                         string path = AssetDatabase.GUIDToAssetPath(g[0]);
-                        obj = AssetDatabase.LoadAssetAtPath(path, typeof(Object));
+                        obj = (Object)AssetDatabase.LoadAssetAtPath(path, typeof(Object));
                     }
 
                     EditorGUIUtility.PingObject(obj);
@@ -57,7 +57,7 @@ namespace MeadowGames.UINodeConnect4.EditorScript
                         {
                             DragAndDrop.AcceptDrag();
 
-                            Object dragged_object = DragAndDrop.objectReferences[0];
+                            Object dragged_object = (Object)DragAndDrop.objectReferences[0];
 
                             System.Type type = System.Type.GetType(dragged_object.name + ",Assembly-CSharp");
 

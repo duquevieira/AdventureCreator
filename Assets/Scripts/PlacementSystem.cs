@@ -26,6 +26,7 @@ public class PlacementSystem : MonoBehaviour
     public GridLayout GridLayout;
     private Grid _grid;
     [SerializeField] private PlacementUI _placementUI;
+    //[SerializeField] private ClickMenuSlot _clickMenuSlot;
     [SerializeField] private Tilemap _mainTileMap;
     [SerializeField] private GameObject floor;
     [SerializeField] private List<GameObject> _structureObjects;
@@ -38,6 +39,7 @@ public class PlacementSystem : MonoBehaviour
     private List<Vector3Int> _availableTiles;
     private Dictionary<Vector3Int, List<Object>> _tilesWithObjects;
     private Vector3 clickedTile;
+    private GameObject _selectedObject;
 
     private void Awake()
     {
@@ -69,6 +71,7 @@ public class PlacementSystem : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             getClickedTile();
+            AddObjectManually();
         }
         if (!_objectToPlace)
         {
@@ -92,28 +95,37 @@ public class PlacementSystem : MonoBehaviour
             }
         }*/
     }
-
-    public Vector3Int convertFloatPosToTile(Vector3 pos)
+    
+    public void SetSelectedObject(GameObject obj)
     {
-       Vector3Int convertedPos = new Vector3Int(Mathf.CeilToInt(pos.x), Mathf.FloorToInt(pos.y), Mathf.FloorToInt(pos.z));
-        return convertedPos;
+        if (obj != null)
+        {
+            _selectedObject = obj;
+            _selectedObject.transform.localScale = Vector3.one;
+            _selectedObject.layer = 0;
+        } else
+        {
+            _selectedObject = null;
+        }
+        
     }
+   
     public void AddObjectManually()
     {
-       
-        //List<TMP_Dropdown.OptionData> dropdownOptions = _placementUI._dropdown.options;
-        int dropdownIndex = _placementUI._dropdown.value;
-        var cloneObj = Instantiate(_mainObjects[dropdownIndex], clickedTile, Quaternion.identity);
-        _objectsInScene.Add(cloneObj);
-        List<Object> objectsInOneTile = getObjectsInOneTile(convertFloatPosToTile(clickedTile));
-        if (objectsInOneTile == null)
+        if (_selectedObject!= null)
         {
-            objectsInOneTile = new List<Object>();
+            var cloneObj = Instantiate(_selectedObject, clickedTile, Quaternion.identity);
+            _objectsInScene.Add(cloneObj);
+            List<Object> objectsInOneTile = getObjectsInOneTile(convertFloatPosToTile(clickedTile));
+            if (objectsInOneTile == null)
+            {
+                objectsInOneTile = new List<Object>();
 
+            }
+            objectsInOneTile.Add(getObjectType(cloneObj));
+            _tilesWithObjects.Remove(convertFloatPosToTile(clickedTile));
+            _tilesWithObjects.Add(convertFloatPosToTile(clickedTile), objectsInOneTile);
         }
-        objectsInOneTile.Add(getObjectType(cloneObj));
-        _tilesWithObjects.Remove(convertFloatPosToTile(clickedTile));
-        _tilesWithObjects.Add(convertFloatPosToTile(clickedTile), objectsInOneTile);
     }
     public Vector3 getClickedTile()
     {
@@ -548,6 +560,12 @@ public class PlacementSystem : MonoBehaviour
             return ObjectTypes.Wall;
         }
         return ObjectTypes.Default;
+    }
+
+    public Vector3Int convertFloatPosToTile(Vector3 pos)
+    {
+        Vector3Int convertedPos = new Vector3Int(Mathf.CeilToInt(pos.x), Mathf.FloorToInt(pos.y), Mathf.FloorToInt(pos.z));
+        return convertedPos;
     }
     private int convertCoordinatesToRelativePosition(Vector3Int adjacentPosition, Vector3Int newPlacement)
     {
