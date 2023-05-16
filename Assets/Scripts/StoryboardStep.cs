@@ -9,10 +9,13 @@ public class StoryboardStep
     private List<ItemGroup> _requirements;
     private List<ItemGroup> _acquired;
 
-    public StoryboardStep(int id, string colliderName)
+    private Vector3 _stepCoordinates;
+
+    public StoryboardStep(int id, string colliderName, Vector3 stepCoordinates)
     {
         _id = id;
         _colliderName = colliderName;
+        _stepCoordinates = stepCoordinates;
         _requirements = new List<ItemGroup>();
         _acquired = new List<ItemGroup>();
     }
@@ -46,4 +49,9 @@ public class StoryboardStep
     {
         return _acquired;
     } 
+
+    public Vector3 getStepCoordinates()
+    {
+        return _stepCoordinates;
+    }
 }
