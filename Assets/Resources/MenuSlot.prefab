@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 8830220132629521583}
   - component: {fileID: 9140778945705895716}
   - component: {fileID: -4066907971149164712}
-  - component: {fileID: -3056055800200825066}
+  - component: {fileID: 1446563415852701307}
+  - component: {fileID: 3566152890553923773}
   m_Layer: 5
   m_Name: MenuSlot
   m_TagString: Untagged
@@ -77,7 +78,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &-3056055800200825066
+--- !u!114 &1446563415852701307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7970894964243719075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 043a5b14374302143974cb4123b0ebb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3566152890553923773
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
