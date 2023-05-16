@@ -3553,7 +3553,7 @@ MonoBehaviour:
     iconOnDrag: {fileID: 8895775685280376203, guid: eb11ac9a06fb4792b393db9b83ab43b4, type: 3}
     exclusiveOnDragCanvas: {fileID: 0}
     useLegacyDragMethod: 0
-    position: {x: 182.14413, y: 14.324212, z: 100}
+    position: {x: 181.7793, y: 14.490049, z: 100}
   dragSelection:
     customRenderer: {fileID: 0}
     line:
@@ -8904,7 +8904,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1543516533
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10300,7 +10300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1758749637
 RectTransform:
   m_ObjectHideFlags: 0
