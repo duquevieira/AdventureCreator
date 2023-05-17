@@ -6,16 +6,16 @@ public class ObjectInfo
 {
 
     [SerializeField]
-    public string name;
+    public string Name;
     [SerializeField]
-    public PositionCoordinates pos;
+    public PositionCoordinates Position;
     [SerializeField]
-    public RotationCoordinates rot;
+    public RotationCoordinates Rotation;
 
     public ObjectInfo(string name, PositionCoordinates pos, RotationCoordinates rot)
     {
-        this.name = name;
-        this.pos = pos;
-        this.rot = rot;
+        this.Name = name;
+        this.Position = pos;
+        this.Rotation = rot;
     }
 }
