@@ -14,13 +14,15 @@ public class LevelSaveLoad : MonoBehaviour
         string save = "";
         Tale tale = new Tale(levelRoot, story);
         PositionCoordinates playerPos = tale.playerPos;
-        string json = JsonUtility.ToJson(playerPos);
+        string json = "Player:\n" + JsonUtility.ToJson(playerPos);
         save += json + "\n";
+        save += "Objects:\n[\n";
         List<ObjectInfo> props = tale.propDataList;
         foreach(ObjectInfo o in props) {
             json = JsonUtility.ToJson(o);
             save += json + "\n";
         }
+        save += "]";
         File.WriteAllText(filePath, save);
     }
 
@@ -28,9 +30,9 @@ public class LevelSaveLoad : MonoBehaviour
     {
         string json = File.ReadAllText(filePath);
         string[] parts = json.Split("\n");
-        PositionCoordinates objectData = JsonUtility.FromJson<PositionCoordinates>(parts[0]);
+        PositionCoordinates objectData = JsonUtility.FromJson<PositionCoordinates>(parts[1]);
         story.Player.transform.position = new Vector3(objectData.getRow(), 0, objectData.getColumn());
-        for(int i = 1; i < parts.Length; i++)
+        for(int i = 4; i < parts.Length-1; i++)
         {
             ObjectInfo data = JsonUtility.FromJson<ObjectInfo>(parts[i]);
             if(data != null) {
