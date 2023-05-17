@@ -293,7 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1655,12 +1655,28 @@ PrefabInstance:
       value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonReleased.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonReleased.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1865893907}
     - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: loadMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonReleased.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -2074,6 +2090,18 @@ PrefabInstance:
       propertyPath: m_FontData.m_FontSize
       value: 70
       objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonReleased.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1865893910}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonReleased.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: quitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonReleased.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LoadList, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 224176556579183792, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2197,7 +2225,15 @@ PrefabInstance:
       value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1865893907}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonReleased.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1865893907}
     - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
@@ -2205,7 +2241,15 @@ PrefabInstance:
       value: loadMenu
       objectReference: {fileID: 0}
     - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonReleased.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: loadMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: ButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneSwitcher, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114315994534524884, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
+      propertyPath: ButtonReleased.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SceneSwitcher, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 224176556579183792, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
@@ -2740,7 +2784,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -523, y: -128}
+  m_AnchoredPosition: {x: -503, y: -108}
   m_SizeDelta: {x: 328.5, y: 448}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1975239352001037 stripped

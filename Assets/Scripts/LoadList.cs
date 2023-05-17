@@ -100,6 +100,14 @@ public class LoadList : MonoBehaviour
         _loadScript.loadScene(levels[BOT_OFFSET + _page * LEVELS_PER_PAGE].getID());
     }
 
+    public void quitGame() {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+    }
+
     private void changeResume(int i) {
         _loadScript.loadScene(i);
     }
