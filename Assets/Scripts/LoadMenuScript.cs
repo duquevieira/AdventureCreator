@@ -8,9 +8,11 @@ public class LoadMenuScript : MonoBehaviour
     private static Vector3 CAM_POS = new Vector3(605.5f,243.5f,-20);
     private static Vector3 START_CHAR = new Vector3(107.400002f,94.8999939f,0);
     private static Vector3 END_CHAR = new Vector3(1103.5f,94.8999939f,0);
-    public GameObject LoadScreen;
+    private const float DEFAULT_ASPECT_RATIO = (16f / 9f);
+    private const float ORTHO_SIZE = 243.5f;
+    public GameObject StartMenu;
     public GameObject LoadingScreen;
-    public Image loadingBar;
+    public Image LoadingBar;
     public GameObject Character;
     public GameObject LoadingScreenText;
 
@@ -25,8 +27,9 @@ public class LoadMenuScript : MonoBehaviour
         _mainCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
         _mainCamera.backgroundColor = Color.black;
         _mainCamera.orthographic = true;
-        _mainCamera.orthographicSize = 243.5f;
-        LoadScreen.SetActive(false);
+        float scaledSize = CalculateScale();
+        _mainCamera.orthographicSize = scaledSize;
+        StartMenu.SetActive(false);
         StartCoroutine(LoadSceneAsync(sceneId));
     }
 
@@ -41,7 +44,7 @@ public class LoadMenuScript : MonoBehaviour
         {
             float progressValue = Mathf.Clamp01(operation.progress / 0.9F);
 
-            loadingBar.fillAmount = progressValue;
+            LoadingBar.fillAmount = progressValue;
 
             Vector3 CharacterPos = Vector3.Lerp(START_CHAR, END_CHAR, progressValue);
             Character.transform.position = CharacterPos;
@@ -60,5 +63,11 @@ public class LoadMenuScript : MonoBehaviour
             yield return null;
         }
         Character.transform.position = END_CHAR;
+    }
+
+    private float CalculateScale() {
+        float currentAspectRatio = (float) Screen.width/Screen.height;
+        float scaleFactor = currentAspectRatio / DEFAULT_ASPECT_RATIO;
+        return ORTHO_SIZE*scaleFactor;
     }
 }
