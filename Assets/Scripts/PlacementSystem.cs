@@ -35,7 +35,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private int width = 5;
     [SerializeField] private int height = 5;
     private PlaceableObject _objectToPlace;
-    private List<GameObject> _objectsInScene;
+    public List<GameObject> _objectsInScene;
     private List<Vector3Int> _availableTiles;
     private Dictionary<Vector3Int, List<Object>> _tilesWithObjects;
     private Vector3 clickedTile;
