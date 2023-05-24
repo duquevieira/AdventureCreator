@@ -5,12 +5,12 @@ using System.Collections.Generic;
 [Serializable]
 public class World {
     //The World class saves the world itself
-    public List<ObjectInfo> PropDataList;
+    public List<ObjectInfo> ObjectsInWorld;
 
     public World(PlacementSystem placer) {
-        PropDataList = new List<ObjectInfo>();
+        ObjectsInWorld = new List<ObjectInfo>();
         foreach(GameObject go in placer._objectsInScene) {
-            PropDataList.Add(go.GetProp());
+            ObjectsInWorld.Add(go.GetProp());
         }
     }
 }
