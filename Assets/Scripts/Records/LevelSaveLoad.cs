@@ -1,6 +1,5 @@
 using System.IO;
 using UnityEngine;
-using UnityEditor;
 using System.Collections.Generic;
 
 public class LevelSaveLoad : MonoBehaviour
@@ -10,34 +9,23 @@ public class LevelSaveLoad : MonoBehaviour
     public string FilePath = "C:/Users/danie/Desktop/SavesFolder/Level";
     public StoryEngineScript Story;
     public PlacementSystem PlacementSystem;
-    public void SaveWorld()
+
+    public void Save()
     {
         World world = new World(PlacementSystem);
-        string json = JsonUtility.ToJson(world,true);
-        File.WriteAllText(FilePath+ WORLD, json);
-    }
-
-    public void SaveTale()
-    {
-        Tale tale = new Tale(Story);
+        Tale tale = new Tale(Story, world);
         string json = JsonUtility.ToJson(tale, true);
         File.WriteAllText(FilePath+ TALE, json);
     }
 
-    public void LoadTale()
+    public void Load()
     {
         string json = File.ReadAllText(FilePath+TALE);
         Tale tale = JsonUtility.FromJson<Tale>(json);
         Story.Player.transform.position = new Vector3(tale.Player.getRow(), 0, tale.Player.getColumn());
         Story.Storyboard = tale.Storyboard;
-    }
-
-    public void LoadWorld()
-    {
-        string json = File.ReadAllText(FilePath+WORLD);
-        World world = JsonUtility.FromJson<World>(json);
         List<GameObject> toUpdate = new List<GameObject>();
-        foreach(ObjectInfo objectInfo in world.PropDataList) {
+        foreach(ObjectInfo objectInfo in tale.TaleWorld.ObjectsInWorld) {
             GameObject toAdd = Resources.Load<GameObject>(objectInfo.Name);
             toAdd.transform.position = new Vector3(objectInfo.Position.getRow(), 0, objectInfo.Position.getColumn());
             switch(objectInfo.Rotation.GetDirection()) {
@@ -58,4 +46,5 @@ public class LevelSaveLoad : MonoBehaviour
         }
         PlacementSystem._objectsInScene = toUpdate;
     }
+
 }
