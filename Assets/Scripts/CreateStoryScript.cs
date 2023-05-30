@@ -117,9 +117,10 @@ public class CreateStoryScript : MonoBehaviour
                 stepPrefab.transform.localPosition = step.getStepCoordinates();
                 Node nodeScript = stepPrefab.GetComponent<Node>();
                 nodeScript.ID = step.getId().ToString();
+                //substituir
                 foreach(GameObject prefab in _prefabMenuScript.AllPrefabs)
                 {
-                    if(prefab.gameObject.name.Equals(step.getColliderName()))
+                    if (prefab.gameObject.name.Equals(step.getColliderName()))
                     {
                         GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(2), false);
                         //TODO
@@ -131,6 +132,23 @@ public class CreateStoryScript : MonoBehaviour
                         break;
                     }
                 }
+                /*foreach(List<GameObject> prefabList in _prefabMenuScript.AllPrefabs)
+                {
+                    foreach (GameObject prefab in prefabList)
+                    {
+                        if (prefab.gameObject.name.Equals(step.getColliderName()))
+                        {
+                            GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(2), false);
+                            //TODO
+                            instantiated.transform.localScale = new Vector3(25, 25, 25);
+                            instantiated.transform.localPosition = Vector3.zero;
+                            instantiated.layer = UILAYER;
+                            foreach (Transform child in instantiated.transform)
+                                child.gameObject.layer = UILAYER;
+                            break;
+                        }
+                    }
+                }*/
                 _allSteps.Add(stepPrefab);
             }
             foreach(GameObject step in _allSteps)
