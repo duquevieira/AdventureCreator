@@ -1,61 +1,50 @@
 using System.IO;
 using UnityEngine;
-using UnityEditor;
 using System.Collections.Generic;
 
 public class LevelSaveLoad : MonoBehaviour
 {
-    public string FilePath = "C:/Users/danie/Desktop/SavesFolder/Level.data";
+    private const string WORLD = "World.data";
+    private const string TALE = "Tale.data";
+    public string FilePath = "C:/Users/danie/Desktop/SavesFolder/Level";
     public StoryEngineScript Story;
-    public GameObject LevelRoot;
+    public PlacementSystem PlacementSystem;
 
     public void Save()
     {
-        string save = "";
-        Tale tale = new Tale(LevelRoot, Story);
-        PositionCoordinates playerPos = tale.PlayerPosition;
-        string json = "Player:\n" + JsonUtility.ToJson(playerPos);
-        save += json + "\n";
-        save += "Objects:\n[\n";
-        List<ObjectInfo> props = tale.PropDataList;
-        foreach(ObjectInfo objectInf in props) {
-            json = JsonUtility.ToJson(objectInf);
-            save += json + "\n";
-        }
-        save += "]";
-        File.WriteAllText(FilePath, save);
+        World world = new World(PlacementSystem);
+        Tale tale = new Tale(Story, world);
+        string json = JsonUtility.ToJson(tale, true);
+        File.WriteAllText(FilePath+ TALE, json);
     }
 
     public void Load()
     {
-        string json = File.ReadAllText(FilePath);
-        string[] parts = json.Split("\n");
-        PositionCoordinates objectData = JsonUtility.FromJson<PositionCoordinates>(parts[1]);
-        Story.Player.transform.position = new Vector3(objectData.getRow(), 0, objectData.getColumn());
-        for(int i = 4; i < parts.Length-1; i++)
-        {
-            ObjectInfo data = JsonUtility.FromJson<ObjectInfo>(parts[i]);
-            if(data != null) {
-                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Catalog/" + data.Name.Split(" ")[0] + ".prefab");
-                GameObject obj = Instantiate(prefab, new Vector3(data.Position.getRow()+12.5f, 0, data.Position.getColumn()), Quaternion.identity, LevelRoot.transform);
-                if(obj != null) {
-                    obj.name = data.Name;
-                    switch(data.Rotation.GetDirection()) {
+        string json = File.ReadAllText(FilePath+TALE);
+        Tale tale = JsonUtility.FromJson<Tale>(json);
+        Story.Player.transform.position = new Vector3(tale.Player.getRow(), 0, tale.Player.getColumn());
+        Story.Storyboard = tale.Storyboard;
+        List<GameObject> toUpdate = new List<GameObject>();
+        foreach(ObjectInfo objectInfo in tale.TaleWorld.ObjectsInWorld) {
+            GameObject toAdd = Resources.Load<GameObject>(objectInfo.Name);
+            toAdd.transform.position = new Vector3(objectInfo.Position.getRow(), 0, objectInfo.Position.getColumn());
+            switch(objectInfo.Rotation.GetDirection()) {
                         case Direction.North:
-                            obj.transform.rotation = Quaternion.Euler(0,0,0);
+                            toAdd.transform.rotation = Quaternion.Euler(0,0,0);
                             break;
                         case Direction.East:
-                            obj.transform.rotation = Quaternion.Euler(0,90,0);
+                            toAdd.transform.rotation = Quaternion.Euler(0,90,0);
                             break;
                         case Direction.South:
-                            obj.transform.rotation = Quaternion.Euler(0,180,0);
+                            toAdd.transform.rotation = Quaternion.Euler(0,180,0);
                             break;
                         case Direction.West:
-                            obj.transform.rotation = Quaternion.Euler(0,270,0);
+                            toAdd.transform.rotation = Quaternion.Euler(0,270,0);
                             break;
-                    }
-                }
             }
+            toUpdate.Add(toAdd);
         }
+        PlacementSystem._objectsInScene = toUpdate;
     }
+
 }

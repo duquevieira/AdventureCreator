@@ -1,20 +1,16 @@
-using System;
 using UnityEngine;
-using System.Collections.Generic;
 
-[Serializable]
-public class Tale {
-    [SerializeField]
-    public List<ObjectInfo> PropDataList;
-    [SerializeField]
-    public PositionCoordinates PlayerPosition;
+public class Tale : MonoBehaviour
+{
+    //The Tale class represents the story and player info
+    public PositionCoordinates Player;
+    public Storyboard Storyboard;
+    public World TaleWorld;
 
-
-    public Tale(GameObject root, StoryEngineScript story) {
-        PropDataList = new List<ObjectInfo>();
-        foreach (GameObject mapObject in GameObject.FindGameObjectsWithTag("Map"))
-            PropDataList.Add(mapObject.GetProp());
-        GameObject player = story.Player;
-        PlayerPosition = new PositionCoordinates(player.transform.position.x, player.transform.position.z);
+    public Tale(StoryEngineScript storyEngine, World world) {
+        GameObject playerObject = storyEngine.Player;
+        Player = new PositionCoordinates(playerObject.transform.position.x, playerObject.transform.position.z);
+        Storyboard = storyEngine.Storyboard;
+        TaleWorld = world;
     }
 }
