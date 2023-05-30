@@ -101,7 +101,6 @@ public class CreateStoryScript : MonoBehaviour
             port.RemoveAllConnections();
         }
         _storyEngineScript.Storyboard = story;
-        _canvas.gameObject.SetActive(false);
     }
 
     void Update()
