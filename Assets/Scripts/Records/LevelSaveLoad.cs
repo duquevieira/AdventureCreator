@@ -6,7 +6,7 @@ public class LevelSaveLoad : MonoBehaviour
 {
     private const string WORLD = "World.data";
     private const string TALE = "Tale.data";
-    public string FilePath = "C:/Users/danie/Desktop/SavesFolder/Level";
+    private string FilePath = "C:/Users/linar/Documents/André/Tale.data";
     public StoryEngineScript Story;
     public PlacementSystem PlacementSystem;
 
@@ -15,12 +15,12 @@ public class LevelSaveLoad : MonoBehaviour
         World world = new World(PlacementSystem);
         Tale tale = new Tale(Story, world);
         string json = JsonUtility.ToJson(tale, true);
-        File.WriteAllText(FilePath+ TALE, json);
+        File.WriteAllText(FilePath, json);
     }
 
     public void Load()
     {
-        string json = File.ReadAllText(FilePath+TALE);
+        string json = File.ReadAllText(FilePath);
         Tale tale = JsonUtility.FromJson<Tale>(json);
         Story.Player.transform.position = new Vector3(tale.Player.getRow(), 0, tale.Player.getColumn());
         Story.Storyboard = tale.Storyboard;
