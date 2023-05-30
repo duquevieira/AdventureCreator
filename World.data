@@ -1,0 +1,1414 @@
+{
+    "PropDataList": [
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 0.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 0.0,
+                "_column": 1.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 0.0,
+                "_column": 2.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 0.0,
+                "_column": 3.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 0.0,
+                "_column": 4.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 0.0,
+                "_column": 5.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 0.0,
+                "_column": 6.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 0.0,
+                "_column": 7.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 0.0,
+                "_column": 8.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 0.0,
+                "_column": 9.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 1.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 1.0,
+                "_column": 1.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 1.0,
+                "_column": 2.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 1.0,
+                "_column": 3.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 1.0,
+                "_column": 4.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 1.0,
+                "_column": 5.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 1.0,
+                "_column": 6.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 1.0,
+                "_column": 7.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 1.0,
+                "_column": 8.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 1.0,
+                "_column": 9.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 2.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 2.0,
+                "_column": 1.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 2.0,
+                "_column": 2.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 2.0,
+                "_column": 3.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 2.0,
+                "_column": 4.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 2.0,
+                "_column": 5.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 2.0,
+                "_column": 6.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 2.0,
+                "_column": 7.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 2.0,
+                "_column": 8.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 2.0,
+                "_column": 9.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 3.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 3.0,
+                "_column": 1.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 3.0,
+                "_column": 2.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 3.0,
+                "_column": 3.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 3.0,
+                "_column": 4.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 3.0,
+                "_column": 5.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 3.0,
+                "_column": 6.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 3.0,
+                "_column": 7.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 3.0,
+                "_column": 8.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 3.0,
+                "_column": 9.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 4.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 4.0,
+                "_column": 1.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 4.0,
+                "_column": 2.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 4.0,
+                "_column": 3.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 4.0,
+                "_column": 4.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 4.0,
+                "_column": 5.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 4.0,
+                "_column": 6.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 4.0,
+                "_column": 7.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 4.0,
+                "_column": 8.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 4.0,
+                "_column": 9.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 5.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 5.0,
+                "_column": 1.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 5.0,
+                "_column": 2.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 5.0,
+                "_column": 3.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 5.0,
+                "_column": 4.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 5.0,
+                "_column": 5.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 5.0,
+                "_column": 6.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 5.0,
+                "_column": 7.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 5.0,
+                "_column": 8.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 5.0,
+                "_column": 9.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 6.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 6.0,
+                "_column": 1.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 6.0,
+                "_column": 2.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 6.0,
+                "_column": 3.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 6.0,
+                "_column": 4.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 6.0,
+                "_column": 5.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 6.0,
+                "_column": 6.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 6.0,
+                "_column": 7.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 6.0,
+                "_column": 8.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 6.0,
+                "_column": 9.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 7.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 7.0,
+                "_column": 1.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 7.0,
+                "_column": 2.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 7.0,
+                "_column": 3.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 7.0,
+                "_column": 4.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 7.0,
+                "_column": 5.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 7.0,
+                "_column": 6.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 7.0,
+                "_column": 7.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 7.0,
+                "_column": 8.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 7.0,
+                "_column": 9.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 8.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 8.0,
+                "_column": 1.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 8.0,
+                "_column": 2.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 8.0,
+                "_column": 3.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 8.0,
+                "_column": 4.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 8.0,
+                "_column": 5.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 8.0,
+                "_column": 6.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 8.0,
+                "_column": 7.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 8.0,
+                "_column": 8.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 8.0,
+                "_column": 9.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 1.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 2.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 3.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 4.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 5.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 6.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 7.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 8.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Floor_Carpet_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 9.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": -1.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 1
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": -1.0,
+                "_column": 1.0
+            },
+            "Rotation": {
+                "_direction": 1
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": -1.0,
+                "_column": 2.0
+            },
+            "Rotation": {
+                "_direction": 1
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": -1.0,
+                "_column": 3.0
+            },
+            "Rotation": {
+                "_direction": 1
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": -1.0,
+                "_column": 4.0
+            },
+            "Rotation": {
+                "_direction": 1
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": -1.0,
+                "_column": 5.0
+            },
+            "Rotation": {
+                "_direction": 1
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": -1.0,
+                "_column": 6.0
+            },
+            "Rotation": {
+                "_direction": 1
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": -1.0,
+                "_column": 7.0
+            },
+            "Rotation": {
+                "_direction": 1
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": -1.0,
+                "_column": 8.0
+            },
+            "Rotation": {
+                "_direction": 1
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": -1.0,
+                "_column": 9.0
+            },
+            "Rotation": {
+                "_direction": 1
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 0.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": 1.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 2.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 3.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 4.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": 5.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": 6.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 7.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 8.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 0.0
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": -1.0,
+                "_column": 10.0
+            },
+            "Rotation": {
+                "_direction": 2
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 0.0,
+                "_column": 10.0
+            },
+            "Rotation": {
+                "_direction": 2
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 1.0,
+                "_column": 10.0
+            },
+            "Rotation": {
+                "_direction": 2
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": 2.0,
+                "_column": 10.0
+            },
+            "Rotation": {
+                "_direction": 2
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": 3.0,
+                "_column": 10.0
+            },
+            "Rotation": {
+                "_direction": 2
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 4.0,
+                "_column": 10.0
+            },
+            "Rotation": {
+                "_direction": 2
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 5.0,
+                "_column": 10.0
+            },
+            "Rotation": {
+                "_direction": 2
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": 6.0,
+                "_column": 10.0
+            },
+            "Rotation": {
+                "_direction": 2
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": 7.0,
+                "_column": 10.0
+            },
+            "Rotation": {
+                "_direction": 2
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": 8.0,
+                "_column": 10.0
+            },
+            "Rotation": {
+                "_direction": 2
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 1.0
+            },
+            "Rotation": {
+                "_direction": 3
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 2.0
+            },
+            "Rotation": {
+                "_direction": 3
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 3.0
+            },
+            "Rotation": {
+                "_direction": 3
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 4.0
+            },
+            "Rotation": {
+                "_direction": 3
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 5.0
+            },
+            "Rotation": {
+                "_direction": 3
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 6.0
+            },
+            "Rotation": {
+                "_direction": 3
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 7.0
+            },
+            "Rotation": {
+                "_direction": 3
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_Window_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 8.0
+            },
+            "Rotation": {
+                "_direction": 3
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 9.0
+            },
+            "Rotation": {
+                "_direction": 3
+            }
+        },
+        {
+            "Name": "SM_Bld_Wall_Baseboard_01(Clone)",
+            "Position": {
+                "_row": 9.0,
+                "_column": 10.0
+            },
+            "Rotation": {
+                "_direction": 3
+            }
+        },
+        {
+            "Name": "SM_Prop_Cabinets_01(Clone)(Clone)",
+            "Position": {
+                "_row": 4.5,
+                "_column": 5.5
+            },
+            "Rotation": {
+                "_direction": 0
+            }
+        }
+    ]
+}
