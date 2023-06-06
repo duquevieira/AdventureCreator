@@ -14,6 +14,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using UnityEngine.WSA;
 using static Object;
+using static UnityEditor.PlayerSettings;
 using Random = UnityEngine.Random;
 
 // www.youtube.com/watch?v=rKp9fWvmIww&t=342s
@@ -58,6 +59,7 @@ public class PlacementSystem : MonoBehaviour
             {
                 Vector3 pos = new Vector3(i, 0.001f, j);
                 var cloneObj = Instantiate(floor, pos, Quaternion.identity);
+                cloneObj.name = cloneObj.name.Split("(")[0]; 
                 _objectsInScene.Add(cloneObj);
 
             }
@@ -75,6 +77,7 @@ public class PlacementSystem : MonoBehaviour
                 {
                     Vector3 pos = new Vector3(i, 0.001f, j);
                     var cloneObj = Instantiate(floor, pos, Quaternion.identity);
+                    cloneObj.name = cloneObj.name.Split("(")[0];
                     _objectsInScene.Add(cloneObj);
 
                 }
@@ -130,6 +133,7 @@ public class PlacementSystem : MonoBehaviour
         if (_selectedObject!= null)
         {
             var cloneObj = Instantiate(_selectedObject, clickedTile, Quaternion.identity);
+            cloneObj.name = cloneObj.name.Split("(")[0];
             _objectsInScene.Add(cloneObj);
             List<Object> objectsInOneTile = getObjectsInOneTile(convertFloatPosToTile(clickedTile));
             if (objectsInOneTile == null)
@@ -178,7 +182,7 @@ public class PlacementSystem : MonoBehaviour
 
         return position;
     }
-    private void DestroyAllObjects()
+    public void DestroyAllObjects()
     {
         List<Transform> childs = new List<Transform>();
         for (int j = 0; j < _objectsInScene.Count; j++)
@@ -266,6 +270,7 @@ public class PlacementSystem : MonoBehaviour
                     {
                         //Vector3 position = SnapCoordinateToGrid(randomTile);
                         var cloneObj = Instantiate(_structureObjects[objectsToTryIndexes[objectIndex]], position, rotation);
+                        cloneObj.name = cloneObj.name.Split("(")[0];
                         _objectsInScene.Add(cloneObj);
                         //_availableTiles.Remove(randomTile);
                         List<Object> objectsInOneTile = getObjectsInOneTile(position);
@@ -347,6 +352,7 @@ public class PlacementSystem : MonoBehaviour
                     position.y = 0.5f;
                 }
                 var cloneObj = Instantiate(listObjects[objectsToTryIndexes[objectIndex]], position, Quaternion.identity);
+                cloneObj.name = cloneObj.name.Split("(")[0];
                 _objectsInScene.Add(cloneObj);
                 //_availableTiles.Remove(randomTile);
                 
