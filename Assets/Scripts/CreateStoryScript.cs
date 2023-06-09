@@ -53,7 +53,7 @@ public class CreateStoryScript : MonoBehaviour
 
     private void SaveStoryState()
     {
-        Storyboard story = new Storyboard();
+        List<StoryboardStep> story = new List<StoryboardStep>();
         List<GameObject> emptySteps = new List<GameObject>();
         foreach(GameObject step in _allSteps)
         {
@@ -62,7 +62,7 @@ public class CreateStoryScript : MonoBehaviour
                 int stepID = int.Parse(step.GetComponent<Node>().ID);
                 string colliderName = step.transform.GetChild(2).GetChild(0).name.Split(PARENTHESIS)[0];
                 StoryboardStep storyboardStep = new StoryboardStep(stepID, colliderName, step.transform.localPosition);
-                story.addStep(storyboardStep);
+                story.Add(storyboardStep);
             }
             else
             {
@@ -79,7 +79,7 @@ public class CreateStoryScript : MonoBehaviour
         {
             Node nodeScript = step.GetComponent<Node>();
             List<Node> previous = nodeScript.GetNodesConnectedToPolarity(Port.PolarityType._in);
-            foreach(StoryboardStep storyboardStep in story.getStorySteps())
+            foreach(StoryboardStep storyboardStep in story)
             {
                 if(storyboardStep.getId().ToString().Equals(nodeScript.ID))
                 {
@@ -110,7 +110,7 @@ public class CreateStoryScript : MonoBehaviour
         {
             _canvas.gameObject.SetActive(true);
             _allSteps = new List<GameObject>();
-            List<StoryboardStep> storySteps = _storyEngineScript.Storyboard.getStorySteps();
+            List<StoryboardStep> storySteps = _storyEngineScript.Storyboard;
             foreach(StoryboardStep step in storySteps)
             {
                 GameObject stepPrefab = Instantiate(_prefabNewStep, _nodeCanvas.transform);

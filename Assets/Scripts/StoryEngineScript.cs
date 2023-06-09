@@ -5,6 +5,7 @@ using MoreMountains.Feedbacks;
 using MoreMountains.InventoryEngine;
 using Unity.VisualScripting;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class StoryEngineScript : MonoBehaviour
 {
@@ -13,24 +14,24 @@ public class StoryEngineScript : MonoBehaviour
     public Camera Camera;
     [SerializeField]
     public GameObject Player;
-    public Inventory Inventory;
 
     [HideInInspector]
     public List<ItemGroup> StoryItems;
     [HideInInspector]
-    public Storyboard Storyboard;
+    public List<StoryboardStep> Storyboard;
+
 
     void Start()
     {
         StoryItems = new List<ItemGroup>();
-        Storyboard = new Storyboard();
+        Storyboard = new List<StoryboardStep>();
     }
 
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.S))
         {
-            foreach(StoryboardStep step in Storyboard.getStorySteps())
+            foreach(StoryboardStep step in Storyboard)
             {
                 Debug.Log(Time.realtimeSinceStartup + "-----------------------------");
                 Debug.Log(Time.realtimeSinceStartup + " ID " + step.getId());
@@ -52,7 +53,7 @@ public class StoryEngineScript : MonoBehaviour
 
     public void ProcessEntry(string colliderName)
     {
-        foreach (StoryboardStep iteratedStep in Storyboard.getStorySteps())
+        foreach (StoryboardStep iteratedStep in Storyboard)
             if (colliderName.Equals(iteratedStep.getColliderName()))
             {
                 List<ItemGroup> requirements = iteratedStep.getRequirements();
@@ -66,7 +67,8 @@ public class StoryEngineScript : MonoBehaviour
                             storyAmount = storyItem.getItemAmount();
                             break;
                         }
-                    int inventoryAmount = Inventory.GetQuantity(requirement.getItemName());
+                    //TODO
+                    int inventoryAmount = 0;
                     int requiredAmount = requirement.getItemAmount();
                     if (inventoryAmount < requiredAmount && storyAmount < requiredAmount)
                     {
@@ -86,7 +88,8 @@ public class StoryEngineScript : MonoBehaviour
                                     StoryItems.Remove(storyItem);
                                 break;
                             }
-                        Inventory.RemoveItemByID(requirement.getItemName(), requirement.getItemAmount());
+                        //TODO
+                        //Inventory.RemoveItemByID(requirement.getItemName(), requirement.getItemAmount());
                     }
                     foreach (ItemGroup acquires in iteratedStep.getAcquired())
                     {
