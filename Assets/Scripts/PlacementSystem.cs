@@ -27,6 +27,7 @@ public class PlacementSystem : MonoBehaviour
     public GridLayout GridLayout;
     private Grid _grid;
     [SerializeField] private PlacementUI _placementUI;
+    [SerializeField] private SwitchCreateMode switchMode;
     //[SerializeField] private ClickMenuSlot _clickMenuSlot;
     [SerializeField] private Tilemap _mainTileMap;
     [SerializeField] private GameObject floor;
@@ -88,8 +89,11 @@ public class PlacementSystem : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1))
         {
-            getClickedTile();
-            AddObjectManually();
+            if (switchMode.currentMode == SwitchCreateMode.CreateMode.MapMode)
+            {
+                getClickedTile();
+                AddObjectManually();
+            }  
         }
         if (!_objectToPlace)
         {
