@@ -1,41 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-
-public class Level
-{
-    private int sceneID;
-    private string levelName;
-
-    public Level(int id)
-    {
-        sceneID = id;
-
-        if (sceneID == -1) levelName = "Empty";
-        else
-        {
-            //Não dá para obter o nome de uma cena unloaded por isso tenho que apanhar o path e tratar o nome
-            string[] path = SceneUtility.GetScenePathByBuildIndex(sceneID).Split("/");
-            levelName = path[path.Length-1].Split(".")[0];
-        }
-    }
-
-    public string getName()
-    {
-        return levelName;
-    }
-
-    public int getID()
-    {
-        return sceneID;
-    }
-}
-
-
+using System.Net;
+using System.IO;
 
 public class LoadList : MonoBehaviour
 {
+    private const string GET_ALL_SAVES_ENDPOINT = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/documents";
+    private const string EMPTY = "Empty";
     private static int TOP_OFFSET = 0;
     private static int MID_OFFSET = 1;
     private static int BOT_OFFSET = 2;
@@ -46,7 +18,7 @@ public class LoadList : MonoBehaviour
     [SerializeField]
     private TransitionScript _transitionScript;
 
-    public List<Level> levels;
+    public List<Tale> levels;
     public Text buttonTopText, buttonMiddleText, buttonBottomText;
     public MoreMountains.Tools.MMTouchButton resumeButton;
     private int _page;
@@ -54,7 +26,7 @@ public class LoadList : MonoBehaviour
 
     void Awake()
     {
-        levels = new List<Level>();
+        levels = new List<Tale>();
         populateLevels(levels);
         _page = 0;
         _max = levels.Count;
@@ -97,7 +69,7 @@ public class LoadList : MonoBehaviour
 
     public void botLoad()
     {
-        _loadScript.loadScene(levels[BOT_OFFSET + _page * LEVELS_PER_PAGE].getID());
+        _loadScript.loadScene(1); //TODO: Replace with the id of the scene in the project manager (Can't do right now because it depends on other things)
     }
 
     public void quitGame() {
@@ -114,21 +86,42 @@ public class LoadList : MonoBehaviour
 
     private void updateText()
     {
-        buttonTopText.text = levels[TOP_OFFSET + _page * LEVELS_PER_PAGE].getName();
-        buttonMiddleText.text = levels[MID_OFFSET + _page * LEVELS_PER_PAGE].getName();
-        buttonBottomText.text = levels[BOT_OFFSET + _page * LEVELS_PER_PAGE].getName();
+        var top = TOP_OFFSET + _page * LEVELS_PER_PAGE;
+        var mid = MID_OFFSET + _page * LEVELS_PER_PAGE;
+        var bot = BOT_OFFSET + _page * LEVELS_PER_PAGE;
+        if(top < levels.Count)
+            buttonTopText.text = levels[top].Name;
+        else
+            buttonTopText.text = EMPTY;
+        if(mid < levels.Count)
+            buttonMiddleText.text = levels[mid].Name;
+        else
+            buttonMiddleText.text = EMPTY;
+        if(bot < levels.Count)
+            buttonBottomText.text = levels[bot].Name;
+        else
+            buttonBottomText.text = EMPTY;
     }
 
-    private void populateLevels(List<Level> levels)
+    private void populateLevels(List<Tale> levels)
     {
-        int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
-        for(int i = 1; i < sceneCount; i++)
-        {
-            levels.Add(new Level(i));
-        }
-        for(int i = 0; i <= levels.Count%3; i++)
-        {
-            levels.Add(new Level(-1));
-        }
+        var request = WebRequest.Create(GET_ALL_SAVES_ENDPOINT);
+        var response = request.GetResponse();
+        var stream = response.GetResponseStream();
+        var reader = new StreamReader(stream);
+        string responseText = reader.ReadToEnd();
+        Debug.Log("Response: " + responseText);
+        GetAllSavesResponse responseObject = JsonUtility.FromJson<GetAllSavesResponse>(responseText);
+        Debug.Log(responseObject._rid);
+        Debug.Log(responseObject.Documents.ToString());
+        Debug.Log(responseObject._count);
+        //TODO: Code to populate levels to be added here
+    }
+
+    private class GetAllSavesResponse
+    {
+        public string _rid;
+        public List<Object> Documents;
+        public int _count;
     }
 }

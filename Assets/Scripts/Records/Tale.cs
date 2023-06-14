@@ -3,6 +3,7 @@ using UnityEngine;
 public class Tale
 {
     //The Tale class represents the story and player info
+    public string Name;
     public PositionCoordinates Player;
     public Storyboard Storyboard;
     public World TaleWorld;
