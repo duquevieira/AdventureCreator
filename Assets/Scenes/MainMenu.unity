@@ -1203,7 +1203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114122550869409914, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Text
-      value: Resume Story
+      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 114122550869409914, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_FontData.m_Font
@@ -1742,7 +1742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114122550869409914, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Text
-      value: Create a Story
+      value: Create
       objectReference: {fileID: 0}
     - target: {fileID: 114122550869409914, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_FontData.m_Font
@@ -2344,7 +2344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114122550869409914, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_Text
-      value: Pick a Story
+      value: Load
       objectReference: {fileID: 0}
     - target: {fileID: 114122550869409914, guid: ea4aaeea6e39ef943b801514577ca507, type: 3}
       propertyPath: m_FontData.m_Font
