@@ -8,7 +8,7 @@ public class LevelSaveLoad : MonoBehaviour
 {
     private const string WORLD = "World.data";
     private const string TALE = "Tale.data";
-    private string FilePath = "C:/Users/linar/Documents/André/Tale.data";
+    private string FilePath = "C:/Users/danie/Documents/Andrï¿½/Tale.data";
     private string PrefabPath = "AndreUI_test/";
     public StoryEngineScript Story;
     public PlacementSystem PlacementSystem;

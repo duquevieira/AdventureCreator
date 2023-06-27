@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class LoadMenuScript : MonoBehaviour
 {
-    private static Vector3 CAM_POS = new Vector3(605.5f,243.5f,-20);
-    private static Vector3 START_CHAR = new Vector3(107.400002f,94.8999939f,0);
-    private static Vector3 END_CHAR = new Vector3(1103.5f,94.8999939f,0);
-    private const float DEFAULT_ASPECT_RATIO = (16f / 9f);
-    private const float ORTHO_SIZE = 243.5f;
+    private static Vector3 CAM_POS = new Vector3(0,0,0);
+    private static Vector3 START_CHAR = new Vector3(25,135,0);
+    private static Vector3 END_CHAR = new Vector3(775,135,0);
+    private const float ORTHO_SIZE = 383;
+    private const int CAM_Z_OFFSET = -100;
+    private const int REFERENCE_WIDTH = 1366;
     public GameObject StartMenu;
     public GameObject LoadingScreen;
     public Image LoadingBar;
@@ -23,12 +24,15 @@ public class LoadMenuScript : MonoBehaviour
     public void loadScene(int sceneId)
     {
         LoadingScreenText.SetActive(false);
+        LoadingScreen.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        CAM_POS = new Vector3(Screen.width/2, Screen.height/2, CAM_Z_OFFSET);
         _mainCamera.transform.position = CAM_POS;
         _mainCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
         _mainCamera.backgroundColor = Color.black;
         _mainCamera.orthographic = true;
         float scaledSize = CalculateScale();
         _mainCamera.orthographicSize = scaledSize;
+        CaculateCharacterScale();
         StartMenu.SetActive(false);
         StartCoroutine(LoadSceneAsync(sceneId));
     }
@@ -53,11 +57,13 @@ public class LoadMenuScript : MonoBehaviour
             if (progressValue >= 0.9f)
             {
                 LoadingScreenText.SetActive(true);
+                Debug.Log(_mainCamera.orthographicSize);
                 // Wait for user input to activate the scene
                 if (Input.anyKeyDown)
                 {
                     operation.allowSceneActivation = true;
                 }
+                Debug.Log(END_CHAR);
             }
 
             yield return null;
@@ -66,8 +72,14 @@ public class LoadMenuScript : MonoBehaviour
     }
 
     private float CalculateScale() {
-        float currentAspectRatio = (float) Screen.width/Screen.height;
-        float scaleFactor = currentAspectRatio / DEFAULT_ASPECT_RATIO;
+        float scaleFactor = (float) Screen.width/REFERENCE_WIDTH;
         return ORTHO_SIZE*scaleFactor;
+    }
+
+    private void CaculateCharacterScale() {
+        float currentWidthRatio = (float) Screen.width/800;
+        float currentHeightRatio = (float) Screen.height/450;
+        START_CHAR = new Vector3(START_CHAR.x*currentWidthRatio, START_CHAR.y*currentHeightRatio, 0);
+        END_CHAR = new Vector3(END_CHAR.x*currentWidthRatio, END_CHAR.y*currentHeightRatio, 0);
     }
 }
