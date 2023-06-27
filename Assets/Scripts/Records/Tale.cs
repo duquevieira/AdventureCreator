@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Tale : MonoBehaviour
+public class Tale
 {
     //The Tale class represents the story and player info
+    public string Name;
     public PositionCoordinates Player;
     public List<StoryboardStep> Storyboard;
     public World TaleWorld;
