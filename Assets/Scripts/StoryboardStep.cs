@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StoryboardStep
+
+[System.Serializable]
+public class StoryboardStep : Object
 {
     private int _id;
     private string _colliderName;

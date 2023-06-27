@@ -28,31 +28,31 @@ public class StoryTests
     [Test]
     public void StoryboardTests()
     {
-        Storyboard storyboard = new Storyboard();
-        StoryboardStep step0 = new StoryboardStep(storyboard.getStorySteps().Count, "collider", Vector3.zero);
+        List<StoryboardStep> storyboard = new List<StoryboardStep>();
+        StoryboardStep step0 = new StoryboardStep(storyboard.Count, "collider", Vector3.zero);
         step0.addAcquires(new ItemGroup("acquires", 1));
         step0.addRequirement(new ItemGroup("requires", 2));
-        storyboard.addStep(step0);
+        storyboard.Add(step0);
 
 
-        StoryboardStep step1 = new StoryboardStep(storyboard.getStorySteps().Count, "collider1", Vector3.zero);
+        StoryboardStep step1 = new StoryboardStep(storyboard.Count, "collider1", Vector3.zero);
         step1.addAcquires(new ItemGroup("acquires1", 2));
         step1.addRequirement(new ItemGroup("requires1", 3));
-        storyboard.addStep(step1);
+        storyboard.Add(step1);
 
-        Assert.That(storyboard.getStorySteps()[0].getId(), Is.EqualTo(0));
-        Assert.That(storyboard.getStorySteps()[0].getColliderName(), Is.EqualTo("collider"));
-        Assert.That(storyboard.getStorySteps()[0].getAcquired()[0].getItemName(), Is.EqualTo("acquires"));
-        Assert.That(storyboard.getStorySteps()[0].getAcquired()[0].getItemAmount(), Is.EqualTo(1));
-        Assert.That(storyboard.getStorySteps()[0].getRequirements()[0].getItemName(), Is.EqualTo("requires"));
-        Assert.That(storyboard.getStorySteps()[0].getRequirements()[0].getItemAmount(), Is.EqualTo(2));
+        Assert.That(storyboard[0].getId(), Is.EqualTo(0));
+        Assert.That(storyboard[0].getColliderName(), Is.EqualTo("collider"));
+        Assert.That(storyboard[0].getAcquired()[0].getItemName(), Is.EqualTo("acquires"));
+        Assert.That(storyboard[0].getAcquired()[0].getItemAmount(), Is.EqualTo(1));
+        Assert.That(storyboard[0].getRequirements()[0].getItemName(), Is.EqualTo("requires"));
+        Assert.That(storyboard[0].getRequirements()[0].getItemAmount(), Is.EqualTo(2));
 
-        Assert.That(storyboard.getStorySteps()[1].getId(), Is.EqualTo(1));
-        Assert.That(storyboard.getStorySteps()[1].getColliderName(), Is.EqualTo("collider1"));
-        Assert.That(storyboard.getStorySteps()[1].getAcquired()[0].getItemName(), Is.EqualTo("acquires1"));
-        Assert.That(storyboard.getStorySteps()[1].getAcquired()[0].getItemAmount(), Is.EqualTo(2));
-        Assert.That(storyboard.getStorySteps()[1].getRequirements()[0].getItemName(), Is.EqualTo("requires1"));
-        Assert.That(storyboard.getStorySteps()[1].getRequirements()[0].getItemAmount(), Is.EqualTo(3));
+        Assert.That(storyboard[1].getId(), Is.EqualTo(1));
+        Assert.That(storyboard[1].getColliderName(), Is.EqualTo("collider1"));
+        Assert.That(storyboard[1].getAcquired()[0].getItemName(), Is.EqualTo("acquires1"));
+        Assert.That(storyboard[1].getAcquired()[0].getItemAmount(), Is.EqualTo(2));
+        Assert.That(storyboard[1].getRequirements()[0].getItemName(), Is.EqualTo("requires1"));
+        Assert.That(storyboard[1].getRequirements()[0].getItemAmount(), Is.EqualTo(3));
     }
 
     [Test]
@@ -60,67 +60,67 @@ public class StoryTests
     {
         var gameObject = new GameObject();
         var storyengine = gameObject.AddComponent<StoryEngineScript>();
-        storyengine.Storyboard = new Storyboard();
+        storyengine.Storyboard = new List<StoryboardStep>();
         storyengine.StoryItems = new List<ItemGroup>();
         gameObject = new GameObject();
-        storyengine.Inventory = gameObject.AddComponent<FakeInventory>();
+        //storyengine.Inventory = gameObject.AddComponent<FakeInventory>();
         
-        StoryboardStep step = new StoryboardStep(storyengine.Storyboard.getStorySteps().Count, "FAttendant", Vector3.zero);
+        StoryboardStep step = new StoryboardStep(storyengine.Storyboard.Count, "FAttendant", Vector3.zero);
         step.addAcquires(new ItemGroup("id0", 1));
-        storyengine.Storyboard.addStep(step);
+        storyengine.Storyboard.Add(step);
 
-        step = new StoryboardStep(storyengine.Storyboard.getStorySteps().Count, "Basket", Vector3.zero);
+        step = new StoryboardStep(storyengine.Storyboard.Count, "Basket", Vector3.zero);
         step.addRequirement(new ItemGroup("id0", 1));
         step.addAcquires(new ItemGroup("id1", 5));
-        storyengine.Storyboard.addStep(step);
+        storyengine.Storyboard.Add(step);
 
-        step = new StoryboardStep(storyengine.Storyboard.getStorySteps().Count, "Bread", Vector3.zero);
+        step = new StoryboardStep(storyengine.Storyboard.Count, "Bread", Vector3.zero);
         step.addRequirement(new ItemGroup("id1", 1));
         step.addAcquires(new ItemGroup("BreadItem", 1));
         step.addAcquires(new ItemGroup("id2", 1));
-        storyengine.Storyboard.addStep(step);
+        storyengine.Storyboard.Add(step);
 
-        step = new StoryboardStep(storyengine.Storyboard.getStorySteps().Count, "Cheese", Vector3.zero);
+        step = new StoryboardStep(storyengine.Storyboard.Count, "Cheese", Vector3.zero);
         step.addRequirement(new ItemGroup("id1", 1));
         step.addAcquires(new ItemGroup("CheeseItem", 1));
         step.addAcquires(new ItemGroup("id2", 1));
-        storyengine.Storyboard.addStep(step);
+        storyengine.Storyboard.Add(step);
 
-        step = new StoryboardStep(storyengine.Storyboard.getStorySteps().Count, "Cake", Vector3.zero);
+        step = new StoryboardStep(storyengine.Storyboard.Count, "Cake", Vector3.zero);
         step.addRequirement(new ItemGroup("id1", 2));
         step.addAcquires(new ItemGroup("CakeItem", 1));
         step.addAcquires(new ItemGroup("id2", 1));
-        storyengine.Storyboard.addStep(step);
+        storyengine.Storyboard.Add(step);
 
-        step = new StoryboardStep(storyengine.Storyboard.getStorySteps().Count, "Door", Vector3.zero);
+        step = new StoryboardStep(storyengine.Storyboard.Count, "Door", Vector3.zero);
         step.addRequirement(new ItemGroup("id2", 5));
         step.addAcquires(new ItemGroup("id3", 1));
-        storyengine.Storyboard.addStep(step);
+        storyengine.Storyboard.Add(step);
 
-        step = new StoryboardStep(storyengine.Storyboard.getStorySteps().Count, "Wolf", Vector3.zero);
+        step = new StoryboardStep(storyengine.Storyboard.Count, "Wolf", Vector3.zero);
         step.addRequirement(new ItemGroup("id3", 1));
         step.addAcquires(new ItemGroup("id4", 1));
-        storyengine.Storyboard.addStep(step);
+        storyengine.Storyboard.Add(step);
 
-        step = new StoryboardStep(storyengine.Storyboard.getStorySteps().Count, "Door1", Vector3.zero);
+        step = new StoryboardStep(storyengine.Storyboard.Count, "Door1", Vector3.zero);
         step.addRequirement(new ItemGroup("id4", 1));
         step.addAcquires(new ItemGroup("id5", 1));
-        storyengine.Storyboard.addStep(step);
+        storyengine.Storyboard.Add(step);
 
-        step = new StoryboardStep(storyengine.Storyboard.getStorySteps().Count, "MHunter", Vector3.zero);
+        step = new StoryboardStep(storyengine.Storyboard.Count, "MHunter", Vector3.zero);
         step.addRequirement(new ItemGroup("id5", 1));
         step.addAcquires(new ItemGroup("id6", 1));
-        storyengine.Storyboard.addStep(step);
+        storyengine.Storyboard.Add(step);
 
-        step = new StoryboardStep(storyengine.Storyboard.getStorySteps().Count, "Door1", Vector3.zero);
+        step = new StoryboardStep(storyengine.Storyboard.Count, "Door1", Vector3.zero);
         step.addRequirement(new ItemGroup("id6", 1));
         step.addAcquires(new ItemGroup("id7", 1));
-        storyengine.Storyboard.addStep(step);
+        storyengine.Storyboard.Add(step);
 
-        step = new StoryboardStep(storyengine.Storyboard.getStorySteps().Count, "FShopper", Vector3.zero);
+        step = new StoryboardStep(storyengine.Storyboard.Count, "FShopper", Vector3.zero);
         step.addRequirement(new ItemGroup("id7", 1));
         step.addAcquires(new ItemGroup("final", 1));
-        storyengine.Storyboard.addStep(step);
+        storyengine.Storyboard.Add(step);
 
         storyengine.ProcessEntry("FAttendant");
         storyengine.ProcessEntry("Basket");
