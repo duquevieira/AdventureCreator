@@ -6,20 +6,19 @@ using UnityEngine.UI;
 
 public class PlacementUI : MonoBehaviour
 {
-    [SerializeField] public TMP_Dropdown _dropdown;
     [SerializeField] private TMP_Text _clickedTileText;
     [SerializeField] private TMP_Text _clickedObjectText;
     [SerializeField] private Button _addButton;
     //[SerializeField] private Button _delButton;
     [SerializeField] private PlacementSystem _placementSys;
+    [SerializeField] private SwitchCreateMode createMode;
     private List<GameObject> _mainObjects;
 
     private void Start()
     {
-        _dropdown.ClearOptions();
         _clickedTileText.text = "Clicked Tile: ";
         _clickedObjectText.text = "Clicked Object: ";
-        _addButton.interactable = false;
+        //_addButton.interactable = false;
         //_delButton.interactable = false;
     }
 
@@ -35,20 +34,40 @@ public class PlacementUI : MonoBehaviour
         //{
         //    _addButton.interactable = true;
         //}
-        if (!_clickedObjectText.text.Equals("Clicked Object: "))
+        if (createMode.currentMode == SwitchCreateMode.CreateMode.MapMode)
         {
-            _addButton.interactable = true;
-        }
-        if (Input.GetMouseButtonDown(1))
+            ShowUI();
+            /*if (!_clickedObjectText.text.Equals("Clicked Object: "))
+            {
+                _addButton.interactable = true;
+            }*/
+            if (Input.GetMouseButtonDown(1))
+            {
+                //_dropdown.onValueChanged.AddListener(index => OnDropDownChange(_mainObjects, index));
+                Vector3 clickedTile = _placementSys.getClickedTile();
+                Debug.Log(clickedTile);
+                Vector3Int roundedClickedTile = _placementSys.convertFloatPosToTile(clickedTile);
+                _clickedTileText.text = "Clicked Tile: " + roundedClickedTile;
+            }
+        } else
         {
-            _dropdown.ClearOptions();
-            _dropdown.AddOptions(_mainObjects.ConvertAll(gameObject => gameObject.name));
-            //_dropdown.onValueChanged.AddListener(index => OnDropDownChange(_mainObjects, index));
-            Vector3 clickedTile = _placementSys.getClickedTile();
-            Debug.Log(clickedTile);
-            Vector3Int roundedClickedTile = _placementSys.convertFloatPosToTile(clickedTile);
-            _clickedTileText.text = "Clicked Tile: " + roundedClickedTile;
+            ClearUI();
         }
+        
+    }
+
+    private void ClearUI()
+    {
+        _clickedTileText.enabled = false;
+        _clickedObjectText.enabled = false;
+        //_addButton.enabled = false;
+    }
+
+    private void ShowUI()
+    {
+        _clickedTileText.enabled = true;
+        _clickedObjectText.enabled = true;
+        //_addButton.enabled = true;
     }
 
     public void UpdateSelectectObject(string selectedObject)

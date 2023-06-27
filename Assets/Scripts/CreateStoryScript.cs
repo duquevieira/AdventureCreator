@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static SwitchCreateMode;
 
 public class CreateStoryScript : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class CreateStoryScript : MonoBehaviour
     private Canvas _canvas;
     [SerializeField]
     private Canvas _nodeCanvas;
+    [SerializeField] SwitchCreateMode switchMode;
+    
 
     private List<GameObject> _allSteps;
 
@@ -32,6 +35,7 @@ public class CreateStoryScript : MonoBehaviour
 
     void Start()
     {
+        ClearUI();
         _allSteps = new List<GameObject>();
         _buttonNewStep.onClick.AddListener(AddNewStoryStep);
         _buttonCreateStory.onClick.AddListener(SaveStoryState);
@@ -101,11 +105,30 @@ public class CreateStoryScript : MonoBehaviour
             port.RemoveAllConnections();
         }
         _storyEngineScript.Storyboard = story;
-        _canvas.gameObject.SetActive(false);
+        //_canvas.gameObject.SetActive(false);
+    }
+    private void ClearUI()
+    {
+        _buttonCreateStory.gameObject.SetActive(false);
+        _buttonNewStep.gameObject.SetActive(false);
+    }
+
+    private void ShowUI()
+    {
+        _buttonCreateStory.gameObject.SetActive(true);
+        _buttonNewStep.gameObject.SetActive(true);
     }
 
     void Update()
     {
+        if (switchMode.currentMode == SwitchCreateMode.CreateMode.StoryBoardMode)
+        {
+            ShowUI();
+        } else
+        {
+            ClearUI();
+        }
+
         if (Input.GetKeyUp(KeyCode.A) && !_canvas.gameObject.activeSelf)
         {
             _canvas.gameObject.SetActive(true);
