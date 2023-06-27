@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
+[Serializable]
 public class ItemGroup
 {
+    [SerializeField]
     private string _itemName;
+    [SerializeField]
     private int _amount;
 
     public ItemGroup(string itemName, int amount)
