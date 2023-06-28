@@ -13,6 +13,7 @@ public class StoryboardStep : Object
 
     public List<float> StepCoordinates;
 
+
     public StoryboardStep(int id, string colliderName, Vector3 stepCoordinates)
     {
         Id = id;
