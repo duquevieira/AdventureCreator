@@ -43,5 +43,14 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
             }
         if (noStep)
             Destroy(_clone);
+
+
+        RaycastHit res;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out res))
+        {
+            Debug.Log(Time.realtimeSinceStartup + " " + _clone.name + " " + res.transform.name);
+        }
     }
 }

@@ -114,7 +114,8 @@ public class CreateStoryScript : MonoBehaviour
             foreach(StoryboardStep step in storySteps)
             {
                 GameObject stepPrefab = Instantiate(_prefabNewStep, _nodeCanvas.transform);
-                stepPrefab.transform.localPosition = step.getStepCoordinates();
+                List<float> coords = step.getStepCoordinates();
+                stepPrefab.transform.localPosition = new Vector3(coords[0], coords[1], coords[2]);
                 Node nodeScript = stepPrefab.GetComponent<Node>();
                 nodeScript.ID = step.getId().ToString();
                 foreach(GameObject prefab in _prefabMenuScript.AllPrefabs)
