@@ -6,54 +6,59 @@ using UnityEngine;
 [System.Serializable]
 public class StoryboardStep : Object
 {
-    private int _id;
-    private string _colliderName;
-    private List<ItemGroup> _requirements;
-    private List<ItemGroup> _acquired;
+    public int Id;
+    public string ColliderName;
+    public List<ItemGroup> Requirements;
+    public List<ItemGroup> Acquired;
 
-    private Vector3 _stepCoordinates;
+    public List<float> StepCoordinates;
 
     public StoryboardStep(int id, string colliderName, Vector3 stepCoordinates)
     {
-        _id = id;
-        _colliderName = colliderName;
-        _stepCoordinates = stepCoordinates;
-        _requirements = new List<ItemGroup>();
-        _acquired = new List<ItemGroup>();
+        Id = id;
+        ColliderName = colliderName;
+        StepCoordinates = new List<float>()
+        {
+            stepCoordinates.x,
+            stepCoordinates.y,
+            stepCoordinates.z,
+        };
+        Requirements = new List<ItemGroup>();
+        Acquired = new List<ItemGroup>();
     }
 
     public void addRequirement(ItemGroup requirement)
     {
-        _requirements.Add(requirement);
+        Requirements.Add(requirement);
     }
 
     public void addAcquires(ItemGroup acquired)
     {
-        _acquired.Add(acquired);
+        Acquired.Add(acquired);
     }
 
     public int getId()
     {
-        return _id;
+        return Id;
     }
 
     public string getColliderName()
     {
-        return _colliderName;
+        return ColliderName;
     }
 
     public List<ItemGroup> getRequirements()
     {
-        return _requirements;
+        return Requirements;
     }
 
     public List<ItemGroup> getAcquired()
     {
-        return _acquired;
+        return Acquired;
     } 
 
-    public Vector3 getStepCoordinates()
+    public List<float> getStepCoordinates()
     {
-        return _stepCoordinates;
+        return StepCoordinates;
     }
 }

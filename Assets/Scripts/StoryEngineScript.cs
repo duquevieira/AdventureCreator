@@ -23,8 +23,7 @@ public class StoryEngineScript : MonoBehaviour
 
     void Start()
     {
-        StoryItems = new List<ItemGroup>();
-        Storyboard = new List<StoryboardStep>();
+        ClearStoryElements();
     }
 
     void Update()
@@ -122,5 +121,11 @@ public class StoryEngineScript : MonoBehaviour
         //PirateDeckHand, PirateFirstMate, PirateSeaman
         //Skeleton1, Skeleton2, Skeleton3
         return "PirateBlackbeard";
+    }
+
+    public void ClearStoryElements()
+    {
+        StoryItems = new List<ItemGroup>();
+        Storyboard = new List<StoryboardStep>();
     }
 }
