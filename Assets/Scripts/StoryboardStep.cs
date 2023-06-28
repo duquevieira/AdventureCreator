@@ -6,11 +6,14 @@ using UnityEngine;
 [System.Serializable]
 public class StoryboardStep : Object
 {
+    [SerializeField]
     private int _id;
+    [SerializeField]
     private string _colliderName;
+    [SerializeField]
     private List<ItemGroup> _requirements;
+    [SerializeField]
     private List<ItemGroup> _acquired;
-
     private Vector3 _stepCoordinates;
 
     public StoryboardStep(int id, string colliderName, Vector3 stepCoordinates)
