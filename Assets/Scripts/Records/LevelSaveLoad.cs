@@ -7,11 +7,14 @@ public class LevelSaveLoad : MonoBehaviour
 {
     private const string WORLD = "World.data";
     private const string TALE = "Tale.data";
-    private string _endpointPostPath = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/document-schema/63576297-97a1-4b79-8de9-c728219745eb/documents";
+    private const string SAVE_ID = "63576297-97a1-4b79-8de9-c728219745eb";
+    private const string GAME_ID = "f8afede5-6171-4e0e-bab4-d09e4ed4e137";
+    private string _endpointPostPath = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/document-schema/%s/documents";
     private string _endpointDeletePath = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/";
     private string _endpointGetPath = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/documents/";
     private string _prefabPath = "AndreUI_test/";
     public static string SaveId = null;
+    public static string GameId = null;
     public StoryEngineScript Story;
     public PlacementSystem PlacementSystem;
 
@@ -26,12 +29,24 @@ public class LevelSaveLoad : MonoBehaviour
     {
         World world = new World(PlacementSystem);
         Tale tale = new Tale(Story, world);
-        var taleWrapped = new DataWrapper(tale);
+        var taleWrapped = new DataTaleWrapper(tale);
         string json = JsonUtility.ToJson(taleWrapped, true);
         if(string.IsNullOrEmpty(SaveId)) {
-            SaveId = PostNewSave(json);
+            SaveId = PostNewSave(json, SAVE_ID);
         } else {
-            SaveId = PutSave(json);
+            SaveId = PutSave(json, SAVE_ID);
+        }
+    }
+
+    public void SaveState()
+    {
+        Game game = new Game(Story);
+        var gameWrapped = new DataGameWrapper(game);
+        string json = JsonUtility.ToJson(gameWrapped, true);
+        if(string.IsNullOrEmpty(GameId)) {
+            GameId = PostNewSave(json, GAME_ID);
+        } else {
+            SaveId = PutSave(json, GAME_ID);
         }
     }
 
@@ -68,21 +83,29 @@ public class LevelSaveLoad : MonoBehaviour
         PlacementSystem._objectsInScene = toUpdate;
     }
 
-    private string PostNewSave(string json)
+    public void LoadState() {
+        if(string.IsNullOrEmpty(GameId)) return;
+        Game game = GetState();
+        Story.Player.transform.position = new Vector3(game.Player.getRow(), 0, game.Player.getColumn());
+        Story.Storyboard = game.Storyboard;
+        //Values are being attributed and as soon as the world can be loaded it should just be running the command to refresh
+    }
+
+    private string PostNewSave(string json, string id)
     {
-        var request = WebRequest.Create(_endpointPostPath);
+        var request = WebRequest.Create(string.Format(_endpointPostPath, id));
         request.Method = "POST";
         request.ContentType = "application/json";
         return TreatResponse(json, request);
     }
 
-    private string PutSave(string json)
+    private string PutSave(string json, string id)
     {
         var requestDelete = WebRequest.Create(_endpointDeletePath+SaveId);
         requestDelete.Method = "DELETE";
         requestDelete.ContentType = "application/json";
         TreatDeleteResponse(json, requestDelete);
-        var requestPost = WebRequest.Create(_endpointPostPath);
+        var requestPost = WebRequest.Create(string.Format(_endpointPostPath, id));
         requestPost.Method = "POST";
         requestPost.ContentType = "application/json";
         return TreatResponse(json, requestPost);
@@ -94,6 +117,12 @@ public class LevelSaveLoad : MonoBehaviour
         return TreatGetResponse(requestGet);
     }
 
+    private Game GetState() {
+        var requestGet = WebRequest.Create(_endpointGetPath+GameId);
+        requestGet.Method = "GET";
+        return TreatGetGameResponse(requestGet);
+    }
+
     private static Tale TreatGetResponse(WebRequest request) {
         try
         {
@@ -103,6 +132,23 @@ public class LevelSaveLoad : MonoBehaviour
             var responseJson = reader.ReadToEnd();
             Debug.Log("Get Response: " + responseJson);
             return JsonUtility.FromJson<GetResponse>(responseJson).data;
+        }
+        catch (WebException e)
+        {
+            Debug.Log("Error: " + e.Message);
+        }
+        return null;
+    }
+
+        private static Game TreatGetGameResponse(WebRequest request) {
+        try
+        {
+            var response = request.GetResponse();
+            var responseStream = response.GetResponseStream();
+            var reader = new StreamReader(responseStream);
+            var responseJson = reader.ReadToEnd();
+            Debug.Log("Get Response: " + responseJson);
+            return JsonUtility.FromJson<GetGameResponse>(responseJson).data;
         }
         catch (WebException e)
         {
@@ -163,6 +209,14 @@ public class LevelSaveLoad : MonoBehaviour
 
         GetResponse(Tale data) {
             this.data = data;
+        }
+    }
+
+    private class GetGameResponse {
+        public Game data;
+
+        GetGameResponse(Game game) {
+            this.data = game;
         }
     }
 }
