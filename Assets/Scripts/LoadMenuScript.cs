@@ -16,12 +16,13 @@ public class LoadMenuScript : MonoBehaviour
     public Image LoadingBar;
     public GameObject Character;
     public GameObject LoadingScreenText;
-
+    [SerializeField]
+    private LoadList _loadScript;
     [SerializeField]
     private Camera _mainCamera;
 
 
-    public void loadScene(int sceneId)
+    public void loadScene(string scene)
     {
         LoadingScreenText.SetActive(false);
         LoadingScreen.GetComponent<CanvasGroup>().blocksRaycasts = true;
@@ -34,12 +35,12 @@ public class LoadMenuScript : MonoBehaviour
         _mainCamera.orthographicSize = scaledSize;
         CaculateCharacterScale();
         StartMenu.SetActive(false);
-        StartCoroutine(LoadSceneAsync(sceneId));
+        StartCoroutine(LoadSceneAsync(scene));
     }
 
-    IEnumerator LoadSceneAsync(int sceneId)
+    IEnumerator LoadSceneAsync(string scene)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
         operation.allowSceneActivation = false;
 
         LoadingScreen.SetActive(true);
@@ -53,22 +54,29 @@ public class LoadMenuScript : MonoBehaviour
             Vector3 CharacterPos = Vector3.Lerp(START_CHAR, END_CHAR, progressValue);
             Character.transform.position = CharacterPos;
 
-
             if (progressValue >= 0.9f)
             {
                 LoadingScreenText.SetActive(true);
-                Debug.Log(_mainCamera.orthographicSize);
                 // Wait for user input to activate the scene
                 if (Input.anyKeyDown)
                 {
                     operation.allowSceneActivation = true;
+                    if(scene.Equals("CreatorModeScene")) loadCreatorScene();
+                    else loadPlayScene();
                 }
-                Debug.Log(END_CHAR);
             }
 
             yield return null;
         }
         Character.transform.position = END_CHAR;
+    }
+
+    private void loadCreatorScene() {
+        LevelSaveLoad.SaveId = _loadScript.SelectedSave;
+    }
+
+    private void loadPlayScene() {
+        
     }
 
     private float CalculateScale() {

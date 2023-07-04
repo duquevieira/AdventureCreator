@@ -11,13 +11,16 @@ public class LevelSaveLoad : MonoBehaviour
     private string _endpointDeletePath = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/";
     private string _endpointGetPath = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/documents/";
     private string _prefabPath = "AndreUI_test/";
-    public string SaveId = null;
+    public static string SaveId = null;
     public StoryEngineScript Story;
     public PlacementSystem PlacementSystem;
 
-    //Test Variables
-    private string testDirectory = "C:/Users/danie/Desktop/SavesFolder/temp.txt";
-
+    void Start() {
+        if(!string.IsNullOrEmpty(SaveId)) {
+            Load();
+            //Adicionar um else onde corre a geração aleatória
+        } 
+    }
    
     public void Save()
     {
@@ -30,7 +33,6 @@ public class LevelSaveLoad : MonoBehaviour
         } else {
             SaveId = PutSave(json);
         }
-        File.WriteAllText(testDirectory, json);
     }
 
     public void Load()
