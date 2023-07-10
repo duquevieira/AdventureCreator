@@ -72,11 +72,12 @@ public class LoadMenuScript : MonoBehaviour
     }
 
     private void loadCreatorScene() {
-        LevelSaveLoad.SaveId = _loadScript.SelectedSave;
+        SaveLevel.SaveId = _loadScript.SelectedSave;
     }
 
     private void loadPlayScene() {
-        
+        SaveGame.SaveId = _loadScript.SelectedSave;
+        SaveGame.GameId = _loadScript.UserSave;
     }
 
     private float CalculateScale() {

@@ -8,6 +8,7 @@ using System.IO;
 public class LoadList : MonoBehaviour
 {
     public string SelectedSave = null;
+    public string UserSave = null;
     private const string GET_ALL_SAVES_ENDPOINT = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/documents";
     private const string EMPTY = "Empty";
     private const string WorldSaveSchemaID = "63576297-97a1-4b79-8de9-c728219745eb";
