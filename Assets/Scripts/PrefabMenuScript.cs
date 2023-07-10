@@ -20,7 +20,7 @@ public class PrefabMenuScript : MonoBehaviour
 
     private static int UILAYER = 5;
 
-    private static string[] foldersToSearch = {"Assets/Resources/Interactables"/*//, "Assets/Resources/Items"
+    private static string[] foldersToSearch = {"Assets/Resources/TrainingSet"/*//, "Assets/Resources/Items"
      ,"Assets/PolygonOffice/Prefabs/Characters", "Assets/PolygonShops/Prefabs/Characters", "Assets/PolygonPirates/Prefabs/Characters", 
      "Assets/PolygonCity/Prefabs/Characters", "Assets/PolygonAncientEmpire/Prefabs/Characters"*/};
 

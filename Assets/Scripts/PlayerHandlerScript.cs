@@ -6,7 +6,7 @@ using static SwitchCreateMode;
 
 public class PlayerHandlerScript : MonoBehaviour
 {
-    private static string ANIMATION_WALK = "walking";
+    protected static string ANIMATION_WALK = "walking";
     private static string ITEMS_HIGH = "pickupHigh";
     private static string ITEMS_LOW = "pickupGround";
 
@@ -19,14 +19,12 @@ public class PlayerHandlerScript : MonoBehaviour
     private float _speed;
     [SerializeField]
     private StoryEngineScript _storyEngineScript;
-    [SerializeField] 
-    private SwitchCreateMode createMode;
 
-    private Camera _camera;
+    protected Camera _camera;
     private GameObject _player;
-    private GameObject _character;
-    private Animator _playerAnimator;
-    private bool _canMove;
+    protected GameObject _character;
+    protected Animator _playerAnimator;
+    protected bool _canMove;
     [HideInInspector]
     public Vector3 Target;
 
@@ -41,28 +39,8 @@ public class PlayerHandlerScript : MonoBehaviour
         _canMove = false;
     }
 
-    void Update()
+    public virtual void Update()
     {
-        if (createMode.currentMode == SwitchCreateMode.CreateMode.TestingMode)
-        {
-            _character.SetActive(true);
-            _canMove = true;
-            if (Input.GetMouseButton(1))
-            {
-                Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-                {
-                    _playerAnimator.SetBool(ANIMATION_WALK, true);
-                    Target = hit.point;
-                }
-            }
-        } else
-        {
-            _canMove= false;
-            _character.SetActive(false);
-        }
-            
         /*if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
