@@ -2,7 +2,6 @@ using MoreMountains.Feedbacks;
 using MoreMountains.InventoryEngine;
 using System.Collections;
 using UnityEngine;
-using static SwitchCreateMode;
 
 public class PlayerHandlerScript : MonoBehaviour
 {
@@ -19,8 +18,6 @@ public class PlayerHandlerScript : MonoBehaviour
     private float _speed;
     [SerializeField]
     private StoryEngineScript _storyEngineScript;
-    [SerializeField] 
-    private SwitchCreateMode createMode;
 
     private Camera _camera;
     private GameObject _player;
@@ -35,34 +32,24 @@ public class PlayerHandlerScript : MonoBehaviour
         _camera = _storyEngineScript.Camera;
         _player = _storyEngineScript.Player;
         _character = _player.transform.Find(_storyEngineScript.getCharacterSkin()).gameObject;
-        //_character.SetActive(true);
+        _character.SetActive(true);
         _playerAnimator = _character.GetComponent<Animator>();
         Target = _player.transform.position;
-        _canMove = false;
+        _canMove = true;
     }
 
     void Update()
     {
-        if (createMode.currentMode == SwitchCreateMode.CreateMode.TestingMode)
+        if (Input.GetMouseButton(1))
         {
-            _character.SetActive(true);
-            _canMove = true;
-            if (Input.GetMouseButton(1))
+            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-                {
-                    _playerAnimator.SetBool(ANIMATION_WALK, true);
-                    Target = hit.point;
-                }
+                _playerAnimator.SetBool(ANIMATION_WALK, true);
+                Target = hit.point;
             }
-        } else
-        {
-            _canMove= false;
-            _character.SetActive(false);
         }
-            
         /*if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
