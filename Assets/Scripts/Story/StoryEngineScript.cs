@@ -30,7 +30,7 @@ public class StoryEngineScript : MonoBehaviour
     void Start()
     {
         ClearStoryElements();
-        _itemsManager.setStoryEngineScript(this);
+        /*_itemsManager.setStoryEngineScript(this);
         //TODO APAGAR APENAS PARA TESTAR
         /*StoryboardStep step = new StoryboardStep(0, "Lookout", Vector3.zero);
         step.addAcquires(new ItemGroup("Fish", 1));
