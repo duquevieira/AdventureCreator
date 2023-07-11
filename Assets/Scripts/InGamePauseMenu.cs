@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using MoreMountains.InventoryEngine;
 using MoreMountains.Tools;
 using MoreMountains.TopDownEngine;
 
 
 public class InGamePauseMenu : MonoBehaviour
 {
-    public InventoryInputManager InventoryScript;
     public CanvasGroup Overlay;
     public CanvasGroup PauseMenu;
 
@@ -24,16 +22,13 @@ public class InGamePauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown("escape"))
         {
-            if (!InventoryScript.InventoryIsOpen)
+            if (_pauseMenuOpen)
             {
-                if (_pauseMenuOpen)
-                {
-                    ClosePauseMenu();
-                }
-                else
-                {
-                    OpenPauseMenu();
-                }
+                ClosePauseMenu();
+            }
+            else
+            {
+                OpenPauseMenu();
             }
         }
     }
