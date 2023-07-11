@@ -32,7 +32,7 @@ public class StoryEngineScript : MonoBehaviour
         ClearStoryElements();
         _itemsManager.setStoryEngineScript(this);
         //TODO APAGAR APENAS PARA TESTAR
-        StoryboardStep step = new StoryboardStep(0, "Lookout", Vector3.zero);
+        /*StoryboardStep step = new StoryboardStep(0, "Lookout", Vector3.zero);
         step.addAcquires(new ItemGroup("Fish", 1));
         step.addAcquires(new ItemGroup("0", 1));
         Storyboard.Add(step);
@@ -46,7 +46,7 @@ public class StoryEngineScript : MonoBehaviour
         step.addRequirement(new ItemGroup("Shark", 1));
         step.addRequirement(new ItemGroup("1", 1));
         step.addAcquires(new ItemGroup("Character_Skeleton_03", 1));
-        Storyboard.Add(step);
+        Storyboard.Add(step);*/
     }
 
     void Update()
