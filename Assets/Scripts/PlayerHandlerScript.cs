@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerHandlerScript : MonoBehaviour
 {
-    private static string ANIMATION_WALK = "walking";
+    protected static string ANIMATION_WALK = "walking";
     private static string ITEMS_HIGH = "pickupHigh";
     private static string ITEMS_LOW = "pickupGround";
 
@@ -19,11 +19,11 @@ public class PlayerHandlerScript : MonoBehaviour
     [SerializeField]
     private StoryEngineScript _storyEngineScript;
 
-    private Camera _camera;
+    protected Camera _camera;
     private GameObject _player;
-    private GameObject _character;
-    private Animator _playerAnimator;
-    private bool _canMove;
+    protected GameObject _character;
+    protected Animator _playerAnimator;
+    protected bool _canMove;
     [HideInInspector]
     public Vector3 Target;
 
@@ -38,7 +38,7 @@ public class PlayerHandlerScript : MonoBehaviour
         _canMove = true;
     }
 
-    void Update()
+    public virtual void Update()
     {
         if (Input.GetMouseButton(1))
         {
