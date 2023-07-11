@@ -6,24 +6,6 @@ using MoreMountains.InventoryEngine;
 
 public class StoryTests
 {
-    [Test]
-    public void FakeInventoryTests()
-    {
-        var gameObject = new GameObject();
-        FakeInventory inventory = gameObject.AddComponent<FakeInventory>();
-
-        inventory.Items.Add(new ItemGroup("item1", 1));
-        Assert.That(inventory.GetQuantity("item1"), Is.EqualTo(1));
-        inventory.Items.Add(new ItemGroup("item2", 5));
-        Assert.That(inventory.GetQuantity("item2"), Is.EqualTo(5));
-        inventory.Items.Add(new ItemGroup("item1", 10));
-        Assert.That(inventory.GetQuantity("item1"), Is.EqualTo(11));
-
-        inventory.RemoveItemByID("item1", 2);
-        Assert.That(inventory.GetQuantity("item1"), Is.EqualTo(9));
-        inventory.RemoveItemByID("item2", 6);
-        Assert.That(inventory.GetQuantity("item2"), Is.EqualTo(0));
-    }
 
     [Test]
     public void StoryboardTests()
@@ -63,7 +45,6 @@ public class StoryTests
         storyengine.Storyboard = new List<StoryboardStep>();
         storyengine.StoryItems = new List<ItemGroup>();
         gameObject = new GameObject();
-        //storyengine.Inventory = gameObject.AddComponent<FakeInventory>();
         
         StoryboardStep step = new StoryboardStep(storyengine.Storyboard.Count, "FAttendant", Vector3.zero);
         step.addAcquires(new ItemGroup("id0", 1));
