@@ -151,10 +151,15 @@ public class StoryEngineScript : MonoBehaviour
                         }
                         else
                         {
+                            string prefabName = acquires.getItemName().Split("@Step@")[1];
+                            foreach(string aux in acquires.getItemName().Split("@Step@"))//TODO DELETE
+                            {
+                                Debug.Log(Time.realtimeSinceStartup + " " + aux);
+                            }
                             bool newItem = true;
                             foreach (ItemGroup inventoryItem in InventoryItems)
                             {
-                                if (inventoryItem.getItemName() == acquires.getItemName())
+                                if (inventoryItem.getItemName() == prefabName)
                                 {
                                     newItem = false;
                                     inventoryItem.addItemAmount(acquires.getItemAmount());
@@ -163,7 +168,7 @@ public class StoryEngineScript : MonoBehaviour
                             }
                             if (newItem)
                             {
-                                ItemGroup item = new ItemGroup(acquires.getItemName(), acquires.getItemAmount());
+                                ItemGroup item = new ItemGroup(prefabName, acquires.getItemAmount());
                                 InventoryItems.Add(item);
                                 _itemsManager.AddItem(item);
                             }

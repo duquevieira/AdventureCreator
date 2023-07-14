@@ -91,7 +91,8 @@ public class CreateStoryScript : MonoBehaviour
                         else
                         {
                             name = connection.port0.ID.Split("Item");
-                            storyboardStep.addRequirement(new ItemGroup(_allSteps[int.Parse(name[1])].transform.GetChild(4).GetChild(0).name, 1));
+                            storyboardStep.addRequirement(new ItemGroup(name[1] + "@Step@" +_allSteps[int.Parse(name[1])].transform.GetChild(4).GetChild(0).name, 1));
+                            Debug.Log(name[1] + "@Step@" + _allSteps[int.Parse(name[1])].transform.GetChild(4).GetChild(0).name);
                         }
                     }
                     int itemAmount = 0;
@@ -137,7 +138,7 @@ public class CreateStoryScript : MonoBehaviour
             ClearUI();
         }
         //TODO ADICIONAR NOVO COM ITENS
-        if (Input.GetKeyUp(KeyCode.A) && !_canvas.gameObject.activeSelf)
+        if (Input.GetKeyUp(KeyCode.L))
         {
             _canvas.gameObject.SetActive(true);
             _allSteps = new List<GameObject>();

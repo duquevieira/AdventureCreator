@@ -14,8 +14,8 @@ public class StepToggleScript : MonoBehaviour
 
     private GameObject _itemSpot;
     private GameObject _itemPort;
-    private static String BUTTON_TEXT_STORY = "Story Step";
-    private static String BUTTON_TEXT_ITEM = "Get Item";
+    private static string BUTTON_TEXT_STORY = "Story Step";
+    private static string BUTTON_TEXT_ITEM = "Get Item";
 
 
     void Start()
