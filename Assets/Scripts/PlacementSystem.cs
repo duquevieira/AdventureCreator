@@ -52,21 +52,6 @@ public class PlacementSystem : MonoBehaviour
         _tilesWithObjects = new Dictionary<Vector3Int, List<Object>>();
     }
 
-    private void Start()
-    {
-        for (int i = 0; i < width; i++)
-        {
-            for (int j = 0; j < height; j++)
-            {
-                Vector3 pos = new Vector3(i, 0.001f, j);
-                var cloneObj = Instantiate(floor, pos, Quaternion.identity);
-                cloneObj.name = cloneObj.name.Split("(")[0]; 
-                _objectsInScene.Add(cloneObj);
-
-            }
-        }
-        SpawnStructure();
-    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
@@ -195,6 +180,22 @@ public class PlacementSystem : MonoBehaviour
         }
         _tilesWithObjects.Clear();
         ResetAvailableTiles();
+    }
+
+    public void SpawnFloorAndWalls()
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                Vector3 pos = new Vector3(i, 0.001f, j);
+                var cloneObj = Instantiate(floor, pos, Quaternion.identity);
+                cloneObj.name = cloneObj.name.Split("(")[0];
+                _objectsInScene.Add(cloneObj);
+
+            }
+        }
+        SpawnStructure();
     }
     private void SpawnStructure()
     {
