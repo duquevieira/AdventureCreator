@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,14 +35,30 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
         EventSystem.current.RaycastAll(eventData, hits);
         bool noStep = true;
         foreach (RaycastResult hit in hits)
-            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(STEP_PREFAB_NAME))
+        {
+            GameObject current = hit.gameObject;
+            if (current.name.Split(PARENTHESIS)[0].Equals(STEP_PREFAB_NAME))
             {
+                bool itemMode = current.GetComponent<StepToggleScript>().ItemMode;
                 noStep = false;
-                if(hit.gameObject.transform.GetChild(2).childCount != 0)
-                    Destroy(hit.gameObject.transform.GetChild(2).GetChild(0).gameObject);
-                _clone.transform.SetParent(hit.gameObject.transform.GetChild(2), false);
-                _clone.transform.localPosition = Vector3.zero;
+                if (itemMode)
+                {
+                    Transform itemSpot = current.transform.GetChild(4);
+                    if (itemSpot.childCount != 0)
+                        Destroy(itemSpot.GetChild(0).gameObject);
+                    _clone.transform.SetParent(itemSpot, false);
+                    _clone.transform.localPosition = Vector3.zero;
+                }
+                else
+                {
+                    Transform colliderSpot = current.transform.GetChild(2);
+                    if (colliderSpot.childCount != 0)
+                        Destroy(colliderSpot.GetChild(0).gameObject);
+                    _clone.transform.SetParent(colliderSpot, false);
+                    _clone.transform.localPosition = Vector3.zero;
+                }
             }
+        }
         if (noStep)
             Destroy(_clone);
     }
