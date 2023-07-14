@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SaveGame : AbstractSave
 {
-    private const string GAME_ID = "f8afede5-6171-4e0e-bab4-d09e4ed4e137";
+    private const string GAME_ID = "63576297-97a1-4b79-8de9-c728219745eb";
     private string _prefabPath = "AndreUI_test/";
     public static string SaveId;
     public static string GameId = null;
@@ -32,7 +32,8 @@ public class SaveGame : AbstractSave
         Game game = GetGameProcess(GetSave(GameId));
         Story.Player.transform.position = new Vector3(game.Player.getRow(), 0, game.Player.getColumn());
         Story.Storyboard = game.Storyboard;
-        Story.StoryItems = game.Inventory;
+        Story.StoryItems = game.StoryItems;
+        Story.InventoryItems = game.InventoryItems;
     }
 
     private void NewGame(Tale tale) {

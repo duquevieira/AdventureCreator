@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SaveLevel : AbstractSave
 {
-    private const string SAVE_ID = "63576297-97a1-4b79-8de9-c728219745eb";
+    private const string SAVE_ID = "019d5349-668e-458f-a112-a49970266f07";
     public static string SaveId = null;
     private string _prefabPath = "AndreUI_test/";
     public PlacementSystem PlacementSystem;
@@ -12,7 +12,7 @@ public class SaveLevel : AbstractSave
     void Start() {
         if(!string.IsNullOrEmpty(SaveId)) {
             Load();
-        }
+        } else PlacementSystem.SpawnFloorAndWalls();
     }
 
     public void Save()

@@ -1,10 +1,13 @@
 using MeadowGames.UINodeConnect4;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static SwitchCreateMode;
+using Connection = MeadowGames.UINodeConnect4.Connection;
 
 public class CreateStoryScript : MonoBehaviour
 {
@@ -52,13 +55,14 @@ public class CreateStoryScript : MonoBehaviour
             counter = int.Parse(_allSteps[_allSteps.Count-1].GetComponent<Node>().ID) + 1;
         }
         nodeScript.ID = (counter).ToString();
+        nodeScript.ports[0].ID = "In" + nodeScript.ID;
+        nodeScript.ports[1].ID = "Out" + nodeScript.ID;
         _allSteps.Add(newStep);
     }
 
     private void SaveStoryState()
     {
         List<StoryboardStep> story = new List<StoryboardStep>();
-        List<GameObject> emptySteps = new List<GameObject>();
         foreach(GameObject step in _allSteps)
         {
             if(step.transform.GetChild(2).childCount > 0)
@@ -68,31 +72,36 @@ public class CreateStoryScript : MonoBehaviour
                 StoryboardStep storyboardStep = new StoryboardStep(stepID, colliderName, step.transform.localPosition);
                 story.Add(storyboardStep);
             }
-            else
-            {
-                emptySteps.Add(step);
-            }
-        }
-        foreach(GameObject step in emptySteps)
-        {
-            _allSteps.Remove(step);
-            Destroy(step);
         }
         List<Port> portList = new List<Port>();
         foreach(GameObject step in _allSteps)
         {
             Node nodeScript = step.GetComponent<Node>();
-            List<Node> previous = nodeScript.GetNodesConnectedToPolarity(Port.PolarityType._in);
             foreach(StoryboardStep storyboardStep in story)
             {
                 if(storyboardStep.getId().ToString().Equals(nodeScript.ID))
                 {
-                    foreach (Node requirement in previous)
+                    foreach (Connection connection in nodeScript.ports[0].Connections)
                     {
-                        storyboardStep.addRequirement(new ItemGroup(requirement.ID, 1));
+                        string[] name = connection.port0.ID.Split("Out");
+                        if (name.Length > 1)
+                        {
+                            storyboardStep.addRequirement(new ItemGroup(name[1], 1));
+                        }
+                        else
+                        {
+                            name = connection.port0.ID.Split("Item");
+                            storyboardStep.addRequirement(new ItemGroup(_allSteps[int.Parse(name[1])].transform.GetChild(4).GetChild(0).name, 1));
+                        }
+                    }
+                    int itemAmount = 0;
+                    if(nodeScript.ports.Count > 2)
+                    {
+                        itemAmount = nodeScript.ports[2].ConnectionsCount;
+                        storyboardStep.addAcquires(new ItemGroup(step.transform.GetChild(4).GetChild(0).name, itemAmount));
                     }
                     List<Node> next = nodeScript.GetNodesConnectedToPolarity(Port.PolarityType._out);
-                    storyboardStep.addAcquires(new ItemGroup(nodeScript.ID, next.Count));
+                    storyboardStep.addAcquires(new ItemGroup(nodeScript.ID, next.Count - itemAmount));
                     portList.AddRange(nodeScript.ports);
                     Destroy(step);
                     break;
@@ -105,7 +114,6 @@ public class CreateStoryScript : MonoBehaviour
             port.RemoveAllConnections();
         }
         _storyEngineScript.Storyboard = story;
-        //_canvas.gameObject.SetActive(false);
     }
     private void ClearUI()
     {
@@ -128,7 +136,7 @@ public class CreateStoryScript : MonoBehaviour
         {
             ClearUI();
         }
-
+        //TODO ADICIONAR NOVO COM ITENS
         if (Input.GetKeyUp(KeyCode.A) && !_canvas.gameObject.activeSelf)
         {
             _canvas.gameObject.SetActive(true);
