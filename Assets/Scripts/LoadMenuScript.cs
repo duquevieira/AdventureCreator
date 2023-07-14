@@ -11,6 +11,7 @@ public class LoadMenuScript : MonoBehaviour
     private const float ORTHO_SIZE = 383;
     private const int CAM_Z_OFFSET = -100;
     private const int REFERENCE_WIDTH = 1366;
+    private const string CREATE_SCENE = "CreateScene";
     public GameObject StartMenu;
     public GameObject LoadingScreen;
     public Image LoadingBar;
@@ -61,7 +62,7 @@ public class LoadMenuScript : MonoBehaviour
                 if (Input.anyKeyDown)
                 {
                     operation.allowSceneActivation = true;
-                    if(scene.Equals("CreatorModeScene")) loadCreatorScene();
+                    if(scene.Equals(CREATE_SCENE)) loadCreatorScene();
                     else loadPlayScene();
                 }
             }
