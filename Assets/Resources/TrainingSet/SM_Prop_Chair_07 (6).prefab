@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 7087603675322704937}
   - component: {fileID: 7086729392865786609}
   - component: {fileID: 7088333884191963107}
+  - component: {fileID: 4722858671818276392}
+  - component: {fileID: -4211435926890422975}
   m_Layer: 0
   m_Name: SM_Prop_Chair_07 (6)
   m_TagString: Untagged
@@ -175,3 +177,27 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43174447144167850, guid: 48921c609c1a3e04b97d942d639c7136, type: 2}
+--- !u!114 &4722858671818276392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7114652858142946331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442fba75605d392409129582a36c8d33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4211435926890422975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7114652858142946331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae76d79a4dc265d41bd7a3b3bbb717d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

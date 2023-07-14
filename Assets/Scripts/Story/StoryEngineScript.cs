@@ -24,13 +24,13 @@ public class StoryEngineScript : MonoBehaviour
     [HideInInspector]
     public List<StoryboardStep> Storyboard;
     [SerializeField]
-    private InventoryItemsManager _itemsManager;
+    //private InventoryItemsManager _itemsManager;
 
 
     void Start()
     {
         ClearStoryElements();
-        _itemsManager.setStoryEngineScript(this);
+        //_itemsManager.setStoryEngineScript(this);
         //TODO APAGAR APENAS PARA TESTAR
         /*StoryboardStep step = new StoryboardStep(0, "Lookout", Vector3.zero);
         step.addAcquires(new ItemGroup("Fish", 1));
@@ -123,7 +123,7 @@ public class StoryEngineScript : MonoBehaviour
                                 //_itemsManager.UpdateAmount(inventoryItem);
                                 if (inventoryItem.getItemAmount() == 0)
                                 {
-                                    _itemsManager.DeleteItem(inventoryItem.getItemName());
+                                    //_itemsManager.DeleteItem(inventoryItem.getItemName());
                                     InventoryItems.Remove(inventoryItem);
                                 }
                                 break;
@@ -165,7 +165,7 @@ public class StoryEngineScript : MonoBehaviour
                             {
                                 ItemGroup item = new ItemGroup(acquires.getItemName(), acquires.getItemAmount());
                                 InventoryItems.Add(item);
-                                _itemsManager.AddItem(item);
+                                //_itemsManager.AddItem(item);
                             }
                         }
                     }

@@ -19,8 +19,8 @@ using Random = UnityEngine.Random;
 
 // www.youtube.com/watch?v=rKp9fWvmIww&t=342s
 
-// Problemas: Destroy nao funciona; so calcula posicoes a volta e nao embaixo ou em cima; as posicoes a volta nao dependem da relacao entre 2 objetos (exemplo: mesa nao pode ter nada na diagonal agora, mas poderia so ter prateleiras na diagonal
-
+// Problemas: so calcula posicoes a volta e nao embaixo ou em cima; as posicoes a volta nao dependem da relacao entre 2 objetos (exemplo: mesa nao pode ter nada na diagonal agora, mas poderia so ter prateleiras na diagonal
+// Quando colocar um objeto, colocar numa das 4 posicoes da celula baseado no q ja la esta
 public class PlacementSystem : MonoBehaviour
 {
     public static PlacementSystem Current;
@@ -39,7 +39,7 @@ public class PlacementSystem : MonoBehaviour
     private PlaceableObject _objectToPlace;
     public List<GameObject> _objectsInScene;
     private List<Vector3Int> _availableTiles;
-    private Dictionary<Vector3Int, List<Object>> _tilesWithObjects;
+    private Dictionary<Vector3Int, List<GameObject>> _tilesWithObjects;
     private Vector3 clickedTile;
     private GameObject _selectedObject;
     
@@ -49,7 +49,7 @@ public class PlacementSystem : MonoBehaviour
         _grid = GridLayout.GetComponent<Grid>();
         _objectsInScene = new List<GameObject>();
         _availableTiles = new List<Vector3Int>();
-        _tilesWithObjects = new Dictionary<Vector3Int, List<Object>>();
+        _tilesWithObjects = new Dictionary<Vector3Int, List<GameObject>>();
     }
 
     private void Update()
@@ -68,9 +68,9 @@ public class PlacementSystem : MonoBehaviour
 
                 }
             }
-            SpawnStructure();
-            SpawnMainObjects();
-            SpawnExtras();
+            SpawnFloorAndWalls();
+            //SpawnMainObjects();
+            //SpawnExtras();
         }
         if (Input.GetMouseButtonDown(1))
         {
@@ -119,20 +119,35 @@ public class PlacementSystem : MonoBehaviour
    
     public void AddObjectManually()
     {
+        float maxY = 0.1f;
         if (_selectedObject!= null)
         {
-            var cloneObj = Instantiate(_selectedObject, clickedTile, Quaternion.identity);
-            cloneObj.name = cloneObj.name.Split("(")[0];
-            _objectsInScene.Add(cloneObj);
-            List<Object> objectsInOneTile = getObjectsInOneTile(convertFloatPosToTile(clickedTile));
+            List<GameObject> objectsInOneTile = getObjectsInOneTile(convertFloatPosToTile(clickedTile));
             if (objectsInOneTile == null)
             {
-                objectsInOneTile = new List<Object>();
-
+                var cloneObj = Instantiate(_selectedObject, clickedTile, Quaternion.identity);
+                cloneObj.name = cloneObj.name.Split("(")[0];
+                _objectsInScene.Add(cloneObj);
+                objectsInOneTile = new List<GameObject>();
+                objectsInOneTile.Add(cloneObj);
+                _tilesWithObjects.Remove(convertFloatPosToTile(clickedTile));
+                _tilesWithObjects.Add(convertFloatPosToTile(clickedTile), objectsInOneTile);
+            } else
+            {
+                foreach (GameObject obj in objectsInOneTile)
+                {
+                    float y = obj.GetComponent<Collider>().bounds.size.y + obj.transform.position.y;
+                    if (y > maxY)
+                        maxY = y;
+                }
+                var newClickedTile = clickedTile + new Vector3(0,maxY,0);
+                var cloneObj = Instantiate(_selectedObject, newClickedTile, Quaternion.identity);
+                cloneObj.name = cloneObj.name.Split("(")[0];
+                _objectsInScene.Add(cloneObj);
+                objectsInOneTile.Add(cloneObj);
+                _tilesWithObjects.Remove(convertFloatPosToTile(clickedTile));
+                _tilesWithObjects.Add(convertFloatPosToTile(clickedTile), objectsInOneTile);
             }
-            objectsInOneTile.Add(getObjectType(cloneObj));
-            _tilesWithObjects.Remove(convertFloatPosToTile(clickedTile));
-            _tilesWithObjects.Add(convertFloatPosToTile(clickedTile), objectsInOneTile);
         }
     }
     public Vector3 getClickedTile()
@@ -168,8 +183,29 @@ public class PlacementSystem : MonoBehaviour
     {
         Vector3Int cellPos = _mainTileMap.WorldToCell(position);
         position = _grid.GetCellCenterWorld(cellPos);
-
         return position;
+    }
+
+    private Vector3 AllCellPositions(Vector3 centerCell, string desiredPos)
+    {
+        Vector3 cellSize = _grid.cellSize;
+        Vector3 leftBorder = centerCell + new Vector3 (-cellSize.x/2, 0, 0);
+        Vector3 topBorder = centerCell + new Vector3(0, 0, cellSize.y/2);
+        Vector3 rightBorder = centerCell + new Vector3(cellSize.x / 2, 0, 0);
+        Vector3 bottomBorder = centerCell + new Vector3(0, 0, -cellSize.y/2);
+        switch (desiredPos)
+        {
+            case "left": 
+                return leftBorder;
+            case "right":
+                return rightBorder;
+            case "top":
+                return topBorder;
+            case "bottom":
+                return bottomBorder;
+            default:
+                return centerCell;
+        }
     }
     public void DestroyAllObjects()
     {
@@ -195,9 +231,9 @@ public class PlacementSystem : MonoBehaviour
 
             }
         }
-        SpawnStructure();
+        //SpawnWalls();
     }
-    private void SpawnStructure()
+    /*private void SpawnWalls()
     {
         Vector3Int position;
         int counter = 0;
@@ -308,8 +344,9 @@ public class PlacementSystem : MonoBehaviour
         }
         
         Debug.Log("There is no more available tiles to place the object");
-    }
-    private void SpawnMainObjects()
+    }*/
+    
+    /*private void SpawnMainObjects()
     {
         //DestroyAllObjects();
         ResetAvailableTiles();
@@ -318,8 +355,9 @@ public class PlacementSystem : MonoBehaviour
             GenerationProcess(_mainObjects);
         }
         Debug.Log("There is no more available tiles to place the object");
-    }
-    private void SpawnExtras()
+    }*/
+
+    /*ivate void SpawnExtras()
     {
         //DestroyAllObjects();
         ResetAvailableTiles();
@@ -328,9 +366,9 @@ public class PlacementSystem : MonoBehaviour
             GenerationProcess(_extraObjects);
         }
         Debug.Log("There is no more available tiles to place the object");
-    }
+    }*/
 
-    private void GenerationProcess(List<GameObject> listObjects) {
+    /*private void GenerationProcess(List<GameObject> listObjects) {
         List<int> objectsToTryIndexes = new List<int>();
         for (int i = 0; i < listObjects.Count; i++)
         {
@@ -385,7 +423,7 @@ public class PlacementSystem : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     private float getObjectHeight(List<Object> objects)
     {
@@ -399,12 +437,12 @@ public class PlacementSystem : MonoBehaviour
         }
         return height;
     }
-    private List<Object> getObjectsInOneTile(Vector3Int tile)
+    private List<GameObject> getObjectsInOneTile(Vector3Int tile)
     {
         return _tilesWithObjects.GetValueOrDefault(tile);
     }
 
-    private Dictionary<ObjectTypes, int[]> getObjectProbabilities(GameObject obj)
+    /*private Dictionary<ObjectTypes, int[]> getObjectProbabilities(GameObject obj)
     {
         Dictionary<ObjectTypes, int[]> objectProbabilities = new Dictionary<ObjectTypes, int[]>();
         if (obj.TryGetComponent<Chair>(out Chair chair))
@@ -438,7 +476,7 @@ public class PlacementSystem : MonoBehaviour
             objectProbabilities = wall.getProbabilities();
         }
         return objectProbabilities;
-    }
+    }*/
 
     private Object getObjectType(GameObject obj)
     {
@@ -469,7 +507,7 @@ public class PlacementSystem : MonoBehaviour
         return null;
     }
 
-    private Dictionary<Vector3Int, List<Object>> getAdjacentObjects(Vector3Int newPlacement)
+    /*private Dictionary<Vector3Int, List<Object>> getAdjacentObjects(Vector3Int newPlacement)
     {
         List<Vector3Int> adjacentTiles = new List<Vector3Int>();
         Dictionary<Vector3Int, List<Object>> adjacentObjectsAndPositions = new Dictionary<Vector3Int, List<Object>>();
@@ -489,9 +527,9 @@ public class PlacementSystem : MonoBehaviour
         }
         Debug.Log("N de objetos adjacentes: " + adjacentObjectsAndPositions.Count);
         return adjacentObjectsAndPositions;
-    }
+    }*/
 
-    private bool compareProbabilities(Dictionary<ObjectTypes, int[]> probabilities, Dictionary<Vector3Int, List<Object>> adjacentObjects, Vector3Int newPlacement)
+    /*private bool compareProbabilities(Dictionary<ObjectTypes, int[]> probabilities, Dictionary<Vector3Int, List<Object>> adjacentObjects, Vector3Int newPlacement)
     {
         bool canPlace = false;
         if (adjacentObjects.Count == 0)
@@ -557,7 +595,7 @@ public class PlacementSystem : MonoBehaviour
             }
         }
         return canPlace;
-    }
+    }*/
 
     private ObjectTypes convertObjectToObjectType(Object obj)
     {
@@ -593,7 +631,7 @@ public class PlacementSystem : MonoBehaviour
         Vector3Int convertedPos = new Vector3Int(Mathf.CeilToInt(pos.x), Mathf.FloorToInt(pos.y), Mathf.FloorToInt(pos.z));
         return convertedPos;
     }
-    private int convertCoordinatesToRelativePosition(Vector3Int adjacentPosition, Vector3Int newPlacement)
+    /*private int convertCoordinatesToRelativePosition(Vector3Int adjacentPosition, Vector3Int newPlacement)
     {
         if (adjacentPosition == newPlacement)
         {
@@ -643,6 +681,6 @@ public class PlacementSystem : MonoBehaviour
         {
             return -1;
         }
-    }
+    }*/
 
 }
