@@ -6,7 +6,7 @@ using UnityEngine;
 
 public abstract class AbstractSave : MonoBehaviour
 {
-    private string _endpointPostPath = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/document-schema/%s/documents";
+    private string _endpointPostPath = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/document-schema/{0}/documents";
     private string _endpointDeletePath = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/";
     private string _endpointGetPath = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/documents/";
     public StoryEngineScript Story;
@@ -14,6 +14,8 @@ public abstract class AbstractSave : MonoBehaviour
     public string PostNewSave(string json, string id)
     {
         var request = WebRequest.Create(string.Format(_endpointPostPath, id));
+        Debug.Log(id);
+        Debug.Log(string.Format(_endpointPostPath, id));
         request.Method = "POST";
         request.ContentType = "application/json";
         return TreatResponse(json, request);

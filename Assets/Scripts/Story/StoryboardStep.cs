@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
-[System.Serializable]
+[Serializable]
 public class StoryboardStep : Object
 {
     public int Id;
