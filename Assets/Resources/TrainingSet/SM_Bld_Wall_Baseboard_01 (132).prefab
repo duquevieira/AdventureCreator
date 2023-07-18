@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4568635868910706508}
   - component: {fileID: 9031393156526450260}
   - component: {fileID: 3949617130060819625}
+  - component: {fileID: -6075388403086982057}
   m_Layer: 0
   m_Name: SM_Bld_Wall_Baseboard_01 (132)
   m_TagString: Untagged
@@ -142,5 +143,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7fc012e6c2baaf49bebf73a316acb85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6075388403086982057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8282860994551191106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

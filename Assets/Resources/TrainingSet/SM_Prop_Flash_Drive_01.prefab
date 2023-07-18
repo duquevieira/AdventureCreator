@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 222193235928491896}
   - component: {fileID: 233721682754710914}
   - component: {fileID: 254810345214177452}
+  - component: {fileID: -8378858788408614576}
   m_Layer: 0
   m_Name: SM_Prop_Flash_Drive_01
   m_TagString: Untagged
@@ -106,3 +107,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43599497418551010, guid: 3d53aac499fb91d4d9c1dd01ede795a3, type: 2}
+--- !u!114 &-8378858788408614576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245911121313109636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

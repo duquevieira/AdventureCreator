@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 843650997200303188}
   - component: {fileID: 833337499098807436}
   - component: {fileID: 803042427641776014}
+  - component: {fileID: -4619455128366441919}
   m_Layer: 0
   m_Name: SM_Prop_Darkboard_01 (3)
   m_TagString: Untagged
@@ -106,3 +107,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43095794590452458, guid: f5a57386a07fe4b4bbc602c91018769f, type: 2}
+--- !u!114 &-4619455128366441919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847999989838671974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

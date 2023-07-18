@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6268648508515588821}
   - component: {fileID: 6256601462905941251}
   - component: {fileID: 6224029953701404585}
+  - component: {fileID: 6719300263597036182}
   m_Layer: 0
   m_Name: SM_Prop_Cup_Lid_01 (2)
   m_TagString: Untagged
@@ -106,3 +107,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43861314699780222, guid: 401753b9d6b287d4c8eedc8d140a47af, type: 2}
+--- !u!114 &6719300263597036182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6233785449293367473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

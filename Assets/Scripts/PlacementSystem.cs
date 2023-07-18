@@ -135,6 +135,7 @@ public class PlacementSystem : MonoBehaviour
             {
                 var cloneObj = Instantiate(_selectedObject, clickedTile, Quaternion.identity);
                 cloneObj.name = cloneObj.name.Split("(")[0];
+                cloneObj.transform.parent = GameObject.Find("Objects").transform;
                 _objectsInScene.Add(cloneObj);
                 objectsInOneTile = new List<GameObject>();
                 objectsInOneTile.Add(cloneObj);
@@ -272,6 +273,7 @@ public class PlacementSystem : MonoBehaviour
                 var cloneObj = Instantiate(floor, pos, Quaternion.identity);
                 cloneObj.name = cloneObj.name.Split("(")[0];
                 _objectsInScene.Add(cloneObj);
+                cloneObj.transform.parent = GameObject.Find("Ground").transform;
 
             }
         }

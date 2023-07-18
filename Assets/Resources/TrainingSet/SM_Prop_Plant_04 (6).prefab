@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1788138535076795578}
   - component: {fileID: 1797964243892126820}
   - component: {fileID: 1748245115176923564}
+  - component: {fileID: 7129513894825427475}
   m_Layer: 0
   m_Name: SM_Prop_Plant_04 (6)
   m_TagString: Untagged
@@ -106,3 +107,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43334011680030622, guid: f8f8ad3ab4049fd44ba313414d157ae1, type: 2}
+--- !u!114 &7129513894825427475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775483735259259598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

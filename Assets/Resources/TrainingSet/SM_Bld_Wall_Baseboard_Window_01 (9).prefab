@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 547253713468689216}
   - component: {fileID: 5727103029794649362}
   - component: {fileID: 1194226741375600341}
+  - component: {fileID: -5267895964664096694}
   m_Layer: 0
   m_Name: SM_Bld_Wall_Baseboard_Window_01 (9)
   m_TagString: Untagged
@@ -226,5 +227,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae76d79a4dc265d41bd7a3b3bbb717d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5267895964664096694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7058950146647055412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

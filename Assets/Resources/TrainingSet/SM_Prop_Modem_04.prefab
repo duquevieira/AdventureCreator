@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8315541677351203666}
   - component: {fileID: 8305773586357353764}
   - component: {fileID: 8355768565229513362}
+  - component: {fileID: 6804576925884811045}
   m_Layer: 0
   m_Name: SM_Prop_Modem_04
   m_TagString: Untagged
@@ -106,3 +107,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43266541177428674, guid: fd695557d4d62b941a8636fa56b5f2ed, type: 2}
+--- !u!114 &6804576925884811045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8292534465983982840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

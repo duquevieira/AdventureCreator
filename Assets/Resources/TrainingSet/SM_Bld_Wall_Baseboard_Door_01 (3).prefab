@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6975598914174916411}
   - component: {fileID: 6975897580217952177}
   - component: {fileID: 6975983986208540755}
+  - component: {fileID: -2021652459240819063}
   m_Layer: 0
   m_Name: SM_Bld_Wall_Baseboard_Door_01 (3)
   m_TagString: Untagged
@@ -149,3 +150,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.499995, y: 1.0203304, z: 0.18272094}
   m_Center: {x: -1.2499975, y: 2.486835, z: 0.09134338}
+--- !u!114 &-2021652459240819063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6927547176078530499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
