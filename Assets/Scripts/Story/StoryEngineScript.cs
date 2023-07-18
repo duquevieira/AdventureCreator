@@ -31,22 +31,6 @@ public class StoryEngineScript : MonoBehaviour
     {
         ClearStoryElements();
         _itemsManager.setStoryEngineScript(this);
-        //TODO APAGAR APENAS PARA TESTAR
-        /*StoryboardStep step = new StoryboardStep(0, "Lookout", Vector3.zero);
-        step.addAcquires(new ItemGroup("Fish", 1));
-        step.addAcquires(new ItemGroup("0", 1));
-        Storyboard.Add(step);
-        step = new StoryboardStep(1, "SM_Veh_Boat_Small_01_Hull 3", Vector3.zero);
-        step.addRequirement(new ItemGroup("Fish", 1));
-        step.addRequirement(new ItemGroup("0", 1));
-        step.addAcquires(new ItemGroup("Shark", 1));
-        step.addAcquires(new ItemGroup("1", 1));
-        Storyboard.Add(step);
-        step = new StoryboardStep(1, "PirateLeaders", Vector3.zero);
-        step.addRequirement(new ItemGroup("Shark", 1));
-        step.addRequirement(new ItemGroup("1", 1));
-        step.addAcquires(new ItemGroup("Character_Skeleton_03", 1));
-        Storyboard.Add(step);*/
     }
 
     void Update()
@@ -68,7 +52,6 @@ public class StoryEngineScript : MonoBehaviour
                 {
                     Debug.Log(Time.realtimeSinceStartup + " " + acquires.getItemName() + " " + acquires.getItemAmount());
                 }
-                Debug.Log(Time.realtimeSinceStartup + " COORDINATES " + step.getStepCoordinates());
             }
         }
     }
@@ -76,7 +59,7 @@ public class StoryEngineScript : MonoBehaviour
     public void ProcessEntry(string colliderName)
     {
         foreach (StoryboardStep iteratedStep in Storyboard)
-            if (colliderName.Equals(iteratedStep.getColliderName()))
+            if (colliderName.Split("(")[0].Equals(iteratedStep.getColliderName()))
             {
                 List<ItemGroup> requirements = iteratedStep.getRequirements();
                 bool completable = true;
@@ -131,9 +114,9 @@ public class StoryEngineScript : MonoBehaviour
                     }
                     foreach (ItemGroup acquires in iteratedStep.getAcquired())
                     {
-                        if(int.TryParse(acquires.getItemName(), out int number))
+                        bool newItem = true;
+                        if (int.TryParse(acquires.getItemName(), out int number))
                         {
-                            bool newItem = true;
                             foreach (ItemGroup storyItem in StoryItems)
                             {
                                 if (storyItem.getItemName() == acquires.getItemName())
@@ -151,7 +134,6 @@ public class StoryEngineScript : MonoBehaviour
                         }
                         else
                         {
-                            bool newItem = true;
                             foreach (ItemGroup inventoryItem in InventoryItems)
                             {
                                 if (inventoryItem.getItemName() == acquires.getItemName())

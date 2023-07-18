@@ -51,12 +51,13 @@ public class InventoryItemsManager : MonoBehaviour
     {
 
         //TODO Resources.Load para o asset quando estiver no nosso folder e nao nas pastas do polygon
-        string[] lookingFor = {"Assets/PolygonPirates/Prefabs/Characters"};
+        string[] lookingFor = {"Assets/Resources/TrainingSet"};
         List<GameObject> prefabs = PrefabNameLoader.GetAssets<GameObject>(lookingFor, "t:prefab");
         foreach(GameObject prefab in prefabs)
-            if(prefab.name.Equals(item.getItemName()))
+            if(prefab.name.Split("(")[0].Equals(item.getItemName()))
             {
                 var itemSlot = Instantiate(_itemSlotPrefab, _panel.transform);
+                itemSlot.name = prefab.name.Split("(")[0];
                 _displayedItems.Add(itemSlot);
                 itemSlot.GetComponent<InventoryItemDragScript>().SetStoryEngineScript(_storyEngineScript);
                 var instantiated = Instantiate(prefab, itemSlot.transform);
