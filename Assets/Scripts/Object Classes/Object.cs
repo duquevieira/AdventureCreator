@@ -33,7 +33,7 @@ public class Object: MonoBehaviour
         AvailableArea newArea2 = new AvailableArea(objMaxX, areaUsed.getMaxX(), areaUsed.getMinZ(), areaUsed.getMaxZ());
         AvailableArea newArea3 = new AvailableArea(areaUsed.getMinX(), areaUsed.getMaxX(), areaUsed.getMinZ(), objMinZ);
         AvailableArea newArea4 = new AvailableArea(areaUsed.getMinX(), areaUsed.getMaxX(), objMaxZ, areaUsed.getMaxZ());
-        OnTopAvailableAreas.Remove(a);
+        OnTopAvailableAreas.Remove(areaUsed);
         OnTopAvailableAreas.Add(newArea1);
         OnTopAvailableAreas.Add(newArea2);
         OnTopAvailableAreas.Add(newArea3);
