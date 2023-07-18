@@ -18,7 +18,7 @@ public class StepToggleScript : MonoBehaviour
     private static String BUTTON_TEXT_ITEM = "Get Item";
 
 
-    void Start()
+    void Awake()
     {
         _buttonToggle.onClick.AddListener(ToggleStepItem);
         ItemMode = false;
@@ -26,7 +26,7 @@ public class StepToggleScript : MonoBehaviour
         _itemPort = transform.GetChild(1).GetChild(2).gameObject;
     }
 
-    private void ToggleStepItem()
+    public void ToggleStepItem()
     {
         Node nodeScript = GetComponent<Node>();
         if (ItemMode)
