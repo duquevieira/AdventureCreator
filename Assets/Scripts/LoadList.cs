@@ -13,7 +13,7 @@ public class LoadList : MonoBehaviour
     private const string GET_ALL_SAVES_ENDPOINT = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/documents";
     private const string SAVE_ID = "019d5349-668e-458f-a112-a49970266f07";
     private const string EMPTY = "Empty";
-    private const string WorldSaveSchemaID = "63576297-97a1-4b79-8de9-c728219745eb";
+    private const string WorldSaveSchemaID = "019d5349-668e-458f-a112-a49970266f07";
     private int index = 0;
     private static List<string> _availableSaves;
     private static List<string> _levelImages;
