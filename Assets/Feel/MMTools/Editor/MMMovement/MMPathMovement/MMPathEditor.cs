@@ -47,6 +47,7 @@ namespace MoreMountains.Tools
 
                 // draws a movable handle
                 var fmh_49_69_638253145314556564 = Quaternion.identity; Vector3 newPoint = Handles.FreeMoveHandle(oldPoint, Quaternion.identity, .5f, new Vector3(.25f, .25f, .25f), Handles.CircleHandleCap);
+
                 newPoint = ApplyAxisLock(oldPoint, newPoint);
 				
 				// records changes
