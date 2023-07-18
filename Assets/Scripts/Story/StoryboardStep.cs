@@ -11,7 +11,7 @@ public class StoryboardStep : Object
     public string ColliderName;
     public List<ItemGroup> Requirements;
     public List<ItemGroup> Acquired;
-
+    public List<int> ItemDependentSteps;
     public List<float> StepCoordinates;
 
 
@@ -23,10 +23,11 @@ public class StoryboardStep : Object
         {
             stepCoordinates.x,
             stepCoordinates.y,
-            stepCoordinates.z,
+            stepCoordinates.z
         };
         Requirements = new List<ItemGroup>();
         Acquired = new List<ItemGroup>();
+        ItemDependentSteps = new List<int>();
     }
 
     public void addRequirement(ItemGroup requirement)
@@ -37,6 +38,16 @@ public class StoryboardStep : Object
     public void addAcquires(ItemGroup acquired)
     {
         Acquired.Add(acquired);
+    }
+
+    public void addItemDependentStep(int stepId)
+    {
+        ItemDependentSteps.Add(stepId);
+    }
+
+    public List<int> getItemDependentSteps()
+    {
+        return ItemDependentSteps;
     }
 
     public int getId()
