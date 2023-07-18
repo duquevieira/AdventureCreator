@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using MoreMountains.Tools;
+using MoreMountains.TopDownEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ using UnityEngine.UIElements;
 using UnityEngine.WSA;
 using static Object;
 using static UnityEditor.PlayerSettings;
+using static UnityEditor.Progress;
 using Random = UnityEngine.Random;
 
 // www.youtube.com/watch?v=rKp9fWvmIww&t=342s
@@ -120,6 +122,12 @@ public class PlacementSystem : MonoBehaviour
     public void AddObjectManually()
     {
         float maxY = 0.1f;
+        float areaMinX = 0f;
+        float areaMaxX = 0f;
+        float areaMinZ = 0f;
+        float areaMaxZ = 0f;
+        GameObject topObject = null;
+        List<AvailableArea> usableAreas = new List<AvailableArea>();
         if (_selectedObject!= null)
         {
             List<GameObject> objectsInOneTile = getObjectsInOneTile(convertFloatPosToTile(clickedTile));
@@ -134,19 +142,55 @@ public class PlacementSystem : MonoBehaviour
                 _tilesWithObjects.Add(convertFloatPosToTile(clickedTile), objectsInOneTile);
             } else
             {
+                var _temp = Instantiate(_selectedObject, clickedTile, Quaternion.identity);
+                Vector3 newClickedTile = clickedTile;
                 foreach (GameObject obj in objectsInOneTile)
                 {
-                    float y = obj.GetComponent<Collider>().bounds.size.y + obj.transform.position.y;
-                    if (y > maxY)
-                        maxY = y;
+                    if(convertObjectToObjectType(getObjectType(obj)) != ObjectTypes.Prop)
+                    {
+                        topObject = obj;
+                        float y = obj.GetComponent<Collider>().bounds.size.y + obj.transform.position.y;
+                        if (y > maxY)
+                            maxY = y;
+                        List<AvailableArea> totalAreas = obj.GetComponent<Object>().getOnTopAvailableAreas();
+                        foreach (AvailableArea a in totalAreas)
+                        {
+                            if ((_temp.GetComponent<Collider>().bounds.size.x <= Mathf.Abs((a.getMaxX()-a.getMinX()))) && (_temp.GetComponent<Collider>().bounds.size.z <= Mathf.Abs(a.getMaxZ()-a.getMinZ())))
+                            {
+                                usableAreas.Add(a);
+                            }
+                        }
+                    }     
                 }
-                var newClickedTile = clickedTile + new Vector3(0,maxY,0);
-                var cloneObj = Instantiate(_selectedObject, newClickedTile, Quaternion.identity);
-                cloneObj.name = cloneObj.name.Split("(")[0];
-                _objectsInScene.Add(cloneObj);
-                objectsInOneTile.Add(cloneObj);
-                _tilesWithObjects.Remove(convertFloatPosToTile(clickedTile));
-                _tilesWithObjects.Add(convertFloatPosToTile(clickedTile), objectsInOneTile);
+                if (usableAreas.Count > 0)
+                {
+                    int randomAreaIndex = Random.Range(0, usableAreas.Count);
+                    areaMinX = usableAreas[randomAreaIndex].getMinX();
+                    areaMaxX = usableAreas[randomAreaIndex].getMaxX();
+                    areaMinZ = usableAreas[randomAreaIndex].getMinZ();
+                    areaMaxZ = usableAreas[randomAreaIndex].getMaxZ();
+                    float x = Random.Range(areaMinX, (areaMaxX - _temp.GetComponent<Collider>().bounds.size.x)) + (_temp.GetComponent<Collider>().bounds.size.x/2);
+                    float z = Random.Range(areaMinZ, (areaMaxZ - _temp.GetComponent<Collider>().bounds.size.z)) + (_temp.GetComponent<Collider>().bounds.size.z/2);
+                    newClickedTile = new Vector3(x, maxY, z);
+                    var cloneObj = Instantiate(_selectedObject, newClickedTile, Quaternion.identity);
+                    cloneObj.name = cloneObj.name.Split("(")[0];
+                    cloneObj.transform.parent = topObject.transform;
+                    _objectsInScene.Add(cloneObj);
+                    objectsInOneTile.Add(cloneObj);
+                    _tilesWithObjects.Remove(convertFloatPosToTile(clickedTile));
+                    _tilesWithObjects.Add(convertFloatPosToTile(clickedTile), objectsInOneTile);
+                    topObject.GetComponent<Object>().UpdateAvailableTopAreas(
+                        usableAreas[randomAreaIndex],
+                        x - (_temp.GetComponent<Collider>().bounds.size.x / 2),
+                        x + (_temp.GetComponent<Collider>().bounds.size.z / 2),
+                        z - (_temp.GetComponent<Collider>().bounds.size.z / 2),
+                        z + (_temp.GetComponent<Collider>().bounds.size.z / 2)
+                        );
+                } else
+                {
+                    Debug.Log("Não há espaco suficiente para colocar este objeto");
+                }
+                Destroy(_temp);
             }
         }
     }
