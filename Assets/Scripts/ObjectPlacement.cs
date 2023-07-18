@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
 
-public class PlaceableObject : MonoBehaviour
+public class ObjectPlacement : MonoBehaviour
 {
 
     public bool Placed { get; private set; }

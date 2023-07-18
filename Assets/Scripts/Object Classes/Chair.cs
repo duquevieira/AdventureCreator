@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Chair : Object
+public class Chair : PlaceableObject
 {
     /*public override void setAttributes()
     {
-        CanBeAboveOf = new List<Object>
+        CanBeAboveOf = new List<PlaceableObject>
         {
             new Rug()
         };
@@ -22,7 +22,7 @@ public class Chair : Object
         }
     }*/
 
-    /* public override List<Object> getCanBeAboveOf()
+    /* public override List<PlaceableObject> getCanBeAboveOf()
      {
          return this.CanBeAboveOf;
      }*/

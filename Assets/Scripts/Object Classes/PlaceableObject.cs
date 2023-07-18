@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Object: MonoBehaviour
+public class PlaceableObject : MonoBehaviour
 {
     [HideInInspector] public Dictionary<ObjectTypes, int[]> Probabilities;
     //[HideInInspector] public enum AdjacentPositions { Top, TopLeft,TopRight, Right,Left,On,BottomLeft,Bottom,BottomRight };
-    [HideInInspector] public enum ObjectTypes { Chair, Shelf, Table, Rug, Prop, Wall, Default};
+    [HideInInspector] public enum ObjectTypes { Chair, Shelf, Table, Rug, Prop, Wall, Default };
 
     [HideInInspector] public List<AvailableArea> OnTopAvailableAreas;
 
@@ -42,9 +42,9 @@ public class Object: MonoBehaviour
             OnTopAvailableAreas.Remove(newArea1);
         if (objMaxX == areaUsed.getMaxX())
             OnTopAvailableAreas.Remove(newArea2);
-        if (areaUsed.getMinZ()== objMinZ)
+        if (areaUsed.getMinZ() == objMinZ)
             OnTopAvailableAreas.Remove(newArea3);
-        if (areaUsed.getMaxZ()== objMaxZ)
+        if (areaUsed.getMaxZ() == objMaxZ)
             OnTopAvailableAreas.Remove(newArea4);
     }
 

@@ -20,18 +20,18 @@ namespace MeadowGames.UINodeConnect4.EditorScript
                 if (GUILayout.Button(field?.ToString(), EditorStyles.objectField))
                 {
                     EditorUtility.FocusProjectWindow();
-                    Object obj = null;
+                    PlaceableObject obj = null;
                     if (field != null)
                     {
                         var g = AssetDatabase.FindAssets($"t:Script {field.GetType()}");
                         string path = AssetDatabase.GUIDToAssetPath(g[0]);
-                        obj = (Object)AssetDatabase.LoadAssetAtPath(path, typeof(Object));
+                        obj = (PlaceableObject)AssetDatabase.LoadAssetAtPath(path, typeof(PlaceableObject));
                     }
                     else
                     {
                         var g = AssetDatabase.FindAssets($"t:Script {typeof(T).Name}");
                         string path = AssetDatabase.GUIDToAssetPath(g[0]);
-                        obj = (Object)AssetDatabase.LoadAssetAtPath(path, typeof(Object));
+                        obj = (PlaceableObject)AssetDatabase.LoadAssetAtPath(path, typeof(PlaceableObject));
                     }
 
                     EditorGUIUtility.PingObject(obj);
@@ -57,7 +57,7 @@ namespace MeadowGames.UINodeConnect4.EditorScript
                         {
                             DragAndDrop.AcceptDrag();
 
-                            Object dragged_object = (Object)DragAndDrop.objectReferences[0];
+                            PlaceableObject dragged_object = (PlaceableObject)DragAndDrop.objectReferences[0];
 
                             System.Type type = System.Type.GetType(dragged_object.name + ",Assembly-CSharp");
 

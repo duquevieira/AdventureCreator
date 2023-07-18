@@ -14,7 +14,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using UnityEngine.WSA;
-using static Object;
+using static PlaceableObject;
 using static UnityEditor.PlayerSettings;
 using static UnityEditor.Progress;
 using Random = UnityEngine.Random;
@@ -153,7 +153,7 @@ public class PlacementSystem : MonoBehaviour
                         float y = obj.GetComponent<Collider>().bounds.size.y + obj.transform.position.y;
                         if (y > maxY)
                             maxY = y;
-                        List<AvailableArea> totalAreas = obj.GetComponent<Object>().getOnTopAvailableAreas();
+                        List<AvailableArea> totalAreas = obj.GetComponent<PlaceableObject>().getOnTopAvailableAreas();
                         foreach (AvailableArea a in totalAreas)
                         {
                             if ((_temp.GetComponent<Collider>().bounds.size.x <= Mathf.Abs((a.getMaxX()-a.getMinX()))) && (_temp.GetComponent<Collider>().bounds.size.z <= Mathf.Abs(a.getMaxZ()-a.getMinZ())))
@@ -180,7 +180,7 @@ public class PlacementSystem : MonoBehaviour
                     objectsInOneTile.Add(cloneObj);
                     _tilesWithObjects.Remove(convertFloatPosToTile(clickedTile));
                     _tilesWithObjects.Add(convertFloatPosToTile(clickedTile), objectsInOneTile);
-                    topObject.GetComponent<Object>().UpdateAvailableTopAreas(
+                    topObject.GetComponent<PlaceableObject>().UpdateAvailableTopAreas(
                         usableAreas[randomAreaIndex],
                         x - (_temp.GetComponent<Collider>().bounds.size.x / 2),
                         x + (_temp.GetComponent<Collider>().bounds.size.z / 2),
@@ -351,7 +351,7 @@ public class PlacementSystem : MonoBehaviour
                     GameObject obj = _structureObjects[objectsToTryIndexes[objectIndex]];
                     Debug.Log("Objeto: " + obj);
                     Dictionary<ObjectTypes, int[]> objectProbabilities = getObjectProbabilities(obj);
-                    Dictionary<Vector3Int, List<Object>> adjacentObjects = getAdjacentObjects(position);
+                    Dictionary<Vector3Int, List<PlaceableObject>> adjacentObjects = getAdjacentObjects(position);
                     bool canPlace = compareProbabilities(objectProbabilities, adjacentObjects, position);
                     if (canPlace)
                     {
@@ -360,10 +360,10 @@ public class PlacementSystem : MonoBehaviour
                         cloneObj.name = cloneObj.name.Split("(")[0];
                         _objectsInScene.Add(cloneObj);
                         //_availableTiles.Remove(randomTile);
-                        List<Object> objectsInOneTile = getObjectsInOneTile(position);
+                        List<PlaceableObject> objectsInOneTile = getObjectsInOneTile(position);
                         if (objectsInOneTile == null)
                         {
-                            objectsInOneTile = new List<Object>();
+                            objectsInOneTile = new List<PlaceableObject>();
 
                         }
                         objectsInOneTile.Add(getObjectType(obj));
@@ -430,11 +430,11 @@ public class PlacementSystem : MonoBehaviour
             GameObject obj = listObjects[objectsToTryIndexes[objectIndex]];
             Debug.Log("Objeto: " + obj);
             Dictionary<ObjectTypes, int[]> objectProbabilities = getObjectProbabilities(obj);
-            Dictionary<Vector3Int, List<Object>> adjacentObjects = getAdjacentObjects(randomTile);
+            Dictionary<Vector3Int, List<PlaceableObject>> adjacentObjects = getAdjacentObjects(randomTile);
             bool canPlace = compareProbabilities(objectProbabilities, adjacentObjects, randomTile);
             if (canPlace)
             {
-                List<Object> objectsInOneTile = getObjectsInOneTile(randomTile);
+                List<PlaceableObject> objectsInOneTile = getObjectsInOneTile(randomTile);
                 Vector3 position = SnapCoordinateToGrid(randomTile);
                 if (convertObjectToObjectType(getObjectType(obj)) == ObjectTypes.Prop)
                 {
@@ -447,7 +447,7 @@ public class PlacementSystem : MonoBehaviour
                 
                 if (objectsInOneTile == null)
                 {
-                    objectsInOneTile = new List<Object>();
+                    objectsInOneTile = new List<PlaceableObject>();
 
                 }
                 objectsInOneTile.Add(getObjectType(obj));
@@ -471,7 +471,7 @@ public class PlacementSystem : MonoBehaviour
         }
     }*/
 
-    private float getObjectHeight(List<Object> objects)
+    private float getObjectHeight(List<PlaceableObject> objects)
     {
         float height = 0f;
         for (int i = 0; i<objects.Count; i++)
@@ -524,7 +524,7 @@ public class PlacementSystem : MonoBehaviour
         return objectProbabilities;
     }*/
 
-    private Object getObjectType(GameObject obj)
+    private PlaceableObject getObjectType(GameObject obj)
     {
         if (obj.TryGetComponent<Chair>(out Chair chair))
         {
@@ -553,10 +553,10 @@ public class PlacementSystem : MonoBehaviour
         return null;
     }
 
-    /*private Dictionary<Vector3Int, List<Object>> getAdjacentObjects(Vector3Int newPlacement)
+    /*private Dictionary<Vector3Int, List<PlaceableObject>> getAdjacentObjects(Vector3Int newPlacement)
     {
         List<Vector3Int> adjacentTiles = new List<Vector3Int>();
-        Dictionary<Vector3Int, List<Object>> adjacentObjectsAndPositions = new Dictionary<Vector3Int, List<Object>>();
+        Dictionary<Vector3Int, List<PlaceableObject>> adjacentObjectsAndPositions = new Dictionary<Vector3Int, List<PlaceableObject>>();
         for (int i = -1; i < 2; i++)
         {
             for (int j = -1; j < 2; j++)
@@ -575,7 +575,7 @@ public class PlacementSystem : MonoBehaviour
         return adjacentObjectsAndPositions;
     }*/
 
-    /*private bool compareProbabilities(Dictionary<ObjectTypes, int[]> probabilities, Dictionary<Vector3Int, List<Object>> adjacentObjects, Vector3Int newPlacement)
+    /*private bool compareProbabilities(Dictionary<ObjectTypes, int[]> probabilities, Dictionary<Vector3Int, List<PlaceableObject>> adjacentObjects, Vector3Int newPlacement)
     {
         bool canPlace = false;
         if (adjacentObjects.Count == 0)
@@ -585,7 +585,7 @@ public class PlacementSystem : MonoBehaviour
         int placementProbability = 0;
         foreach (Vector3Int pos in adjacentObjects.Keys)
         {
-            List<Object> adjacentObjInPosition = adjacentObjects[pos];
+            List<PlaceableObject> adjacentObjInPosition = adjacentObjects[pos];
             for (int i = 0; i < adjacentObjInPosition.Count; i++)
             {
                 ObjectTypes objectType = convertObjectToObjectType(adjacentObjInPosition[i]);
@@ -643,7 +643,7 @@ public class PlacementSystem : MonoBehaviour
         return canPlace;
     }*/
 
-    private ObjectTypes convertObjectToObjectType(Object obj)
+    private ObjectTypes convertObjectToObjectType(PlaceableObject obj)
     {
         if (obj.TryGetComponent<Chair>(out Chair chair))
         {
