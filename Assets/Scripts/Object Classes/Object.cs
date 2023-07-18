@@ -27,51 +27,25 @@ public class Object: MonoBehaviour
         return OnTopAvailableAreas;
     }
 
-    public void UpdateAvailableTopAreas(AvailableArea a, float objMinX, float objMaxX, float objMinZ, float objMaxZ)
+    public void UpdateAvailableTopAreas(AvailableArea areaUsed, float objMinX, float objMaxX, float objMinZ, float objMaxZ)
     {
-        /*float newMinX;
-        float newMaxX;
-        float newMinZ;
-        float newMaxZ;
-        if (objMinX > a.getMinX())
-            newMinX = objMinX;
-        else
-            newMinX = a.getMinX();
-
-        if (objMaxX < a.getMaxX())
-            newMaxX = objMaxX;
-        else
-            newMaxX = a.getMaxX();
-
-        if (objMinZ> a.getMinZ())
-            newMinZ = objMinZ;
-        else
-            newMinZ = a.getMinZ();
-
-        if (objMaxZ> a.getMaxZ())
-            newMaxZ = objMaxZ;
-        else
-            newMaxZ = a.getMaxZ();
-
-        AvailableArea n1 = new AvailableArea(a.getMinX(),newMinX,a.getMinZ(),newMinZ);
-        AvailableArea n2 = new AvailableArea(newMaxX, a.getMaxX(), newMaxZ, a.getMaxZ());*/
-        AvailableArea n1 = new AvailableArea(a.getMinX(), objMinX, a.getMinZ(), a.getMaxZ());
-        AvailableArea n2 = new AvailableArea(objMaxX, a.getMaxX(), a.getMinZ(), a.getMaxZ());
-        AvailableArea n3 = new AvailableArea(a.getMinX(), a.getMaxX(), a.getMinZ(), objMinZ);
-        AvailableArea n4 = new AvailableArea(a.getMinX(), a.getMaxX(), objMaxZ, a.getMaxZ());
+        AvailableArea newArea1 = new AvailableArea(areaUsed.getMinX(), objMinX, areaUsed.getMinZ(), areaUsed.getMaxZ());
+        AvailableArea newArea2 = new AvailableArea(objMaxX, areaUsed.getMaxX(), areaUsed.getMinZ(), areaUsed.getMaxZ());
+        AvailableArea newArea3 = new AvailableArea(areaUsed.getMinX(), areaUsed.getMaxX(), areaUsed.getMinZ(), objMinZ);
+        AvailableArea newArea4 = new AvailableArea(areaUsed.getMinX(), areaUsed.getMaxX(), objMaxZ, areaUsed.getMaxZ());
         OnTopAvailableAreas.Remove(a);
-        OnTopAvailableAreas.Add(n1);
-        OnTopAvailableAreas.Add(n2);
-        OnTopAvailableAreas.Add(n3);
-        OnTopAvailableAreas.Add(n4);
-        if (a.getMinX() == objMinX)
-            OnTopAvailableAreas.Remove(n1);
-        if (objMaxX == a.getMaxX())
-            OnTopAvailableAreas.Remove(n2);
-        if (a.getMinZ()== objMinZ)
-            OnTopAvailableAreas.Remove(n3);
-        if (a.getMaxZ()== objMaxZ)
-            OnTopAvailableAreas.Remove(n4);
+        OnTopAvailableAreas.Add(newArea1);
+        OnTopAvailableAreas.Add(newArea2);
+        OnTopAvailableAreas.Add(newArea3);
+        OnTopAvailableAreas.Add(newArea4);
+        if (areaUsed.getMinX() == objMinX)
+            OnTopAvailableAreas.Remove(newArea1);
+        if (objMaxX == areaUsed.getMaxX())
+            OnTopAvailableAreas.Remove(newArea2);
+        if (areaUsed.getMinZ()== objMinZ)
+            OnTopAvailableAreas.Remove(newArea3);
+        if (areaUsed.getMaxZ()== objMaxZ)
+            OnTopAvailableAreas.Remove(newArea4);
     }
 
     public virtual Dictionary<ObjectTypes, int[]> getProbabilities()

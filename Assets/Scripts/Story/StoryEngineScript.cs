@@ -24,7 +24,7 @@ public class StoryEngineScript : MonoBehaviour
     [HideInInspector]
     public List<StoryboardStep> Storyboard;
     [SerializeField]
-    //private InventoryItemsManager _itemsManager;
+    private InventoryItemsManager _itemsManager;
 
 
     void Start()

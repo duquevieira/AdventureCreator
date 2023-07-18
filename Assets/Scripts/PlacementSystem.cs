@@ -230,7 +230,7 @@ public class PlacementSystem : MonoBehaviour
         return position;
     }
 
-    private Vector3 AllCellPositions(Vector3 centerCell, string desiredPos)
+    /*private Vector3 AllCellPositions(Vector3 centerCell, string desiredPos)
     {
         Vector3 cellSize = _grid.cellSize;
         Vector3 leftBorder = centerCell + new Vector3 (-cellSize.x/2, 0, 0);
@@ -250,7 +250,7 @@ public class PlacementSystem : MonoBehaviour
             default:
                 return centerCell;
         }
-    }
+    }*/
     public void DestroyAllObjects()
     {
         List<Transform> childs = new List<Transform>();
