@@ -6,6 +6,7 @@ using MoreMountains.TopDownEngine;
 
 public class InGamePauseMenu : MonoBehaviour
 {
+    private const string MAIN_MENU_SCENE = "MainMenu";
     public CanvasGroup Overlay;
     public CanvasGroup PauseMenu;
 
@@ -34,7 +35,7 @@ public class InGamePauseMenu : MonoBehaviour
     }
 
     public void QuitToMainMenu() {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(MAIN_MENU_SCENE);
         GameManager.Current.Pause(PauseMethods.PauseMenu);
     }
 
