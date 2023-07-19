@@ -35,7 +35,7 @@ Transform:
   - {fileID: 2876205790532468067}
   - {fileID: 2879083975913588163}
   m_Father: {fileID: 0}
-  m_RootOrder: 99
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -124.03801, z: -90.00001}
 --- !u!33 &2854682512540807897
 MeshFilter:
@@ -95,17 +95,9 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2873303503658020213}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
+  serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43649063333526518, guid: 116f131082c7d4f419a2a1f6a87709fd, type: 2}

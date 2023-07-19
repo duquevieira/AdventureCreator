@@ -9,6 +9,7 @@ public class ClickMenuSlot : MonoBehaviour, IPointerClickHandler
 
     private PlacementUI _placUI;
     private PlacementSystem _placSys;
+    private PlacementSystemV2 _placSys2;
     private string _selectedObjectName;
     private GameObject _selectedObject;
 
@@ -16,11 +17,12 @@ public class ClickMenuSlot : MonoBehaviour, IPointerClickHandler
     {
         _placUI = GameObject.Find("Grid").GetComponent<PlacementUI>();
         _placSys = GameObject.Find("Grid").GetComponent<PlacementSystem>();
+        _placSys2 = GameObject.Find("Level").GetComponent<PlacementSystemV2>();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        GameObject prev_SelectedObject = _selectedObject;
+        /*GameObject prev_SelectedObject = _selectedObject;
         _selectedObject = gameObject.transform.GetChild(0).gameObject;
         if (prev_SelectedObject != _selectedObject)
         {
@@ -34,7 +36,10 @@ public class ClickMenuSlot : MonoBehaviour, IPointerClickHandler
             _placSys.SetSelectedObject(_selectedObject);
             _selectedObjectName = "";
             _placUI.UpdateSelectectObject(_selectedObjectName);
-        }
+        }*/
+        _selectedObject = gameObject.transform.GetChild(0).gameObject;
+        string name = _selectedObject.name.Split("(")[0];
+        _placSys2.StartPlacement(name);
     }
 
     public string getSelectedObjectName()

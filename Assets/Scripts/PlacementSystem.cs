@@ -31,7 +31,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private PlacementUI _placementUI;
     [SerializeField] private SwitchCreateMode switchMode;
     //[SerializeField] private ClickMenuSlot _clickMenuSlot;
-    [SerializeField] private Tilemap _mainTileMap;
+    //[SerializeField] private Tilemap _mainTileMap;
     [SerializeField] private GameObject floor;
     [SerializeField] private List<GameObject> _structureObjects;
     [SerializeField] public List<GameObject> _mainObjects;
@@ -44,7 +44,7 @@ public class PlacementSystem : MonoBehaviour
     private Dictionary<Vector3Int, List<GameObject>> _tilesWithObjects;
     private Vector3 clickedTile;
     private GameObject _selectedObject;
-    
+
     private void Awake()
     {
         Current = this;
@@ -80,7 +80,7 @@ public class PlacementSystem : MonoBehaviour
             {
                 getClickedTile();
                 AddObjectManually();
-            }  
+            }
         }
         if (!_objectToPlace)
         {
@@ -104,7 +104,7 @@ public class PlacementSystem : MonoBehaviour
             }
         }*/
     }
-    
+
     public void SetSelectedObject(GameObject obj)
     {
         if (obj != null)
@@ -112,13 +112,14 @@ public class PlacementSystem : MonoBehaviour
             _selectedObject = obj;
             _selectedObject.transform.localScale = Vector3.one;
             _selectedObject.layer = 0;
-        } else
+        }
+        else
         {
             _selectedObject = null;
         }
-        
+
     }
-   
+
     public void AddObjectManually()
     {
         float maxY = 0.1f;
@@ -128,7 +129,7 @@ public class PlacementSystem : MonoBehaviour
         float areaMaxZ = 0f;
         GameObject topObject = null;
         List<AvailableArea> usableAreas = new List<AvailableArea>();
-        if (_selectedObject!= null)
+        if (_selectedObject != null)
         {
             List<GameObject> objectsInOneTile = getObjectsInOneTile(convertFloatPosToTile(clickedTile));
             if (objectsInOneTile == null)
@@ -141,13 +142,14 @@ public class PlacementSystem : MonoBehaviour
                 objectsInOneTile.Add(cloneObj);
                 _tilesWithObjects.Remove(convertFloatPosToTile(clickedTile));
                 _tilesWithObjects.Add(convertFloatPosToTile(clickedTile), objectsInOneTile);
-            } else
+            }
+            else
             {
                 var _temp = Instantiate(_selectedObject, clickedTile, Quaternion.identity);
                 Vector3 newClickedTile = clickedTile;
                 foreach (GameObject obj in objectsInOneTile)
                 {
-                    if(convertObjectToObjectType(getObjectType(obj)) != ObjectTypes.Prop)
+                    if (convertObjectToObjectType(getObjectType(obj)) != ObjectTypes.Prop)
                     {
                         topObject = obj;
                         float y = obj.GetComponent<Collider>().bounds.size.y + obj.transform.position.y;
@@ -156,12 +158,12 @@ public class PlacementSystem : MonoBehaviour
                         List<AvailableArea> totalAreas = obj.GetComponent<PlaceableObject>().getOnTopAvailableAreas();
                         foreach (AvailableArea a in totalAreas)
                         {
-                            if ((_temp.GetComponent<Collider>().bounds.size.x <= Mathf.Abs((a.getMaxX()-a.getMinX()))) && (_temp.GetComponent<Collider>().bounds.size.z <= Mathf.Abs(a.getMaxZ()-a.getMinZ())))
+                            if ((_temp.GetComponent<Collider>().bounds.size.x <= Mathf.Abs((a.getMaxX() - a.getMinX()))) && (_temp.GetComponent<Collider>().bounds.size.z <= Mathf.Abs(a.getMaxZ() - a.getMinZ())))
                             {
                                 usableAreas.Add(a);
                             }
                         }
-                    }     
+                    }
                 }
                 if (usableAreas.Count > 0)
                 {
@@ -170,8 +172,8 @@ public class PlacementSystem : MonoBehaviour
                     areaMaxX = usableAreas[randomAreaIndex].getMaxX();
                     areaMinZ = usableAreas[randomAreaIndex].getMinZ();
                     areaMaxZ = usableAreas[randomAreaIndex].getMaxZ();
-                    float x = Random.Range(areaMinX, (areaMaxX - _temp.GetComponent<Collider>().bounds.size.x)) + (_temp.GetComponent<Collider>().bounds.size.x/2);
-                    float z = Random.Range(areaMinZ, (areaMaxZ - _temp.GetComponent<Collider>().bounds.size.z)) + (_temp.GetComponent<Collider>().bounds.size.z/2);
+                    float x = Random.Range(areaMinX, (areaMaxX - _temp.GetComponent<Collider>().bounds.size.x)) + (_temp.GetComponent<Collider>().bounds.size.x / 2);
+                    float z = Random.Range(areaMinZ, (areaMaxZ - _temp.GetComponent<Collider>().bounds.size.z)) + (_temp.GetComponent<Collider>().bounds.size.z / 2);
                     newClickedTile = new Vector3(x, maxY, z);
                     var cloneObj = Instantiate(_selectedObject, newClickedTile, Quaternion.identity);
                     cloneObj.name = cloneObj.name.Split("(")[0];
@@ -187,7 +189,8 @@ public class PlacementSystem : MonoBehaviour
                         z - (_temp.GetComponent<Collider>().bounds.size.z / 2),
                         z + (_temp.GetComponent<Collider>().bounds.size.z / 2)
                         );
-                } else
+                }
+                else
                 {
                     Debug.Log("Não há espaco suficiente para colocar este objeto");
                 }
@@ -204,9 +207,9 @@ public class PlacementSystem : MonoBehaviour
     }
     private void ResetAvailableTiles()
     {
-        for (int i = 0; i < width-1; i++)
+        for (int i = 0; i < width - 1; i++)
         {
-            for (int j = 0; j < height-1; j++)
+            for (int j = 0; j < height - 1; j++)
             {
                 _availableTiles.Add(new Vector3Int(i, 0, j));
             }
@@ -226,7 +229,7 @@ public class PlacementSystem : MonoBehaviour
     }
     public Vector3 SnapCoordinateToGrid(Vector3 position)
     {
-        Vector3Int cellPos = _mainTileMap.WorldToCell(position);
+        Vector3Int cellPos = _grid.WorldToCell(position);
         position = _grid.GetCellCenterWorld(cellPos);
         return position;
     }
@@ -391,7 +394,7 @@ public class PlacementSystem : MonoBehaviour
         
         Debug.Log("There is no more available tiles to place the object");
     }*/
-    
+
     /*private void SpawnMainObjects()
     {
         //DestroyAllObjects();
@@ -474,8 +477,8 @@ public class PlacementSystem : MonoBehaviour
     private float getObjectHeight(List<PlaceableObject> objects)
     {
         float height = 0f;
-        for (int i = 0; i<objects.Count; i++)
-        { 
+        for (int i = 0; i < objects.Count; i++)
+        {
             if (objects[0].gameObject.transform.lossyScale.y > height)
             {
                 height = objects[0].gameObject.transform.localScale.y;

@@ -12,7 +12,7 @@ public class SaveLevel : AbstractSave
     void Start() {
         if(!string.IsNullOrEmpty(SaveId)) {
             Load();
-        } else PlacementSystem.SpawnFloorAndWalls();
+        } //else PlacementSystem.SpawnFloorAndWalls();
     }
 
     public void Save()

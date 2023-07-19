@@ -11,7 +11,7 @@ public class PlacementUI : MonoBehaviour
     [SerializeField] private Button _addButton;
     //[SerializeField] private Button _delButton;
     [SerializeField] private PlacementSystem _placementSys;
-    [SerializeField] private SwitchCreateMode createMode;
+    [SerializeField] private SwitchCreateMode _createMode;
     private List<GameObject> _mainObjects;
 
     private void Start()
@@ -24,7 +24,6 @@ public class PlacementUI : MonoBehaviour
 
     private void Awake()
     {
-        
         _mainObjects = _placementSys._mainObjects;
     }
 
@@ -34,7 +33,7 @@ public class PlacementUI : MonoBehaviour
         //{
         //    _addButton.interactable = true;
         //}
-        if (createMode.currentMode == SwitchCreateMode.CreateMode.MapMode)
+        if (_createMode.currentMode == SwitchCreateMode.CreateMode.MapMode)
         {
             ShowUI();
             /*if (!_clickedObjectText.text.Equals("Clicked Object: "))

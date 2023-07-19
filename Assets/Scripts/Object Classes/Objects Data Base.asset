@@ -1,0 +1,430 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c3bf7191c5f07488e555e2cd584419, type: 3}
+  m_Name: Objects Data Base
+  m_EditorClassIdentifier: 
+  objectsDatabase:
+  - <Name>k__BackingField: 'SM_Bld_Door_05 '
+    <ID>k__BackingField: 0
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 584982380618613368, guid: 069ef2b68baf561428e91320be9aaf0a, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Bld_Floor_Carpet_01 '
+    <ID>k__BackingField: 1
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5790792420144977488, guid: 72273c7c9e1bde640926500ef28ccbd7, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Bld_Pillar_Exterior_04 '
+    <ID>k__BackingField: 2
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 212546567820680758, guid: 8a993a3d3bbe8ce499c79ef9abf6ac7e, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Bld_Wall_Baseboard_01 '
+    <ID>k__BackingField: 3
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 8282860994551191106, guid: c93ebb31abdf6c843a154dc547e7b0c5, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Bld_Wall_Baseboard_Door_01 '
+    <ID>k__BackingField: 4
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 6927547176078530499, guid: d45a9ff74144bf14399d73ce89a9a13c, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Bld_Wall_Baseboard_Window_01 '
+    <ID>k__BackingField: 5
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2501072237592662155, guid: 58037232a7012034581d71a282a1468b, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_AirVent_Wall_01 '
+    <ID>k__BackingField: 6
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2304027743697801042, guid: 88dd15bf3d24e504ab47d75e27bce231, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Bin_02 '
+    <ID>k__BackingField: 7
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2671137638010868365, guid: fa78c74d4e2176442bd2189086ca793a, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Book_Group_01 '
+    <ID>k__BackingField: 8
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2457196960573819350, guid: 6aa1f55c9c9302b408a1760f5135146f, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Book_Group_02 '
+    <ID>k__BackingField: 9
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3497049613042565116, guid: 2f41c15136dcc294c8cc1c96cdbd8163, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Book_Group_03 '
+    <ID>k__BackingField: 10
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 6485239832690585464, guid: e4e2259af11b010429f6ff74cd223bf8, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Book_Group_04 '
+    <ID>k__BackingField: 11
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 8526826667785435253, guid: ef54b3d888808d64ebf50552a312d7bc, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Book_Group_08 '
+    <ID>k__BackingField: 12
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2556615393224583447, guid: d8ba0a3b12bc3cb42934f7ca6173390a, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Book_Magazine_01 '
+    <ID>k__BackingField: 13
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2529214932959392913, guid: 7c76d554cb03e764689a640182ce254d, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Book_Magazine_02 '
+    <ID>k__BackingField: 14
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 6330878106779587827, guid: 07069376941b3fc49aa583503c9734c0, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Bottle_01 '
+    <ID>k__BackingField: 15
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3542719759174298272, guid: 0c4e3ff853ae5cb4e82bb29a5a8fbec5, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Briefcase_01 '
+    <ID>k__BackingField: 16
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4563793570405937736, guid: 3143e22f058f6c34f93be8eedcf444d7, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Cabinets_02 '
+    <ID>k__BackingField: 17
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3859294859778985475, guid: 4aaf062c3facc1441b9be16f34063991, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_CardboardBox_03 '
+    <ID>k__BackingField: 18
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5097793938428822550, guid: 747311f6754faf848aed9fcca9e339e3, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_CardboardBox_04 '
+    <ID>k__BackingField: 19
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 9057825968249847282, guid: 08a048c94e7dc3e46a9b8367ef762788, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Cellphone_01 '
+    <ID>k__BackingField: 20
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 844589401945671934, guid: 49a187c57076dab4981206f173eed13f, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Certificate_01 '
+    <ID>k__BackingField: 21
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5066611207769418823, guid: 6fc8ba9d30767df46b84d679d10b42b2, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Chair_07 '
+    <ID>k__BackingField: 22
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7114652858142946331, guid: 372b6d1f01f9d644ba4e3744fb944d74, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Clock_01 '
+    <ID>k__BackingField: 23
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4447581929237024160, guid: 3e7fff33ac9bfa7468a7324cfa8341ef, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_CoffeeTable_01 '
+    <ID>k__BackingField: 24
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3703040301288503088, guid: 491d7669779f8e049af7ba6844c44822, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Computer_Keyboard_01 '
+    <ID>k__BackingField: 25
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4490636866040312290, guid: 76bba1bbad92c114085ce6d21edfa3d5, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Computer_Monitor_02 '
+    <ID>k__BackingField: 26
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 8278982013903913182, guid: c4641ddcb4531c7438a12b5d02c07a1a, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Computer_Monitor_04 '
+    <ID>k__BackingField: 27
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5159296795132516540, guid: 8aa7b92f1b2a4a7418c2bb915f681550, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Computer_Mouse_01 '
+    <ID>k__BackingField: 28
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4918548170075270236, guid: c15781d0e89873640981129d1bd3cbab, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Computer_Mousepad_02 '
+    <ID>k__BackingField: 29
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 815625354590125101, guid: bb0ae58d1a0c98446b20dfe957a2af4d, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Computer_Tower_Modern_01 '
+    <ID>k__BackingField: 30
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5238617497141651269, guid: 40e81cbc9a77e05409e5b3528e4704a4, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Console_MegaCube_01 '
+    <ID>k__BackingField: 31
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3110193127986079383, guid: 33e3f442680dadd4cb64bd74cbc9c863, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Console_PlayBox_01 '
+    <ID>k__BackingField: 32
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 9079978641942720653, guid: 27a040cc2a41a164097435d01905d168, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Controller_01 '
+    <ID>k__BackingField: 33
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2236002309687554302, guid: 61beeb76cbf336f47801273c735bfe93, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Cord_Desk_01 '
+    <ID>k__BackingField: 34
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3093804156630088937, guid: 62b1e6c0a69feb24898376b5282534fc, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Cord_Wall_01 '
+    <ID>k__BackingField: 35
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1695810471958489831, guid: 609e0d53b3c74414686c386e83b20b43, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Couch_02 '
+    <ID>k__BackingField: 36
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3300232435969836066, guid: 4375f5c4ea503da418d997df72841d31, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Cup_Boss_01 '
+    <ID>k__BackingField: 37
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4801111906381682250, guid: cdd59ea52cad05747a12fd1f280fb57b, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Cup_Coffee_Disposable_Open_Full_01 '
+    <ID>k__BackingField: 38
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1700344509143128932, guid: 8cba08180b434844a9a6362b81d17a2f, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Cup_Lid_01 '
+    <ID>k__BackingField: 39
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 6233785449293367473, guid: 116df02be15aec0498a870c164eae39a, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Cup_Pens_01 '
+    <ID>k__BackingField: 40
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 8382532180534362934, guid: a4326b10e3099db498b9b2ee23ca4ff0, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Darkboard_01 '
+    <ID>k__BackingField: 41
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 847999989838671974, guid: c4341ae41abbad043806a2220ab11de3, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Desk_01 '
+    <ID>k__BackingField: 42
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 8192783645895324966, guid: 15c39c3ecbe386a458e0934c5188c419, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Desk_02 '
+    <ID>k__BackingField: 43
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3855013638508509731, guid: a774db938a77f094aaaa5a0f910992c4, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: SM_Prop_Desklamp_03
+    <ID>k__BackingField: 44
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 8775184880097698909, guid: 8d16888f824d4684989ad91a4117f37e, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: SM_Prop_Donut_Pink_02
+    <ID>k__BackingField: 45
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 6857446390926466326, guid: 6c73eb3346493264aabdca902d949aa7, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_FaxMachine_01 '
+    <ID>k__BackingField: 46
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2290769587688141913, guid: 1e33799a94a0efc48875a13ab37ead9f, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Figure_Cowgirl_01 '
+    <ID>k__BackingField: 47
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4415519202572905102, guid: 40a2b081451007948b74cc7cb936017d, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Figure_Goblin_01 '
+    <ID>k__BackingField: 48
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5360077691190249107, guid: 25805ad74c581bb489ac410ae13ba3c5, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Figure_Knight_01 '
+    <ID>k__BackingField: 49
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4841504362511163665, guid: de6535838d9b013468e942118c4bfc03, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Figure_Viking_01 '
+    <ID>k__BackingField: 50
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 590243696989816517, guid: 1ac8be32037eaba40843394453dcc596, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: SM_Prop_Flash_Drive_01
+    <ID>k__BackingField: 51
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 245911121313109636, guid: fefb8e9e3894b4f4085b752ba99859e7, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_FolderTray_03 '
+    <ID>k__BackingField: 52
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5427458529183394015, guid: b9de2ca8babcf6342ad2c841afaa2f0d, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_FootRest_01 '
+    <ID>k__BackingField: 53
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1568358806528054412, guid: f701d483a99f0f147a39eb76191aab95, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: SM_Prop_Globe_01
+    <ID>k__BackingField: 54
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4783198101680162311, guid: f92929bbd288fa94ca4907ec45fef80e, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: SM_Prop_GraphicsTablet_04
+    <ID>k__BackingField: 55
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1541058663190911650, guid: 058859a7080010b438ae50550be374f8, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_GraphicsTablet_Stylus_01 '
+    <ID>k__BackingField: 56
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2849680504768082428, guid: 0e742fb1856cb2e48aca5f3a79f7cff6, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_GraphicsTablet_StylusStand_01 '
+    <ID>k__BackingField: 57
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 6745806863260294479, guid: 8838a5e55fb022d4c91c8103925eef62, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_HDD_01 '
+    <ID>k__BackingField: 58
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2111767380512840732, guid: 79439d908aa5ace449dc570f4471725d, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_HDD_Dock_01 '
+    <ID>k__BackingField: 59
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5316945130686544198, guid: 68c2132a989a0dd4e8973562bb88e0a2, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: SM_Prop_Headset_01
+    <ID>k__BackingField: 60
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5347321200611988349, guid: c96bd1cac11bbad4795708c208db158c, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: SM_Prop_HolePunch_01
+    <ID>k__BackingField: 61
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4184775065606615833, guid: b64cc16738ebd6d4c9b21e44aa1220e4, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_ID_Card_01 '
+    <ID>k__BackingField: 62
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3608534846093092879, guid: 8dbf23b107dde46448a63b40d7a28ef7, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Microphone_03 '
+    <ID>k__BackingField: 63
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7717149621470307679, guid: 34b918bc4eccc2c468e9e02a2e8a1a54, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Mints_01 '
+    <ID>k__BackingField: 64
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2613813914081913094, guid: af5b95c47f17e89409791e42aa4c2b6e, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: SM_Prop_Modem_04
+    <ID>k__BackingField: 65
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 8292534465983982840, guid: 9323b6164457e4c47a2f4100a15a99ef, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: SM_Prop_Neon_Cactus_01
+    <ID>k__BackingField: 66
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5003075258900044868, guid: e5525ab7d2da3e44cb635dfd6c591206, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Plant_02 '
+    <ID>k__BackingField: 67
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7254117051286091652, guid: 968fa1116fce63f48a0905157453afa5, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Plant_03 '
+    <ID>k__BackingField: 68
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4788004984219655602, guid: 6571c22271d8ec247ac5c3e93395346a, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Plant_04 '
+    <ID>k__BackingField: 69
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1775483735259259598, guid: a79c0553752441741ae7de32466ae3d0, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Plant_13 '
+    <ID>k__BackingField: 70
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1296089312889715571, guid: e59c3f0a73052a54a8dbde57a7887a9c, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Poster_01 '
+    <ID>k__BackingField: 71
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2659923859686980918, guid: f9d417b6567d76441b1977e89afe74b8, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_PuzzleCube_01 '
+    <ID>k__BackingField: 72
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 8360012675543642831, guid: ea40628de95a52d4bbc7d14d6db7f48a, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Rug_02 '
+    <ID>k__BackingField: 73
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7201710930121551246, guid: 3dd77664d7f26f7428b5979a8e9cf6f8, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Shelf_05 '
+    <ID>k__BackingField: 74
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1914211094054067725, guid: 526e85fddb81bb9489fc81b4ecbf1fe5, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Shelf_06 '
+    <ID>k__BackingField: 75
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4687505287390125847, guid: ad04eefc3247a83418dd11360e847141, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: SM_Prop_Shelf_Wall_02
+    <ID>k__BackingField: 76
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 6413259541650057378, guid: 52688ad57c6b54640bcd2434ab377174, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Socket_Switch_01 '
+    <ID>k__BackingField: 77
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4884892284429759462, guid: 981f0a1c6fbd85b449bdfb570e168262, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Socket_Wall_02 '
+    <ID>k__BackingField: 78
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2461559791501594263, guid: a00ddaaa6fd8f024c8be44befb8d626e, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Speaker_Bluetooth_02 '
+    <ID>k__BackingField: 79
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4817569329341553598, guid: 34b08a1db015efd408c5a926ea38ce70, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_Trophy_01 '
+    <ID>k__BackingField: 80
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3386431886852919318, guid: 3a755d7db62326949b13e12b0000cf5a, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Prop_WallDressing_03 '
+    <ID>k__BackingField: 81
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1019361686068072368, guid: 92043d7b056b8614a808a58ffa9c4f19, type: 3}
+    <Types>k__BackingField: 6
+  - <Name>k__BackingField: 'SM_Wep_ToyGun_Shotgun_01 '
+    <ID>k__BackingField: 82
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2873303503658020213, guid: 705db95abeebafe40878a1359ba19077, type: 3}
+    <Types>k__BackingField: 6
