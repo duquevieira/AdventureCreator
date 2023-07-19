@@ -43,6 +43,21 @@ public class GridData
         return true;
     }
 
+    public int GetRepresenatationIndex(Vector3Int gridPos)
+    {
+        if (!placedObjects.ContainsKey(gridPos))
+            return -1;
+        return placedObjects[gridPos].PlacedObjectIndex;
+    }
+
+    public void RemoveObjectAt(Vector3Int gridPos)
+    {
+        foreach(var pos in placedObjects[gridPos].occupiedPositions)
+        {
+            placedObjects.Remove(pos);
+        }
+    }
+
     public class PlacementData
     {
         public List<Vector3Int> occupiedPositions;
