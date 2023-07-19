@@ -44,7 +44,7 @@ public class PlacementSystem : MonoBehaviour
     private Dictionary<Vector3Int, List<GameObject>> _tilesWithObjects;
     private Vector3 clickedTile;
     private GameObject _selectedObject;
-    
+
     private void Awake()
     {
         Current = this;
@@ -80,7 +80,7 @@ public class PlacementSystem : MonoBehaviour
             {
                 getClickedTile();
                 AddObjectManually();
-            }  
+            }
         }
         if (!_objectToPlace)
         {
@@ -104,7 +104,7 @@ public class PlacementSystem : MonoBehaviour
             }
         }*/
     }
-    
+
     public void SetSelectedObject(GameObject obj)
     {
         if (obj != null)
@@ -116,9 +116,9 @@ public class PlacementSystem : MonoBehaviour
         {
             _selectedObject = null;
         }
-        
+
     }
-   
+
     public void AddObjectManually()
     {
         float maxY = 0.1f;
@@ -128,7 +128,7 @@ public class PlacementSystem : MonoBehaviour
         float areaMaxZ = 0f;
         GameObject topObject = null;
         List<AvailableArea> usableAreas = new List<AvailableArea>();
-        if (_selectedObject!= null)
+        if (_selectedObject != null)
         {
             List<GameObject> objectsInOneTile = getObjectsInOneTile(convertFloatPosToTile(clickedTile));
             if (objectsInOneTile == null)
@@ -147,7 +147,7 @@ public class PlacementSystem : MonoBehaviour
                 Vector3 newClickedTile = clickedTile;
                 foreach (GameObject obj in objectsInOneTile)
                 {
-                    if(convertObjectToObjectType(getObjectType(obj)) != ObjectTypes.Prop)
+                    if (convertObjectToObjectType(getObjectType(obj)) != ObjectTypes.Prop)
                     {
                         topObject = obj;
                         float y = obj.GetComponent<Collider>().bounds.size.y + obj.transform.position.y;
@@ -156,12 +156,12 @@ public class PlacementSystem : MonoBehaviour
                         List<AvailableArea> totalAreas = obj.GetComponent<PlaceableObject>().getOnTopAvailableAreas();
                         foreach (AvailableArea a in totalAreas)
                         {
-                            if ((_temp.GetComponent<Collider>().bounds.size.x <= Mathf.Abs((a.getMaxX()-a.getMinX()))) && (_temp.GetComponent<Collider>().bounds.size.z <= Mathf.Abs(a.getMaxZ()-a.getMinZ())))
+                            if ((_temp.GetComponent<Collider>().bounds.size.x <= Mathf.Abs((a.getMaxX() - a.getMinX()))) && (_temp.GetComponent<Collider>().bounds.size.z <= Mathf.Abs(a.getMaxZ() - a.getMinZ())))
                             {
                                 usableAreas.Add(a);
                             }
                         }
-                    }     
+                    }
                 }
                 if (usableAreas.Count > 0)
                 {
@@ -170,8 +170,8 @@ public class PlacementSystem : MonoBehaviour
                     areaMaxX = usableAreas[randomAreaIndex].getMaxX();
                     areaMinZ = usableAreas[randomAreaIndex].getMinZ();
                     areaMaxZ = usableAreas[randomAreaIndex].getMaxZ();
-                    float x = Random.Range(areaMinX, (areaMaxX - _temp.GetComponent<Collider>().bounds.size.x)) + (_temp.GetComponent<Collider>().bounds.size.x/2);
-                    float z = Random.Range(areaMinZ, (areaMaxZ - _temp.GetComponent<Collider>().bounds.size.z)) + (_temp.GetComponent<Collider>().bounds.size.z/2);
+                    float x = Random.Range(areaMinX, (areaMaxX - _temp.GetComponent<Collider>().bounds.size.x)) + (_temp.GetComponent<Collider>().bounds.size.x / 2);
+                    float z = Random.Range(areaMinZ, (areaMaxZ - _temp.GetComponent<Collider>().bounds.size.z)) + (_temp.GetComponent<Collider>().bounds.size.z / 2);
                     newClickedTile = new Vector3(x, maxY, z);
                     var cloneObj = Instantiate(_selectedObject, newClickedTile, Quaternion.identity);
                     cloneObj.name = cloneObj.name.Split("(")[0];
@@ -204,9 +204,9 @@ public class PlacementSystem : MonoBehaviour
     }
     private void ResetAvailableTiles()
     {
-        for (int i = 0; i < width-1; i++)
+        for (int i = 0; i < width - 1; i++)
         {
-            for (int j = 0; j < height-1; j++)
+            for (int j = 0; j < height - 1; j++)
             {
                 _availableTiles.Add(new Vector3Int(i, 0, j));
             }
@@ -277,7 +277,71 @@ public class PlacementSystem : MonoBehaviour
 
             }
         }
-        //SpawnWalls();
+        SpawnWalls();
+    }
+
+    private void SpawnWalls()
+    {
+        for (int i = 0; i < height; i++)
+        {
+            int randomIndex = Random.Range(0, _structureObjects.Count);
+            GameObject structureObject = _structureObjects[randomIndex];
+            Vector3 leftEdgeTile = new Vector3(-1, 0, i);
+            //List<GameObject> objectsInOneTile = getObjectsInOneTile(convertFloatPosToTile(leftEdgeTile));
+            var cloneObj = Instantiate(structureObject, leftEdgeTile, Quaternion.Euler(0f, 90f, 0f));
+            cloneObj.name = cloneObj.name.Split("(")[0];
+            cloneObj.transform.parent = GameObject.Find("Walls").transform;
+            _objectsInScene.Add(cloneObj);
+            //objectsInOneTile = new List<GameObject>();
+            //objectsInOneTile.Add(cloneObj);
+            //_tilesWithObjects.Remove(convertFloatPosToTile(leftEdgeTile));
+            //_tilesWithObjects.Add(convertFloatPosToTile(leftEdgeTile), objectsInOneTile);
+        }
+        for (int i = 1; i < height + 1; i++)
+        {
+            int randomIndex = Random.Range(0, _structureObjects.Count);
+            GameObject structureObject = _structureObjects[randomIndex];
+            Vector3 rightEdgeTile = new Vector3(width - 1, 0, i);
+            //List<GameObject> objectsInOneTile = getObjectsInOneTile(convertFloatPosToTile(rightEdgeTile));
+            var cloneObj = Instantiate(structureObject, rightEdgeTile, Quaternion.Euler(0f, -90f, 0f));
+            cloneObj.name = cloneObj.name.Split("(")[0];
+            cloneObj.transform.parent = GameObject.Find("Walls").transform;
+            _objectsInScene.Add(cloneObj);
+            //objectsInOneTile = new List<GameObject>();
+            //objectsInOneTile.Add(cloneObj);
+            //_tilesWithObjects.Remove(convertFloatPosToTile(rightEdgeTile));
+            //_tilesWithObjects.Add(convertFloatPosToTile(rightEdgeTile), objectsInOneTile);
+        }
+        for (int i = 0; i < width; i++)
+        {
+            int randomIndex = Random.Range(0, _structureObjects.Count);
+            GameObject structureObject = _structureObjects[randomIndex];
+            Vector3 bottomEdgeTile = new Vector3(i, 0, 0);
+            //List<GameObject> objectsInOneTile = getObjectsInOneTile(convertFloatPosToTile(bottomEdgeTile));
+            var cloneObj = Instantiate(structureObject, bottomEdgeTile, Quaternion.identity);
+            cloneObj.name = cloneObj.name.Split("(")[0];
+            cloneObj.transform.parent = GameObject.Find("Walls").transform;
+            _objectsInScene.Add(cloneObj);
+            //objectsInOneTile = new List<GameObject>();
+            //objectsInOneTile.Add(cloneObj);
+            //_tilesWithObjects.Remove(convertFloatPosToTile(bottomEdgeTile));
+            //_tilesWithObjects.Add(convertFloatPosToTile(bottomEdgeTile), objectsInOneTile);
+        }
+        for (int i = -1; i < width -1; i++)
+        {
+            int randomIndex = Random.Range(0, _structureObjects.Count);
+            GameObject structureObject = _structureObjects[randomIndex];
+            Vector3 topEdgeTile = new Vector3(i, 0, height);
+            //List<GameObject> objectsInOneTile = getObjectsInOneTile(convertFloatPosToTile(topEdgeTile));
+            var cloneObj = Instantiate(structureObject, topEdgeTile, Quaternion.Euler(0f,180f,0f));
+            cloneObj.name = cloneObj.name.Split("(")[0];
+            cloneObj.transform.parent = GameObject.Find("Walls").transform;
+            _objectsInScene.Add(cloneObj);
+            //objectsInOneTile = new List<GameObject>();
+            //objectsInOneTile.Add(cloneObj);
+            //_tilesWithObjects.Remove(convertFloatPosToTile(topEdgeTile));
+            //_tilesWithObjects.Add(convertFloatPosToTile(topEdgeTile), objectsInOneTile);
+        }
     }
     /*private void SpawnWalls()
     {
