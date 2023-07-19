@@ -6,36 +6,44 @@ using UnityEngine.SceneManagement;
 public class LoadMenuScript : MonoBehaviour
 {
     private static Vector3 CAM_POS = new Vector3(0,0,0);
-    private static Vector3 START_CHAR = new Vector3(25,135,0);
-    private static Vector3 END_CHAR = new Vector3(775,135,0);
+    private static Vector3 START_CHAR;
+    private static Vector3 END_CHAR;
     private const float ORTHO_SIZE = 383;
     private const int CAM_Z_OFFSET = -100;
     private const int REFERENCE_WIDTH = 1366;
     private const string CREATE_SCENE = "CreateScene";
-    public GameObject StartMenu;
-    public GameObject LoadingScreen;
     public Image LoadingBar;
     public GameObject Character;
     public GameObject LoadingScreenText;
-    [SerializeField]
-    private LoadList _loadScript;
+
+    [HideInInspector]
+    public static string SaveId;
+    [HideInInspector]
+    public static string GameId;
+    [HideInInspector]
+    public static string SceneToLoad;
     [SerializeField]
     private Camera _mainCamera;
+
+    void Start() {
+        START_CHAR = new Vector3(25,135,0);
+        END_CHAR = new Vector3(775,135,0);
+        loadScene(SceneToLoad);
+    }
 
 
     public void loadScene(string scene)
     {
         LoadingScreenText.SetActive(false);
-        LoadingScreen.GetComponent<CanvasGroup>().blocksRaycasts = true;
         CAM_POS = new Vector3(Screen.width/2, Screen.height/2, CAM_Z_OFFSET);
         _mainCamera.transform.position = CAM_POS;
         _mainCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
         _mainCamera.backgroundColor = Color.black;
         _mainCamera.orthographic = true;
         float scaledSize = CalculateScale();
+        LoadingBar.fillAmount = 0;
         _mainCamera.orthographicSize = scaledSize;
         CaculateCharacterScale();
-        StartMenu.SetActive(false);
         StartCoroutine(LoadSceneAsync(scene));
     }
 
@@ -43,9 +51,6 @@ public class LoadMenuScript : MonoBehaviour
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
         operation.allowSceneActivation = false;
-
-        LoadingScreen.SetActive(true);
-
         while (!operation.isDone)
         {
             float progressValue = Mathf.Clamp01(operation.progress / 0.9F);
@@ -53,6 +58,8 @@ public class LoadMenuScript : MonoBehaviour
             LoadingBar.fillAmount = progressValue;
 
             Vector3 CharacterPos = Vector3.Lerp(START_CHAR, END_CHAR, progressValue);
+            Debug.Log("Start: " + START_CHAR + " End: " + END_CHAR + " Progress: " + progressValue);
+            Debug.Log(CharacterPos);
             Character.transform.position = CharacterPos;
 
             if (progressValue >= 0.9f)
@@ -73,12 +80,12 @@ public class LoadMenuScript : MonoBehaviour
     }
 
     private void loadCreatorScene() {
-        SaveLevel.SaveId = _loadScript.SelectedSave;
+        SaveLevel.SaveId = SaveId;
     }
 
     private void loadPlayScene() {
-        SaveGame.SaveId = _loadScript.SelectedSave;
-        SaveGame.GameId = _loadScript.UserSave;
+        SaveGame.SaveId = SaveId;
+        SaveGame.GameId = GameId;
     }
 
     private float CalculateScale() {
