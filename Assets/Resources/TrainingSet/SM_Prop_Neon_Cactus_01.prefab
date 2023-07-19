@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4980833792271047564}
   - component: {fileID: 4988726373235766102}
   - component: {fileID: 5011439482579639632}
+  - component: {fileID: -2035119695284988190}
   m_Layer: 0
   m_Name: SM_Prop_Neon_Cactus_01
   m_TagString: Untagged
@@ -106,3 +107,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43695507974294742, guid: 5b51e0679cef4884ca91e53beca63fdc, type: 2}
+--- !u!114 &-2035119695284988190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5003075258900044868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

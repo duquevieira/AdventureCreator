@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8392831059775483013}
   - component: {fileID: 8381910634730721071}
   - component: {fileID: 8423140180454579887}
+  - component: {fileID: -179989965227830674}
   m_Layer: 0
   m_Name: SM_Prop_PuzzleCube_01 (4)
   m_TagString: Untagged
@@ -106,3 +107,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43637756705370442, guid: 320319aac82b960409b3275e463ffef2, type: 2}
+--- !u!114 &-179989965227830674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8360012675543642831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

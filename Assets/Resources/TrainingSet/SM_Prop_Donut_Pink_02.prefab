@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6871273205922566862}
   - component: {fileID: 6880200898895254112}
   - component: {fileID: 6902514053274025060}
+  - component: {fileID: -4386208011302526842}
   m_Layer: 0
   m_Name: SM_Prop_Donut_Pink_02
   m_TagString: Untagged
@@ -106,3 +107,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43974950894566398, guid: 41cc1bd1103182649a7e76c511c95925, type: 2}
+--- !u!114 &-4386208011302526842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6857446390926466326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Object;
+using static PlaceableObject;
 
-public class Prop : Object
+public class Prop : PlaceableObject
 {
     /*public override int[] getAdjacentPositionsProbabilities(ObjectTypes objectType)
     {

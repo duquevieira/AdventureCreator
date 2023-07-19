@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2885150711438487622}
   - component: {fileID: 2895336608062642746}
   - component: {fileID: 2926092170766288792}
+  - component: {fileID: -5238661809551783052}
   m_Layer: 0
   m_Name: SM_Bld_Floor_Carpet_01 (47)
   m_TagString: Untagged
@@ -105,3 +106,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.5, y: 0, z: 2.5}
   m_Center: {x: -1.25, y: 0, z: 1.2500012}
+--- !u!114 &-5238661809551783052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2916143165660384406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

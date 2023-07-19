@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6691403600363726909}
   - component: {fileID: 6701144017925055731}
   - component: {fileID: 6648263612796523563}
+  - component: {fileID: 691964794169356276}
   m_Layer: 0
   m_Name: SM_Bld_Pillar_Exterior_04 (8)
   m_TagString: Untagged
@@ -105,3 +106,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.42820188, y: 3.0065417, z: 0.42820188}
   m_Center: {x: 0.0000018328428, y: 1.5032709, z: -0.0000006109476}
+--- !u!114 &691964794169356276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678427270474298935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

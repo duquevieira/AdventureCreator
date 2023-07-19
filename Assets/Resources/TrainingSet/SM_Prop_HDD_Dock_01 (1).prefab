@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5312817539149271970}
   - component: {fileID: 5303369079499727680}
   - component: {fileID: 5272430855371894920}
+  - component: {fileID: 1180796246632888064}
   m_Layer: 0
   m_Name: SM_Prop_HDD_Dock_01 (1)
   m_TagString: Untagged
@@ -106,3 +107,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43516823462314164, guid: 542c0aaa9ffba1c4ea9451e2a28b1967, type: 2}
+--- !u!114 &1180796246632888064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316945130686544198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Table : Object
+public class Table : PlaceableObject
 {
     /*public override int[] getAdjacentPositionsProbabilities(ObjectTypes objectType)
     {

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3029264508169432395}
   - component: {fileID: 3030106455245119661}
   - component: {fileID: 3030824070998630155}
+  - component: {fileID: -3304694996266599766}
   m_Layer: 0
   m_Name: SM_Prop_Cord_Desk_01 (4)
   m_TagString: Untagged
@@ -175,3 +176,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43945813115845130, guid: a05972faf1336344db08b9ac285d614f, type: 2}
+--- !u!114 &-3304694996266599766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3093804156630088937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

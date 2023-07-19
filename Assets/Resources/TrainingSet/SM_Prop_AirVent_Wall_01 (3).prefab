@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2272249706630424946}
   - component: {fileID: 2282858138045329476}
   - component: {fileID: 2242403105288947130}
+  - component: {fileID: -1376438515225951067}
   m_Layer: 0
   m_Name: SM_Prop_AirVent_Wall_01 (3)
   m_TagString: Untagged
@@ -106,3 +107,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43091940603964502, guid: 363ac1552f502894bb4c0a58363d8d0d, type: 2}
+--- !u!114 &-1376438515225951067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304027743697801042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6628b62d1d3ac81478e52dd56946c5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

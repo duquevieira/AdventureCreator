@@ -45,7 +45,6 @@ public class PlacementUI : MonoBehaviour
             {
                 //_dropdown.onValueChanged.AddListener(index => OnDropDownChange(_mainObjects, index));
                 Vector3 clickedTile = _placementSys.getClickedTile();
-                Debug.Log(clickedTile);
                 Vector3Int roundedClickedTile = _placementSys.convertFloatPosToTile(clickedTile);
                 _clickedTileText.text = "Clicked Tile: " + roundedClickedTile;
             }
