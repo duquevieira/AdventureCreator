@@ -7,7 +7,8 @@ using UnityEngine.EventSystems;
 public class MouseCoords : MonoBehaviour
 {
     [SerializeField] private LayerMask placementLayerMask;
-    public event Action OnClicked, OnExit, OnDelete;
+    [SerializeField] private PlacementSystemV2 _placementSys;
+    public event Action OnClicked, OnExit, Rotate;
     private Vector3 _lastPos;
 
 
@@ -17,8 +18,8 @@ public class MouseCoords : MonoBehaviour
             OnClicked?.Invoke();
         if (Input.GetMouseButtonDown(1))
             OnExit?.Invoke();
-        if (Input.GetKeyDown(KeyCode.Delete))
-            OnDelete?.Invoke();
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+            _placementSys.RotateStructure();
     }
 
     public bool IsPointerOverUI()

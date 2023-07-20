@@ -1,12 +1,16 @@
+using MoreMountains.Feedbacks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
 public class PlacementState : IBuildingState
 {
     private int _selectedObjectIndex = -1;
+    private Quaternion _rotation = new Quaternion();
+    private Vector2Int _size;
     string Name;
     Grid Grid;
     PreviewSystem PreviewSystem;
@@ -28,9 +32,10 @@ public class PlacementState : IBuildingState
         ObjectPlacer = objectPlacer;
 
         _selectedObjectIndex = database.objectsDatabase.FindIndex(data => data.Name == name);
+        _size = Database.objectsDatabase[_selectedObjectIndex].Size;
         if (_selectedObjectIndex > -1)
         {
-            previewSystem.StartShowingPlacementPreview(database.objectsDatabase[_selectedObjectIndex].Prefab, database.objectsDatabase[_selectedObjectIndex].Size);
+            previewSystem.StartShowingPlacementPreview(database.objectsDatabase[_selectedObjectIndex].Prefab, _size);
         }
         else
             throw new System.Exception($"No object with name {name}");
@@ -50,17 +55,25 @@ public class PlacementState : IBuildingState
         GridData selectedData = GetSelectedData(Database.objectsDatabase[_selectedObjectIndex].Types);
         if (selectedData == StructureData)
         {
-            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.CellToWorld(gridPos));
+            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.CellToWorld(gridPos), _rotation);
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), false);
             PreviewSystem.UpdatePreviewPosition(Grid.CellToWorld(gridPos), false);
         } else
         {
-            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.GetCellCenterWorld(gridPos));
+            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.GetCellCenterWorld(gridPos), _rotation);
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), false);
             PreviewSystem.UpdatePreviewPosition(Grid.GetCellCenterWorld(gridPos), false);
         }
+        selectedData.AddObjectAt(gridPos,_size, Database.objectsDatabase[_selectedObjectIndex].Name, index);
+    }
 
-        selectedData.AddObjectAt(gridPos, Database.objectsDatabase[_selectedObjectIndex].Size, Database.objectsDatabase[_selectedObjectIndex].Name, index);
+    public Quaternion Rotate()
+    {
+        _rotation = PreviewSystem.RotatePreview();
+        Vector2Int _newSize = PreviewSystem.RotateCursor(_size);
+        //Database.objectsDatabase[_selectedObjectIndex].Size = _newSize; 
+        _size = _newSize;
+        return _rotation;
     }
 
 
@@ -96,7 +109,7 @@ public class PlacementState : IBuildingState
     private bool CheckPlacementValidity(Vector3Int gridPos, int selectedObjectIndex)
     {
         GridData selectedData = GetSelectedData(Database.objectsDatabase[selectedObjectIndex].Types);
-        return selectedData.CanPlacedObjectAt(gridPos, Database.objectsDatabase[selectedObjectIndex].Size);
+        return selectedData.CanPlacedObjectAt(gridPos, _size);
     }
 
 }

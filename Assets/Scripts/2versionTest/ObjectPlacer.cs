@@ -8,10 +8,11 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField]
     private List<GameObject> _placedGameObjects = new List<GameObject>();
 
-    public int PlaceObject(GameObject prefab, Vector3 position)
+    public int PlaceObject(GameObject prefab, Vector3 position, Quaternion rotation)
     {
         GameObject objClone = Instantiate(prefab);
         objClone.transform.position = position;
+        objClone.transform.rotation = rotation;
         _placedGameObjects.Add(objClone);
         return _placedGameObjects.Count - 1;
     }

@@ -51,7 +51,12 @@ public class PlacementSystemV2 : MonoBehaviour
         Vector3 mousePos = _inputManager.getMouseWorldPosition();
         Vector3Int gridPos = _grid.WorldToCell(mousePos);
         buildingState.OnAction(gridPos);
-       
+    }
+
+    public void RotateStructure()
+    {
+        if (buildingState != null)
+            buildingState.Rotate();
     }
 
     //private bool CheckPlacementValidity(Vector3Int gridPos, int selectedObjectIndex)

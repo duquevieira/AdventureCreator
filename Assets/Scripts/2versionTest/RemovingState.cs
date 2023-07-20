@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class RemovingState : IBuildingState
 {
@@ -31,6 +32,7 @@ public class RemovingState : IBuildingState
     {
         PreviewSystem.StopShowingPreview();
     }
+
 
     public void OnAction(Vector3Int gridPos)
     {
@@ -70,5 +72,10 @@ public class RemovingState : IBuildingState
     {
         bool validity = CheckIfSelectionIsValid(gridPos);
         PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), validity);
+    }
+
+    public Quaternion Rotate()
+    {
+        return new Quaternion();
     }
 }

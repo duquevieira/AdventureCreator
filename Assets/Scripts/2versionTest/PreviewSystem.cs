@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PreviewSystem : MonoBehaviour
@@ -98,5 +99,19 @@ public class PreviewSystem : MonoBehaviour
         _cellIndicator.SetActive(true);
         PrepareCursor(Vector2Int.one);
         ApplyFeedbackToCursor(false);
+    }
+
+    public Quaternion RotatePreview()
+    {
+        _previewObject.transform.Rotate(new Vector3(0, 90, 0));
+        Quaternion rotation = _previewObject.transform.rotation;
+        return rotation;
+    }
+
+    public Vector2Int RotateCursor(Vector2Int originalSize)
+    {
+        Vector2Int _newSize = new Vector2Int(originalSize.y, originalSize.x);
+        PrepareCursor(_newSize);
+        return _newSize;
     }
 }
