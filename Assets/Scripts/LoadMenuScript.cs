@@ -77,6 +77,7 @@ public class LoadMenuScript : MonoBehaviour
             yield return null;
         }
         Character.transform.position = END_CHAR;
+        yield return null;
     }
 
     private void loadCreatorScene() {

@@ -14,7 +14,7 @@ public class LoadList : MonoBehaviour
     private const string SAVE_ID = "019d5349-668e-458f-a112-a49970266f07";
     private const string EMPTY = "Empty";
     private const string WorldSaveSchemaID = "019d5349-668e-458f-a112-a49970266f07";
-    private int index = 0;
+    private int _index = 0;
     private static List<string> _availableSaves;
     private static List<string> _levelImages;
     private static Dictionary<string, string> _playerSaves;
@@ -23,21 +23,29 @@ public class LoadList : MonoBehaviour
     {
         _availableSaves = new List<string>();
         _playerSaves = new Dictionary<string, string>();
+        _levelImages = new List<string>();
         populateLevels();
         populatePlayerSaves();
+        updateLevel();
     }
 
     public void selectSave() {
-        SelectedSave = _availableSaves[index];
-        UserSave = _playerSaves[SelectedSave];
+        SelectedSave = _availableSaves[_index];
+        if(_playerSaves.ContainsKey(SelectedSave)) {
+            UserSave = _playerSaves[SelectedSave];
+        }
     }
 
     public void prevSave() {
-        if(index >= 1) index--;
+        Debug.Log("Previous!");
+        if(_index >= 1) _index--;
+        updateLevel();
     }
 
     public void nextSave() {
-        if(index < _availableSaves.Count-1) index++;
+        Debug.Log("Next!");
+        if(_index < _availableSaves.Count-1) _index++;
+        updateLevel();
     }
 
     public void quitGame() {
@@ -49,8 +57,11 @@ public class LoadList : MonoBehaviour
     }
     
     private void updateLevel() {
-        SaveImage.LoadImageFromBase64(_levelImages[index]);
-        SaveText.GetComponent<TextMeshProUGUI>().text = _availableSaves[index];
+        if(_levelImages.Count > 0) {
+            SaveImage.LoadImageFromBase64(_levelImages[_index]);
+            SaveText.GetComponent<TextMeshProUGUI>().text = _availableSaves[_index];
+            Debug.Log(_availableSaves[_index]);
+        }
     }
 
     private void populateLevels()
