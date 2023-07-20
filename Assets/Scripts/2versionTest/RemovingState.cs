@@ -10,15 +10,17 @@ public class RemovingState : IBuildingState
     Grid Grid;
     PreviewSystem PreviewSystem;
     GridData FloorData;
+    GridData StructureData;
     GridData FurnitureData;
     ObjectPlacer ObjectPlacer;
 
-    public RemovingState(string name, Grid grid, PreviewSystem previewSystem, GridData floorData, GridData furnitureData, ObjectPlacer objectPlacer)
+    public RemovingState(string name, Grid grid, PreviewSystem previewSystem, GridData floorData,GridData structureData, GridData furnitureData, ObjectPlacer objectPlacer)
     {
         Name = name;
         Grid = grid;
         PreviewSystem = previewSystem;
         FloorData = floorData;
+        StructureData = structureData;
         FurnitureData = furnitureData;
         ObjectPlacer = objectPlacer;
 
@@ -33,13 +35,17 @@ public class RemovingState : IBuildingState
     public void OnAction(Vector3Int gridPos)
     {
         GridData selectedData = null;
-        if(!FurnitureData.CanPlacedObjectAt(gridPos,Vector2Int.one))
+        if (!FurnitureData.CanPlacedObjectAt(gridPos, Vector2Int.one))
         {
             selectedData = FurnitureData;
-        } else if (!FloorData.CanPlacedObjectAt(gridPos, Vector2Int.one))
-        {
-            selectedData = FloorData;
         }
+        else if (!StructureData.CanPlacedObjectAt(gridPos, Vector2Int.one))
+        {
+            selectedData = StructureData;
+        }
+        else if (!FloorData.CanPlacedObjectAt(gridPos, Vector2Int.one))
+            selectedData = FloorData;
+
         if (selectedData == null)
         {
             // nothing to remove
@@ -52,7 +58,7 @@ public class RemovingState : IBuildingState
             ObjectPlacer.RemoveObjectAt(_gameObjectIndex);
         }
         Vector3 cellPosition = Grid.CellToWorld(gridPos);
-        PreviewSystem.UpdatePosition(cellPosition, CheckIfSelectionIsValid(gridPos));
+        PreviewSystem.UpdateCursorPosition(cellPosition, CheckIfSelectionIsValid(gridPos));
     }
 
     private bool CheckIfSelectionIsValid(Vector3Int gridPos)
@@ -63,6 +69,6 @@ public class RemovingState : IBuildingState
     public void UpdateState(Vector3Int gridPos)
     {
         bool validity = CheckIfSelectionIsValid(gridPos);
-        PreviewSystem.UpdatePosition(Grid.CellToWorld(gridPos), validity);
+        PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), validity);
     }
 }

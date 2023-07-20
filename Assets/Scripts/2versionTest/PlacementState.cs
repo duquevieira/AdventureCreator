@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.IMGUI.Controls;
@@ -11,16 +12,18 @@ public class PlacementState : IBuildingState
     PreviewSystem PreviewSystem;
     ObjectsDataBase Database;
     GridData FloorData;
+    GridData StructureData;
     GridData FurnitureData;
     ObjectPlacer ObjectPlacer;
 
-    public PlacementState(string name, Grid grid, PreviewSystem previewSystem, ObjectsDataBase database, GridData floorData, GridData furnitureData, ObjectPlacer objectPlacer)
+    public PlacementState(string name, Grid grid, PreviewSystem previewSystem, ObjectsDataBase database, GridData floorData, GridData structureData, GridData furnitureData, ObjectPlacer objectPlacer)
     {
         Name = name;
         Grid = grid;
         PreviewSystem = previewSystem;
         Database = database;
         FloorData = floorData;
+        StructureData = structureData;
         FurnitureData = furnitureData;
         ObjectPlacer = objectPlacer;
 
@@ -43,25 +46,57 @@ public class PlacementState : IBuildingState
         bool placementValidity = CheckPlacementValidity(gridPos, _selectedObjectIndex);
         if (!placementValidity)
             return;
+        int index;
+        GridData selectedData = GetSelectedData(Database.objectsDatabase[_selectedObjectIndex].Types);
+        if (selectedData == StructureData)
+        {
+            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.CellToWorld(gridPos));
+            PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), false);
+            PreviewSystem.UpdatePreviewPosition(Grid.CellToWorld(gridPos), false);
+        } else
+        {
+            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.GetCellCenterWorld(gridPos));
+            PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), false);
+            PreviewSystem.UpdatePreviewPosition(Grid.GetCellCenterWorld(gridPos), false);
+        }
 
-        int index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.CellToWorld(gridPos));
-
-        GridData selectedData = Database.objectsDatabase[_selectedObjectIndex].Types == ObjectData.ObjectTypes.Floor ? FloorData : FurnitureData;
         selectedData.AddObjectAt(gridPos, Database.objectsDatabase[_selectedObjectIndex].Size, Database.objectsDatabase[_selectedObjectIndex].Name, index);
-        PreviewSystem.UpdatePosition(Grid.CellToWorld(gridPos), false);
     }
 
-    private bool CheckPlacementValidity(Vector3Int gridPos, int selectedObjectIndex)
-    {
-        GridData selectedData = Database.objectsDatabase[selectedObjectIndex].Types == ObjectData.ObjectTypes.Floor ? FloorData : FurnitureData;
-        return selectedData.CanPlacedObjectAt(gridPos, Database.objectsDatabase[selectedObjectIndex].Size);
-    }
 
     public void UpdateState(Vector3Int gridPos)
     {
         bool placementValidity = CheckPlacementValidity(gridPos, _selectedObjectIndex);
+        GridData selectedData = GetSelectedData(Database.objectsDatabase[_selectedObjectIndex].Types);
 
-        PreviewSystem.UpdatePosition(Grid.CellToWorld(gridPos), placementValidity);
+        if (selectedData == StructureData)
+        {
+            PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), placementValidity);
+            PreviewSystem.UpdatePreviewPosition(Grid.CellToWorld(gridPos), placementValidity);
+        }
+        else
+        {
+            PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), placementValidity);
+            PreviewSystem.UpdatePreviewPosition(Grid.GetCellCenterWorld(gridPos), placementValidity);
+        }
+    }
+
+    private GridData GetSelectedData(ObjectData.ObjectTypes objectType)
+    {
+        switch (objectType)
+        {
+            case ObjectData.ObjectTypes.Floor:
+                return FloorData;
+            case ObjectData.ObjectTypes.Wall:
+                return StructureData;
+            default:
+                return FurnitureData;
+        }
+    }
+    private bool CheckPlacementValidity(Vector3Int gridPos, int selectedObjectIndex)
+    {
+        GridData selectedData = GetSelectedData(Database.objectsDatabase[selectedObjectIndex].Types);
+        return selectedData.CanPlacedObjectAt(gridPos, Database.objectsDatabase[selectedObjectIndex].Size);
     }
 
 }

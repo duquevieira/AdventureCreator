@@ -8,6 +8,7 @@ public class MouseCoords : MonoBehaviour
 {
     [SerializeField] private LayerMask placementLayerMask;
     public event Action OnClicked, OnExit, OnDelete;
+    private Vector3 _lastPos;
 
 
     private void Update()
@@ -33,7 +34,6 @@ public class MouseCoords : MonoBehaviour
         {
             return Vector3.zero;
         }*/
-        Vector3 _lastPos = new Vector3();
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = Camera.main.nearClipPlane;
         Ray ray = Camera.main.ScreenPointToRay(mousePos);

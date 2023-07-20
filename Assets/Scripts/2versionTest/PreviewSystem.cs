@@ -54,21 +54,25 @@ public class PreviewSystem : MonoBehaviour
             Destroy(_previewObject);
     }
 
-    public void UpdatePosition(Vector3 position, bool validity)
+    public void UpdateCursorPosition(Vector3 position, bool validity)
     {
-        if(_previewObject!= null)
-        {
-            MovePreview(position);
-            ApplyFeedbackToPreview(validity);
-        }
         MoveCursor(position);
         ApplyFeedbackToCursor(validity);
     }
 
+    public void UpdatePreviewPosition(Vector3 position, bool validity)
+    {
+        if (_previewObject != null)
+        {
+            MovePreview(position);
+            ApplyFeedbackToPreview(validity);
+        }
+    }
+
     private void ApplyFeedbackToPreview(bool validity)
     {
-        Color c = validity ? Color.white : Color.red;
-        c.a = 0.5f;
+        Color c = validity ? Color.cyan : Color.red;
+        c.a = 0.7f;
         _previewMaterialInstance.color = c;
     }
 
