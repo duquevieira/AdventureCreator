@@ -20,6 +20,8 @@ public class MouseCoords : MonoBehaviour
             OnExit?.Invoke();
         if (Input.GetKeyDown(KeyCode.LeftShift))
             _placementSys.RotateStructure();
+        if (Input.GetKeyDown(KeyCode.Delete))
+            _placementSys.StartRemoving();
     }
 
     public bool IsPointerOverUI()

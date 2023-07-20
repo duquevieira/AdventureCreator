@@ -33,6 +33,7 @@ public class PlacementState : IBuildingState
 
         _selectedObjectIndex = database.objectsDatabase.FindIndex(data => data.Name == name);
         _size = Database.objectsDatabase[_selectedObjectIndex].Size;
+        _rotation = database.objectsDatabase[_selectedObjectIndex].Prefab.transform.rotation;
         if (_selectedObjectIndex > -1)
         {
             previewSystem.StartShowingPlacementPreview(database.objectsDatabase[_selectedObjectIndex].Prefab, _size);
@@ -71,7 +72,6 @@ public class PlacementState : IBuildingState
     {
         _rotation = PreviewSystem.RotatePreview();
         Vector2Int _newSize = PreviewSystem.RotateCursor(_size);
-        //Database.objectsDatabase[_selectedObjectIndex].Size = _newSize; 
         _size = _newSize;
         return _rotation;
     }

@@ -14,6 +14,9 @@
         },
         {
             "m_Id": "141b390879c143738b8f560d5c62b42e"
+        },
+        {
+            "m_Id": "4bddcb5fb951472693082d22c563f457"
         }
     ],
     "m_Keywords": [],
@@ -77,6 +80,9 @@
         },
         {
             "m_Id": "4981581426f4458bad7da8c87519b3fa"
+        },
+        {
+            "m_Id": "f558e799a9354b0396cff0558837eb28"
         }
     ],
     "m_GroupDatas": [],
@@ -290,6 +296,20 @@
                     "m_Id": "a1a5768133d142ea914424bbe9c0f495"
                 },
                 "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "f558e799a9354b0396cff0558837eb28"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "cfe9c0bd47f041d781fd5c6523962a16"
+                },
+                "m_SlotId": 194490741
             }
         }
     ],
@@ -797,6 +817,33 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector2ShaderProperty",
+    "m_ObjectId": "4bddcb5fb951472693082d22c563f457",
+    "m_Guid": {
+        "m_GuidSerialized": "bc64e401-8800-4020-9304-dbf473415a57"
+    },
+    "m_Name": "Offeset",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Offeset",
+    "m_DefaultReferenceName": "_Offeset",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "4c2de5d10ed64ce0b386714e54217b9b",
@@ -842,6 +889,27 @@
         "e32": 0.0,
         "e33": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
+    "m_ObjectId": "55a2f1434b1a4f88ba1c8dfb4997912b",
+    "m_Id": 0,
+    "m_DisplayName": "Offeset",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_Labels": []
 }
 
 {
@@ -1778,6 +1846,9 @@
         },
         {
             "m_Id": "141b390879c143738b8f560d5c62b42e"
+        },
+        {
+            "m_Id": "4bddcb5fb951472693082d22c563f457"
         }
     ]
 }
@@ -2133,6 +2204,41 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "f558e799a9354b0396cff0558837eb28",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -471.0,
+            "y": -178.99996948242188,
+            "width": 116.0,
+            "height": 34.00001525878906
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "55a2f1434b1a4f88ba1c8dfb4997912b"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "4bddcb5fb951472693082d22c563f457"
+    }
 }
 
 {

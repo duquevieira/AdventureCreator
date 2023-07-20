@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlacementSystemV2 : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlacementSystemV2 : MonoBehaviour
     [SerializeField] private GameObject _gridVisualization;
     [SerializeField] private PreviewSystem _preview;
     [SerializeField] private ObjectPlacer _objectPlacer;
+    [SerializeField] private Vector2Int _gridSize;
     IBuildingState buildingState;
     private GridData _floorData, _structureData, _furnitureData;
     private Vector3Int _lastDetectedPosition = Vector3Int.zero;
@@ -21,8 +23,8 @@ public class PlacementSystemV2 : MonoBehaviour
         _floorData = new GridData();
         _structureData = new GridData();
         _furnitureData = new GridData();
+        _gridVisualization.transform.localScale = Vector3.zero + new Vector3(_gridSize.x/10f, 1, _gridSize.y / 10f);
     }
-
 
     public void StartPlacement(string name)
     {
