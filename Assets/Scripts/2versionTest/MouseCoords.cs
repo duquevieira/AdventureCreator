@@ -8,7 +8,7 @@ public class MouseCoords : MonoBehaviour
 {
     [SerializeField] private LayerMask placementLayerMask;
     [SerializeField] private PlacementSystemV2 _placementSys;
-    public event Action OnClicked, OnExit, Rotate;
+    public event Action OnClicked, OnExit, OnDrag;
     private Vector3 _lastPos;
 
 
@@ -22,6 +22,8 @@ public class MouseCoords : MonoBehaviour
             _placementSys.RotateStructure();
         if (Input.GetKeyDown(KeyCode.Delete))
             _placementSys.StartRemoving();
+        if (Input.GetMouseButton(0))
+            _placementSys.DragStructure();
     }
 
     public bool IsPointerOverUI()

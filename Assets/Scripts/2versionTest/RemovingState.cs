@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class RemovingState : IBuildingState
 {
     private int _gameObjectIndex = -1;
-    string Name;
+    //string Name;
     Grid Grid;
     PreviewSystem PreviewSystem;
     GridData FloorData;
@@ -15,9 +15,9 @@ public class RemovingState : IBuildingState
     GridData FurnitureData;
     ObjectPlacer ObjectPlacer;
 
-    public RemovingState(string name, Grid grid, PreviewSystem previewSystem, GridData floorData,GridData structureData, GridData furnitureData, ObjectPlacer objectPlacer)
+    public RemovingState(/*string name,*/ Grid grid, PreviewSystem previewSystem, GridData floorData,GridData structureData, GridData furnitureData, ObjectPlacer objectPlacer)
     {
-        Name = name;
+        //Name = name;
         Grid = grid;
         PreviewSystem = previewSystem;
         FloorData = floorData;
@@ -79,5 +79,9 @@ public class RemovingState : IBuildingState
     public Quaternion Rotate()
     {
         return new Quaternion();
+    }
+
+    public void Drag()
+    {
     }
 }

@@ -26,6 +26,20 @@ public class PlacementSystemV2 : MonoBehaviour
         _gridVisualization.transform.localScale = Vector3.zero + new Vector3(_gridSize.x/10f, 1, _gridSize.y / 10f);
     }
 
+    private void Update()
+    {
+        if (buildingState == null)
+            return;
+        Vector3 mousePos = _inputManager.getMouseWorldPosition();
+        Vector3Int gridPos = _grid.WorldToCell(mousePos);
+        if (_lastDetectedPosition != gridPos)
+        {
+            buildingState.UpdateState(gridPos);
+            _lastDetectedPosition = gridPos;
+        }
+
+    }
+
     public void StartPlacement(string name)
     {
         StopPlacement();
@@ -39,7 +53,7 @@ public class PlacementSystemV2 : MonoBehaviour
     {
         StopPlacement();
         _gridVisualization.SetActive(true);
-        buildingState = new RemovingState(name, _grid, _preview, _floorData,_structureData, _furnitureData, _objectPlacer);
+        buildingState = new RemovingState(/*name,*/ _grid, _preview, _floorData,_structureData, _furnitureData, _objectPlacer);
         _inputManager.OnClicked += PlaceStructure;
         _inputManager.OnExit += StopPlacement;
     }
@@ -53,12 +67,6 @@ public class PlacementSystemV2 : MonoBehaviour
         Vector3 mousePos = _inputManager.getMouseWorldPosition();
         Vector3Int gridPos = _grid.WorldToCell(mousePos);
         buildingState.OnAction(gridPos);
-    }
-
-    public void RotateStructure()
-    {
-        if (buildingState != null)
-            buildingState.Rotate();
     }
 
     //private bool CheckPlacementValidity(Vector3Int gridPos, int selectedObjectIndex)
@@ -79,17 +87,14 @@ public class PlacementSystemV2 : MonoBehaviour
         buildingState = null;
     }
 
-    private void Update()
+    public void RotateStructure()
     {
-        if (buildingState==null)
-            return;
-        Vector3 mousePos = _inputManager.getMouseWorldPosition();
-        Vector3Int gridPos = _grid.WorldToCell(mousePos);
-        if (_lastDetectedPosition != gridPos)
-        {
-            buildingState.UpdateState(gridPos);
-            _lastDetectedPosition = gridPos;
-        }
-        
+        if (buildingState != null)
+            buildingState.Rotate();
+    }
+        public void DragStructure()
+    {
+        if (buildingState != null)
+            buildingState.Drag();
     }
 }

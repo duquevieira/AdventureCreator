@@ -6,4 +6,5 @@ public interface IBuildingState
     void OnAction(Vector3Int gridPos);
     void UpdateState(Vector3Int gridPos);
     Quaternion Rotate();
+    void Drag();
 }
