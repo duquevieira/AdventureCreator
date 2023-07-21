@@ -11,6 +11,7 @@ public class PlacementState : IBuildingState
     private int _selectedObjectIndex = -1;
     private Quaternion _rotation = new Quaternion();
     private Vector2Int _size;
+    private Vector3 _structureRotatedPosition = new Vector3();
     string Name;
     Grid Grid;
     PreviewSystem PreviewSystem;
@@ -49,16 +50,17 @@ public class PlacementState : IBuildingState
 
     public void OnAction(Vector3Int gridPos)
     {
+        int index;
         bool placementValidity = CheckPlacementValidity(gridPos, _selectedObjectIndex);
         if (!placementValidity)
             return;
-        int index;
+
         GridData selectedData = GetSelectedData(Database.objectsDatabase[_selectedObjectIndex].Types);
         if (selectedData == StructureData)
         {
-            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.CellToWorld(gridPos), _rotation);
-            PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), false);
-            PreviewSystem.UpdatePreviewPosition(Grid.CellToWorld(gridPos), false);
+            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, _structureRotatedPosition, _rotation);
+            PreviewSystem.UpdateCursorPosition(_structureRotatedPosition, false);
+            PreviewSystem.UpdatePreviewPosition(_structureRotatedPosition, false);
         } else
         {
             index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.GetCellCenterWorld(gridPos), _rotation);
@@ -68,11 +70,39 @@ public class PlacementState : IBuildingState
         selectedData.AddObjectAt(gridPos,_size, Database.objectsDatabase[_selectedObjectIndex].Name, index);
     }
 
+    private Vector3 GetPositionOfRotatedStructure(Quaternion rotation, Vector3 gridPos )
+    {
+        switch(rotation.eulerAngles.y)
+        {
+            case 90:
+                return gridPos;
+            case 180:
+                return gridPos += new Vector3Int(0, 0, 1);
+            case 270:
+                return gridPos += new Vector3Int(1, 0, 1);
+            case 0:
+                return gridPos += new Vector3Int(1, 0, 0);
+            default:
+                return gridPos;
+        }
+    }
+
     public Quaternion Rotate()
     {
-        _rotation = PreviewSystem.RotatePreview();
-        Vector2Int _newSize = PreviewSystem.RotateCursor(_size);
-        _size = _newSize;
+        GridData selectedData = GetSelectedData(Database.objectsDatabase[_selectedObjectIndex].Types);
+        if (selectedData != StructureData)
+        {
+            _rotation = PreviewSystem.RotatePreviewCenter();
+            Vector2Int _newSize = PreviewSystem.RotateCursor(_size);
+            _size = _newSize;
+        } else
+        {
+            Transform transform = PreviewSystem.RotatePreviewEdges();
+            _rotation = transform.rotation;
+            _structureRotatedPosition = transform.position;
+            Vector2Int _newSize = PreviewSystem.RotateCursor(_size);
+            _size = _newSize;
+        }
         return _rotation;
     }
 
@@ -81,11 +111,12 @@ public class PlacementState : IBuildingState
     {
         bool placementValidity = CheckPlacementValidity(gridPos, _selectedObjectIndex);
         GridData selectedData = GetSelectedData(Database.objectsDatabase[_selectedObjectIndex].Types);
+        _structureRotatedPosition = GetPositionOfRotatedStructure(_rotation, Grid.CellToWorld(gridPos));
 
         if (selectedData == StructureData)
         {
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), placementValidity);
-            PreviewSystem.UpdatePreviewPosition(Grid.CellToWorld(gridPos), placementValidity);
+            PreviewSystem.UpdatePreviewPosition(_structureRotatedPosition, placementValidity);
         }
         else
         {

@@ -11,6 +11,7 @@ public class PlacementUI : MonoBehaviour
     [SerializeField] private Button _addButton;
     //[SerializeField] private Button _delButton;
     [SerializeField] private PlacementSystem _placementSys;
+    [SerializeField] private PlacementSystemV2 _placementSys2;
     [SerializeField] private SwitchCreateMode _createMode;
     private List<GameObject> _mainObjects;
 
@@ -58,6 +59,9 @@ public class PlacementUI : MonoBehaviour
     {
         _clickedTileText.enabled = false;
         _clickedObjectText.enabled = false;
+        _placementSys2.StopPlacement();
+             
+
         //_addButton.enabled = false;
     }
 
@@ -65,6 +69,7 @@ public class PlacementUI : MonoBehaviour
     {
         _clickedTileText.enabled = true;
         _clickedObjectText.enabled = true;
+        _placementSys2._gridVisualization.SetActive(true);
         //_addButton.enabled = true;
     }
 

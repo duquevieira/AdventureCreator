@@ -225,7 +225,7 @@ MonoBehaviour:
     <Types>k__BackingField: 6
   - <Name>k__BackingField: 'SM_Prop_Desk_01 '
     <ID>k__BackingField: 42
-    <Size>k__BackingField: {x: 2, y: 1}
+    <Size>k__BackingField: {x: 3, y: 1}
     <Prefab>k__BackingField: {fileID: 8192783645895324966, guid: 15c39c3ecbe386a458e0934c5188c419, type: 3}
     <Types>k__BackingField: 2
   - <Name>k__BackingField: 'SM_Prop_Desk_02 '

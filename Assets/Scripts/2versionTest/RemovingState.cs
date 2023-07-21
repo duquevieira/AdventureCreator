@@ -65,13 +65,15 @@ public class RemovingState : IBuildingState
 
     private bool CheckIfSelectionIsValid(Vector3Int gridPos)
     {
-        return !(FurnitureData.CanPlacedObjectAt(gridPos, Vector2Int.one) && !FloorData.CanPlacedObjectAt(gridPos, Vector2Int.one));
+        if (!(FurnitureData.CanPlacedObjectAt(gridPos, Vector2Int.one)) || !(FloorData.CanPlacedObjectAt(gridPos, Vector2Int.one)))
+            return true;
+        return false;
     }
 
     public void UpdateState(Vector3Int gridPos)
     {
         bool validity = CheckIfSelectionIsValid(gridPos);
-        PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), validity);
+        PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), !validity);
     }
 
     public Quaternion Rotate()

@@ -9,7 +9,7 @@ public class PlacementSystemV2 : MonoBehaviour
     [SerializeField] private MouseCoords _inputManager;
     [SerializeField] private Grid _grid;
     [SerializeField] private ObjectsDataBase _database;
-    [SerializeField] private GameObject _gridVisualization;
+    [SerializeField] public GameObject _gridVisualization;
     [SerializeField] private PreviewSystem _preview;
     [SerializeField] private ObjectPlacer _objectPlacer;
     [SerializeField] private Vector2Int _gridSize;
@@ -67,7 +67,7 @@ public class PlacementSystemV2 : MonoBehaviour
     //    return selectedData.CanPlacedObjectAt(gridPos, _database.objectsDatabase[selectedObjectIndex].Size);
     //}
 
-    private void StopPlacement()
+    public void StopPlacement()
     {
         if (buildingState == null)
             return;
