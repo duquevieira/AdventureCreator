@@ -26,7 +26,9 @@ public class SaveLevel : AbstractSave
 
     public async void Save()
     {
+        CanQuit = false;
         await SaveBackgroundAsync();
+        CanQuit = true;
     }
 
     private async Task SaveBackgroundAsync()

@@ -2,13 +2,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using MoreMountains.Tools;
 using MoreMountains.TopDownEngine;
+using System.Threading.Tasks;
 
 
 public class InGamePauseMenu : MonoBehaviour
 {
     private const string MAIN_MENU_SCENE = "MainMenu";
+    private const string LOADING_SCENE = "LoadingScreenScene";
     public CanvasGroup Overlay;
     public CanvasGroup PauseMenu;
+    public GameObject MenuObjects;
+    public GameObject PostProcessing;
 
     private bool _pauseMenuOpen;
 
@@ -34,18 +38,28 @@ public class InGamePauseMenu : MonoBehaviour
         }
     }
 
+    public void TogglePauseMenu() {
+        if(_pauseMenuOpen) {
+            ClosePauseMenu();
+        } else {
+            OpenPauseMenu();
+        }
+    }
+
     public void QuitToMainMenu() {
-        SceneManager.LoadScene(MAIN_MENU_SCENE);
-        GameManager.Current.Pause(PauseMethods.PauseMenu);
+        if(!AbstractSave.CanQuit) return;
+        LoadMenuScript.SceneToLoad = MAIN_MENU_SCENE;
+        GameManager.Current.Pause(PauseMethods.NoPauseMenu);
+        SceneManager.LoadScene(LOADING_SCENE);
     }
 
     private void OpenPauseMenu()
-    {
+    {        
         PauseMenu.blocksRaycasts = true;
-
+        PostProcessing.SetActive(true);
         _pauseMenuOpen = true;
         GameManager.Current.Pause(PauseMethods.PauseMenu);
-
+        MenuObjects.SetActive(true);
         StartCoroutine(MMFade.FadeCanvasGroup(PauseMenu, 0.2f, 1f));
         StartCoroutine(MMFade.FadeCanvasGroup(Overlay, 0.2f, 0.85f));
     }
@@ -53,10 +67,10 @@ public class InGamePauseMenu : MonoBehaviour
     public void ClosePauseMenu()
     {
         PauseMenu.blocksRaycasts = false;
-
+        PostProcessing.SetActive(false);
         _pauseMenuOpen = false;
         GameManager.Current.Pause(PauseMethods.PauseMenu);
-
+        MenuObjects.SetActive(false);
         StartCoroutine(MMFade.FadeCanvasGroup(PauseMenu, 0.2f, 0f));
         StartCoroutine(MMFade.FadeCanvasGroup(Overlay, 0.2f, 0f));
     }

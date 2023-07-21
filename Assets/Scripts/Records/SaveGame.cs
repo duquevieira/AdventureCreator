@@ -18,6 +18,13 @@ public class SaveGame : AbstractSave
             LoadLevel(false);
     }
 
+    public async void Save() {
+        await Task.Yield();
+        CanQuit = false;
+        SaveState();
+        CanQuit = true;
+    }
+
     public async void SaveState()
     {
         Game game = new Game(SaveId, Story);
@@ -30,7 +37,7 @@ public class SaveGame : AbstractSave
         }
         else
         {
-            await PutSaveAsync(json, GAME_ID, GameId);
+            GameId = OverwriteSaveProcess(await PutSaveAsync(json, GAME_ID, GameId));
         }
     }
 
@@ -39,11 +46,12 @@ public class SaveGame : AbstractSave
         Story.ClearStoryElements();
         string json = "";
         if(!string.IsNullOrEmpty(GameId)) {
+            Debug.Log("Game ID: " + GameId);
             json = GetSave(GameId);
         } else {
+            Debug.Log("Save ID: " + SaveId);
             json = GetSave(SaveId);
         }
-        
         Game game = GetGameProcess(json);
         Story.Player.transform.position = new Vector3(game.Player.getRow(), 0, game.Player.getColumn());
         Story.Storyboard = game.Storyboard;

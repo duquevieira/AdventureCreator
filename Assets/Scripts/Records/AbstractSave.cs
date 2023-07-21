@@ -9,6 +9,7 @@ public abstract class AbstractSave : MonoBehaviour
     private string _endpointPostPath = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/document-schema/{0}/documents";
     private string _endpointDeletePath = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/";
     private string _endpointGetPath = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/documents/";
+    public static bool CanQuit = true;
     public StoryEngineScript Story;
     public PlayerHandlerScript PlayerHandler;
 
@@ -75,7 +76,9 @@ public abstract class AbstractSave : MonoBehaviour
             var response = request.GetResponse();
             var responseStream = response.GetResponseStream();
             var reader = new StreamReader(responseStream);
-            return reader.ReadToEnd();
+            var returnString = reader.ReadToEnd();
+            responseStream.Close();
+            return returnString;
         }
         catch (WebException e)
         {
