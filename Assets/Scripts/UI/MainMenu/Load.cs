@@ -6,7 +6,9 @@ public class Load : MonoBehaviour, MenuObject
     public GameObject LoadMenu;
     public GameObject MainCanvas;
     public GameObject LoadCanvas;
-    private static Vector3 LOAD_POS = new Vector3(250, 0, -75);
+    [SerializeField]
+    private LoadList _loadList;
+    private static Vector3 LOAD_POS = new Vector3(0, 0, -75);
     private static Vector3 MAIN_POS = new Vector3(0, 0, -75);
 
     public void runFunction() {
@@ -14,6 +16,7 @@ public class Load : MonoBehaviour, MenuObject
         LoadMenu.SetActive(true);
         MainCanvas.SetActive(false);
         MainCamera.transform.position = LOAD_POS;
+        _loadList.updateLevel();
     }
 
     public void returnFunction() {
