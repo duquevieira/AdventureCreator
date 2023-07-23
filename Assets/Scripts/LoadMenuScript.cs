@@ -12,6 +12,7 @@ public class LoadMenuScript : MonoBehaviour
     private const int CAM_Z_OFFSET = -100;
     private const int REFERENCE_WIDTH = 1366;
     private const string CREATE_SCENE = "CreateScene";
+    private const string GAME_SCENE = "GameScene";
     public Image LoadingBar;
     public GameObject Character;
     public GameObject LoadingScreenText;
@@ -70,13 +71,14 @@ public class LoadMenuScript : MonoBehaviour
                 {
                     operation.allowSceneActivation = true;
                     if(scene.Equals(CREATE_SCENE)) loadCreatorScene();
-                    else loadPlayScene();
+                    else if(scene.Equals(GAME_SCENE)) loadPlayScene();
                 }
             }
 
             yield return null;
         }
         Character.transform.position = END_CHAR;
+        yield return null;
     }
 
     private void loadCreatorScene() {
