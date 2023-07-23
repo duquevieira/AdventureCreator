@@ -24,4 +24,13 @@ public class ObjectPlacer : MonoBehaviour
         Destroy(PlacedGameObjects[gameObjectIndex]);
         PlacedGameObjects[gameObjectIndex] = null;
     }
+
+    public void RemoveAllObjects()
+    {
+        foreach(var obj in PlacedGameObjects)
+        {
+            Destroy(obj);
+        }
+        PlacedGameObjects.Clear();
+    }
 }

@@ -29,19 +29,6 @@ public class GridData
         }
     }
 
-    private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, Vector2Int objectSize)
-    {
-        List<Vector3Int> returnVal = new List<Vector3Int>();
-        for (int x = 0; x < objectSize.x; x++)
-        {
-            for (int y = 0; y < objectSize.y; y++)
-            {
-                returnVal.Add(gridPosition + new Vector3Int(x, y, 0));
-            }
-        }
-        return returnVal;
-    }
-
     public bool CanPlacedObjectAt(Vector3Int gridPosition, Vector2Int objectSize, ObjectData.ObjectTypes objType)
     {
         if (objType == ObjectData.ObjectTypes.Structure)
@@ -62,16 +49,7 @@ public class GridData
         }
     }
 
-    private List<ObjectData.ObjectTypes> getObjectTypesAt(Vector3Int pos)
-    {
-        List<ObjectData.ObjectTypes> objectTypesAt = new List<ObjectData.ObjectTypes>();
-        foreach(var obj in placedObjects[pos])
-        {
-            if (!objectTypesAt.Contains(obj.Type))
-                objectTypesAt.Add(obj.Type);
-        }
-        return objectTypesAt;
-    }
+    
 
     public List<int> GetRepresenatationIndex(Vector3Int gridPos)
     {
@@ -103,6 +81,11 @@ public class GridData
         }
     }
 
+    public void RemoveAllObjects()
+    {
+        placedObjects.Clear();
+    }
+
     public bool CheckObjectsAt(Vector3Int gridPos)
     {
         if (placedObjects.ContainsKey(gridPos))
@@ -110,6 +93,31 @@ public class GridData
         else
             return false;
     }
+
+    private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, Vector2Int objectSize)
+    {
+        List<Vector3Int> returnVal = new List<Vector3Int>();
+        for (int x = 0; x < objectSize.x; x++)
+        {
+            for (int y = 0; y < objectSize.y; y++)
+            {
+                returnVal.Add(gridPosition + new Vector3Int(x, y, 0));
+            }
+        }
+        return returnVal;
+    }
+
+    private List<ObjectData.ObjectTypes> getObjectTypesAt(Vector3Int pos)
+    {
+        List<ObjectData.ObjectTypes> objectTypesAt = new List<ObjectData.ObjectTypes>();
+        foreach (var obj in placedObjects[pos])
+        {
+            if (!objectTypesAt.Contains(obj.Type))
+                objectTypesAt.Add(obj.Type);
+        }
+        return objectTypesAt;
+    }
+
 
     public class PlacementData
     {

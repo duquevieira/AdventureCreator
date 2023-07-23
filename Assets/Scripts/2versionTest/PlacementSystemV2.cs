@@ -68,12 +68,6 @@ public class PlacementSystemV2 : MonoBehaviour
         buildingState.OnAction(gridPos);
     }
 
-    //private bool CheckPlacementValidity(Vector3Int gridPos, int selectedObjectIndex)
-    //{
-    //    GridData selectedData = _database.objectsDatabase[selectedObjectIndex].Types == ObjectData.ObjectTypes.Floor ? _floorData : _furnitureData;
-    //    return selectedData.CanPlacedObjectAt(gridPos, _database.objectsDatabase[selectedObjectIndex].Size);
-    //}
-
     public void StopPlacement()
     {
         _gridVisualization.SetActive(false);
@@ -110,5 +104,11 @@ public class PlacementSystemV2 : MonoBehaviour
                 _objData.AddObjectAt(_gridPos, _database.objectsDatabase[_selectedObjectIndex].Size, _database.objectsDatabase[_selectedObjectIndex].Name,_index, _database.objectsDatabase[_selectedObjectIndex].Types);
             }
         }
+    }
+
+    public void RemoveAllObjects()
+    {
+        _objData.RemoveAllObjects();
+        _objectPlacer.RemoveAllObjects();
     }
 }
