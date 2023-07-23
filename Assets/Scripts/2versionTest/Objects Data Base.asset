@@ -18,10 +18,10 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 584982380618613368, guid: 069ef2b68baf561428e91320be9aaf0a, type: 3}
     <Types>k__BackingField: 5
-  - <Name>k__BackingField: 'SM_Bld_Floor_Carpet_01 '
+  - <Name>k__BackingField: SM_Bld_Floor_Carpet_01_Parent
     <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 5790792420144977488, guid: 72273c7c9e1bde640926500ef28ccbd7, type: 3}
+    <Prefab>k__BackingField: {fileID: 5208937592618823373, guid: 6d38fef2c648a60429dd0fd8d5bfedf2, type: 3}
     <Types>k__BackingField: 7
   - <Name>k__BackingField: 'SM_Bld_Pillar_Exterior_04 '
     <ID>k__BackingField: 2
@@ -225,9 +225,9 @@ MonoBehaviour:
     <Types>k__BackingField: 6
   - <Name>k__BackingField: 'SM_Prop_Desk_01 '
     <ID>k__BackingField: 42
-    <Size>k__BackingField: {x: 3, y: 1}
+    <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 8192783645895324966, guid: 15c39c3ecbe386a458e0934c5188c419, type: 3}
-    <Types>k__BackingField: 2
+    <Types>k__BackingField: 6
   - <Name>k__BackingField: 'SM_Prop_Desk_02 '
     <ID>k__BackingField: 43
     <Size>k__BackingField: {x: 1, y: 1}

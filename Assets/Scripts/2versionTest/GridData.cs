@@ -1,21 +1,32 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GridData
 {
-    Dictionary<Vector3Int, PlacementData> placedObjects = new Dictionary<Vector3Int, PlacementData>();
+    Dictionary<Vector3Int, List<PlacementData>> placedObjects = new Dictionary<Vector3Int, List<PlacementData>>();
 
-    public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, string name, int placedObjectIndex)
+    public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, string name, int placedObjectIndex, ObjectData.ObjectTypes type)
     {
         List<Vector3Int> positionsToOccupy = CalculatePositions(gridPosition, objectSize);
-        PlacementData data = new PlacementData(positionsToOccupy, name, placedObjectIndex);
+        List<PlacementData> objectsAt;
+        PlacementData data = new PlacementData(positionsToOccupy, name, placedObjectIndex, type);
         foreach (var pos in positionsToOccupy)
         {
+            Debug.Log(pos);
             if (placedObjects.ContainsKey(pos))
-                throw new Exception($"Dictionary already contains this cell position {pos}");
-            placedObjects[pos] = data;
+            {
+                 objectsAt = placedObjects[pos];
+                // throw new Exception($"Dictionary already contains this cell position {pos}");
+            } else
+            {
+                objectsAt = new List<PlacementData>();
+            }
+            objectsAt.Add(data);
+            placedObjects[pos] = objectsAt;
         }
     }
 
@@ -32,30 +43,63 @@ public class GridData
         return returnVal;
     }
 
-    public bool CanPlacedObjectAt(Vector3Int gridPosition, Vector2Int objectSize)
+    public bool CanPlacedObjectAt(Vector3Int gridPosition, Vector2Int objectSize, ObjectData.ObjectTypes objType)
     {
-        List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
-        foreach (var pos in positionToOccupy)
+        if (objType == ObjectData.ObjectTypes.Wall || objType == ObjectData.ObjectTypes.Floor)
+            return true;
+        else
         {
-            if (placedObjects.ContainsKey(pos))
-                return false;
+            List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
+            foreach (var pos in positionToOccupy)
+            {
+                if (placedObjects.ContainsKey(pos))
+                    foreach(var obj in placedObjects[pos])
+                    {
+                        if (obj.Type != ObjectData.ObjectTypes.Wall && obj.Type != ObjectData.ObjectTypes.Floor)
+                            return false;
+                    }
+            }
+            return true;
         }
-        return true;
+        
     }
 
-    public int GetRepresenatationIndex(Vector3Int gridPos)
+    public List<int> GetRepresenatationIndex(Vector3Int gridPos)
     {
+        List<int> objectsIndexes = new List<int>();
         if (!placedObjects.ContainsKey(gridPos))
-            return -1;
-        return placedObjects[gridPos].PlacedObjectIndex;
+            return null;
+        else
+        {
+            List<PlacementData> objectsAt = placedObjects[gridPos];
+            foreach(PlacementData obj in objectsAt)
+            {
+                objectsIndexes.Add(obj.PlacedObjectIndex);
+            }
+            return objectsIndexes;
+        }
     }
 
-    public void RemoveObjectAt(Vector3Int gridPos)
+    public void RemoveTopObjectAt(Vector3Int gridPos)
     {
-        foreach(var pos in placedObjects[gridPos].occupiedPositions)
+        if (!CheckObjectsAt(gridPos))
+            return;
+        List<PlacementData> objectsAt = placedObjects[gridPos];
+        PlacementData lastObject = objectsAt[objectsAt.Count-1];
+        foreach(var pos in lastObject.occupiedPositions)
         {
-            placedObjects.Remove(pos);
+            placedObjects[pos].Remove(lastObject);
+            if (placedObjects[pos].Count == 0)
+                placedObjects.Remove(pos);                
         }
+    }
+
+    public bool CheckObjectsAt(Vector3Int gridPos)
+    {
+        if (placedObjects.ContainsKey(gridPos))
+            return true;
+        else
+            return false;
     }
 
     public class PlacementData
@@ -64,11 +108,15 @@ public class GridData
         public string Name { get; private set; }
         public int PlacedObjectIndex { get; private set; }
 
-        public PlacementData(List<Vector3Int> occupiedPositions, string name, int placedObjectIndex)
+        public ObjectData.ObjectTypes Type { get; private set; }
+
+        public PlacementData(List<Vector3Int> occupiedPositions, string name, int placedObjectIndex, ObjectData.ObjectTypes type)
         {
             this.occupiedPositions = occupiedPositions;
             Name = name;
             PlacedObjectIndex = placedObjectIndex;
+            Type = type;
+
         }
     }
 }

@@ -14,15 +14,13 @@ public class PlacementSystemV2 : MonoBehaviour
     [SerializeField] private ObjectPlacer _objectPlacer;
     [SerializeField] private Vector2Int _gridSize;
     IBuildingState buildingState;
-    private GridData _floorData, _structureData, _furnitureData;
+    private GridData _objData;
     private Vector3Int _lastDetectedPosition = Vector3Int.zero;
 
     private void Start()
     {
         StopPlacement();
-        _floorData = new GridData();
-        _structureData = new GridData();
-        _furnitureData = new GridData();
+        _objData= new GridData();
         _gridVisualization.transform.localScale = Vector3.zero + new Vector3(_gridSize.x/10f, 1, _gridSize.y / 10f);
     }
 
@@ -44,7 +42,7 @@ public class PlacementSystemV2 : MonoBehaviour
     {
         StopPlacement();
         _gridVisualization.SetActive(true);
-        buildingState = new PlacementState(name,_grid,_preview,_database,_floorData,_structureData,_furnitureData,_objectPlacer);
+        buildingState = new PlacementState(name,_grid,_preview,_database,_objData,_objectPlacer);
         _inputManager.OnClicked += PlaceStructure;
         _inputManager.OnExit += StopPlacement;
     }
@@ -53,7 +51,7 @@ public class PlacementSystemV2 : MonoBehaviour
     {
         StopPlacement();
         _gridVisualization.SetActive(true);
-        buildingState = new RemovingState(/*name,*/ _grid, _preview, _floorData,_structureData, _furnitureData, _objectPlacer);
+        buildingState = new RemovingState(/*name,*/ _grid, _preview, _objData, _objectPlacer);
         _inputManager.OnClicked += PlaceStructure;
         _inputManager.OnExit += StopPlacement;
     }
