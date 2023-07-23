@@ -8,10 +8,10 @@ using UnityEngine;
 
 public class PlacementState : IBuildingState
 {
-    private int _selectedObjectIndex = -1;
-    private Quaternion _rotation = new Quaternion();
+    private int _selectedObjectIndex;
+    private Quaternion _rotation;
     private Vector2Int _size;
-    private Vector3 _structureRotatedPosition = new Vector3(0f,0.1f,0f);
+    private Vector3 _structureRotatedPosition;
     string Name;
     Grid Grid;
     PreviewSystem PreviewSystem;
@@ -28,9 +28,12 @@ public class PlacementState : IBuildingState
         ObjData = objData;
         ObjectPlacer = objectPlacer;
 
+        _structureRotatedPosition = new Vector3(0f, 0.1f, 0f);
+        _selectedObjectIndex = -1;
         _selectedObjectIndex = database.objectsDatabase.FindIndex(data => data.Name == name);
         _size = Database.objectsDatabase[_selectedObjectIndex].Size;
         _rotation = database.objectsDatabase[_selectedObjectIndex].Prefab.transform.rotation;
+
         if (_selectedObjectIndex > -1)
         {
             previewSystem.StartShowingPlacementPreview(database.objectsDatabase[_selectedObjectIndex].Prefab, _size);

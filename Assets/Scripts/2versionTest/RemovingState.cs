@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class RemovingState : IBuildingState
 {
-    private int _gameObjectIndex = -1;
+    private int _gameObjectIndex;
     //string Name;
     Grid Grid;
     PreviewSystem PreviewSystem;
@@ -20,6 +20,8 @@ public class RemovingState : IBuildingState
         PreviewSystem = previewSystem;
         ObjData = objData;
         ObjectPlacer = objectPlacer;
+
+        _gameObjectIndex = -1;
 
         previewSystem.StartShowingRemovePreview();
     }
