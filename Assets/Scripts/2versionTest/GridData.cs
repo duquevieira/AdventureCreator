@@ -51,7 +51,7 @@ public class GridData
 
     
 
-    public List<int> GetRepresenatationIndex(Vector3Int gridPos)
+    public List<int> GetRepresentationIndex(Vector3Int gridPos)
     {
         List<int> objectsIndexes = new List<int>();
         if (!placedObjects.ContainsKey(gridPos))
