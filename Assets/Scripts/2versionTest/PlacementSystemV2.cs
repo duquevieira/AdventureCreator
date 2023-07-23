@@ -23,7 +23,7 @@ public class PlacementSystemV2 : MonoBehaviour
         StopPlacement();
         _objData= new GridData();
         _gridVisualization.transform.localScale = Vector3.zero + new Vector3(_gridSize.x/10f, 1, _gridSize.y / 10f);
-        PlaceFloorAutomatically(_floorPrefab);
+        PlaceFloorAutomatically();
     }
 
     private void Update()
@@ -91,9 +91,9 @@ public class PlacementSystemV2 : MonoBehaviour
             buildingState.Drag();
     }
 
-    public void PlaceFloorAutomatically(GameObject floorPrefab)
+    public void PlaceFloorAutomatically()
     {
-        int _selectedObjectIndex = _database.objectsDatabase.FindIndex(data => data.Name == floorPrefab.name);
+        int _selectedObjectIndex = _database.objectsDatabase.FindIndex(data => data.Name == _floorPrefab.name);
         for (int x = -(_gridSize.x/2); x < _gridSize.x/2; x++)
         {
             for (int y = -(_gridSize.y/2); y<_gridSize.y/2; y++)
