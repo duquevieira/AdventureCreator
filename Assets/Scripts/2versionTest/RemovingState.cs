@@ -22,7 +22,6 @@ public class RemovingState : IBuildingState
         ObjectPlacer = objectPlacer;
 
         _gameObjectIndex = -1;
-
         previewSystem.StartShowingRemovePreview();
     }
 
