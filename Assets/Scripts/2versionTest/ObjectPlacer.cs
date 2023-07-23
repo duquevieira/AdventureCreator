@@ -21,8 +21,9 @@ public class ObjectPlacer : MonoBehaviour
     {
         if (PlacedGameObjects.Count <= gameObjectIndex || PlacedGameObjects[gameObjectIndex] == null)
             return;
-        Destroy(PlacedGameObjects[gameObjectIndex]);
-        PlacedGameObjects[gameObjectIndex] = null;
+        GameObject objectToRemove = PlacedGameObjects[gameObjectIndex];
+        PlacedGameObjects.Remove(objectToRemove);
+        Destroy(objectToRemove);
     }
 
     public void RemoveAllObjects()

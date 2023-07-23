@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Objects Data Base
   m_EditorClassIdentifier: 
   objectsDatabase:
-  - <Name>k__BackingField: 'SM_Bld_Door_05 '
+  - <Name>k__BackingField: SM_Bld_Door_05
     <ID>k__BackingField: 0
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 584982380618613368, guid: 069ef2b68baf561428e91320be9aaf0a, type: 3}
     <Types>k__BackingField: 3
-    <MiniatureScale>k__BackingField: 20
+    <MiniatureScale>k__BackingField: 25
   - <Name>k__BackingField: SM_Bld_Floor_Carpet_01_Parent
     <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 1, y: 1}
@@ -267,7 +267,7 @@ MonoBehaviour:
     <MiniatureScale>k__BackingField: 25
   - <Name>k__BackingField: 'SM_Prop_Desk_01 '
     <ID>k__BackingField: 42
-    <Size>k__BackingField: {x: 3, y: 1}
+    <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 8192783645895324966, guid: 15c39c3ecbe386a458e0934c5188c419, type: 3}
     <Types>k__BackingField: 0
     <MiniatureScale>k__BackingField: 25

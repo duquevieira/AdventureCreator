@@ -21,9 +21,12 @@ public class PlacementSystemV2 : MonoBehaviour
     private void Start()
     {
         StopPlacement();
-        _objData= new GridData();
         _gridVisualization.transform.localScale = Vector3.zero + new Vector3(_gridSize.x/10f, 1, _gridSize.y / 10f);
-        PlaceFloorAutomatically();
+    }
+
+    private void Awake()
+    {
+        _objData = new GridData();
     }
 
     private void Update()
@@ -36,7 +39,7 @@ public class PlacementSystemV2 : MonoBehaviour
         {
             buildingState.UpdateState(gridPos);
             _lastDetectedPosition = gridPos;
-        }
+        }            
     }
 
     public void StartPlacement(string name)
@@ -100,7 +103,7 @@ public class PlacementSystemV2 : MonoBehaviour
             {
                 Vector3Int _gridPos = new Vector3Int(x, y, 0);
                 Quaternion _rotation = _database.objectsDatabase[_selectedObjectIndex].Prefab.transform.rotation;
-                int _index = _objectPlacer.PlaceObject(_database.objectsDatabase[_selectedObjectIndex].Prefab, _grid.GetCellCenterWorld(_gridPos), _rotation);   
+                int _index = _objectPlacer.PlaceObject(_database.objectsDatabase[_selectedObjectIndex].Prefab, _grid.GetCellCenterWorld(_gridPos), _rotation);
                 _objData.AddObjectAt(_gridPos, _database.objectsDatabase[_selectedObjectIndex].Size, _database.objectsDatabase[_selectedObjectIndex].Name,_index, _database.objectsDatabase[_selectedObjectIndex].Types);
             }
         }
@@ -111,4 +114,5 @@ public class PlacementSystemV2 : MonoBehaviour
         _objData.RemoveAllObjects();
         _objectPlacer.RemoveAllObjects();
     }
+
 }

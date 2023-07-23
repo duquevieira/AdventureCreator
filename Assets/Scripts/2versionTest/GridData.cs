@@ -49,8 +49,6 @@ public class GridData
         }
     }
 
-    
-
     public List<int> GetRepresentationIndex(Vector3Int gridPos)
     {
         List<int> objectsIndexes = new List<int>();

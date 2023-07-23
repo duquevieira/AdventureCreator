@@ -1,14 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class SaveLevel : AbstractSave
 {
     private const string SAVE_ID = "019d5349-668e-458f-a112-a49970266f07";
     public static string SaveId = null;
-    private string _prefabPath = "AndreUI_test/";
+    private string _prefabPath = "TrainingSet/";
     public PlacementSystemV2 PlacementSystem;
     public ObjectPlacer ObjectPlacer;
+    [SerializeField] private Camera _screenshotCamera;
 
     void Start() {
         if(!string.IsNullOrEmpty(SaveId)) {
@@ -16,22 +20,40 @@ public class SaveLevel : AbstractSave
         } else PlacementSystem.PlaceFloorAutomatically();
     }
 
-    public void Save()
+    public async void Save()
     {
+        CanQuit = false;
+        await SaveBackgroundAsync();
+        CanQuit = true;
+    }
+
+    private async Task SaveBackgroundAsync()
+    {
+        await Task.Yield();
+
         World world = new World(ObjectPlacer);
-        Tale tale = new Tale(Story, world);
+        Debug.Log("World Saved");
+        Tale tale = new Tale(Story, world, _screenshotCamera);
+        Debug.Log("Tale Created");
         var taleWrapped = new DataTaleWrapper(tale);
+        Debug.Log("Tale Wrapped");
         string json = JsonUtility.ToJson(taleWrapped, true);
-        if(string.IsNullOrEmpty(SaveId)) {
-            SaveId = OverwriteSaveProcess(PostNewSave(json, SAVE_ID));
-        } else {
-            SaveId = OverwriteSaveProcess(PutSave(json, SAVE_ID, SaveId));
+        Debug.Log("Json made");
+        if (string.IsNullOrEmpty(SaveId))
+        {
+            SaveId = OverwriteSaveProcess(await PostNewSaveAsync(json, SAVE_ID));
         }
+        else
+        {
+            SaveId = OverwriteSaveProcess(await PutSaveAsync(json, SAVE_ID, SaveId));
+        }
+        Debug.Log("Done");
     }
 
     public void Load()
     {
-        if(string.IsNullOrEmpty(SaveId)) return;
+        if(string.IsNullOrEmpty(SaveId)) 
+            return;
         PlacementSystem.RemoveAllObjects();
         Tale tale = GetSaveProcess(GetSave(SaveId));
         Debug.Log(tale);
@@ -39,7 +61,7 @@ public class SaveLevel : AbstractSave
         Story.Storyboard = tale.Storyboard;
         List<GameObject> toUpdate = new List<GameObject>();
         foreach(ObjectInfo objectInfo in tale.TaleWorld.ObjectsInWorld) {
-            GameObject toAdd = Resources.Load<GameObject>(_prefabPath + objectInfo.Name);
+            GameObject toAdd = Resources.Load<GameObject>(_prefabPath + objectInfo.Name.Split("(")[0]);
             toAdd.transform.position = new Vector3(objectInfo.Position.getRow(), 0, objectInfo.Position.getColumn());
             switch(objectInfo.Rotation.GetDirection()) {
                         case Direction.North:
@@ -58,6 +80,7 @@ public class SaveLevel : AbstractSave
             var cloneObj = Instantiate(toAdd, toAdd.transform.position, toAdd.transform.rotation);
             cloneObj.name = cloneObj.name.Split("(")[0];
             toUpdate.Add(cloneObj);
+            
         }
         ObjectPlacer.PlacedGameObjects = toUpdate;
     }

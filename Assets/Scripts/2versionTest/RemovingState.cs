@@ -40,7 +40,7 @@ public class RemovingState : IBuildingState
             ObjectPlacer.RemoveObjectAt(_gameObjectIndex);
         }
         else
-            return;
+            return;            
                       
         Vector3 cellPosition = Grid.CellToWorld(gridPos);
         PreviewSystem.UpdateCursorPosition(cellPosition, !CheckIfSelectionIsValid(gridPos));
