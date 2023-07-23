@@ -13,6 +13,7 @@ public class PlacementSystemV2 : MonoBehaviour
     [SerializeField] private PreviewSystem _preview;
     [SerializeField] private ObjectPlacer _objectPlacer;
     [SerializeField] private Vector2Int _gridSize;
+    [SerializeField] private GameObject _floorPrefab;
     IBuildingState buildingState;
     private GridData _objData;
     private Vector3Int _lastDetectedPosition = Vector3Int.zero;
@@ -22,6 +23,7 @@ public class PlacementSystemV2 : MonoBehaviour
         StopPlacement();
         _objData= new GridData();
         _gridVisualization.transform.localScale = Vector3.zero + new Vector3(_gridSize.x/10f, 1, _gridSize.y / 10f);
+        PlaceFloorAutomatically(_floorPrefab);
     }
 
     private void Update()
@@ -35,7 +37,6 @@ public class PlacementSystemV2 : MonoBehaviour
             buildingState.UpdateState(gridPos);
             _lastDetectedPosition = gridPos;
         }
-
     }
 
     public void StartPlacement(string name)
@@ -94,5 +95,20 @@ public class PlacementSystemV2 : MonoBehaviour
     {
         if (buildingState != null)
             buildingState.Drag();
+    }
+
+    public void PlaceFloorAutomatically(GameObject floorPrefab)
+    {
+        int _selectedObjectIndex = _database.objectsDatabase.FindIndex(data => data.Name == floorPrefab.name);
+        for (int x = -(_gridSize.x/2); x < _gridSize.x/2; x++)
+        {
+            for (int y = -(_gridSize.y/2); y<_gridSize.y/2; y++)
+            {
+                Vector3Int _gridPos = new Vector3Int(x, y, 0);
+                Quaternion _rotation = _database.objectsDatabase[_selectedObjectIndex].Prefab.transform.rotation;
+                int _index = _objectPlacer.PlaceObject(_database.objectsDatabase[_selectedObjectIndex].Prefab, _grid.GetCellCenterWorld(_gridPos), _rotation);   
+                _objData.AddObjectAt(_gridPos, _database.objectsDatabase[_selectedObjectIndex].Size, _database.objectsDatabase[_selectedObjectIndex].Name,_index, _database.objectsDatabase[_selectedObjectIndex].Types);
+            }
+        }
     }
 }
