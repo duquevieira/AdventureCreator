@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class PlacementUI : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _clickedTileText;
-    [SerializeField] private TMP_Text _clickedObjectText;
+    //[SerializeField] private TMP_Text _clickedTileText;
+    //[SerializeField] private TMP_Text _clickedObjectText;
     [SerializeField] private Button _addButton;
     //[SerializeField] private Button _delButton;
     [SerializeField] private PlacementSystem _placementSys;
@@ -17,8 +17,8 @@ public class PlacementUI : MonoBehaviour
 
     private void Start()
     {
-        _clickedTileText.text = "Clicked Tile: ";
-        _clickedObjectText.text = "Clicked Object: ";
+        //_clickedTileText.text = "Clicked Tile: ";
+        //_clickedObjectText.text = "Clicked Object: ";
         //_addButton.interactable = false;
         //_delButton.interactable = false;
     }
@@ -46,7 +46,7 @@ public class PlacementUI : MonoBehaviour
                 //_dropdown.onValueChanged.AddListener(index => OnDropDownChange(_mainObjects, index));
                 Vector3 clickedTile = _placementSys.getClickedTile();
                 Vector3Int roundedClickedTile = _placementSys.convertFloatPosToTile(clickedTile);
-                _clickedTileText.text = "Clicked Tile: " + roundedClickedTile;
+                //_clickedTileText.text = "Clicked Tile: " + roundedClickedTile;
             }
         } else
         {
@@ -57,8 +57,8 @@ public class PlacementUI : MonoBehaviour
 
     private void ClearUI()
     {
-        _clickedTileText.enabled = false;
-        _clickedObjectText.enabled = false;
+        //_clickedTileText.enabled = false;
+        //_clickedObjectText.enabled = false;
         _placementSys2.StopPlacement();
              
 
@@ -67,14 +67,14 @@ public class PlacementUI : MonoBehaviour
 
     private void ShowUI()
     {
-        _clickedTileText.enabled = true;
-        _clickedObjectText.enabled = true;
+        //_clickedTileText.enabled = true;
+        //_clickedObjectText.enabled = true;
         _placementSys2._gridVisualization.SetActive(true);
         //_addButton.enabled = true;
     }
 
     public void UpdateSelectectObject(string selectedObject)
     {
-        _clickedObjectText.text = "Clicked Object: " + selectedObject;
+        //_clickedObjectText.text = "Clicked Object: " + selectedObject;
     }
 }
