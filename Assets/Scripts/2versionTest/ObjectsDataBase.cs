@@ -25,7 +25,7 @@ public class ObjectsDataBase : ScriptableObject
         }
         foreach(var item in alreadyInDatabase) 
         {
-            ObjectData obj = new ObjectData(item.Key, i, Vector2Int.one,item.Value, ObjectData.ObjectTypes.Default);
+            ObjectData obj = new ObjectData(item.Key, i, Vector2Int.one,item.Value, ObjectData.ObjectTypes.Default, 25);
             objectsDatabase.Add(obj);
             i++;
         }
@@ -54,13 +54,18 @@ public class ObjectData
     [field: SerializeField]
     public ObjectTypes Types { get; private set; }
 
-    public ObjectData(string name, int iD, Vector2Int size, GameObject prefab, ObjectTypes type) 
+    [field: SerializeField]
+    public int MiniatureScale { get; private set; }
+
+
+    public ObjectData(string name, int iD, Vector2Int size, GameObject prefab, ObjectTypes type, int miniatureScale) 
     {
         Name = name;
         ID = iD;
         Size = size;
         Prefab = prefab;
         Types = type;
+        MiniatureScale = miniatureScale;
     }
 
 }
