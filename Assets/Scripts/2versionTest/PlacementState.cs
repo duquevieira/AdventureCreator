@@ -45,7 +45,7 @@ public class PlacementState : IBuildingState
         _structureRotatedPosition = GetPositionOfRotatedStructure(_rotation, Grid.CellToWorld(gridPos));
         ObjectData.ObjectTypes objType = Database.objectsDatabase[_selectedObjectIndex].Types;
 
-        if (objType == ObjectData.ObjectTypes.Wall)
+        if (objType == ObjectData.ObjectTypes.Structure)
         {
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), placementValidity);
             PreviewSystem.UpdatePreviewPosition(_structureRotatedPosition, placementValidity);
@@ -70,7 +70,7 @@ public class PlacementState : IBuildingState
 
         //GridData selectedData = GetSelectedData(Database.objectsDatabase[_selectedObjectIndex].Types);
         ObjectData.ObjectTypes objType = Database.objectsDatabase[_selectedObjectIndex].Types;
-        if (objType == ObjectData.ObjectTypes.Wall)
+        if (objType == ObjectData.ObjectTypes.Structure)
         {
             index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, _structureRotatedPosition, _rotation);
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), true);
@@ -88,7 +88,7 @@ public class PlacementState : IBuildingState
     {
         ObjectData.ObjectTypes objType = Database.objectsDatabase[_selectedObjectIndex].Types;
         //GridData selectedData = GetSelectedData(Database.objectsDatabase[_selectedObjectIndex].Types);
-        if (objType != ObjectData.ObjectTypes.Wall)
+        if (objType != ObjectData.ObjectTypes.Structure)
         {
             _rotation = PreviewSystem.RotatePreviewCenter();
             Vector2Int _newSize = PreviewSystem.RotateCursor(_size);

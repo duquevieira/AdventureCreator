@@ -16,7 +16,6 @@ public class GridData
         PlacementData data = new PlacementData(positionsToOccupy, name, placedObjectIndex, type);
         foreach (var pos in positionsToOccupy)
         {
-            Debug.Log(pos);
             if (placedObjects.ContainsKey(pos))
             {
                  objectsAt = placedObjects[pos];
@@ -45,7 +44,7 @@ public class GridData
 
     public bool CanPlacedObjectAt(Vector3Int gridPosition, Vector2Int objectSize, ObjectData.ObjectTypes objType)
     {
-        if (objType == ObjectData.ObjectTypes.Wall || objType == ObjectData.ObjectTypes.Floor)
+        if (objType == ObjectData.ObjectTypes.Structure)
             return true;
         else
         {
@@ -53,15 +52,25 @@ public class GridData
             foreach (var pos in positionToOccupy)
             {
                 if (placedObjects.ContainsKey(pos))
-                    foreach(var obj in placedObjects[pos])
-                    {
-                        if (obj.Type != ObjectData.ObjectTypes.Wall && obj.Type != ObjectData.ObjectTypes.Floor)
-                            return false;
-                    }
+                {
+                    List<ObjectData.ObjectTypes> objectTypeAt = getObjectTypesAt(pos);
+                    if (objectTypeAt.Contains(objType))
+                        return false;
+                }       
             }
             return true;
         }
-        
+    }
+
+    private List<ObjectData.ObjectTypes> getObjectTypesAt(Vector3Int pos)
+    {
+        List<ObjectData.ObjectTypes> objectTypesAt = new List<ObjectData.ObjectTypes>();
+        foreach(var obj in placedObjects[pos])
+        {
+            if (!objectTypesAt.Contains(obj.Type))
+                objectTypesAt.Add(obj.Type);
+        }
+        return objectTypesAt;
     }
 
     public List<int> GetRepresenatationIndex(Vector3Int gridPos)
