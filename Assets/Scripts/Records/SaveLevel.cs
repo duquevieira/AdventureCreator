@@ -7,8 +7,10 @@ public class SaveLevel : AbstractSave
 {
     private const string SAVE_ID = "019d5349-668e-458f-a112-a49970266f07";
     public static string SaveId = null;
-    private string _prefabPath = "AndreUI_Test/";
-    public PlacementSystem PlacementSystem;
+
+    private string _prefabPath = "AndreUI_test/";
+    public PlacementSystemV2 PlacementSystem;
+    public ObjectPlacer ObjectPlacer;
     [SerializeField]
     private Camera _screenshotCamera;
 
@@ -26,6 +28,8 @@ public class SaveLevel : AbstractSave
 
     public async void Save()
     {
+        World world = new World(ObjectPlacer);
+        Tale tale = new Tale(Story, world);
         CanQuit = false;
         await SaveBackgroundAsync();
         CanQuit = true;
@@ -56,12 +60,9 @@ public class SaveLevel : AbstractSave
 
     public void Load()
     {
-        if (string.IsNullOrEmpty(SaveId))
-            return;
-
-        PlacementSystem.DestroyAllObjects();
-        string json = GetSave(SaveId);
-        Tale tale = GetSaveProcess(json);
+        if(string.IsNullOrEmpty(SaveId)) return;
+        PlacementSystem.RemoveAllObjects();
+        Tale tale = GetSaveProcess(GetSave(SaveId));
         Debug.Log(tale);
         Story.Player.transform.position = new Vector3(tale.Player.getRow(), 0, tale.Player.getColumn());
         PlayerHandler.Target = new Vector3(tale.Player.getRow(), 0, tale.Player.getColumn());
@@ -93,7 +94,7 @@ public class SaveLevel : AbstractSave
             cloneObj.name = cloneObj.name.Split('(')[0];
             toUpdate.Add(cloneObj);
         }
-        PlacementSystem._objectsInScene = toUpdate;
+        ObjectPlacer.PlacedGameObjects = toUpdate;
     }
 
     private string OverwriteSaveProcess(string json)

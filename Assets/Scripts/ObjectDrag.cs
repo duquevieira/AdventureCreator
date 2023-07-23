@@ -6,17 +6,18 @@ public class ObjectDrag : MonoBehaviour
 {
 
     private Vector3 _offset;
+    [SerializeField] private MouseCoords _inputManager;
 
-    // Select an object pressing the mouse
+    /*// Select an object pressing the mouse
     private void OnMouseDown()
     {
-        _offset = transform.position - PlacementSystem.getMouseWorldPosition();
+        _offset = transform.position - _inputManager.getMouseWorldPosition();
     }
 
     // Move an object dragging the mouse
     private void OnMouseDrag()
     {
-        Vector3 pos = PlacementSystem.getMouseWorldPosition() + _offset;
+        Vector3 pos = _inputManager.getMouseWorldPosition() + _offset;
         transform.position = PlacementSystem.Current.SnapCoordinateToGrid(pos);
         if (Input.GetKeyDown(KeyCode.Delete))
         {
@@ -25,6 +26,5 @@ public class ObjectDrag : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             transform.Rotate(new Vector3(0, 90, 0));
-        }
+        }*/
     }
-}

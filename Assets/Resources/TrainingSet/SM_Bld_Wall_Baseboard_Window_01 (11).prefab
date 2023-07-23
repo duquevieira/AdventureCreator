@@ -37,7 +37,7 @@ Transform:
   m_Children:
   - {fileID: 5568672257823447554}
   m_Father: {fileID: 0}
-  m_RootOrder: 82
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
 --- !u!33 &5565973657985485324
 MeshFilter:
@@ -97,18 +97,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5569972910624062034}
   m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.4999926, y: 2.9969995, z: 0.17040771}
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: -1.2499963, y: 1.4984998, z: 0.085203856}
 --- !u!114 &3108281170556480806
 MonoBehaviour:
@@ -146,6 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae76d79a4dc265d41bd7a3b3bbb717d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputManager: {fileID: 0}
 --- !u!114 &-8000272107913504472
 MonoBehaviour:
   m_ObjectHideFlags: 0
