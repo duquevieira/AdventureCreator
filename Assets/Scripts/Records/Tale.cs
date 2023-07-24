@@ -19,6 +19,7 @@ public class Tale
         GameObject playerObject = storyEngine.Player;
         Player = new PositionCoordinates(playerObject.transform.position.x, playerObject.transform.position.z);
         Storyboard = storyEngine.Storyboard;
+        Debug.Log(Storyboard);
         TaleWorld = world;
         CaptureScreenshot(camera);
     }

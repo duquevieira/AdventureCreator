@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -38,6 +38,7 @@ public class SaveLevel : AbstractSave
         var taleWrapped = new DataTaleWrapper(tale);
         Debug.Log("Tale Wrapped");
         string json = JsonUtility.ToJson(taleWrapped, true);
+        await File.WriteAllTextAsync("C:/Users/danie/Desktop/json.txt", json);
         Debug.Log("Json made");
         if (string.IsNullOrEmpty(SaveId))
         {
@@ -52,7 +53,7 @@ public class SaveLevel : AbstractSave
 
     public void Load()
     {
-        if(string.IsNullOrEmpty(SaveId)) 
+        if(string.IsNullOrEmpty(SaveId) || !CanQuit) 
             return;
         PlacementSystem.RemoveAllObjects();
         Tale tale = GetSaveProcess(GetSave(SaveId));

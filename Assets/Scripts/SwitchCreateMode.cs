@@ -8,13 +8,15 @@ public class SwitchCreateMode : MonoBehaviour
 {
     [HideInInspector] public enum CreateMode {MapMode, StoryBoardMode, TestingMode};
     public CreateMode currentMode;
-    [SerializeField] private TMP_Dropdown dropdown;
+    public SimplePressAnimation[] Icons;
+    private const int TOGGLE = 0;
+    private const int TEST = 1;
+    //[SerializeField] private TMP_Dropdown dropdown;
 
     // Start is called before the first frame update
     void Start()
     {
         currentMode = CreateMode.MapMode;
-        dropdown.onValueChanged.AddListener(delegate { DropDownValueChanged(dropdown); });
     }
 
     /*public void SwitchMode()
@@ -28,7 +30,7 @@ public class SwitchCreateMode : MonoBehaviour
         }
     }*/
 
-    private void DropDownValueChanged(TMP_Dropdown change)
+    /*private void DropDownValueChanged(TMP_Dropdown change)
     {
         switch (change.value)
         {
@@ -46,5 +48,20 @@ public class SwitchCreateMode : MonoBehaviour
                 break;
         }
         
+    }*/
+
+    public void ToggleMode() {
+        if(currentMode.Equals(CreateMode.MapMode)) {
+            currentMode = CreateMode.StoryBoardMode;
+            Icons[TOGGLE].PlayAnimation();
+        } else {
+            currentMode = CreateMode.MapMode;
+            Icons[TOGGLE].PlayAnimation();
+        }
+    }
+
+    public void Test() {
+        currentMode = CreateMode.TestingMode;
+        Icons[TEST].PlayAnimation();
     }
 }
