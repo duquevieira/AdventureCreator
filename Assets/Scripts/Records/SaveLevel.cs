@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -52,7 +51,7 @@ public class SaveLevel : AbstractSave
 
     public void Load()
     {
-        if(string.IsNullOrEmpty(SaveId)) 
+        if(string.IsNullOrEmpty(SaveId) || !CanQuit) 
             return;
         PlacementSystem.RemoveAllObjects();
         Tale tale = GetSaveProcess(GetSave(SaveId));

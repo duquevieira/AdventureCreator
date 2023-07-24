@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 public class SaveGame : AbstractSave
 {
     private const string GAME_ID = "63576297-97a1-4b79-8de9-c728219745eb";
-    private string _prefabPath = "AndreUI_test/";
+    private string _prefabPath = "TrainingSet/";
     public static string SaveId;
     public static string GameId = null;
 
@@ -43,6 +43,7 @@ public class SaveGame : AbstractSave
 
     public void LoadState()
     {
+        if(!CanQuit) return;
         Story.ClearStoryElements();
         string json = "";
         if(!string.IsNullOrEmpty(GameId)) {
@@ -73,7 +74,7 @@ public class SaveGame : AbstractSave
         Tale tale = GetTaleProcess(GetSave(SaveId));
         foreach (ObjectInfo o in tale.TaleWorld.ObjectsInWorld)
         {
-            GameObject toAdd = Resources.Load<GameObject>(_prefabPath + o.Name);
+            GameObject toAdd = Resources.Load<GameObject>(_prefabPath + o.Name.Split("(")[0]);
             toAdd.transform.position = new Vector3(o.Position.getRow(), 0, o.Position.getColumn());
 
             switch (o.Rotation.GetDirection())

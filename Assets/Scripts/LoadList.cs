@@ -12,6 +12,7 @@ public class LoadList : MonoBehaviour
     public string UserSave = null;
     public ImageLoader SaveImage;
     public GameObject SaveText;
+    public GameObject Confirmation;
     private const string GET_ALL_SAVES_ENDPOINT = "https://envoy-gw.orangesmoke-c07594bb.westeurope.azurecontainerapps.io/8cddde22-bd7d-4af9-8a2c-ceac14a35eae/document-api/api/v1/documents";
     private const string SAVE_ID = "019d5349-668e-458f-a112-a49970266f07";
     private const string EMPTY = "Empty";
@@ -41,8 +42,11 @@ public class LoadList : MonoBehaviour
     }
 
     public void selectSave() {
+        Debug.Log("Selecting Save...");
         if(_availableSaves.Count > 0) {
             SelectedSave = _availableSaves[_index];
+            Confirmation.SetActive(true);
+            Debug.Log("Save selected: " + SelectedSave);
         }
         if(_playerSaves.ContainsKey(SelectedSave)) {
             UserSave = _playerSaves[SelectedSave];
@@ -51,12 +55,14 @@ public class LoadList : MonoBehaviour
 
     public void prevSave() {
         Debug.Log("Previous!");
+        Confirmation.SetActive(false);
         if(_index >= 1) _index--;
         updateLevel();
     }
 
     public void nextSave() {
         Debug.Log("Next!");
+        Confirmation.SetActive(false);
         if(_index < _availableSaves.Count-1) _index++;
         updateLevel();
     }

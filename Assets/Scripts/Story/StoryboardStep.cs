@@ -5,7 +5,7 @@ using System;
 
 
 [Serializable]
-public class StoryboardStep : PlaceableObject
+public class StoryboardStep
 {
     public int Id;
     public string ColliderName;

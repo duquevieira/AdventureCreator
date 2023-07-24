@@ -6,34 +6,32 @@ using UnityEngine;
 [Serializable]
 public class ItemGroup
 {
-    [SerializeField]
-    private string _itemName;
-    [SerializeField]
-    private int _amount;
+    public string ItemName;
+    public int Amount;
 
     public ItemGroup(string itemName, int amount)
     {
-        _itemName = itemName;
-        _amount = amount;
+        ItemName = itemName;
+        Amount = amount;
     }
 
     public string getItemName()
     {
-        return _itemName;
+        return ItemName;
     }
 
     public int getItemAmount()
     {
-        return _amount;
+        return Amount;
     }
 
     public void addItemAmount(int amount)
     {
-        _amount += amount;
+        Amount += amount;
     }
 
     public void removeItemAmount(int amount)
     {
-        _amount -= amount;
+        Amount -= amount;
     }
 }

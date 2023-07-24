@@ -12,7 +12,6 @@ public class InGamePauseMenu : MonoBehaviour
     public CanvasGroup Overlay;
     public CanvasGroup PauseMenu;
     public GameObject MenuObjects;
-    public GameObject PostProcessing;
 
     private bool _pauseMenuOpen;
 
@@ -56,7 +55,6 @@ public class InGamePauseMenu : MonoBehaviour
     private void OpenPauseMenu()
     {        
         PauseMenu.blocksRaycasts = true;
-        PostProcessing.SetActive(true);
         _pauseMenuOpen = true;
         GameManager.Current.Pause(PauseMethods.PauseMenu);
         MenuObjects.SetActive(true);
@@ -67,7 +65,6 @@ public class InGamePauseMenu : MonoBehaviour
     public void ClosePauseMenu()
     {
         PauseMenu.blocksRaycasts = false;
-        PostProcessing.SetActive(false);
         _pauseMenuOpen = false;
         GameManager.Current.Pause(PauseMethods.PauseMenu);
         MenuObjects.SetActive(false);
