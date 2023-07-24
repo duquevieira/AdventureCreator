@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -38,7 +37,6 @@ public class SaveLevel : AbstractSave
         var taleWrapped = new DataTaleWrapper(tale);
         Debug.Log("Tale Wrapped");
         string json = JsonUtility.ToJson(taleWrapped, true);
-        await File.WriteAllTextAsync("C:/Users/danie/Desktop/json.txt", json);
         Debug.Log("Json made");
         if (string.IsNullOrEmpty(SaveId))
         {
