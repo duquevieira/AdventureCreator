@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 public class SaveGame : AbstractSave
 {
     private const string GAME_ID = "63576297-97a1-4b79-8de9-c728219745eb";
-    private string _prefabPath = "TrainingSet/";
+    private string _prefabPath = "Prefabs/";
     public static string SaveId;
     public static string GameId = null;
 

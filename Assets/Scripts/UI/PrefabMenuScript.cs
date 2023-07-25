@@ -23,7 +23,7 @@ public class PrefabMenuScript : MonoBehaviour
 
     private static int UILAYER = 5;
 
-    private static string[] foldersToSearch = {"Assets/Resources/TrainingSet"/*//, "Assets/Resources/Items"
+    private static string[] foldersToSearch = {"Assets/Resources/Prefabs"/*//, "Assets/Resources/Items"
      ,"Assets/PolygonOffice/Prefabs/Characters", "Assets/PolygonShops/Prefabs/Characters", "Assets/PolygonPirates/Prefabs/Characters", 
      "Assets/PolygonCity/Prefabs/Characters", "Assets/PolygonAncientEmpire/Prefabs/Characters"*/};
 
@@ -34,10 +34,12 @@ public class PrefabMenuScript : MonoBehaviour
             int scale = obj.MiniatureScale;
             var menuSlot = Instantiate(_menuSlotPrefab, _panel.transform);
             var instantiated = Instantiate(obj.Prefab, menuSlot.transform);
-            if (obj.Types == ObjectData.ObjectTypes.Structure)
-                instantiated.transform.Rotate(0, 90, 0);
-            if (obj.Types == ObjectData.ObjectTypes.Floor) 
-                instantiated.transform.Rotate(-90,0,0);
+            instantiated.transform.rotation = obj.MiniatureRotation;
+            instantiated.transform.position += obj.MinaturePosition;
+            //if (obj.Types == ObjectData.ObjectTypes.Structure)
+            //    instantiated.transform.Rotate(0, 90, 0);
+            //if (obj.Types == ObjectData.ObjectTypes.Floor) 
+            //    instantiated.transform.Rotate(-90,0,0);
             instantiated.layer = UILAYER;
             instantiated.transform.localScale = new Vector3(scale, scale, scale);
             foreach (Transform child in instantiated.transform)
