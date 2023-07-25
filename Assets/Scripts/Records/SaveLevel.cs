@@ -8,7 +8,7 @@ public class SaveLevel : AbstractSave
 {
     private const string SAVE_ID = "019d5349-668e-458f-a112-a49970266f07";
     public static string SaveId = null;
-    private string _prefabPath = "TrainingSet/";
+    private string _prefabPath = "Prefabs/";
     public PlacementSystemV2 PlacementSystem;
     public ObjectPlacer ObjectPlacer;
     [SerializeField] private Camera _screenshotCamera;

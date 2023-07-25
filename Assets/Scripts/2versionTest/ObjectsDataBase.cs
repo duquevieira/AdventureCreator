@@ -16,7 +16,7 @@ public class ObjectsDataBase : ScriptableObject
         Dictionary<string,GameObject> alreadyInDatabase= new Dictionary<string,GameObject>();
         int i = 0;
         objectsDatabase = new List<ObjectData>();
-        var foundItems = Resources.LoadAll("TrainingSet",typeof(GameObject)).Cast<GameObject>().ToArray();
+        var foundItems = Resources.LoadAll("Prefabs",typeof(GameObject)).Cast<GameObject>().ToArray();
         foreach(var item in foundItems)
         {
             string objName = item.name.Split("(")[0];
@@ -25,7 +25,7 @@ public class ObjectsDataBase : ScriptableObject
         }
         foreach(var item in alreadyInDatabase) 
         {
-            ObjectData obj = new ObjectData(item.Key, i, Vector2Int.one,item.Value, ObjectData.ObjectTypes.Default, 25);
+            ObjectData obj = new ObjectData(item.Key, i, Vector2Int.one,item.Value, ObjectData.ObjectTypes.Default, 25, new Quaternion(),new Vector3());
             objectsDatabase.Add(obj);
             i++;
         }
@@ -57,8 +57,15 @@ public class ObjectData
     [field: SerializeField]
     public int MiniatureScale { get; private set; }
 
+    [field: SerializeField]
+    public Quaternion MiniatureRotation { get; private set; }
 
-    public ObjectData(string name, int iD, Vector2Int size, GameObject prefab, ObjectTypes type, int miniatureScale) 
+    [field: SerializeField]
+    public Vector3 MinaturePosition { get; private set; }
+
+
+
+    public ObjectData(string name, int iD, Vector2Int size, GameObject prefab, ObjectTypes type, int miniatureScale, Quaternion miniatureRotation, Vector3 MiniaturePosition) 
     {
         Name = name;
         ID = iD;
@@ -66,6 +73,9 @@ public class ObjectData
         Prefab = prefab;
         Types = type;
         MiniatureScale = miniatureScale;
+        MiniatureRotation = miniatureRotation;
+        MinaturePosition = MiniaturePosition;
+
     }
 
 }
