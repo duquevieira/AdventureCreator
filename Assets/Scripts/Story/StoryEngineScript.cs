@@ -27,7 +27,7 @@ public class StoryEngineScript : MonoBehaviour
     private InventoryItemsManager _itemsManager;
 
 
-    void Start()
+    void Awake()
     {
         ClearStoryElements();
         _itemsManager.setStoryEngineScript(this);
@@ -37,13 +37,14 @@ public class StoryEngineScript : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.S))
         {
+            Debug.Log(Time.realtimeSinceStartup + " " + Storyboard.Count);
             foreach (StoryboardStep step in Storyboard)
             {
                 Debug.Log(Time.realtimeSinceStartup + "-----------------------------");
                 Debug.Log(Time.realtimeSinceStartup + " ID " + step.getId());
                 Debug.Log(Time.realtimeSinceStartup + " COLLIDER " + step.getColliderName());
                 Debug.Log(Time.realtimeSinceStartup + " REQUIREMENTS");
-                foreach(ItemGroup requirement in step.getRequirements())
+                foreach (ItemGroup requirement in step.getRequirements())
                 {
                     Debug.Log(Time.realtimeSinceStartup + " " + requirement.getItemName() + " " + requirement.getItemAmount());
                 }
@@ -63,11 +64,11 @@ public class StoryEngineScript : MonoBehaviour
             {
                 List<ItemGroup> requirements = iteratedStep.getRequirements();
                 bool completable = true;
-                foreach(ItemGroup requirement in requirements)
+                foreach (ItemGroup requirement in requirements)
                 {
                     int storyAmount = -1;
-                    foreach(ItemGroup storyItem in StoryItems)
-                        if(storyItem.getItemName() == requirement.getItemName())
+                    foreach (ItemGroup storyItem in StoryItems)
+                        if (storyItem.getItemName() == requirement.getItemName())
                         {
                             storyAmount = storyItem.getItemAmount();
                             break;
@@ -94,7 +95,7 @@ public class StoryEngineScript : MonoBehaviour
                             if (storyItem.getItemName() == requirement.getItemName())
                             {
                                 storyItem.removeItemAmount(requirement.getItemAmount());
-                                if(storyItem.getItemAmount() == 0)
+                                if (storyItem.getItemAmount() == 0)
                                     StoryItems.Remove(storyItem);
                                 break;
                             }
@@ -169,6 +170,10 @@ public class StoryEngineScript : MonoBehaviour
     public void ClearStoryElements()
     {
         StoryItems = new List<ItemGroup>();
+        foreach (ItemGroup item in InventoryItems)
+        {
+            _itemsManager.DeleteItem(item.getItemName());
+        }
         InventoryItems = new List<ItemGroup>();
         Storyboard = new List<StoryboardStep>();
     }
