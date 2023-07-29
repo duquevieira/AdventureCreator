@@ -74,13 +74,13 @@ public class PlacementState : IBuildingState
         ObjectData.ObjectTypes objType = Database.objectsDatabase[_selectedObjectIndex].Types;
         if (objType == ObjectData.ObjectTypes.Structure)
         {
-            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, _structureRotatedPosition, _rotation);
+            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, _structureRotatedPosition, _rotation, objType);
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), true);
             PreviewSystem.UpdatePreviewPosition(_structureRotatedPosition, true);
         }
         else
         {
-            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.GetCellCenterWorld(gridPos), _rotation);
+            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.GetCellCenterWorld(gridPos), _rotation, objType);
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), false);
             PreviewSystem.UpdatePreviewPosition(Grid.GetCellCenterWorld(gridPos), false);
         }

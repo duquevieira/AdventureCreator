@@ -104,9 +104,8 @@ public class PlacementSystemV2 : MonoBehaviour
             for (int y = -(_gridSize.y/2); y<_gridSize.y/2; y++)
             {
                 Vector3Int _gridPos = new Vector3Int(x, y, 0);
-                Debug.Log(_gridPos);
                 Quaternion _rotation = _database.objectsDatabase[_selectedObjectIndex].Prefab.transform.rotation;
-                int _index = _objectPlacer.PlaceObject(_database.objectsDatabase[_selectedObjectIndex].Prefab, _grid.GetCellCenterWorld(_gridPos), _rotation);
+                int _index = _objectPlacer.PlaceObject(_database.objectsDatabase[_selectedObjectIndex].Prefab, _grid.GetCellCenterWorld(_gridPos), _rotation, _database.objectsDatabase[_selectedObjectIndex].Types);
                 _objData.AddObjectAt(_gridPos, _database.objectsDatabase[_selectedObjectIndex].Size, _database.objectsDatabase[_selectedObjectIndex].Name,_index, _database.objectsDatabase[_selectedObjectIndex].Types);
             }
         }
@@ -125,7 +124,7 @@ public class PlacementSystemV2 : MonoBehaviour
         Vector2Int _size = _database.objectsDatabase[_selectedObjectIndex].Size;
         string _name = toAdd.name.Split("(")[0];
         ObjectData.ObjectTypes _type = _database.objectsDatabase[_selectedObjectIndex].Types;
-
         _objData.AddObjectAt(_gridPos, _size, _name, index, _type);
+        _objectPlacer.PlaceObject(toAdd, toAdd.transform.position, toAdd.transform.rotation, _type);
     }
 }

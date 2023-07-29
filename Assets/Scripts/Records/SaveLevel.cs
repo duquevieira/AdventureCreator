@@ -58,7 +58,7 @@ public class SaveLevel : AbstractSave
         Debug.Log(tale);
         Story.Player.transform.position = new Vector3(tale.Player.getRow(), 0, tale.Player.getColumn());
         Story.Storyboard = tale.Storyboard;
-        List<GameObject> toUpdate = new List<GameObject>();
+        int index = 0;
         foreach(ObjectInfo objectInfo in tale.TaleWorld.ObjectsInWorld) {
             GameObject toAdd = Resources.Load<GameObject>(_prefabPath + objectInfo.Name.Split("(")[0]);
             toAdd.transform.position = new Vector3(objectInfo.Position.getRow(), 0, objectInfo.Position.getColumn());
@@ -76,12 +76,9 @@ public class SaveLevel : AbstractSave
                             toAdd.transform.rotation = Quaternion.Euler(0,270,0);
                             break;
             }
-            var cloneObj = Instantiate(toAdd, toAdd.transform.position, toAdd.transform.rotation);
-            cloneObj.name = cloneObj.name.Split("(")[0];
-            toUpdate.Add(cloneObj);
-            PlacementSystem.RestoreLoadedGridData(toAdd, toUpdate.Count-1);            
+            PlacementSystem.RestoreLoadedGridData(toAdd, index);
+            index++;
         }
-        ObjectPlacer.PlacedGameObjects = toUpdate;
     }
 
     private string OverwriteSaveProcess(string json) {
