@@ -99,7 +99,7 @@ public class PlacementSystemV2 : MonoBehaviour
         int _selectedObjectIndex = _database.objectsDatabase.FindIndex(data => data.Name == _floorPrefab.name);
         for (int x = -(_gridSize.x/2); x < _gridSize.x/2; x++)
         {
-            for (int y = -(_gridSize.y/2); y<_gridSize.y/2; y++)
+            for (int y = -(_gridSize.y/2)+1; y<_gridSize.y/2+1; y++)
             {
                 Vector3Int _gridPos = new Vector3Int(x, y, 0);
                 Quaternion _rotation = _database.objectsDatabase[_selectedObjectIndex].Prefab.transform.rotation;
