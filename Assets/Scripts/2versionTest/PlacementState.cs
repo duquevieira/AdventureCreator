@@ -47,7 +47,6 @@ public class PlacementState : IBuildingState
         bool placementValidity = CheckPlacementValidity(gridPos, _selectedObjectIndex);
         _structureRotatedPosition = GetPositionOfRotatedStructure(_rotation, Grid.CellToWorld(gridPos));
         ObjectData.ObjectTypes objType = Database.objectsDatabase[_selectedObjectIndex].Types;
-
         if (objType == ObjectData.ObjectTypes.Structure)
         {
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), placementValidity);
@@ -114,7 +113,7 @@ public class PlacementState : IBuildingState
 
     private Vector3 GetPositionOfRotatedStructure(Quaternion rotation, Vector3 gridPos)
     {
-        switch (rotation.eulerAngles.y)
+        switch (Mathf.Round(rotation.eulerAngles.y))
         {
             case 90:
                 return gridPos;
