@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class PlacementSystemV2 : MonoBehaviour
@@ -46,7 +48,7 @@ public class PlacementSystemV2 : MonoBehaviour
     {
         StopPlacement();
         _gridVisualization.SetActive(true);
-        buildingState = new PlacementState(name,_grid,_preview,_database,_objData,_objectPlacer);
+        buildingState = new PlacementState(name, _grid, _preview,_database,_objData,_objectPlacer);
         _inputManager.OnClicked += PlaceStructure;
         _inputManager.OnExit += StopPlacement;
     }
@@ -99,9 +101,10 @@ public class PlacementSystemV2 : MonoBehaviour
         int _selectedObjectIndex = _database.objectsDatabase.FindIndex(data => data.Name == _floorPrefab.name);
         for (int x = -(_gridSize.x/2); x < _gridSize.x/2; x++)
         {
-            for (int y = -(_gridSize.y/2)+1; y<_gridSize.y/2+1; y++)
+            for (int y = -(_gridSize.y/2); y<_gridSize.y/2; y++)
             {
                 Vector3Int _gridPos = new Vector3Int(x, y, 0);
+                Debug.Log(_gridPos);
                 Quaternion _rotation = _database.objectsDatabase[_selectedObjectIndex].Prefab.transform.rotation;
                 int _index = _objectPlacer.PlaceObject(_database.objectsDatabase[_selectedObjectIndex].Prefab, _grid.GetCellCenterWorld(_gridPos), _rotation);
                 _objData.AddObjectAt(_gridPos, _database.objectsDatabase[_selectedObjectIndex].Size, _database.objectsDatabase[_selectedObjectIndex].Name,_index, _database.objectsDatabase[_selectedObjectIndex].Types);
@@ -115,4 +118,14 @@ public class PlacementSystemV2 : MonoBehaviour
         _objectPlacer.RemoveAllObjects();
     }
 
+    public void RestoreLoadedGridData(GameObject toAdd, int index)
+    {
+        Vector3Int _gridPos = _grid.WorldToCell(toAdd.transform.position);
+        int _selectedObjectIndex = _database.objectsDatabase.FindIndex(data => data.Name == toAdd.name.Split("(")[0]);
+        Vector2Int _size = _database.objectsDatabase[_selectedObjectIndex].Size;
+        string _name = toAdd.name.Split("(")[0];
+        ObjectData.ObjectTypes _type = _database.objectsDatabase[_selectedObjectIndex].Types;
+
+        _objData.AddObjectAt(_gridPos, _size, _name, index, _type);
+    }
 }

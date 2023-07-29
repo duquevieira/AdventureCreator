@@ -79,7 +79,7 @@ public class SaveLevel : AbstractSave
             var cloneObj = Instantiate(toAdd, toAdd.transform.position, toAdd.transform.rotation);
             cloneObj.name = cloneObj.name.Split("(")[0];
             toUpdate.Add(cloneObj);
-            
+            PlacementSystem.RestoreLoadedGridData(toAdd, toUpdate.Count-1);            
         }
         ObjectPlacer.PlacedGameObjects = toUpdate;
     }

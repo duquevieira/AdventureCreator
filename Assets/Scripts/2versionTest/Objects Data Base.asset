@@ -28,7 +28,7 @@ MonoBehaviour:
     <Types>k__BackingField: 1
     <MiniatureScale>k__BackingField: 40
     <MiniatureRotation>k__BackingField: {x: -0.70710677, y: 0, z: 0, w: 0.70710677}
-    <MinaturePosition>k__BackingField: {x: -5, y: 55, z: 0}
+    <MinaturePosition>k__BackingField: {x: -5, y: 0, z: 0}
   - <Name>k__BackingField: SM_Bld_Wall_Baseboard_01
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 1, y: 1}
@@ -36,7 +36,7 @@ MonoBehaviour:
     <Types>k__BackingField: 3
     <MiniatureScale>k__BackingField: 15
     <MiniatureRotation>k__BackingField: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-    <MinaturePosition>k__BackingField: {x: -18, y: -30, z: 0}
+    <MinaturePosition>k__BackingField: {x: -30, y: -30, z: 0}
   - <Name>k__BackingField: SM_Bld_Wall_Baseboard_Window_02
     <ID>k__BackingField: 20
     <Size>k__BackingField: {x: 1, y: 1}
