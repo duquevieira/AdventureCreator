@@ -117,7 +117,7 @@ public class PlacementSystemV2 : MonoBehaviour
         _objectPlacer.RemoveAllObjects();
     }
 
-    public void RestoreLoadedGridData(GameObject toAdd, int index)
+    public void RestoreLoadedData(GameObject toAdd, int index)
     {
         Vector3Int _gridPos = _grid.WorldToCell(toAdd.transform.position);
         int _selectedObjectIndex = _database.objectsDatabase.FindIndex(data => data.Name == toAdd.name.Split("(")[0]);

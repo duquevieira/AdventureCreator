@@ -111,6 +111,13 @@ public class GridData
         return allData;
     }
 
+    public string getHighestObjectNameAt(Vector3Int gridPos)
+    {
+        List<PlacementData> objectsAt = placedObjects[gridPos];
+        PlacementData lastObject = objectsAt[objectsAt.Count - 1];
+        return lastObject.Name.Split("(")[0];   
+    }
+
     private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, Vector2Int objectSize)
     {
         List<Vector3Int> returnVal = new List<Vector3Int>();

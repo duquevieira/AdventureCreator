@@ -30,13 +30,13 @@ public class PlacementState : IBuildingState
 
         _structureRotatedPosition = new Vector3(0f, 0.1f, 0f);
         _selectedObjectIndex = -1;
-        _selectedObjectIndex = database.objectsDatabase.FindIndex(data => data.Name == name);
+        _selectedObjectIndex = Database.objectsDatabase.FindIndex(data => data.Name == name);
         _size = Database.objectsDatabase[_selectedObjectIndex].Size;
-        _rotation = database.objectsDatabase[_selectedObjectIndex].Prefab.transform.rotation;
+        _rotation = Database.objectsDatabase[_selectedObjectIndex].Prefab.transform.rotation;
 
         if (_selectedObjectIndex > -1)
         {
-            previewSystem.StartShowingPlacementPreview(database.objectsDatabase[_selectedObjectIndex].Prefab, _size);
+            previewSystem.StartShowingPlacementPreview(Database.objectsDatabase[_selectedObjectIndex].Prefab, _size);
         }
         else
             throw new System.Exception($"No object with name {name}");
@@ -44,7 +44,7 @@ public class PlacementState : IBuildingState
 
     public void UpdateState(Vector3Int gridPos)
     {
-        bool placementValidity = CheckPlacementValidity(gridPos, _selectedObjectIndex);
+        bool placementValidity = CheckPlacementValidity(gridPos);
         _structureRotatedPosition = GetPositionOfRotatedStructure(_rotation, Grid.CellToWorld(gridPos));
         ObjectData.ObjectTypes objType = Database.objectsDatabase[_selectedObjectIndex].Types;
         if (objType == ObjectData.ObjectTypes.Structure)
@@ -52,7 +52,13 @@ public class PlacementState : IBuildingState
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), placementValidity);
             PreviewSystem.UpdatePreviewPosition(_structureRotatedPosition, placementValidity);
         }
-        else
+        else if (objType == ObjectData.ObjectTypes.Prop)
+        {
+            float _maxY = GetMaximumHeightAt(gridPos);
+            Vector3 _maxHeightPos = Grid.GetCellCenterWorld(gridPos) + new Vector3(0,_maxY,0);
+            PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), placementValidity);
+            PreviewSystem.UpdatePreviewPosition(_maxHeightPos, placementValidity);
+        } else
         {
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), placementValidity);
             PreviewSystem.UpdatePreviewPosition(Grid.GetCellCenterWorld(gridPos), placementValidity);
@@ -66,7 +72,7 @@ public class PlacementState : IBuildingState
     public void OnAction(Vector3Int gridPos)
     {
         int index;
-        bool placementValidity = CheckPlacementValidity(gridPos, _selectedObjectIndex);
+        bool placementValidity = CheckPlacementValidity(gridPos);
         if (!placementValidity)
             return;
 
@@ -78,7 +84,14 @@ public class PlacementState : IBuildingState
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), true);
             PreviewSystem.UpdatePreviewPosition(_structureRotatedPosition, true);
         }
-        else
+        else if (objType == ObjectData.ObjectTypes.Prop)
+        {
+            float _maxY = GetMaximumHeightAt(gridPos);
+            Vector3 _maxHeightPos = Grid.GetCellCenterWorld(gridPos) + new Vector3(0, _maxY, 0);
+            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, _maxHeightPos, _rotation, objType);
+            PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), placementValidity);
+            PreviewSystem.UpdatePreviewPosition(_maxHeightPos, placementValidity);
+        } else
         {
             index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.GetCellCenterWorld(gridPos), _rotation, objType);
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), false);
@@ -128,7 +141,7 @@ public class PlacementState : IBuildingState
         }
     }
    
-    private bool CheckPlacementValidity(Vector3Int gridPos, int selectedObjectIndex)
+    private bool CheckPlacementValidity(Vector3Int gridPos)
     {
         //GridData selectedData = GetSelectedData(Database.objectsDatabase[selectedObjectIndex].Types);
         ObjectData.ObjectTypes objType = Database.objectsDatabase[_selectedObjectIndex].Types;
@@ -138,5 +151,30 @@ public class PlacementState : IBuildingState
             return selectedData.CanPlacedObjectAt(gridPos, _size);*/
         return ObjData.CanPlacedObjectAt(gridPos, _size, objType);
     }
+
+    private float GetMaximumHeightAt(Vector3Int gridPos)
+    {
+        if (ObjData.CheckObjectsAt(gridPos))
+        {
+            int _objectIndex = Database.objectsDatabase.FindIndex(data => data.Name == ObjData.getHighestObjectNameAt(gridPos));
+            GameObject obj = Database.objectsDatabase[_objectIndex].Prefab;
+            float _y;
+            Renderer _renderer = obj.GetComponent<Renderer>();
+            if (_renderer == null)
+            {
+                _renderer = obj.GetComponentInChildren<Renderer>();
+                _y = _renderer.bounds.size.y + obj.transform.position.y;
+            }
+            else
+            {
+                _y = _renderer.bounds.size.y + obj.transform.position.y;
+            }
+            return _y;
+        }
+        else
+            return 0.1f;
+        
+    }
+
 
 }

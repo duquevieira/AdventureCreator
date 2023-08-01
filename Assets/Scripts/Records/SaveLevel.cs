@@ -76,7 +76,7 @@ public class SaveLevel : AbstractSave
                             toAdd.transform.rotation = Quaternion.Euler(0,270,0);
                             break;
             }
-            PlacementSystem.RestoreLoadedGridData(toAdd, index);
+            PlacementSystem.RestoreLoadedData(toAdd, index);
             index++;
         }
     }
