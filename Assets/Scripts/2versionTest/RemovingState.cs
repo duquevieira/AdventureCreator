@@ -38,6 +38,11 @@ public class RemovingState : IBuildingState
             _gameObjectIndex = ObjData.GetRepresentationIndex(gridPos)[ObjData.GetRepresentationIndex(gridPos).Count - 1];
             ObjData.RemoveTopObjectAt(gridPos);
             ObjectPlacer.RemoveObjectAt(_gameObjectIndex);
+            foreach(var data in ObjData.GetAllData())
+            {
+                if (data.PlacedObjectIndex > _gameObjectIndex)
+                    data.PlacedObjectIndex--;
+            }
         }
         else
             return;            

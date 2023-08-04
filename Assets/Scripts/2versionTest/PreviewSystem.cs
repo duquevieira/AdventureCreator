@@ -110,16 +110,16 @@ public class PreviewSystem : MonoBehaviour
 
     public Transform RotatePreviewEdges()
     {
-        if (_previewObject.transform.localRotation.eulerAngles.y == 90)
+        if (Mathf.Round(_previewObject.transform.rotation.eulerAngles.y) == 90)
             _previewObject.transform.position += new Vector3Int(0, 0, 1);
-        else if (_previewObject.transform.localRotation.eulerAngles.y == 180)
+        else if (Mathf.Round(_previewObject.transform.rotation.eulerAngles.y) == 180)
             _previewObject.transform.position += new Vector3Int(1, 0, 0);
-        else if (_previewObject.transform.localRotation.eulerAngles.y == 270)
+        else if (Mathf.Round(_previewObject.transform.rotation.eulerAngles.y) == 270)
             _previewObject.transform.position += new Vector3Int(0, 0, -1);
         else
             _previewObject.transform.position += new Vector3Int(-1, 0, 0);
 
-        _previewObject.transform.Rotate(new Vector3(0, 90, 0));
+        _previewObject.transform.Rotate(0, 90, 0);
         Transform transform = _previewObject.transform;
         return transform;
     }
@@ -130,5 +130,4 @@ public class PreviewSystem : MonoBehaviour
         PrepareCursor(_newSize);
         return _newSize;
     }
-
 }

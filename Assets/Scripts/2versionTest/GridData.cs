@@ -92,6 +92,32 @@ public class GridData
             return false;
     }
 
+    public PlacementData GetLastObjectAt(Vector3Int gridPos)
+    {
+        List<PlacementData> dataAt = placedObjects[gridPos];
+        return dataAt[dataAt.Count-1];
+    }
+
+    public List<PlacementData> GetAllData()
+    {
+        List<PlacementData> allData = new List<PlacementData>();
+        foreach(var pos in placedObjects.Keys)
+        {
+            foreach(var data in placedObjects[pos])
+            {
+                allData.Add(data);
+            }
+        }
+        return allData;
+    }
+
+    public string getHighestObjectNameAt(Vector3Int gridPos)
+    {
+        List<PlacementData> objectsAt = placedObjects[gridPos];
+        PlacementData lastObject = objectsAt[objectsAt.Count - 1];
+        return lastObject.Name.Split("(")[0];   
+    }
+
     private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, Vector2Int objectSize)
     {
         List<Vector3Int> returnVal = new List<Vector3Int>();
@@ -121,7 +147,7 @@ public class GridData
     {
         public List<Vector3Int> occupiedPositions;
         public string Name { get; private set; }
-        public int PlacedObjectIndex { get; private set; }
+        public int PlacedObjectIndex { get; set; }
 
         public ObjectData.ObjectTypes Type { get; private set; }
 
