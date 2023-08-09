@@ -40,14 +40,13 @@ public class PlayerHandlerScript : MonoBehaviour
 
     public virtual void Update()
     {
-        if (Input.GetMouseButton(1))
+       if (Input.GetMouseButtonDown(1))
         {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                _playerAnimator.SetBool(ANIMATION_WALK, true);
-                Target = hit.point;
+                ProcessEntry(hit, null);
             }
         }
         /*if (Input.GetMouseButtonDown(0))
@@ -67,25 +66,52 @@ public class PlayerHandlerScript : MonoBehaviour
                     StartCoroutine(ExecuteAfter(3, doorAnimator, ANIMATION_DOOR));
                 }
             }
-        }
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            
         }*/
         if (_canMove)
         {
-            if (Vector3.Distance(_player.transform.position, Target) > 0.2)
+            Vector3 goal = new Vector3(Target.x, _player.transform.position.y, Target.z);
+            if (Vector3.Distance(_player.transform.position, goal) > 0.2)
             {
                 _playerAnimator.SetBool(ANIMATION_WALK, true);
-                _player.transform.position = Vector3.MoveTowards(_player.transform.position, Target, _speed * Time.deltaTime);
-                _player.transform.LookAt(new Vector3(Target.x, _player.transform.position.y, Target.z));
+                _player.transform.position = Vector3.MoveTowards(_player.transform.position, goal, _speed * Time.deltaTime);
+                _player.transform.LookAt(goal);
             }
             else
                 _playerAnimator.SetBool(ANIMATION_WALK, false);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void ProcessEntry(RaycastHit hit, string itemName)
+    {
+        if (_storyEngineScript.IsStoryStep(hit.transform.name))
+        {
+            float distance = Vector3.Distance(_player.transform.position, hit.collider.transform.position);
+            if (distance < 3)
+            {
+                if (_storyEngineScript.ProcessEntry(hit.collider, itemName))
+                {
+                    _playerAnimator.SetBool(ITEMS_HIGH, true);
+                    StartCoroutine(ExecuteAfter(1.5f, _playerAnimator, ITEMS_HIGH));
+                }
+                else
+                {
+                    _playerAnimator.SetBool(ITEMS_LOW, true);
+                    StartCoroutine(ExecuteAfter(1.5f, _playerAnimator, ITEMS_LOW));
+                }
+                _canMove = false;
+            }
+            else
+            {
+                Target = Vector3.Lerp(hit.point, _player.transform.position, 2 / distance);
+            }
+        }
+        else
+        {
+            Target = hit.point;
+        }
+    }
+
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.transform.position.y > (gameObject.transform.position.y + 0.5))
         {
@@ -99,12 +125,13 @@ public class PlayerHandlerScript : MonoBehaviour
         }
         _canMove = false;
         _storyEngineScript.ProcessEntry(other.gameObject.name);
-    }
+    }*/
 
     IEnumerator ExecuteAfter(float time, Animator animator, string name)
     {
         yield return new WaitForSeconds(time);
         animator.SetBool(name, false);
         _canMove = true;
+        Target = _player.transform.position;
     }
 }

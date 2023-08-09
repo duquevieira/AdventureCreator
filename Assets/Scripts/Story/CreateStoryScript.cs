@@ -41,7 +41,7 @@ public class CreateStoryScript : MonoBehaviour
     {
         ClearUI();
         _allSteps = new List<GameObject>();
-        _firstSwapUpdate = true;
+        _firstSwapUpdate = false;
         _buttonNewStep.onClick.AddListener(AddNewStoryStep);
     }
 
@@ -61,7 +61,6 @@ public class CreateStoryScript : MonoBehaviour
         List<StoryboardStep> story = new List<StoryboardStep>();
         foreach (GameObject step in _allSteps)
         {
-
             int stepID = int.Parse(step.GetComponent<Node>().ID);
             string colliderName = "";
             if (step.transform.GetChild(2).childCount > 0)
@@ -115,13 +114,13 @@ public class CreateStoryScript : MonoBehaviour
     private void ClearUI()
     {
         _buttonNewStep.gameObject.SetActive(false);
-        //_canvas.gameObject.SetActive(false);
+        _canvas.gameObject.SetActive(false);
     }
 
     private void ShowUI()
     {
         _buttonNewStep.gameObject.SetActive(true);
-        //_canvas.gameObject.SetActive(true);
+        _canvas.gameObject.SetActive(true);
     }
 
     void Update()
@@ -167,9 +166,10 @@ public class CreateStoryScript : MonoBehaviour
                         {
                             foundAcquired = true;
                             GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(4), false);
-                            //TODO
-                            instantiated.transform.localScale = new Vector3(25, 25, 25);
-                            instantiated.transform.localPosition = Vector3.zero;
+                            instantiated.transform.rotation = obj.MiniatureRotation;
+                            instantiated.transform.position += obj.MinaturePosition;
+                            int scale = obj.MiniatureScale;
+                            instantiated.transform.localScale = new Vector3(scale, scale, scale);
                             instantiated.layer = UILAYER;
                             foreach (Transform child in instantiated.transform)
                                 child.gameObject.layer = UILAYER;
@@ -178,9 +178,10 @@ public class CreateStoryScript : MonoBehaviour
                         {
                             foundCollider = true;
                             GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(2), false);
-                            //TODO
-                            instantiated.transform.localScale = new Vector3(25, 25, 25);
-                            instantiated.transform.localPosition = Vector3.zero;
+                            instantiated.transform.rotation = obj.MiniatureRotation;
+                            instantiated.transform.position += obj.MinaturePosition;
+                            int scale = obj.MiniatureScale;
+                            instantiated.transform.localScale = new Vector3(scale, scale, scale);
                             instantiated.layer = UILAYER;
                             foreach (Transform child in instantiated.transform)
                                 child.gameObject.layer = UILAYER;
@@ -230,12 +231,12 @@ public class CreateStoryScript : MonoBehaviour
         }
         else
         {
-            ClearUI();
             if (_firstSwapUpdate)
             {
                 SaveStoryState();
                 _firstSwapUpdate = false;
             }
+            ClearUI();
         }
     }
 }
