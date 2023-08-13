@@ -85,14 +85,14 @@ public class CreateStoryScript : MonoBehaviour
                 else
                 {
                     name = connection.port0.ID.Split("Item");
-                    storyboardStep.addRequirement(new ItemGroup(_allSteps[int.Parse(name[1])].transform.GetChild(4).GetChild(0).name.Split(PARENTHESIS)[0], 1));
+                    storyboardStep.addRequirement(new ItemGroup(_allSteps[int.Parse(name[1])].transform.GetChild(2).GetChild(0).name.Split(PARENTHESIS)[0], 1));
                 }
             }
             int itemAmount = 0;
             if (nodeScript.ports.Count > 2)
             {
                 itemAmount = nodeScript.ports[2].ConnectionsCount;
-                storyboardStep.addAcquires(new ItemGroup(step.transform.GetChild(4).GetChild(0).name.Split(PARENTHESIS)[0], itemAmount));
+                storyboardStep.addAcquires(new ItemGroup(step.transform.GetChild(2).GetChild(0).name.Split(PARENTHESIS)[0], itemAmount));
                 foreach (Connection connection in nodeScript.ports[2].Connections)
                 {
                     storyboardStep.addItemDependentStep(int.Parse(connection.port1.ID.Split("In")[1]));
@@ -142,41 +142,20 @@ public class CreateStoryScript : MonoBehaviour
                     nodeScript.ID = step.getId().ToString();
                     nodeScript.ports[0].ID = "In" + nodeScript.ID;
                     nodeScript.ports[1].ID = "Out" + nodeScript.ID;
-                    string acquiredName = "";
                     foreach (ItemGroup acquired in step.getAcquired())
                     {
                         if (!int.TryParse(acquired.getItemName(), out int number))
                         {
                             stepPrefab.GetComponent<StepToggleScript>().ToggleStepItem();
-                            acquiredName = acquired.getItemName();
                             break;
                         }
                     }
                     //substituir
-                    bool foundAcquired = false;
-                    bool foundCollider = false;
-                    if (acquiredName.Equals(""))
-                        foundAcquired = true;
                     foreach (var obj in _database.objectsDatabase)
                     {
                         GameObject prefab = obj.Prefab;
-                        if (foundAcquired && foundCollider)
-                            break;
-                        if (prefab.gameObject.name.Split(PARENTHESIS)[0].Equals(acquiredName))
-                        {
-                            foundAcquired = true;
-                            GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(4), false);
-                            instantiated.transform.rotation = obj.MiniatureRotation;
-                            instantiated.transform.position += obj.MinaturePosition;
-                            int scale = obj.MiniatureScale;
-                            instantiated.transform.localScale = new Vector3(scale, scale, scale);
-                            instantiated.layer = UILAYER;
-                            foreach (Transform child in instantiated.transform)
-                                child.gameObject.layer = UILAYER;
-                        }
                         if (prefab.gameObject.name.Split(PARENTHESIS)[0].Equals(step.getColliderName()))
                         {
-                            foundCollider = true;
                             GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(2), false);
                             instantiated.transform.rotation = obj.MiniatureRotation;
                             instantiated.transform.position += obj.MinaturePosition;
@@ -185,6 +164,7 @@ public class CreateStoryScript : MonoBehaviour
                             instantiated.layer = UILAYER;
                             foreach (Transform child in instantiated.transform)
                                 child.gameObject.layer = UILAYER;
+                            break;
 
                         }
                     }
