@@ -61,7 +61,7 @@ public class SaveLevel : AbstractSave
         int index = 0;
         foreach(ObjectInfo objectInfo in tale.TaleWorld.ObjectsInWorld) {
             GameObject toAdd = Resources.Load<GameObject>(_prefabPath + objectInfo.Name.Split("(")[0]);
-            toAdd.transform.position = new Vector3(objectInfo.Position.getRow(), 0, objectInfo.Position.getColumn());
+            toAdd.transform.position = new Vector3(objectInfo.Position.getRow(), objectInfo.Position.getHeight(), objectInfo.Position.getColumn());
             switch(objectInfo.Rotation.GetDirection()) {
                         case Direction.North:
                             toAdd.transform.rotation = Quaternion.Euler(0,0,0);

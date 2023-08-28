@@ -8,7 +8,7 @@ public static class GameObjectExtensions
     {
         Vector3 position = gameObject.transform.position;
         Quaternion rotation = gameObject.transform.rotation;
-        PositionCoordinates pos = new PositionCoordinates(position.x, position.z);
+        PositionCoordinates pos = new PositionCoordinates(position.x, position.z, position.y);
         RotationCoordinates rot = new RotationCoordinates(rotation);
         return new ObjectInfo(gameObject.name, pos, rot);
     }

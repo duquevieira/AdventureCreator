@@ -69,6 +69,13 @@ public abstract class AbstractSave : MonoBehaviour
         return TreatGetResponse(requestGet);
     }
 
+    public string DeleteSave(string SaveId)
+    {
+        var requestGet = WebRequest.Create(_endpointDeletePath + SaveId);
+        requestGet.Method = "DELETE";
+        return TreatGetResponse(requestGet);
+    }
+
     public static string TreatGetResponse(WebRequest request) 
     {
         try
