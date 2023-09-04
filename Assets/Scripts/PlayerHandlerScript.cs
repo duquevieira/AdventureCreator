@@ -27,6 +27,10 @@ public class PlayerHandlerScript : MonoBehaviour
     [HideInInspector]
     public Vector3 Target;
 
+    //TODO DELETE
+    private Animator NPCAnimator0;
+    private Animator NPCAnimator1;
+
     void Start()
     {
         _camera = _storyEngineScript.Camera;
@@ -36,12 +40,48 @@ public class PlayerHandlerScript : MonoBehaviour
         _playerAnimator = _character.GetComponent<Animator>();
         Target = _player.transform.position;
         _canMove = true;
+        //TODO DELETE
+        /*GameObject aux = GameObject.Find("NPC").transform.Find("MHunter").gameObject;
+        aux.SetActive(true);
+        NPCAnimator0 = aux.GetComponent<Animator>();
+        aux = GameObject.Find("NPC (1)").transform.Find("MWorker").gameObject;
+        aux.SetActive(true);
+        NPCAnimator1 = aux.GetComponent<Animator>();
+        NPCAnimator0.SetInteger("targetAnimation", 8);
+        NPCAnimator1.SetInteger("targetAnimation", 8);*/
     }
 
     public virtual void Update()
     {
+        //TODO DELETE
+       /*if(Input.GetKeyDown(KeyCode.Q))
+       {
+            int aux = NPCAnimator0.GetInteger("targetAnimation");
+            if(aux == 16)
+            {
+                aux = 0;
+            }
+            else
+            {
+                aux++;
+            }
+            NPCAnimator0.SetInteger("targetAnimation", aux);
+       }
+       if(Input.GetKeyDown(KeyCode.W))
+       {
+            int aux = NPCAnimator1.GetInteger("targetAnimation");
+            if (aux == 16)
+            {
+                aux = 0;
+            }
+            else
+            {
+                aux++;
+            }
+            NPCAnimator1.SetInteger("targetAnimation", aux);
+        }*/
        if (Input.GetMouseButtonDown(1))
-        {
+       {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
