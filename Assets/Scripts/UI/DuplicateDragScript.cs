@@ -39,24 +39,12 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
             GameObject current = hit.gameObject;
             if (current.name.Split(PARENTHESIS)[0].Equals(STEP_PREFAB_NAME))
             {
-                bool itemMode = current.GetComponent<StepToggleScript>().ItemMode;
                 noStep = false;
-                if (itemMode)
-                {
-                    Transform itemSpot = current.transform.GetChild(4);
-                    if (itemSpot.childCount != 0)
-                        Destroy(itemSpot.GetChild(0).gameObject);
-                    _clone.transform.SetParent(itemSpot, false);
-                    _clone.transform.localPosition = Vector3.zero;
-                }
-                else
-                {
-                    Transform colliderSpot = current.transform.GetChild(2);
-                    if (colliderSpot.childCount != 0)
-                        Destroy(colliderSpot.GetChild(0).gameObject);
-                    _clone.transform.SetParent(colliderSpot, false);
-                    _clone.transform.localPosition = Vector3.zero;
-                }
+                Transform colliderSpot = current.transform.GetChild(2);
+                if (colliderSpot.childCount != 0)
+                    Destroy(colliderSpot.GetChild(0).gameObject);
+                _clone.transform.SetParent(colliderSpot, false);
+                _clone.transform.localPosition = Vector3.zero;
             }
         }
         if (noStep)

@@ -30,7 +30,24 @@ public class StoryEngineScript : MonoBehaviour
     void Awake()
     {
         ClearStoryElements();
-        _itemsManager.setStoryEngineScript(this);
+        _itemsManager.setPlayerScript(Player.GetComponent<PlayerHandlerScript>());
+        //TODO DELETE
+        /*StoryboardStep step = new StoryboardStep(0, "SM_Prop_TableFootball_01", Vector3.zero);
+        step.addAcquires(new ItemGroup("SM_Prop_TableFootball_01", 1));
+        step.addAcquires(new ItemGroup("0", 1));
+        Storyboard.Add(step);
+        step = new StoryboardStep(1, "SM_Prop_Couch_02", Vector3.zero);
+        step.addRequirement(new ItemGroup("SM_Prop_TableFootball_01", 1));
+        step.addRequirement(new ItemGroup("0", 1));
+        step.addAcquires(new ItemGroup("SM_Prop_Couch_02", 1));
+        step.addAcquires(new ItemGroup("1", 1));
+        Storyboard.Add(step);
+        step = new StoryboardStep(1, "SM_Prop_Desk_01", Vector3.zero);
+        step.addRequirement(new ItemGroup("SM_Prop_Couch_02", 1));
+        step.addRequirement(new ItemGroup("1", 1));
+        step.addAcquires(new ItemGroup("SM_Prop_Desk_01", 1));
+        step.addAcquires(new ItemGroup("1", 1));
+        Storyboard.Add(step);*/
     }
 
     void Update()
@@ -57,36 +74,53 @@ public class StoryEngineScript : MonoBehaviour
         }
     }
 
-    public void ProcessEntry(string colliderName)
+    public bool ProcessEntry(Collider collider, string itemName)
     {
+        string colliderName = collider.name;
         foreach (StoryboardStep iteratedStep in Storyboard)
             if (colliderName.Split("(")[0].Equals(iteratedStep.getColliderName()))
             {
                 List<ItemGroup> requirements = iteratedStep.getRequirements();
                 bool completable = true;
+                bool itemIsNeeded = false;
                 foreach (ItemGroup requirement in requirements)
                 {
-                    int storyAmount = -1;
-                    foreach (ItemGroup storyItem in StoryItems)
-                        if (storyItem.getItemName() == requirement.getItemName())
+                    int amount = -1;
+                    if (int.TryParse(requirement.getItemName(), out int number))
+                    {
+                        foreach (ItemGroup storyItem in StoryItems)
+                            if (storyItem.getItemName() == requirement.getItemName())
+                            {
+                                amount = storyItem.getItemAmount();
+                                break;
+                            }
+                    }
+                    else
+                    {
+                        if(itemName == null)
                         {
-                            storyAmount = storyItem.getItemAmount();
+                            completable = false;
                             break;
                         }
-                    int inventoryAmount = -1;
-                    foreach (ItemGroup inventoryItem in InventoryItems)
-                        if (inventoryItem.getItemName() == requirement.getItemName())
+                        else if(requirement.getItemName().Equals(itemName))
                         {
-                            inventoryAmount = inventoryItem.getItemAmount();
-                            break;
+                            itemIsNeeded = true;
                         }
-                    int requiredAmount = requirement.getItemAmount();
-                    if (inventoryAmount < requiredAmount && storyAmount < requiredAmount)
+                        foreach (ItemGroup inventoryItem in InventoryItems)
+                            if (inventoryItem.getItemName() == requirement.getItemName())
+                            {
+                                amount = inventoryItem.getItemAmount();
+                                break;
+                            }
+                    }
+                    if(requirement.getItemAmount() > amount)
                     {
                         completable = false;
                         break;
                     }
                 }
+                if (itemName != null && !itemIsNeeded)
+                    completable = false;
                 if (completable)
                 {
                     foreach (ItemGroup requirement in requirements)
@@ -150,10 +184,21 @@ public class StoryEngineScript : MonoBehaviour
                                 InventoryItems.Add(item);
                                 _itemsManager.AddItem(item);
                             }
+                            Destroy(collider.gameObject);
                         }
                     }
+                    return completable;
                 }
             }
+        return false;
+    }
+
+    public bool IsStoryStep(string colliderName)
+    {
+        foreach (StoryboardStep iteratedStep in Storyboard)
+            if (colliderName.Split("(")[0].Equals(iteratedStep.getColliderName()))
+                return true;
+        return false; ;
     }
 
     public string getCharacterSkin()
@@ -164,7 +209,7 @@ public class StoryEngineScript : MonoBehaviour
         //Gentleman, GovernorsDaughter, PirateBlackbeard, PirateCaptain
         //PirateDeckHand, PirateFirstMate, PirateSeaman
         //Skeleton1, Skeleton2, Skeleton3
-        return "PirateBlackbeard";
+        return "MClerk";
     }
 
     public void ClearStoryElements()

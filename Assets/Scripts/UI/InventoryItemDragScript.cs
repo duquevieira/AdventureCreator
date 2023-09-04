@@ -5,18 +5,19 @@ using UnityEngine.EventSystems;
 
 public class InventoryItemDragScript : DuplicateDragScript
 {
-    private StoryEngineScript _storyEngineScript;
+    private PlayerHandlerScript _playerHandlerScript;
 
-    public void SetStoryEngineScript(StoryEngineScript storyEngineScript)
+    public void setPlayerScript(PlayerHandlerScript playerHandlerScript)
     {
-        _storyEngineScript = storyEngineScript;
+        _playerHandlerScript = playerHandlerScript;
     }
 
     public override void OnEndDrag(PointerEventData eventData)
     {
-        Destroy(_clone);
         if(Physics.Raycast(Camera.main.ScreenPointToRay(eventData.position), out RaycastHit hit)) {
-            _storyEngineScript.ProcessEntry(hit.collider.name);
+
+            _playerHandlerScript.ProcessEntry(hit, _clone.name);
         }
+        Destroy(_clone);
     }
 }
