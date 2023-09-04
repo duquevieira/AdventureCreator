@@ -10,19 +10,18 @@ public class StepToggleScript : MonoBehaviour
     [SerializeField]
     private Button _buttonToggle;
 
+    [HideInInspector]
     public bool ItemMode;
 
-    private GameObject _itemSpot;
     private GameObject _itemPort;
     private static String BUTTON_TEXT_STORY = "Story Step";
-    private static String BUTTON_TEXT_ITEM = "Get Item";
+    private static String BUTTON_TEXT_ITEM = "Item Step";
 
 
     void Awake()
     {
         _buttonToggle.onClick.AddListener(ToggleStepItem);
         ItemMode = false;
-        _itemSpot = transform.GetChild(4).gameObject;
         _itemPort = transform.GetChild(1).GetChild(2).gameObject;
     }
 
@@ -34,14 +33,12 @@ public class StepToggleScript : MonoBehaviour
             ItemMode = false;
             Port itemPort = nodeScript.ports[2];
             itemPort.RemoveAllConnections();
-            _itemSpot.SetActive(false);
             _itemPort.SetActive(false);
             _buttonToggle.GetComponentInChildren<Text>().text = BUTTON_TEXT_STORY;
         }
         else
         {
             ItemMode = true;
-            _itemSpot.SetActive(true);
             _itemPort.SetActive(true);
             nodeScript.ports[2].ID = "Item" + nodeScript.ID;
             _buttonToggle.GetComponentInChildren<Text>().text = BUTTON_TEXT_ITEM;

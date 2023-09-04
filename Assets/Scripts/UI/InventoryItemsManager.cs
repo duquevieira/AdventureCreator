@@ -13,20 +13,22 @@ public class InventoryItemsManager : MonoBehaviour
     [SerializeField]
     private GameObject _itemSlotPrefab;
 
+    [SerializeField] ObjectsDataBase _database;
+
     [SerializeField]
-    private StoryEngineScript _storyEngineScript;
+    private PlayerHandlerScript _playerHandlerScript;
 
     private List<GameObject> _displayedItems;
 
     private static int UILAYER = 5;
     private static string PARENTHESIS = "(";
 
-    public void setStoryEngineScript(StoryEngineScript storyEngineScript)
+    public void setPlayerScript(PlayerHandlerScript playerHandlerScript)
     {
-        _storyEngineScript = storyEngineScript;
+        _playerHandlerScript = playerHandlerScript;
     }
 
-    private static string[] foldersToSearch = {"Assets/Resources/Interactables"/*
+    private static string[] foldersToSearch = {"Assets/Resources/Prefabs"/*
      ,"Assets/PolygonOffice/Prefabs/Characters", "Assets/PolygonShops/Prefabs/Characters", "Assets/PolygonPirates/Prefabs/Characters", 
      "Assets/PolygonCity/Prefabs/Characters", "Assets/PolygonAncientEmpire/Prefabs/Characters"*/
     };
@@ -51,24 +53,27 @@ public class InventoryItemsManager : MonoBehaviour
     {
 
         //TODO Resources.Load para o asset quando estiver no nosso folder e nao nas pastas do polygon
-        string[] lookingFor = {"Assets/Resources/TrainingSet"};
+        string[] lookingFor = {"Assets/Resources/Prefabs"};
         List<GameObject> prefabs = PrefabNameLoader.GetAssets<GameObject>(lookingFor, "t:prefab");
-        foreach(GameObject prefab in prefabs)
-            if(prefab.name.Split("(")[0].Equals(item.getItemName()))
+        foreach (var obj in _database.objectsDatabase)
+        {
+            GameObject prefab = obj.Prefab;
+            if (prefab.name.Split("(")[0].Equals(item.getItemName()))
             {
                 var itemSlot = Instantiate(_itemSlotPrefab, _panel.transform);
                 itemSlot.name = prefab.name.Split("(")[0];
                 _displayedItems.Add(itemSlot);
-                itemSlot.GetComponent<InventoryItemDragScript>().SetStoryEngineScript(_storyEngineScript);
+                itemSlot.GetComponent<InventoryItemDragScript>().setPlayerScript(_playerHandlerScript);
                 var instantiated = Instantiate(prefab, itemSlot.transform);
                 instantiated.name = prefab.name.Split(PARENTHESIS)[0];
                 instantiated.layer = UILAYER;
-                //TODO
-                instantiated.transform.localScale = new Vector3(25, 25, 25);
+                instantiated.transform.localScale = new Vector3(obj.MiniatureScale, obj.MiniatureScale, obj.MiniatureScale);
+                instantiated.transform.rotation = obj.MiniatureRotation;
                 foreach (Transform child in instantiated.transform)
                     child.gameObject.layer = UILAYER;
                 break;
             }
+        }
     }
 }
 

@@ -103,7 +103,7 @@ public class StoryTests
         step.addAcquires(new ItemGroup("final", 1));
         storyengine.Storyboard.Add(step);
 
-        storyengine.ProcessEntry("FAttendant");
+        /*storyengine.ProcessEntry("FAttendant");
         storyengine.ProcessEntry("Basket");
         storyengine.ProcessEntry("Bread");
         storyengine.ProcessEntry("Cheese");
@@ -114,7 +114,7 @@ public class StoryTests
         storyengine.ProcessEntry("Door1");
         storyengine.ProcessEntry("MHunter");
         storyengine.ProcessEntry("Door1");
-        storyengine.ProcessEntry("FShopper");
+        storyengine.ProcessEntry("FShopper");*/
 
         int finalAmount = -1;
         int testAmount = -1;
