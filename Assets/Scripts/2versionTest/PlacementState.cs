@@ -91,7 +91,12 @@ public class PlacementState : IBuildingState
             index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, _maxHeightPos, _rotation, objType);
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), placementValidity);
             PreviewSystem.UpdatePreviewPosition(_maxHeightPos, placementValidity);
-        } else
+        } else if (objType == ObjectData.ObjectTypes.WallProp)
+        {
+            index = 0;
+            Debug.Log("TODO");
+        }
+        else
         {
             index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.GetCellCenterWorld(gridPos), _rotation, objType);
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), false);

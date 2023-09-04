@@ -37,7 +37,7 @@ public class ObjectsDataBase : ScriptableObject
 public class ObjectData
 {
     //[HideInInspector] public enum ObjectTypes { Chair, Shelf, Table, Rug, Prop, Wall, Default, Floor };
-    [HideInInspector] public enum ObjectTypes { Default, Floor, Prop, Structure };
+    [HideInInspector] public enum ObjectTypes { Default, Floor, Prop, Structure, WallProp};
 
     [field: SerializeField]
     public string Name { get; private set; }

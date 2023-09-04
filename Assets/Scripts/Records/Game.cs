@@ -12,7 +12,7 @@ public class Game
 
     public Game(string level, StoryEngineScript story) {
         LevelId = level;
-        Player = new PositionCoordinates(story.Player.transform.position.x, story.Player.transform.position.z);
+        Player = new PositionCoordinates(story.Player.transform.position.x, story.Player.transform.position.z, story.Player.transform.position.y);
         Storyboard = story.Storyboard;
         StoryItems = story.StoryItems;
         InventoryItems = story.InventoryItems;

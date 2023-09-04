@@ -17,7 +17,7 @@ public class Tale
 
     public Tale(StoryEngineScript storyEngine, World world, Camera camera) {
         GameObject playerObject = storyEngine.Player;
-        Player = new PositionCoordinates(playerObject.transform.position.x, playerObject.transform.position.z);
+        Player = new PositionCoordinates(playerObject.transform.position.x, playerObject.transform.position.z, playerObject.transform.position.y);
         Storyboard = storyEngine.Storyboard;
         Debug.Log(Storyboard);
         TaleWorld = world;
