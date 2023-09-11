@@ -201,7 +201,7 @@ MonoBehaviour:
     <ID>k__BackingField: 24
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 5710232741108961639, guid: daa8e3b7b6e4f3749b0e69dc1c3af5e6, type: 3}
-    <Types>k__BackingField: 0
+    <Types>k__BackingField: 2
     <MiniatureScale>k__BackingField: 130
     <MiniatureRotation>k__BackingField: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
     <MinaturePosition>k__BackingField: {x: 0, y: 10, z: 0}
