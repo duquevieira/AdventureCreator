@@ -1,7 +1,9 @@
+using MoreMountains.Tools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 public class SaveLevel : AbstractSave
@@ -12,11 +14,19 @@ public class SaveLevel : AbstractSave
     public PlacementSystemV2 PlacementSystem;
     public ObjectPlacer ObjectPlacer;
     [SerializeField] private Camera _screenshotCamera;
+    [SerializeField] private TMP_InputField _inputfield;
+    private string _saveName = null;
 
     void Start() {
+        _inputfield.onValueChanged.AddListener(delegate { OnValueChange(); });
         if(!string.IsNullOrEmpty(SaveId)) {
             Load();
         } else PlacementSystem.PlaceFloorAutomatically();
+    }
+
+    public void OnValueChange()
+    {
+        _saveName = _inputfield.text;
     }
 
     public async void Save()
@@ -29,24 +39,30 @@ public class SaveLevel : AbstractSave
     private async Task SaveBackgroundAsync()
     {
         await Task.Yield();
-
-        World world = new World(ObjectPlacer);
-        Debug.Log("World Saved");
-        Tale tale = new Tale(Story, world, _screenshotCamera);
-        Debug.Log("Tale Created");
-        var taleWrapped = new DataTaleWrapper(tale);
-        Debug.Log("Tale Wrapped");
-        string json = JsonUtility.ToJson(taleWrapped, true);
-        Debug.Log("Json made");
-        if (string.IsNullOrEmpty(SaveId))
+        string name = _saveName;
+        if (!string.IsNullOrEmpty(name))
         {
-            SaveId = OverwriteSaveProcess(await PostNewSaveAsync(json, SAVE_ID));
-        }
-        else
+            World world = new World(ObjectPlacer);
+            Debug.Log("World Saved");
+            Tale tale = new Tale(name, Story, world, _screenshotCamera);
+            Debug.Log("Tale Created");
+            var taleWrapped = new DataTaleWrapper(tale);
+            Debug.Log("Tale Wrapped");
+            string json = JsonUtility.ToJson(taleWrapped, true);
+            Debug.Log("Json made");
+            if (string.IsNullOrEmpty(SaveId))
+            {
+                SaveId = OverwriteSaveProcess(await PostNewSaveAsync(json, SAVE_ID));
+            }
+            else
+            {
+                SaveId = OverwriteSaveProcess(await PutSaveAsync(json, SAVE_ID, SaveId));
+            }
+            Debug.Log("Done");
+        } else
         {
-            SaveId = OverwriteSaveProcess(await PutSaveAsync(json, SAVE_ID, SaveId));
+            Debug.Log("Need to put a save name");
         }
-        Debug.Log("Done");
     }
 
     public void Load()
@@ -56,6 +72,8 @@ public class SaveLevel : AbstractSave
         PlacementSystem.RemoveAllObjects();
         Tale tale = GetSaveProcess(GetSave(SaveId));
         Debug.Log(tale);
+        _saveName = tale.Name;
+        _inputfield.text = _saveName;
         Story.Player.transform.position = new Vector3(tale.Player.getRow(), 0, tale.Player.getColumn());
         Story.Storyboard = tale.Storyboard;
         int index = 0;
@@ -88,4 +106,5 @@ public class SaveLevel : AbstractSave
     private Tale GetSaveProcess(string json) {
         return JsonUtility.FromJson<DataTaleWrapper>(json).data;
     }
+
 }

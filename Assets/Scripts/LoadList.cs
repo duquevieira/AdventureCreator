@@ -20,6 +20,7 @@ public class LoadList : MonoBehaviour
     private int _index = 0;
     private static List<string> _availableSaves;
     private static List<string> _levelImages;
+    private static List<string> _levelNames;
     private static Dictionary<string, string> _playerSaves;
 
     void Awake()
@@ -28,6 +29,7 @@ public class LoadList : MonoBehaviour
         _availableSaves = new List<string>();
         _playerSaves = new Dictionary<string, string>();
         _levelImages = new List<string>();
+        _levelNames= new List<string>();
         Task.Run(async () => await Startup()).ConfigureAwait(false);
     }
 
@@ -78,7 +80,7 @@ public class LoadList : MonoBehaviour
     public async void updateLevel() {
         if(_levelImages.Count > 0) {
             SaveImage.LoadImageFromBase64(_levelImages[_index]);
-            SaveText.GetComponent<TextMeshProUGUI>().text = _availableSaves[_index];
+            SaveText.GetComponent<TextMeshProUGUI>().text = _levelNames[_index];
             Debug.Log(_availableSaves[_index]);
         }
         await Task.Yield();
@@ -100,6 +102,7 @@ public class LoadList : MonoBehaviour
             if(d.documentSchemaId.Equals(WorldSaveSchemaID)) {
                 _availableSaves.Add(d.id);
                 _levelImages.Add(d.data.Screenshot);
+                _levelNames.Add(d.data.Name);
             }
         }
         Debug.Log("Ending Population of Levels");

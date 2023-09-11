@@ -54,7 +54,7 @@ public class PlacementSystem : MonoBehaviour
         _tilesWithObjects = new Dictionary<Vector3Int, List<GameObject>>();
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -85,7 +85,7 @@ public class PlacementSystem : MonoBehaviour
         if (!_objectToPlace)
         {
             return;
-        }
+        }*/
         /*if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             objectToPlace.Rotate();
@@ -103,7 +103,7 @@ public class PlacementSystem : MonoBehaviour
                 Destroy(objectToPlace.gameObject);
             }
         }*/
-    }
+    //}
 
     public void SetSelectedObject(GameObject obj)
     {

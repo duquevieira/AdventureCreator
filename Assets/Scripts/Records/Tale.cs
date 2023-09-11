@@ -15,7 +15,8 @@ public class Tale
     public List<StoryboardStep> Storyboard;
     public World TaleWorld;
 
-    public Tale(StoryEngineScript storyEngine, World world, Camera camera) {
+    public Tale(string name, StoryEngineScript storyEngine, World world, Camera camera) {
+        Name = name;
         GameObject playerObject = storyEngine.Player;
         Player = new PositionCoordinates(playerObject.transform.position.x, playerObject.transform.position.z, playerObject.transform.position.y);
         Storyboard = storyEngine.Storyboard;
