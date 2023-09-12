@@ -40,14 +40,25 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
             if (current.name.Split(PARENTHESIS)[0].Equals(STEP_PREFAB_NAME))
             {
                 noStep = false;
-                Transform colliderSpot = current.transform.GetChild(2);
-                if (colliderSpot.childCount != 0)
-                    Destroy(colliderSpot.GetChild(0).gameObject);
-                _clone.transform.SetParent(colliderSpot, false);
-                _clone.transform.localPosition = Vector3.zero;
+                if(_clone.GetComponent<LoopAnimationScript>() == null)
+                {
+                    setAsChild(current.transform.GetChild(2));
+                }
+                else
+                {
+                    setAsChild(current.transform.GetChild(4));
+                }
             }
         }
         if (noStep)
             Destroy(_clone);
+    }
+
+    private void setAsChild (Transform parent)
+    {
+        if (parent.childCount != 0)
+            Destroy(parent.GetChild(0).gameObject);
+        _clone.transform.SetParent(parent, false);
+        _clone.transform.localPosition = new Vector3(0, 0, -10);
     }
 }

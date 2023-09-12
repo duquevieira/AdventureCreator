@@ -2,6 +2,7 @@ using MeadowGames.UINodeConnect4;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.AssemblyQualifiedNameParser;
 using UnityEditor.MemoryProfiler;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -66,6 +67,8 @@ public class CreateStoryScript : MonoBehaviour
             if (step.transform.GetChild(2).childCount > 0)
                 colliderName = step.transform.GetChild(2).GetChild(0).name.Split(PARENTHESIS)[0];
             StoryboardStep storyboardStep = new StoryboardStep(stepID, colliderName, step.transform.localPosition);
+            //TODO DELETE
+            storyboardStep.addAnimation(10);
             story.Add(storyboardStep);
 
         }
@@ -74,26 +77,28 @@ public class CreateStoryScript : MonoBehaviour
         {
             GameObject step = _allSteps[i];
             Node nodeScript = step.GetComponent<Node>();
+            StepToggleScript toggleScript = step.GetComponent<StepToggleScript>();
             StoryboardStep storyboardStep = story[i];
             foreach (Connection connection in nodeScript.ports[0].Connections)
             {
                 string[] name = connection.port0.ID.Split("Out");
-                if (name.Length > 1)
+                int pos = int.Parse(name[1].Split(PARENTHESIS)[0]);
+                if (_allSteps[pos].GetComponent<StepToggleScript>().ItemMode)
                 {
-                    storyboardStep.addRequirement(new ItemGroup(name[1].Split(PARENTHESIS)[0], 1));
+                    storyboardStep.addRequirement(new ItemGroup(_allSteps[pos].transform.GetChild(2).GetChild(0).name.Split(PARENTHESIS)[0], 1));
                 }
                 else
                 {
-                    name = connection.port0.ID.Split("Item");
-                    storyboardStep.addRequirement(new ItemGroup(_allSteps[int.Parse(name[1])].transform.GetChild(2).GetChild(0).name.Split(PARENTHESIS)[0], 1));
+                    storyboardStep.addRequirement(new ItemGroup(name[1].Split(PARENTHESIS)[0], 1));
                 }
             }
             int itemAmount = 0;
-            if (nodeScript.ports.Count > 2)
+            if (toggleScript.ItemMode)
             {
-                itemAmount = nodeScript.ports[2].ConnectionsCount;
-                storyboardStep.addAcquires(new ItemGroup(step.transform.GetChild(2).GetChild(0).name.Split(PARENTHESIS)[0], itemAmount));
-                foreach (Connection connection in nodeScript.ports[2].Connections)
+                itemAmount = nodeScript.ports[1].ConnectionsCount;
+                if(itemAmount != 0)
+                    storyboardStep.addAcquires(new ItemGroup(step.transform.GetChild(2).GetChild(0).name.Split(PARENTHESIS)[0], itemAmount));
+                foreach (Connection connection in nodeScript.ports[1].Connections)
                 {
                     storyboardStep.addItemDependentStep(int.Parse(connection.port1.ID.Split("In")[1]));
                 }
@@ -159,6 +164,7 @@ public class CreateStoryScript : MonoBehaviour
                             GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(2), false);
                             instantiated.transform.rotation = obj.MiniatureRotation;
                             instantiated.transform.position += obj.MinaturePosition;
+                            instantiated.transform.localPosition = new Vector3(0, 0, -10);
                             int scale = obj.MiniatureScale;
                             instantiated.transform.localScale = new Vector3(scale, scale, scale);
                             instantiated.layer = UILAYER;
@@ -204,7 +210,7 @@ public class CreateStoryScript : MonoBehaviour
                     foreach (int itemDependentStep in storyboardStep.getItemDependentSteps())
                     {
                         Node connectedNode = _allSteps[itemDependentStep].GetComponent<Node>();
-                        nodeScript.ports[2].ConnectTo(connectedNode.ports[0]);
+                        nodeScript.ports[1].ConnectTo(connectedNode.ports[0]);
                     }
                 }
             }

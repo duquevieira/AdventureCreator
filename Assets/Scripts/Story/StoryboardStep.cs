@@ -13,7 +13,7 @@ public class StoryboardStep
     public List<ItemGroup> Acquired;
     public List<int> ItemDependentSteps;
     public List<float> StepCoordinates;
-
+    public int Animation;
 
     public StoryboardStep(int id, string colliderName, Vector3 stepCoordinates)
     {
@@ -28,6 +28,12 @@ public class StoryboardStep
         Requirements = new List<ItemGroup>();
         Acquired = new List<ItemGroup>();
         ItemDependentSteps = new List<int>();
+        Animation = -1;
+    }
+
+    public void addAnimation(int animation)
+    {
+        Animation = animation;
     }
 
     public void addRequirement(ItemGroup requirement)
@@ -73,5 +79,10 @@ public class StoryboardStep
     public List<float> getStepCoordinates()
     {
         return StepCoordinates;
+    }
+
+    public int getAnimation()
+    {
+        return Animation;
     }
 }
