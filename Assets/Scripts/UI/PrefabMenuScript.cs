@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Progress;
 
 public class PrefabMenuScript : MonoBehaviour
@@ -19,7 +20,9 @@ public class PrefabMenuScript : MonoBehaviour
     [SerializeField] ObjectsDataBase _database;
     [HideInInspector]
     public List<GameObject> AllPrefabs;//substituir
+    [SerializeField] private TMP_Dropdown _environmentDropdown;
     //public List<List<GameObject>> AllPrefabs;
+    private string _selectedEnvironment;
 
     private static int UILAYER = 5;
 
@@ -29,21 +32,41 @@ public class PrefabMenuScript : MonoBehaviour
 
     public void Start()
     {
+        _selectedEnvironment = _environmentDropdown.options[_environmentDropdown.value].text;
+        _environmentDropdown.onValueChanged.AddListener(delegate { OnDropDownChange(_environmentDropdown); });
+        ShowObjects();      
+    }
+
+   public void OnDropDownChange(TMP_Dropdown _dropdown)
+    {
+        _selectedEnvironment = _dropdown.options[_dropdown.value].text;
+        ShowObjects();
+    }
+
+    private void ShowObjects()
+    {
+        foreach(Transform child in _panel.transform)
+        {
+            Destroy(child.gameObject);
+        }
         foreach (var obj in _database.objectsDatabase)
         {
-            int scale = obj.MiniatureScale;
-            var menuSlot = Instantiate(_menuSlotPrefab, _panel.transform);
-            var instantiated = Instantiate(obj.Prefab, menuSlot.transform);
-            instantiated.transform.rotation = obj.MiniatureRotation;
-            instantiated.transform.position += obj.MinaturePosition;
-            //if (obj.Types == ObjectData.ObjectTypes.Structure)
-            //    instantiated.transform.Rotate(0, 90, 0);
-            //if (obj.Types == ObjectData.ObjectTypes.Floor) 
-            //    instantiated.transform.Rotate(-90,0,0);
-            instantiated.layer = UILAYER;
-            instantiated.transform.localScale = new Vector3(scale, scale, scale);
-            foreach (Transform child in instantiated.transform)
-                child.gameObject.layer = UILAYER;
+            if (obj.Types.ToString() == _selectedEnvironment)
+            {
+                int scale = obj.MiniatureScale;
+                var menuSlot = Instantiate(_menuSlotPrefab, _panel.transform);
+                var instantiated = Instantiate(obj.Prefab, menuSlot.transform);
+                instantiated.transform.rotation = obj.MiniatureRotation;
+                instantiated.transform.position += obj.MinaturePosition;
+                //if (obj.Types == ObjectData.ObjectTypes.Structure)
+                //    instantiated.transform.Rotate(0, 90, 0);
+                //if (obj.Types == ObjectData.ObjectTypes.Floor) 
+                //    instantiated.transform.Rotate(-90,0,0);
+                instantiated.layer = UILAYER;
+                instantiated.transform.localScale = new Vector3(scale, scale, scale);
+                foreach (Transform child in instantiated.transform)
+                    child.gameObject.layer = UILAYER;
+            }
         }
     }
 }

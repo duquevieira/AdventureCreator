@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ using UnityEngine;
 public class ObjectsDataBase : ScriptableObject
 {
     public List<ObjectData> objectsDatabase;
+  
 
     [ContextMenu("Set database")]
     public void SetObjects()
@@ -29,7 +31,7 @@ public class ObjectsDataBase : ScriptableObject
             objectsDatabase.Add(obj);
             i++;
         }
-    }
+    } 
 }
 
 
@@ -75,7 +77,6 @@ public class ObjectData
         MiniatureScale = miniatureScale;
         MiniatureRotation = miniatureRotation;
         MinaturePosition = MiniaturePosition;
-
     }
 
 }
