@@ -229,3 +229,659 @@ MonoBehaviour:
     <MiniatureScale>k__BackingField: 55
     <MiniatureRotation>k__BackingField: {x: 0, y: 1, z: 0, w: -0.00000004371139}
     <MinaturePosition>k__BackingField: {x: 3, y: -25, z: 0}
+  - <Name>k__BackingField: SM_Wep_BlunderBuss_01
+    <ID>k__BackingField: 28
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 169462, guid: b9305c82d89caf44f87bd001e8f35334, type: 3}
+    <Types>k__BackingField: 2
+    <MiniatureScale>k__BackingField: 50
+    <MiniatureRotation>k__BackingField: {x: 0.24184474, y: 0.664463, z: 0.24184474, w: -0.664463}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Item_Coins_02
+    <ID>k__BackingField: 29
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 161422, guid: eb48223ed880cc94e96250f79c0c8cea, type: 3}
+    <Types>k__BackingField: 2
+    <MiniatureScale>k__BackingField: 170
+    <MiniatureRotation>k__BackingField: {x: 0.56486267, y: -0.14224425, z: -0.09960055, w: -0.8067071}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Prop_Chest_03
+    <ID>k__BackingField: 30
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 178976, guid: 6f245fd7a64f1694db04aaa83367d059, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 70
+    <MiniatureRotation>k__BackingField: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+    <MinaturePosition>k__BackingField: {x: 0, y: -20, z: 0}
+  - <Name>k__BackingField: Animation 0
+    <ID>k__BackingField: 31
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: 9cd26ab493a73314e908f48bf59e4d42, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Animation 1
+    <ID>k__BackingField: 32
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: 33927d707797d6f4f9ce68bc433e27fc, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Animation 2
+    <ID>k__BackingField: 33
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: 5d25d624166c87141bc657b7fd8d53a8, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Animation 3
+    <ID>k__BackingField: 34
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: 8dfabb13af5f47144a813b0954672e0f, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Animation 4
+    <ID>k__BackingField: 35
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: 9d63c8d0ec57142458e3a8fa91de6601, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Animation 5
+    <ID>k__BackingField: 36
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: 3c4a9c11e096d4049af4e43784b01412, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Animation 6
+    <ID>k__BackingField: 37
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: 427e23b6114e8f341930ba9aec81ce04, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Animation 7
+    <ID>k__BackingField: 38
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: ea8b5ca9aed3df742a49787a0167af1d, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Animation 8
+    <ID>k__BackingField: 39
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: 976fccadc2dc276439c84e32b8c92400, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Animation 9
+    <ID>k__BackingField: 40
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: 3493abbbd82df084ca9508df5fe5dea6, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Animation 10
+    <ID>k__BackingField: 41
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: 2123af67de854e443937c6fb9757996d, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Animation 11
+    <ID>k__BackingField: 42
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: 6c86c5c22d56b704895c43613a204b01, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Animation 12
+    <ID>k__BackingField: 43
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: 8c653a36473728d43a4665e52e9a96e9, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Animation 13
+    <ID>k__BackingField: 44
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: ae134c1c586117d45ab39a38038000e7, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Animation 14
+    <ID>k__BackingField: 45
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1730909555547974, guid: 618b99a8457fd1745af0996ece6644db, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_City_BusinessMan_Shirt_01
+    <ID>k__BackingField: 46
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 153506, guid: 8ab2b3f5dfbd18f45864bdcac68c919b, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_City_BusinessMan_Suit_01
+    <ID>k__BackingField: 47
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 128674, guid: 9cc68374cfe1ba447bd24273d4fba393, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_City_BusinessWoman_01
+    <ID>k__BackingField: 48
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 183608, guid: 1818c836bd4bc5047b18cd40b0a80089, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_City_Female_Coat_01
+    <ID>k__BackingField: 49
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 184310, guid: 83ac22e4fbe63244b958210bb1cf6815, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_City_Female_Jacket_01
+    <ID>k__BackingField: 50
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 107314, guid: 63f5acb1f7bba174ea4103597cca0a63, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_City_Female_Police_01
+    <ID>k__BackingField: 51
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 166044, guid: 9fb59ac2da462074da3c8f7fd9eecf0e, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_City_Male_Hoodie_01
+    <ID>k__BackingField: 52
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 153682, guid: 6ac082c1f92a67e49941f55e84ba3ece, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_City_Male_Jacket_01
+    <ID>k__BackingField: 53
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 183828, guid: 040e4492b75487744a900ed9903e8a13, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_City_Male_Police_01
+    <ID>k__BackingField: 54
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 191860, guid: 1eb704b5466241344b789e2bc491baa3, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Boss_Female_01
+    <ID>k__BackingField: 55
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1975240265096882, guid: 61d61d845c113fb438bfa07361af9b56, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Boss_Male_01
+    <ID>k__BackingField: 56
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1604611627540692, guid: 024442a804b95f24f8c9586026e49626, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Business_Female_01
+    <ID>k__BackingField: 57
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1214972348348976, guid: fc83034c1d9b90140b0daf6599722fb0, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Business_Female_02
+    <ID>k__BackingField: 58
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1977554221320892, guid: 1592b2a2e1a017243b7a42ee6b52860f, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Business_Female_03
+    <ID>k__BackingField: 59
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1822189464268616, guid: 37719c33ec29f3b4ba7e4f2739d16467, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Business_Female_04
+    <ID>k__BackingField: 60
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1360405817128342, guid: 5710ef11f9736a24fba8d8c61ec93a07, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Business_Male_01
+    <ID>k__BackingField: 61
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1454114287192450, guid: 62bbd2ed7922e1c47a705749fba23201, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Business_Male_02
+    <ID>k__BackingField: 62
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1652544263031632, guid: a129917bd82dd2b4682f77f5cfb3e28e, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Business_Male_03
+    <ID>k__BackingField: 63
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1099670560160142, guid: ee0f7cfb2300e3d42828ddcbf91c968b, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Business_Male_04
+    <ID>k__BackingField: 64
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1293306985708040, guid: b65458f1d6791354e960edf438036379, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Cleaner_Female_01
+    <ID>k__BackingField: 65
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1207000675054372, guid: 5ae76b2547eb2de4391dd0884e2ca848, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Cleaner_Male_01
+    <ID>k__BackingField: 66
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1353977574298584, guid: 3f409f16651b76d4d974364c630c22d6, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Developer_Female_01
+    <ID>k__BackingField: 67
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1464604485386400, guid: 4fa92e36c18a44d4eb49c647192bc1cc, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Developer_Female_02
+    <ID>k__BackingField: 68
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1371166957121120, guid: 0063b1311b63aa14e883e48e998c95b6, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Developer_Male_01
+    <ID>k__BackingField: 69
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1295359657651894, guid: 6c2d062ad84c8b4488b40006ceb8b9aa, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Developer_Male_02
+    <ID>k__BackingField: 70
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1742387174060844, guid: 5f077a7609633724a99b5cb488f56e5e, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Security_Female_01
+    <ID>k__BackingField: 71
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1861045244336520, guid: 57406a1ab836f624baae9c021da9db6b, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Office_Security_Male_01
+    <ID>k__BackingField: 72
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1611835758375592, guid: 8723b2ce302cbf7449ee71ebeb873757, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_Blackbeard_01
+    <ID>k__BackingField: 73
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 192002, guid: a13057d903ae30f47814c285ad5fecad, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_Captain_01
+    <ID>k__BackingField: 74
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 126762, guid: 2ba98eed50c019a4dbb5d05a5059d589, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_Deckhand_01
+    <ID>k__BackingField: 75
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 178864, guid: 3a00807bbf553294980d96e979949d21, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_English_Captain_01
+    <ID>k__BackingField: 76
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 111782, guid: 1fe88b5e8f9136c469af6c878fea39dd, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_English_Govenor_01
+    <ID>k__BackingField: 77
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 195416, guid: 10f00e498d737d04095ef865f968d38a, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_English_Soldier_01
+    <ID>k__BackingField: 78
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 186328, guid: 7fb171d783e2f4d4a936b741e9847a3f, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_Female_Pirate_01
+    <ID>k__BackingField: 79
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 102334, guid: 99895251c50200c41bc55f261e140445, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_Female_Wench_01
+    <ID>k__BackingField: 80
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 128380, guid: 4b648592f304439459dea29f6dc3278c, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_First_Mate_01
+    <ID>k__BackingField: 81
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 132726, guid: 611c7a6a7a99f854895e83627b050f4d, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_Gentleman_01
+    <ID>k__BackingField: 82
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 105566, guid: cfd32dc4905f1f94ca38e20ffe37ab92, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_Governors_Daughter_01
+    <ID>k__BackingField: 83
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1249156991256630, guid: 5f5439c896009f84790c63c55b992c1b, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_Seaman_01
+    <ID>k__BackingField: 84
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 110404, guid: 544a1033950727a46b0056caeab7e5fe, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_Skeleton_01
+    <ID>k__BackingField: 85
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 197842, guid: 37c8ec732dde3404fb9256fdd3ea27a1, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_Skeleton_02
+    <ID>k__BackingField: 86
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 177072, guid: 09605997303915844913b0eeb33a9ccc, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Pirate_Skeleton_03
+    <ID>k__BackingField: 87
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 145884, guid: 8b720278680c1ef4d874f94862178ee3, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Roman_Captain_Male_01
+    <ID>k__BackingField: 88
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 8710209211926872854, guid: 296e903d2ed8780458229affb2b373de, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Roman_Farmer_Female_01
+    <ID>k__BackingField: 89
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7661250533015458655, guid: d155681997646f1459fd653910023125, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Roman_Farmer_Male_01
+    <ID>k__BackingField: 90
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5869724553590187604, guid: 4707318496bd7154a96a057275882474, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Roman_Leader_Male_01
+    <ID>k__BackingField: 91
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 3429329842081118208, guid: 0c126d1931e2ace4588e8a27b1950869, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Roman_Politician_Male_01
+    <ID>k__BackingField: 92
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2402815586026294131, guid: 85f047a560322d44db3ee7773a252150, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Roman_Soldier_Female_01
+    <ID>k__BackingField: 93
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 33723962609650948, guid: 59b3721ba9595584a9c59582503718e8, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Roman_Soldier_Male_01
+    <ID>k__BackingField: 94
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 61056662705754977, guid: f73f912abc0992c4b85babbb7cdcf33d, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Roman_Upperclass_Female_01
+    <ID>k__BackingField: 95
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4159922245014948833, guid: 1caf404ca378a6a49b275f01beafddce, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Roman_Upperclass_Male_01
+    <ID>k__BackingField: 96
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 4546196537496687338, guid: c25b74d361f08744d92c9d1f2f6b0e26, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Roman_Worker_Female_01
+    <ID>k__BackingField: 97
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 5478482732578342036, guid: c74d75c5028c7094f9d702d2f7cedf02, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Roman_Worker_Male_01
+    <ID>k__BackingField: 98
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 7996534718074535925, guid: 89d4fcfe6f0fcc94db63a3efe2893d2f, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Shops_Attendant_Female_01
+    <ID>k__BackingField: 99
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1349454168831766, guid: a11a1a40d51a3a44e91eebe0258a65c1, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Shops_Attendant_Male_01
+    <ID>k__BackingField: 100
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1177440017697582, guid: bae96d9236d5443498cc1e60142333bc, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Shops_Clerk_Female_01
+    <ID>k__BackingField: 101
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1015987700250156, guid: f280e3977cd129a4bb352f70303fd656, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Shops_Clerk_Male_01
+    <ID>k__BackingField: 102
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1377590562378364, guid: 2c53e93c329699842ba7f80b2fd5a93a, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Shops_Gym_Female_01
+    <ID>k__BackingField: 103
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1710635016008472, guid: f9edd29710b0a904ab38a4999f930d85, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Shops_Gym_Male_01
+    <ID>k__BackingField: 104
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1420880779638038, guid: 90bedecab75f4a84b8ed28e75e03ace6, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Shops_Santa_01
+    <ID>k__BackingField: 105
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1653101950470510, guid: a338ecdd326995d48a37608e2dbfafd7, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Shops_Worker_Female_01
+    <ID>k__BackingField: 106
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1277790873567106, guid: 4b4eda5f2914bb149ba4bb1ad19bfce7, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_Shops_Worker_Male_01
+    <ID>k__BackingField: 107
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1057400303355432, guid: 43a77db50625833499aa0a6ba1aedede, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_WW1_British_01
+    <ID>k__BackingField: 108
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1244144955891150, guid: b7131bb62debfa04f920bbfbbf5796cf, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: Character_WW1_German_01
+    <ID>k__BackingField: 109
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1667524180193904, guid: aa82ba29ee06e034aa1eeb9957479485, type: 3}
+    <Types>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}

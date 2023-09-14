@@ -31,29 +31,20 @@ public class StoryEngineScript : MonoBehaviour
     {
         ClearStoryElements();
         _itemsManager.setPlayerScript(Player.GetComponent<PlayerHandlerScript>());
-        //TODO DELETE
-        /*StoryboardStep step = new StoryboardStep(0, "SM_Prop_TableFootball_01", Vector3.zero);
-        step.addAcquires(new ItemGroup("SM_Prop_TableFootball_01", 1));
-        step.addAcquires(new ItemGroup("0", 1));
-        step.addAnimation(14);
-        Storyboard.Add(step);
-        step = new StoryboardStep(1, "SM_Bld_Door_04", Vector3.zero);
-        step.addAcquires(new ItemGroup("1", 1));
-        step.addAnimation(5);
-        Storyboard.Add(step);
-        step = new StoryboardStep(1, "SM_Prop_Couch_02", Vector3.zero);
-        step.addRequirement(new ItemGroup("SM_Prop_TableFootball_01", 1));
-        step.addRequirement(new ItemGroup("0", 1));
-        step.addRequirement(new ItemGroup("1", 1));
-        step.addAcquires(new ItemGroup("2", 1));
-        step.addAnimation(11);
-        Storyboard.Add(step);*/
     }
 
     void Update()
     {
         if (Input.GetKeyUp(KeyCode.S))
         {
+            foreach (ItemGroup storyItem in StoryItems)
+            {
+                Debug.Log(Time.realtimeSinceStartup + " Name " + storyItem.getItemName() + " Amount " + storyItem.getItemAmount());
+            }
+            foreach (ItemGroup inventoryItem in StoryItems)
+            {
+                Debug.Log(Time.realtimeSinceStartup + " Name " + inventoryItem.getItemName() + " Amount " + inventoryItem.getItemAmount());
+            }
             Debug.Log(Time.realtimeSinceStartup + " " + Storyboard.Count);
             foreach (StoryboardStep step in Storyboard)
             {
