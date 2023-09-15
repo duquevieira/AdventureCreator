@@ -26,6 +26,7 @@ public class PlayerHandlerScript : MonoBehaviour
     {
         _camera = _storyEngineScript.Camera;
         _player = _storyEngineScript.Player;
+        //TODO DELETE
         _player.transform.position = new Vector3(0, 2, 0);
         _character = _player.transform.Find(_storyEngineScript.getCharacterSkin()).gameObject;
         _character.SetActive(true);
@@ -66,6 +67,7 @@ public class PlayerHandlerScript : MonoBehaviour
         {
             if (distance < 3)
             {
+                _player.transform.LookAt(hit.transform);
                 int animation = _storyEngineScript.ProcessEntry(hit.collider, itemName);
                 if (animation > -1)
                 {
@@ -91,6 +93,7 @@ public class PlayerHandlerScript : MonoBehaviour
             {
                 if (distance < 3)
                 {
+                    _player.transform.LookAt(hit.transform);
                     animator.SetBool("On", !animator.GetBool("On"));
                 }
                 else

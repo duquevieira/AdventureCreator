@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4855092820269131146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 0.01, z: 4.5}
+  m_LocalPosition: {x: 1.5, y: 0, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -39,6 +39,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8142271244713000236}
     m_Modifications:
+    - target: {fileID: 8245141248750701549, guid: 6cb22d2c69cdf5048b8d7849d543dc73, type: 3}
+      propertyPath: m_Size.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8245141248750701549, guid: 6cb22d2c69cdf5048b8d7849d543dc73, type: 3}
+      propertyPath: m_Size.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8245141248750701549, guid: 6cb22d2c69cdf5048b8d7849d543dc73, type: 3}
+      propertyPath: m_Size.z
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8245141248750701549, guid: 6cb22d2c69cdf5048b8d7849d543dc73, type: 3}
+      propertyPath: m_Center.z
+      value: 1.25
+      objectReference: {fileID: 0}
     - target: {fileID: 8254827457987313891, guid: 6cb22d2c69cdf5048b8d7849d543dc73, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Floor_Carpet_01
