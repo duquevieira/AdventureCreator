@@ -1903,7 +1903,7 @@ GameObject:
   - component: {fileID: 95832565223846796}
   - component: {fileID: -7501500015483765924}
   m_Layer: 0
-  m_Name: male
+  m_Name: Animation 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1958,6 +1958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208f1c54a8eec424d8610c18318c56fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: 6
 --- !u!1 &1738542281706688
 GameObject:
   m_ObjectHideFlags: 0

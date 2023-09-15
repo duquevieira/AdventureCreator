@@ -10,12 +10,13 @@ public class StepToggleScript : MonoBehaviour
     [SerializeField]
     private Button _buttonToggle;
 
+    [SerializeField]
+    private Color _storyColour;
+    [SerializeField]
+    private Color _itemColour;
+
     [HideInInspector]
     public bool ItemMode;
-
-    private static String BUTTON_TEXT_STORY = "Story Step";
-    private static String BUTTON_TEXT_ITEM = "Item Step";
-
 
     void Awake()
     {
@@ -29,12 +30,16 @@ public class StepToggleScript : MonoBehaviour
         if (ItemMode)
         {
             ItemMode = false;
-            _buttonToggle.GetComponentInChildren<Text>().text = BUTTON_TEXT_STORY;
+            _buttonToggle.transform.GetChild(0).gameObject.SetActive(false);
+            _buttonToggle.transform.GetChild(1).gameObject.SetActive(true);
+            gameObject.GetComponent<Image>().color = _storyColour;
         }
         else
         {
             ItemMode = true;
-            _buttonToggle.GetComponentInChildren<Text>().text = BUTTON_TEXT_ITEM;
+            _buttonToggle.transform.GetChild(0).gameObject.SetActive(true);
+            _buttonToggle.transform.GetChild(1).gameObject.SetActive(false);
+            gameObject.GetComponent<Image>().color = _itemColour;
         }
     }
 }
