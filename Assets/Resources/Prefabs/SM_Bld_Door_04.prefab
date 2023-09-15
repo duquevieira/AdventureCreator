@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7347757948992285659}
   - component: {fileID: 7339776065029479913}
   - component: {fileID: 7307323886076867519}
+  - component: {fileID: 586424309757629989}
   m_Layer: 0
   m_Name: SM_Bld_Door_04
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7316444293089924023}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-  m_LocalPosition: {x: 2, y: 0, z: -4}
+  m_LocalPosition: {x: 2, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -98,3 +99,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.002821, y: 1.9668596, z: 0.10672363}
   m_Center: {x: -0.5014105, y: 0.9834298, z: -0.053361814}
+--- !u!95 &586424309757629989
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7316444293089924023}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f8a5baedc71edfc45acbabd1fe74cfc1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

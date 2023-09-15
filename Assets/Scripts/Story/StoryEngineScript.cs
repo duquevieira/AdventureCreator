@@ -35,18 +35,18 @@ public class StoryEngineScript : MonoBehaviour
         /*StoryboardStep step = new StoryboardStep(0, "SM_Prop_TableFootball_01", Vector3.zero);
         step.addAcquires(new ItemGroup("SM_Prop_TableFootball_01", 1));
         step.addAcquires(new ItemGroup("0", 1));
+        step.addAnimation(14);
+        Storyboard.Add(step);
+        step = new StoryboardStep(1, "SM_Bld_Door_04", Vector3.zero);
+        step.addAcquires(new ItemGroup("1", 1));
+        step.addAnimation(5);
         Storyboard.Add(step);
         step = new StoryboardStep(1, "SM_Prop_Couch_02", Vector3.zero);
         step.addRequirement(new ItemGroup("SM_Prop_TableFootball_01", 1));
         step.addRequirement(new ItemGroup("0", 1));
-        step.addAcquires(new ItemGroup("SM_Prop_Couch_02", 1));
-        step.addAcquires(new ItemGroup("1", 1));
-        Storyboard.Add(step);
-        step = new StoryboardStep(1, "SM_Prop_Desk_01", Vector3.zero);
-        step.addRequirement(new ItemGroup("SM_Prop_Couch_02", 1));
         step.addRequirement(new ItemGroup("1", 1));
-        step.addAcquires(new ItemGroup("SM_Prop_Desk_01", 1));
-        step.addAcquires(new ItemGroup("1", 1));
+        step.addAcquires(new ItemGroup("2", 1));
+        step.addAnimation(11);
         Storyboard.Add(step);*/
     }
 
@@ -74,15 +74,15 @@ public class StoryEngineScript : MonoBehaviour
         }
     }
 
-    public bool ProcessEntry(Collider collider, string itemName)
+    public int ProcessEntry(Collider collider, string itemName)
     {
         string colliderName = collider.name;
         foreach (StoryboardStep iteratedStep in Storyboard)
             if (colliderName.Split("(")[0].Equals(iteratedStep.getColliderName()))
             {
                 List<ItemGroup> requirements = iteratedStep.getRequirements();
-                bool completable = true;
-                bool itemIsNeeded = false;
+                bool completable = false;
+                List<string> dependentItems = new List<string>();
                 foreach (ItemGroup requirement in requirements)
                 {
                     int amount = -1;
@@ -97,30 +97,45 @@ public class StoryEngineScript : MonoBehaviour
                     }
                     else
                     {
-                        if(itemName == null)
+                        dependentItems.Add(requirement.getItemName());
+                        if (itemName != null && requirement.getItemName().Equals(itemName))
                         {
-                            completable = false;
-                            break;
+                            foreach (ItemGroup inventoryItem in InventoryItems)
+                                if (inventoryItem.getItemName() == itemName)
+                                {
+                                    amount = inventoryItem.getItemAmount();
+                                    break;
+                                }
                         }
-                        else if(requirement.getItemName().Equals(itemName))
-                        {
-                            itemIsNeeded = true;
-                        }
-                        foreach (ItemGroup inventoryItem in InventoryItems)
-                            if (inventoryItem.getItemName() == requirement.getItemName())
-                            {
-                                amount = inventoryItem.getItemAmount();
-                                break;
-                            }
+
                     }
-                    if(requirement.getItemAmount() > amount)
+                    if(requirement.getItemAmount() <= amount)
                     {
-                        completable = false;
+                        completable = true;
                         break;
                     }
                 }
-                if (itemName != null && !itemIsNeeded)
-                    completable = false;
+                if(completable && dependentItems.Count > 0 && InventoryItems.Count > 0)
+                {
+                    foreach (ItemGroup inventoryItem in InventoryItems)
+                    {
+                        foreach(string dependentItem in dependentItems)
+                        {
+                            if(inventoryItem.getItemName().Equals(dependentItem))
+                            {
+                                completable = false;
+                                if(dependentItem.Equals(itemName))
+                                {
+                                    completable = true;
+                                    goto breakLoop;
+                                }
+                            }
+                        }
+                    }
+                }
+            breakLoop:
+                if (requirements.Count == 0)
+                    completable = true;
                 if (completable)
                 {
                     foreach (ItemGroup requirement in requirements)
@@ -187,10 +202,15 @@ public class StoryEngineScript : MonoBehaviour
                             Destroy(collider.gameObject);
                         }
                     }
-                    return completable;
+                    Animator animator = collider.gameObject.GetComponent<Animator>();
+                    if (animator != null)
+                    {
+                        animator.SetBool("On", !animator.GetBool("On"));
+                    }
+                    return iteratedStep.getAnimation();
                 }
             }
-        return false;
+        return -1;
     }
 
     public bool IsStoryStep(string colliderName)
