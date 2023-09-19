@@ -994,3 +994,147 @@ MonoBehaviour:
     <MiniatureScale>k__BackingField: 25
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
     <MinaturePosition>k__BackingField: {x: 0, y: -35, z: 0}
+  - <Name>k__BackingField: SM_Prop_Kitchen_Pizza_Oven_01
+    <ID>k__BackingField: 110
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1799124086725158, guid: 758d6a5806a7704499220d76ddef8baf, type: 3}
+    <Types>k__BackingField: 3
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 13
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -40, z: 0}
+  - <Name>k__BackingField: SM_Prop_Kitchen_Counter_End_01
+    <ID>k__BackingField: 111
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1950802142998856, guid: fea4a9f810b465e4f97439a390b6c954, type: 3}
+    <Types>k__BackingField: 3
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
+    <MinaturePosition>k__BackingField: {x: -30, y: -15, z: 0}
+  - <Name>k__BackingField: SM_Prop_Kitchen_Knife_01
+    <ID>k__BackingField: 112
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1247418644084676, guid: 48b45d64df49c9247b8dd53203174980, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 100
+    <MiniatureRotation>k__BackingField: {x: -0.2418448, y: -0.664463, z: -0.2418448, w: 0.664463}
+    <MinaturePosition>k__BackingField: {x: 20, y: -20, z: 0}
+  - <Name>k__BackingField: SM_Prop_Food_Bacon_Raw_01
+    <ID>k__BackingField: 113
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1429465436801326, guid: 8b57a8834b1a4c8439f0e13186458757, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 170
+    <MiniatureRotation>k__BackingField: {x: 0.65328145, y: 0.27059796, z: 0.27059796, w: 0.65328145}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Prop_Food_Cheese_Stack_01
+    <ID>k__BackingField: 114
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1263469364071414, guid: 3b4aa48c023530d44b02451b6cdca20a, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 150
+    <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Prop_Food_Chicken_Leg_Raw_01
+    <ID>k__BackingField: 115
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1610394867591510, guid: 5486ef4a3327565498128c0045f7e7ca, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 150
+    <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Prop_Food_Fish_Fillet_01
+    <ID>k__BackingField: 116
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1737619390133026, guid: 2d1148a9c772a8e4a9dd12a36e318140, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 100
+    <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Prop_Food_Fish_Shrimp_01
+    <ID>k__BackingField: 117
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1439163563751860, guid: 28d4ebc68154eb44ba945ecd0a1cffcd, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 150
+    <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Prop_Food_Luncheon_Sliced_01
+    <ID>k__BackingField: 118
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1061550650109628, guid: df138ef3a3be1494896df1aaa3339759, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 150
+    <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Prop_Food_Mushroom_Sliced_01
+    <ID>k__BackingField: 119
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1815403580116408, guid: 9a514d313a6a7704c8c41605e297629e, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 150
+    <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Prop_Food_Onion_Sliced_01
+    <ID>k__BackingField: 120
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1821227637025026, guid: 4f4a6a44c3c24c44698c95ffeaa4fafe, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 150
+    <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Prop_Food_Pickle_Slices_01
+    <ID>k__BackingField: 121
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1769726829661734, guid: d3cfa8eab29b6b34faac45e4cb6523a6, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 150
+    <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Prop_Food_Pineapple_Sliced_01
+    <ID>k__BackingField: 122
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1162639427242124, guid: 209f3ff20ce96204892e4c95b61d8f78, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 150
+    <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Prop_Food_Pizza_Raw_01
+    <ID>k__BackingField: 123
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1756483443037778, guid: c2f30f356865f22478fa26f336785509, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 100
+    <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Prop_Food_Salami_Sliced_01
+    <ID>k__BackingField: 124
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1115653493497122, guid: a80cda14cfa0f1040983784bd9969cec, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 150
+    <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Prop_Food_Sauce_Ketchup_01
+    <ID>k__BackingField: 125
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1144842323900444, guid: 89b421145a7699b4591c51f7041f4e1c, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 150
+    <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
