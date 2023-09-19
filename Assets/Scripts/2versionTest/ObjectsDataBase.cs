@@ -27,11 +27,30 @@ public class ObjectsDataBase : ScriptableObject
         }
         foreach(var item in alreadyInDatabase) 
         {
-            ObjectData obj = new ObjectData(item.Key, i, Vector2Int.one,item.Value, ObjectData.ObjectTypes.Default, 25, new Quaternion(),new Vector3());
+            ObjectData obj = new ObjectData(item.Key, i, Vector2Int.one,item.Value, ObjectData.ObjectTypes.Default,ObjectData.ObjectEnvironemnts.Office, 25, new Quaternion(),new Vector3());
             objectsDatabase.Add(obj);
             i++;
         }
-    } 
+    }
+
+    [ContextMenu("Set characters type")]
+    public void setCharacter()
+    {
+        foreach(var obj in objectsDatabase)
+        {
+            if (obj.Name.Contains("Character"))
+                obj.Types = ObjectData.ObjectTypes.NPC;
+        }
+    }
+
+    [ContextMenu("Set environments to office")]
+    public void setEnvironments()
+    {
+        foreach (var obj in objectsDatabase)
+        {
+            obj.Environments = ObjectData.ObjectEnvironemnts.Office;
+        }
+    }
 }
 
 
@@ -39,7 +58,8 @@ public class ObjectsDataBase : ScriptableObject
 public class ObjectData
 {
     //[HideInInspector] public enum ObjectTypes { Chair, Shelf, Table, Rug, Prop, Wall, Default, Floor };
-    [HideInInspector] public enum ObjectTypes { Default, Floor, Prop, Structure, WallProp};
+    [HideInInspector] public enum ObjectTypes { Default, Floor, Prop, Structure, WallProp, NPC, Animation};
+    [HideInInspector] public enum ObjectEnvironemnts { Office};
 
     [field: SerializeField]
     public string Name { get; private set; }
@@ -54,7 +74,10 @@ public class ObjectData
     public GameObject Prefab { get; private set; }
 
     [field: SerializeField]
-    public ObjectTypes Types { get; private set; }
+    public ObjectTypes Types { get; set; }
+
+    [field: SerializeField]
+    public ObjectEnvironemnts Environments { get; set; }
 
     [field: SerializeField]
     public int MiniatureScale { get; private set; }
@@ -67,13 +90,14 @@ public class ObjectData
 
 
 
-    public ObjectData(string name, int iD, Vector2Int size, GameObject prefab, ObjectTypes type, int miniatureScale, Quaternion miniatureRotation, Vector3 MiniaturePosition) 
+    public ObjectData(string name, int iD, Vector2Int size, GameObject prefab, ObjectTypes type, ObjectEnvironemnts environemnts, int miniatureScale, Quaternion miniatureRotation, Vector3 MiniaturePosition) 
     {
         Name = name;
         ID = iD;
         Size = size;
         Prefab = prefab;
         Types = type;
+        Environments = environemnts;
         MiniatureScale = miniatureScale;
         MiniatureRotation = miniatureRotation;
         MinaturePosition = MiniaturePosition;

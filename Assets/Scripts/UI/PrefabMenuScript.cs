@@ -21,8 +21,10 @@ public class PrefabMenuScript : MonoBehaviour
     [HideInInspector]
     public List<GameObject> AllPrefabs;//substituir
     [SerializeField] private TMP_Dropdown _environmentDropdown;
+    [SerializeField] private TMP_Dropdown _objectTypesDropdown;
     //public List<List<GameObject>> AllPrefabs;
     private string _selectedEnvironment;
+    private string _selectedObjectType;
 
     private static int UILAYER = 5;
 
@@ -33,13 +35,21 @@ public class PrefabMenuScript : MonoBehaviour
     public void Start()
     {
         _selectedEnvironment = _environmentDropdown.options[_environmentDropdown.value].text;
-        _environmentDropdown.onValueChanged.AddListener(delegate { OnDropDownChange(_environmentDropdown); });
+        _selectedObjectType = _objectTypesDropdown.options[_objectTypesDropdown.value].text;
+        _environmentDropdown.onValueChanged.AddListener(delegate { OnEnvironmentDropDownChange(_environmentDropdown); });
+        _objectTypesDropdown.onValueChanged.AddListener(delegate { OnObjectTypeDropDownChange(_objectTypesDropdown); });
         ShowObjects();      
     }
 
-   public void OnDropDownChange(TMP_Dropdown _dropdown)
+   public void OnEnvironmentDropDownChange(TMP_Dropdown _dropdown)
     {
         _selectedEnvironment = _dropdown.options[_dropdown.value].text;
+        ShowObjects();
+    }
+
+    public void OnObjectTypeDropDownChange(TMP_Dropdown _dropdown)
+    {
+        _selectedObjectType = _dropdown.options[_dropdown.value].text;
         ShowObjects();
     }
 
@@ -51,7 +61,7 @@ public class PrefabMenuScript : MonoBehaviour
         }
         foreach (var obj in _database.objectsDatabase)
         {
-            if (obj.Types.ToString() == _selectedEnvironment)
+            if ((obj.Types.ToString() == _selectedObjectType) && (obj.Environments.ToString() == _selectedEnvironment))
             {
                 int scale = obj.MiniatureScale;
                 var menuSlot = Instantiate(_menuSlotPrefab, _panel.transform);
