@@ -75,7 +75,7 @@ public class SaveGame : AbstractSave
         foreach (ObjectInfo o in tale.TaleWorld.ObjectsInWorld)
         {
             GameObject toAdd = Resources.Load<GameObject>(_prefabPath + o.Name.Split("(")[0]);
-            toAdd.transform.position = new Vector3(o.Position.getRow(), 0, o.Position.getColumn());
+            toAdd.transform.position = new Vector3(o.Position.getRow(), o.Position.getHeight(), o.Position.getColumn());
 
             switch (o.Rotation.GetDirection())
             {
