@@ -26,7 +26,7 @@ public class CameraMovement : MonoBehaviour
 
     private void HandleCameraMovement()
     {
-        KeyBoardMovement();
+        //KeyBoardMovement();
         DragPanMovement();
     }
 
