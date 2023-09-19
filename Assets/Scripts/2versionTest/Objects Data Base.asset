@@ -1003,11 +1003,11 @@ MonoBehaviour:
     <MiniatureScale>k__BackingField: 13
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
     <MinaturePosition>k__BackingField: {x: 0, y: -40, z: 0}
-  - <Name>k__BackingField: SM_Prop_Kitchen_Counter_End_01
+  - <Name>k__BackingField: SM_Prop_Kitchen_Counter_End_01_Parent
     <ID>k__BackingField: 111
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 1950802142998856, guid: fea4a9f810b465e4f97439a390b6c954, type: 3}
-    <Types>k__BackingField: 3
+    <Types>k__BackingField: 0
     <Environments>k__BackingField: 0
     <MiniatureScale>k__BackingField: 25
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}

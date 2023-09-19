@@ -61,23 +61,37 @@ public class PrefabMenuScript : MonoBehaviour
         }
         foreach (var obj in _database.objectsDatabase)
         {
-            if ((obj.Types.ToString() == _selectedObjectType) && (obj.Environments.ToString() == _selectedEnvironment))
+            if (_selectedObjectType == "Animation")
             {
-                int scale = obj.MiniatureScale;
-                var menuSlot = Instantiate(_menuSlotPrefab, _panel.transform);
-                var instantiated = Instantiate(obj.Prefab, menuSlot.transform);
-                instantiated.transform.rotation = obj.MiniatureRotation;
-                instantiated.transform.position += obj.MinaturePosition;
-                //if (obj.Types == ObjectData.ObjectTypes.Structure)
-                //    instantiated.transform.Rotate(0, 90, 0);
-                //if (obj.Types == ObjectData.ObjectTypes.Floor) 
-                //    instantiated.transform.Rotate(-90,0,0);
-                instantiated.layer = UILAYER;
-                instantiated.transform.localScale = new Vector3(scale, scale, scale);
-                foreach (Transform child in instantiated.transform)
-                    child.gameObject.layer = UILAYER;
+                if (obj.Types.ToString() == _selectedObjectType)
+                {
+                    ShowObjectList(obj);
+                }
+            } else
+            {
+                if ((obj.Types.ToString() == _selectedObjectType) && (obj.Environments.ToString() == _selectedEnvironment))
+                {
+                    ShowObjectList(obj);
+                }
             }
         }
+    }
+
+    private void ShowObjectList(ObjectData obj)
+    {
+        int scale = obj.MiniatureScale;
+        var menuSlot = Instantiate(_menuSlotPrefab, _panel.transform);
+        var instantiated = Instantiate(obj.Prefab, menuSlot.transform);
+        instantiated.transform.rotation = obj.MiniatureRotation;
+        instantiated.transform.position += obj.MinaturePosition;
+        //if (obj.Types == ObjectData.ObjectTypes.Structure)
+        //    instantiated.transform.Rotate(0, 90, 0);
+        //if (obj.Types == ObjectData.ObjectTypes.Floor) 
+        //    instantiated.transform.Rotate(-90,0,0);
+        instantiated.layer = UILAYER;
+        instantiated.transform.localScale = new Vector3(scale, scale, scale);
+        foreach (Transform child in instantiated.transform)
+            child.gameObject.layer = UILAYER;
     }
 }
         
