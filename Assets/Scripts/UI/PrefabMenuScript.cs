@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Progress;
 
 public class PrefabMenuScript : MonoBehaviour
@@ -19,7 +20,11 @@ public class PrefabMenuScript : MonoBehaviour
     [SerializeField] ObjectsDataBase _database;
     [HideInInspector]
     public List<GameObject> AllPrefabs;//substituir
+    [SerializeField] private TMP_Dropdown _environmentDropdown;
+    [SerializeField] private TMP_Dropdown _objectTypesDropdown;
     //public List<List<GameObject>> AllPrefabs;
+    private string _selectedEnvironment;
+    private string _selectedObjectType;
 
     private static int UILAYER = 5;
 
@@ -29,21 +34,49 @@ public class PrefabMenuScript : MonoBehaviour
 
     public void Start()
     {
+        _selectedEnvironment = _environmentDropdown.options[_environmentDropdown.value].text;
+        _selectedObjectType = _objectTypesDropdown.options[_objectTypesDropdown.value].text;
+        _environmentDropdown.onValueChanged.AddListener(delegate { OnEnvironmentDropDownChange(_environmentDropdown); });
+        _objectTypesDropdown.onValueChanged.AddListener(delegate { OnObjectTypeDropDownChange(_objectTypesDropdown); });
+        ShowObjects();      
+    }
+
+   public void OnEnvironmentDropDownChange(TMP_Dropdown _dropdown)
+    {
+        _selectedEnvironment = _dropdown.options[_dropdown.value].text;
+        ShowObjects();
+    }
+
+    public void OnObjectTypeDropDownChange(TMP_Dropdown _dropdown)
+    {
+        _selectedObjectType = _dropdown.options[_dropdown.value].text;
+        ShowObjects();
+    }
+
+    private void ShowObjects()
+    {
+        foreach(Transform child in _panel.transform)
+        {
+            Destroy(child.gameObject);
+        }
         foreach (var obj in _database.objectsDatabase)
         {
-            int scale = obj.MiniatureScale;
-            var menuSlot = Instantiate(_menuSlotPrefab, _panel.transform);
-            var instantiated = Instantiate(obj.Prefab, menuSlot.transform);
-            instantiated.transform.rotation = obj.MiniatureRotation;
-            instantiated.transform.position += obj.MinaturePosition;
-            //if (obj.Types == ObjectData.ObjectTypes.Structure)
-            //    instantiated.transform.Rotate(0, 90, 0);
-            //if (obj.Types == ObjectData.ObjectTypes.Floor) 
-            //    instantiated.transform.Rotate(-90,0,0);
-            instantiated.layer = UILAYER;
-            instantiated.transform.localScale = new Vector3(scale, scale, scale);
-            foreach (Transform child in instantiated.transform)
-                child.gameObject.layer = UILAYER;
+            if ((obj.Types.ToString() == _selectedObjectType) && (obj.Environments.ToString() == _selectedEnvironment))
+            {
+                int scale = obj.MiniatureScale;
+                var menuSlot = Instantiate(_menuSlotPrefab, _panel.transform);
+                var instantiated = Instantiate(obj.Prefab, menuSlot.transform);
+                instantiated.transform.rotation = obj.MiniatureRotation;
+                instantiated.transform.position += obj.MinaturePosition;
+                //if (obj.Types == ObjectData.ObjectTypes.Structure)
+                //    instantiated.transform.Rotate(0, 90, 0);
+                //if (obj.Types == ObjectData.ObjectTypes.Floor) 
+                //    instantiated.transform.Rotate(-90,0,0);
+                instantiated.layer = UILAYER;
+                instantiated.transform.localScale = new Vector3(scale, scale, scale);
+                foreach (Transform child in instantiated.transform)
+                    child.gameObject.layer = UILAYER;
+            }
         }
     }
 }

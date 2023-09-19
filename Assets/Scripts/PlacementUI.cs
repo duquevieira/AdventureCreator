@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,9 @@ public class PlacementUI : MonoBehaviour
     [SerializeField] private PlacementSystem _placementSys;
     [SerializeField] private PlacementSystemV2 _placementSys2;
     [SerializeField] private SwitchCreateMode _createMode;
+    [SerializeField] private TMP_Dropdown _environmentDropdown;
+    [SerializeField] private TMP_Dropdown _objectTypesDropdown;
+    [SerializeField] private ObjectsDataBase _database;
     private List<GameObject> _mainObjects;
 
     private void Start()
@@ -26,6 +30,11 @@ public class PlacementUI : MonoBehaviour
     private void Awake()
     {
         _mainObjects = _placementSys._mainObjects;
+        string[] _environmentOptions = System.Enum.GetNames(typeof(ObjectData.ObjectEnvironemnts));
+        string[] _objectTypesOptions = System.Enum.GetNames(typeof(ObjectData.ObjectTypes));
+        _environmentDropdown.AddOptions(_environmentOptions.ToList());
+        _objectTypesDropdown.AddOptions(_objectTypesOptions.ToList());
+
     }
 
     private void Update()
