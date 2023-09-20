@@ -67,7 +67,7 @@ public class PlayerHandlerScript : MonoBehaviour
         {
             if (distance < 3)
             {
-                _player.transform.LookAt(hit.transform);
+                _player.transform.LookAt(new Vector3(hit.transform.position.x, 0, hit.transform.position.z));
                 int animation = _storyEngineScript.ProcessEntry(hit.collider, itemName);
                 if (animation > -1)
                 {
@@ -93,7 +93,7 @@ public class PlayerHandlerScript : MonoBehaviour
             {
                 if (distance < 3)
                 {
-                    _player.transform.LookAt(hit.transform);
+                    _player.transform.LookAt(new Vector3(hit.transform.position.x, 0, hit.transform.position.z));
                     animator.SetBool("On", !animator.GetBool("On"));
                 }
                 else
