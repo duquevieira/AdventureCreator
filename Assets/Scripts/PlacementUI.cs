@@ -39,6 +39,13 @@ public class PlacementUI : MonoBehaviour
 
     private void Update()
     {
+        if (_objectTypesDropdown.options[_objectTypesDropdown.value].text == "Animation")
+        {
+            _environmentDropdown.interactable = false;
+        }
+
+        else
+            _environmentDropdown.interactable = true;
         //if (_dropdown.options.Count > 0)
         //{
         //    _addButton.interactable = true;
@@ -61,7 +68,6 @@ public class PlacementUI : MonoBehaviour
         {
             ClearUI();
         }
-        
     }
 
     private void ClearUI()

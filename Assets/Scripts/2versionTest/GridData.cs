@@ -33,7 +33,14 @@ public class GridData
     {
         if (objType == ObjectData.ObjectTypes.Structure)
             return true;
-        else
+        else if (objType == ObjectData.ObjectTypes.Animation)
+        {
+            List<ObjectData.ObjectTypes> objectTypesAt = getObjectTypesAt(gridPosition);
+            if (objectTypesAt.Contains(ObjectData.ObjectTypes.NPC))
+                return true;
+            else
+                return false;
+        } else 
         {
             List<Vector3Int> positionToOccupy = CalculatePositions(gridPosition, objectSize);
             foreach (var pos in positionToOccupy)
@@ -97,7 +104,6 @@ public class GridData
         List<PlacementData> dataAt = placedObjects[gridPos];
         return dataAt[dataAt.Count-1];
     }
-
     public List<PlacementData> GetAllData()
     {
         List<PlacementData> allData = new List<PlacementData>();

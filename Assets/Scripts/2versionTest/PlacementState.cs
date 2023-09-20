@@ -78,31 +78,40 @@ public class PlacementState : IBuildingState
 
         //GridData selectedData = GetSelectedData(Database.objectsDatabase[_selectedObjectIndex].Types);
         ObjectData.ObjectTypes objType = Database.objectsDatabase[_selectedObjectIndex].Types;
-        if (objType == ObjectData.ObjectTypes.Structure)
+        if (objType== ObjectData.ObjectTypes.Animation)
         {
-            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, _structureRotatedPosition, _rotation, objType);
-            PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), true);
-            PreviewSystem.UpdatePreviewPosition(_structureRotatedPosition, true);
+            //Fazer alguma coisa para mostrar que colocou a animacao no NPC
+            //Colocar a animacao no NPC
+        } else
+        {
+            if (objType == ObjectData.ObjectTypes.Structure)
+            {
+                index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, _structureRotatedPosition, _rotation, objType);
+                PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), true);
+                PreviewSystem.UpdatePreviewPosition(_structureRotatedPosition, true);
+            }
+            else if (objType == ObjectData.ObjectTypes.Prop)
+            {
+                float _maxY = GetMaximumHeightAt(gridPos);
+                Vector3 _maxHeightPos = Grid.GetCellCenterWorld(gridPos) + new Vector3(0, _maxY, 0);
+                index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, _maxHeightPos, _rotation, objType);
+                PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), placementValidity);
+                PreviewSystem.UpdatePreviewPosition(_maxHeightPos, placementValidity);
+            }
+            else if (objType == ObjectData.ObjectTypes.WallProp)
+            {
+                index = 0;
+                Debug.Log("TODO");
+            }
+            else
+            {
+                index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.GetCellCenterWorld(gridPos), _rotation, objType);
+                PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), false);
+                PreviewSystem.UpdatePreviewPosition(Grid.GetCellCenterWorld(gridPos), false);
+            }
+            ObjData.AddObjectAt(gridPos, _size, Database.objectsDatabase[_selectedObjectIndex].Name, index, objType);
         }
-        else if (objType == ObjectData.ObjectTypes.Prop)
-        {
-            float _maxY = GetMaximumHeightAt(gridPos);
-            Vector3 _maxHeightPos = Grid.GetCellCenterWorld(gridPos) + new Vector3(0, _maxY, 0);
-            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, _maxHeightPos, _rotation, objType);
-            PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), placementValidity);
-            PreviewSystem.UpdatePreviewPosition(_maxHeightPos, placementValidity);
-        } else if (objType == ObjectData.ObjectTypes.WallProp)
-        {
-            index = 0;
-            Debug.Log("TODO");
-        }
-        else
-        {
-            index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, Grid.GetCellCenterWorld(gridPos), _rotation, objType);
-            PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), false);
-            PreviewSystem.UpdatePreviewPosition(Grid.GetCellCenterWorld(gridPos), false);
-        }
-        ObjData.AddObjectAt(gridPos,_size, Database.objectsDatabase[_selectedObjectIndex].Name, index, objType);
+        
     }
     public Quaternion Rotate()
     {

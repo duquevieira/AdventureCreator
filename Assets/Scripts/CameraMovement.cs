@@ -26,7 +26,7 @@ public class CameraMovement : MonoBehaviour
 
     private void HandleCameraMovement()
     {
-        KeyBoardMovement();
+        //KeyBoardMovement();
         DragPanMovement();
     }
 
@@ -67,12 +67,12 @@ public class CameraMovement : MonoBehaviour
         {
             Vector2 mouseMovementDelta = (Vector2)Input.mousePosition - lastMousePos;
             lastMousePos = Input.mousePosition;
-            inputDir.x = mouseMovementDelta.x * dragSpeed;
-            inputDir.z = mouseMovementDelta.y * dragSpeed;
+            inputDir.x = -mouseMovementDelta.x * dragSpeed;
+            inputDir.z = -mouseMovementDelta.y * dragSpeed;
         }
 
         Vector3 moveDir = transform.up * inputDir.z + transform.right * inputDir.x;
-        _cameraFollow.transform.position += moveDir * moveSpeed * Time.deltaTime;
+        _cameraFollow.transform.position += moveDir * dragSpeed * Time.deltaTime;
     }
 
     private void HandleCameraZoom()
