@@ -3,9 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class StepToggleScript : MonoBehaviour
+public class StepToggleScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
     private Button _buttonToggle;
@@ -31,15 +32,25 @@ public class StepToggleScript : MonoBehaviour
         {
             ItemMode = false;
             _buttonToggle.transform.GetChild(0).gameObject.SetActive(false);
-            _buttonToggle.transform.GetChild(1).gameObject.SetActive(true);
             gameObject.GetComponent<Image>().color = _storyColour;
         }
         else
         {
             ItemMode = true;
             _buttonToggle.transform.GetChild(0).gameObject.SetActive(true);
-            _buttonToggle.transform.GetChild(1).gameObject.SetActive(false);
             gameObject.GetComponent<Image>().color = _itemColour;
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (!ItemMode)
+            _buttonToggle.transform.GetChild(1).gameObject.SetActive(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (!ItemMode)
+            _buttonToggle.transform.GetChild(1).gameObject.SetActive(false);
     }
 }

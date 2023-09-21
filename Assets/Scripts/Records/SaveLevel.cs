@@ -16,6 +16,8 @@ public class SaveLevel : AbstractSave
     [SerializeField] private Camera _screenshotCamera;
     [SerializeField] private TMP_InputField _inputfield;
     private string _saveName = null;
+    [SerializeField]
+    private CreateStoryScript createStoryScript;
 
     void Start() {
         _inputfield.onValueChanged.AddListener(delegate { OnValueChange(); });
@@ -32,6 +34,7 @@ public class SaveLevel : AbstractSave
     public async void Save()
     {
         CanQuit = false;
+        createStoryScript.SaveStoryState();
         await SaveBackgroundAsync();
         CanQuit = true;
     }
