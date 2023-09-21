@@ -50,6 +50,9 @@ public class SwitchCreateMode : MonoBehaviour
         
     }*/
 
+    public CreateMode getCurrentMode()
+    { return currentMode; }
+
     public void ToggleMode() {
         if(currentMode.Equals(CreateMode.MapMode)) {
             currentMode = CreateMode.StoryBoardMode;
