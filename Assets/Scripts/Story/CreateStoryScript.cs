@@ -91,7 +91,7 @@ public class CreateStoryScript : MonoBehaviour
         return 0;
     }
 
-    private void SaveStoryState()
+    public void SaveStoryState()
     {
         List<StoryboardStep> story = new List<StoryboardStep>();
         foreach (GameObject step in _allSteps)
@@ -257,6 +257,12 @@ public class CreateStoryScript : MonoBehaviour
                 _firstSwapUpdate = false;
             }
             ClearUI();
+        }
+        if (Input.GetKeyUp(KeyCode.F10))
+        {
+            SaveStoryState();
+            _storyEngineScript.Storyboard = new List<StoryboardStep>();
+            _allSteps = new List<GameObject>();
         }
     }
 }
