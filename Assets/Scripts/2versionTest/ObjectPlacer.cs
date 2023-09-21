@@ -11,7 +11,7 @@ public class ObjectPlacer : MonoBehaviour
     public int PlaceObject(GameObject prefab, Vector3 position, Quaternion rotation, ObjectData.ObjectTypes type)
     {
         GameObject objClone = Instantiate(prefab);
-        if (type == ObjectData.ObjectTypes.Structure)
+        if (type == ObjectData.ObjectTypes.Wall)
             objClone.transform.parent = GameObject.Find("Walls").transform;
         else if (type == ObjectData.ObjectTypes.Floor)
             objClone.transform.parent = GameObject.Find("Ground").transform;

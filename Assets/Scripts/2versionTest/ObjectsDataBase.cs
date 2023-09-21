@@ -27,7 +27,7 @@ public class ObjectsDataBase : ScriptableObject
         }
         foreach(var item in alreadyInDatabase) 
         {
-            ObjectData obj = new ObjectData(item.Key, i, Vector2Int.one,item.Value, ObjectData.ObjectTypes.Default,ObjectData.ObjectEnvironemnts.Office, 25, new Quaternion(),new Vector3());
+            ObjectData obj = new ObjectData(item.Key, i, Vector2Int.one,item.Value, ObjectData.ObjectTypes.Furniture,ObjectData.ObjectEnvironemnts.Office, 25, new Quaternion(),new Vector3());
             objectsDatabase.Add(obj);
             i++;
         }
@@ -58,7 +58,7 @@ public class ObjectsDataBase : ScriptableObject
 public class ObjectData
 {
     //[HideInInspector] public enum ObjectTypes { Chair, Shelf, Table, Rug, Prop, Wall, Default, Floor };
-    [HideInInspector] public enum ObjectTypes { Default, Floor, Prop, Structure, WallProp, NPC, Animation};
+    [HideInInspector] public enum ObjectTypes { Furniture, Floor, Prop, Wall, WallProp, NPC, Animation};
     [HideInInspector] public enum ObjectEnvironemnts { Office, Kitchen};
 
     [field: SerializeField]

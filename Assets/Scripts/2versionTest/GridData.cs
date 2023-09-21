@@ -31,7 +31,7 @@ public class GridData
 
     public bool CanPlacedObjectAt(Vector3Int gridPosition, Vector2Int objectSize, ObjectData.ObjectTypes objType)
     {
-        if (objType == ObjectData.ObjectTypes.Structure)
+        if (objType == ObjectData.ObjectTypes.Wall)
             return true;
         else if (objType == ObjectData.ObjectTypes.Animation)
         {

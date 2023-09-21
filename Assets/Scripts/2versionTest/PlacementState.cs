@@ -47,7 +47,7 @@ public class PlacementState : IBuildingState
         bool placementValidity = CheckPlacementValidity(gridPos);
         _structureRotatedPosition = GetPositionOfRotatedStructure(_rotation, Grid.CellToWorld(gridPos));
         ObjectData.ObjectTypes objType = Database.objectsDatabase[_selectedObjectIndex].Types;
-        if (objType == ObjectData.ObjectTypes.Structure)
+        if (objType == ObjectData.ObjectTypes.Wall)
         {
             PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), placementValidity);
             PreviewSystem.UpdatePreviewPosition(_structureRotatedPosition, placementValidity);
@@ -84,7 +84,7 @@ public class PlacementState : IBuildingState
             //Colocar a animacao no NPC
         } else
         {
-            if (objType == ObjectData.ObjectTypes.Structure)
+            if (objType == ObjectData.ObjectTypes.Wall)
             {
                 index = ObjectPlacer.PlaceObject(Database.objectsDatabase[_selectedObjectIndex].Prefab, _structureRotatedPosition, _rotation, objType);
                 PreviewSystem.UpdateCursorPosition(Grid.CellToWorld(gridPos), true);
@@ -117,7 +117,7 @@ public class PlacementState : IBuildingState
     {
         ObjectData.ObjectTypes objType = Database.objectsDatabase[_selectedObjectIndex].Types;
         //GridData selectedData = GetSelectedData(Database.objectsDatabase[_selectedObjectIndex].Types);
-        if (objType != ObjectData.ObjectTypes.Structure)
+        if (objType != ObjectData.ObjectTypes.Wall)
         {
             _rotation = PreviewSystem.RotatePreviewCenter();
             Vector2Int _newSize = PreviewSystem.RotateCursor(_size);
