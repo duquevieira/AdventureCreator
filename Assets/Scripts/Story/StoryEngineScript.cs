@@ -7,7 +7,6 @@ using Unity.VisualScripting;
 using UnityEngine.UI;
 using UnityEditor;
 using System.Linq;
-using static UnityEditor.Progress;
 
 public class StoryEngineScript : MonoBehaviour
 {

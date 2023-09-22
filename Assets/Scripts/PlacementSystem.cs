@@ -8,15 +8,11 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using TMPro;
-using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
-using UnityEngine.WSA;
 using static PlaceableObject;
-using static UnityEditor.PlayerSettings;
-using static UnityEditor.Progress;
 using Random = UnityEngine.Random;
 
 // www.youtube.com/watch?v=rKp9fWvmIww&t=342s

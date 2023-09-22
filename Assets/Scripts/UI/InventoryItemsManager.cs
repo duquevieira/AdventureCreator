@@ -51,10 +51,6 @@ public class InventoryItemsManager : MonoBehaviour
 
     public void AddItem(ItemGroup item)
     {
-
-        //TODO Resources.Load para o asset quando estiver no nosso folder e nao nas pastas do polygon
-        string[] lookingFor = {"Assets/Resources/Prefabs"};
-        List<GameObject> prefabs = PrefabNameLoader.GetAssets<GameObject>(lookingFor, "t:prefab");
         foreach (var obj in _database.objectsDatabase)
         {
             GameObject prefab = obj.Prefab;
