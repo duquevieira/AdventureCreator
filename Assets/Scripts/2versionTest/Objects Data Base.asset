@@ -1155,4 +1155,148 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 25
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -25, z: 0}
+  - <Name>k__BackingField: SM_Prop_Blender_01
+    <ID>k__BackingField: 128
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1071258367217308, guid: 751859c5ff8140b4d8ec720fa11091f4, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 90
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -25, z: 0}
+  - <Name>k__BackingField: SM_Prop_Cafe_Bin_01
+    <ID>k__BackingField: 129
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1686138112271896, guid: 1e902af5055c77a45b8e2b25e00e768b, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 30
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -25, z: 0}
+  - <Name>k__BackingField: SM_Prop_Cafe_Booth_Seat_01
+    <ID>k__BackingField: 130
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1260126077779580, guid: 411900e2b975f4a47b03a1677c100c87, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 22
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -25, z: 0}
+  - <Name>k__BackingField: SM_Prop_Cafe_Menu_Board_02
+    <ID>k__BackingField: 131
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1547717923863426, guid: 663c39a3a137db34f852936ce57e6190, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 125
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
+    <MinaturePosition>k__BackingField: {x: 0, y: -20, z: 0}
+  - <Name>k__BackingField: SM_Prop_Cafe_Table_Small_04
+    <ID>k__BackingField: 132
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1348894066145038, guid: b77e7d74bbe0b0d43ba23d0bf8820151, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: -0.0037988648, y: 0.81557864, z: -0.15607674, w: -0.5571867}
     <MinaturePosition>k__BackingField: {x: 0, y: -15, z: 0}
+  - <Name>k__BackingField: SM_Prop_Kitchen_Chopping_Board_01
+    <ID>k__BackingField: 133
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1930005609103870, guid: 1bf897243fa8ed244a407f676e55ac17, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 60
+    <MiniatureRotation>k__BackingField: {x: -0.19349346, y: -0.2921594, z: 0.29215932, w: 0.8898573}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  - <Name>k__BackingField: SM_Prop_Kitchen_Deep_Fryer_01
+    <ID>k__BackingField: 134
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1565356331120162, guid: 4c209c21d2206544d914c4a383c94685, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 20
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
+    <MinaturePosition>k__BackingField: {x: 0, y: -25, z: 0}
+  - <Name>k__BackingField: SM_Prop_Kitchen_Drinks_Machine_01
+    <ID>k__BackingField: 135
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1524248121726092, guid: 400f98e6c03d26f4cbd6d2ab56a061e9, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
+    <MinaturePosition>k__BackingField: {x: 0, y: -15, z: 0}
+  - <Name>k__BackingField: SM_Prop_Kitchen_Prep_Table_02
+    <ID>k__BackingField: 136
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1323521926845032, guid: ea127b20c3b855042848f18fc94fd4d5, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
+    <MinaturePosition>k__BackingField: {x: 0, y: -15, z: 0}
+  - <Name>k__BackingField: SM_Prop_Market_Drinks_Fridge_01
+    <ID>k__BackingField: 137
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1803188489721972, guid: 7b72b1a30fd0e384091f68e326ccf86d, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 20
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
+    <MinaturePosition>k__BackingField: {x: 0, y: -30, z: 0}
+  - <Name>k__BackingField: SM_Prop_Market_Fruit_Basket_01
+    <ID>k__BackingField: 138
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1133943605265940, guid: 6866d384f03524c409ec3327cd769593, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 60
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
+    <MinaturePosition>k__BackingField: {x: 0, y: -25, z: 0}
+  - <Name>k__BackingField: SM_Prop_Market_Shelf_Checkout_01
+    <ID>k__BackingField: 139
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1799800092414758, guid: 5a8c8e3e10e331d43840c4ec6b5309cd, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 25
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
+    <MinaturePosition>k__BackingField: {x: 0, y: -20, z: 0}
+  - <Name>k__BackingField: SM_Prop_Mop_Bucket_01
+    <ID>k__BackingField: 140
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1613894634792622, guid: 0e6d759102d04334685429c73786676b, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 50
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
+    <MinaturePosition>k__BackingField: {x: 0, y: -20, z: 0}
+  - <Name>k__BackingField: SM_Prop_Rubbish_Bin_01
+    <ID>k__BackingField: 141
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1671694686335278, guid: b41991227557dad488ad6f312b948915, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 40
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
+    <MinaturePosition>k__BackingField: {x: 0, y: -25, z: 0}
+  - <Name>k__BackingField: SM_Prop_Sauce_Box_02
+    <ID>k__BackingField: 142
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1783359766703610, guid: 7b94fac4673dd964a84524e822f0269a, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 140
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
+    <MinaturePosition>k__BackingField: {x: 0, y: -20, z: 0}
+  - <Name>k__BackingField: SM_Prop_Shop_Cash_Register_01
+    <ID>k__BackingField: 143
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1746536802831500, guid: 5f1109269fda48a4c9ea6afd8a8dde52, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 50
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
+    <MinaturePosition>k__BackingField: {x: 0, y: -20, z: 0}
