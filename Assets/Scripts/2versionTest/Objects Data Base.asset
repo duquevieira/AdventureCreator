@@ -1223,7 +1223,7 @@ MonoBehaviour:
     <ID>k__BackingField: 135
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 1524248121726092, guid: 400f98e6c03d26f4cbd6d2ab56a061e9, type: 3}
-    <Types>k__BackingField: 0
+    <Types>k__BackingField: 2
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 25
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
@@ -1250,7 +1250,7 @@ MonoBehaviour:
     <ID>k__BackingField: 138
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 1133943605265940, guid: 6866d384f03524c409ec3327cd769593, type: 3}
-    <Types>k__BackingField: 0
+    <Types>k__BackingField: 2
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 60
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
@@ -1269,7 +1269,7 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 1613894634792622, guid: 0e6d759102d04334685429c73786676b, type: 3}
     <Types>k__BackingField: 0
-    <Environments>k__BackingField: 0
+    <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 50
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
     <MinaturePosition>k__BackingField: {x: 0, y: -20, z: 0}
@@ -1286,7 +1286,7 @@ MonoBehaviour:
     <ID>k__BackingField: 142
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 1783359766703610, guid: 7b94fac4673dd964a84524e822f0269a, type: 3}
-    <Types>k__BackingField: 0
+    <Types>k__BackingField: 2
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 140
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
@@ -1295,7 +1295,7 @@ MonoBehaviour:
     <ID>k__BackingField: 143
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 1746536802831500, guid: 5f1109269fda48a4c9ea6afd8a8dde52, type: 3}
-    <Types>k__BackingField: 0
+    <Types>k__BackingField: 2
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 50
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
