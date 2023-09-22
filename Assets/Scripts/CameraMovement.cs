@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static SwitchCreateMode;
 
 public class CameraMovement : MonoBehaviour
 {
+    [SerializeField] private SwitchCreateMode _createMode;
     [SerializeField] private CinemachineVirtualCamera _camera;
     [SerializeField] private GameObject _cameraFollow;
     [SerializeField] float moveSpeed = 10f;
@@ -15,13 +17,17 @@ public class CameraMovement : MonoBehaviour
     private bool dragActive;
     private Vector2 lastMousePos;
     private float targetFOV = 30f;
+    private bool _canZoom;
 
 
     private void Update()
     {
-        HandleCameraMovement();
-        HandleCameraRotation();
-        HandleCameraZoom();
+        if (_createMode.currentMode.Equals(CreateMode.MapMode))
+        {
+            HandleCameraMovement();
+            HandleCameraRotation();
+            HandleCameraZoom();
+        }
     }
 
     private void HandleCameraMovement()
