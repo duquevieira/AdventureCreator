@@ -1300,3 +1300,30 @@ MonoBehaviour:
     <MiniatureScale>k__BackingField: 50
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
     <MinaturePosition>k__BackingField: {x: 0, y: -20, z: 0}
+  - <Name>k__BackingField: SM_Prop_Cannon_01
+    <ID>k__BackingField: 144
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 169560, guid: a646c5740d5675a429aae4c8f68bf514, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 27
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
+    <MinaturePosition>k__BackingField: {x: 15, y: -20, z: 0}
+  - <Name>k__BackingField: SM_Prop_Scrub_Bucket_02
+    <ID>k__BackingField: 145
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 154712, guid: 8055edb26f397b349b640dd64a972f2e, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 85
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
+    <MinaturePosition>k__BackingField: {x: 0, y: -20, z: 0}
+  - <Name>k__BackingField: SM_Prop_Campfire_01
+    <ID>k__BackingField: 146
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 109254, guid: fb0d85962f5d9be4c90bf0da0b78bb06, type: 3}
+    <Types>k__BackingField: 0
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 60
+    <MiniatureRotation>k__BackingField: {x: -0.25881904, y: 0, z: 0, w: 0.9659258}
+    <MinaturePosition>k__BackingField: {x: 0, y: -10, z: 0}

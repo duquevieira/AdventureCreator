@@ -18,8 +18,11 @@ public class SaveLevel : AbstractSave
     private string _saveName = null;
     [SerializeField]
     private CreateStoryScript createStoryScript;
+    //TODO delete
+    private bool oneSave;
 
     void Start() {
+        oneSave = true;
         _inputfield.onValueChanged.AddListener(delegate { OnValueChange(); });
         if(!string.IsNullOrEmpty(SaveId)) {
             Load();
@@ -33,10 +36,13 @@ public class SaveLevel : AbstractSave
 
     public async void Save()
     {
-        CanQuit = false;
-        createStoryScript.SaveStoryState();
-        await SaveBackgroundAsync();
-        CanQuit = true;
+        if(oneSave) {
+            CanQuit = false;
+            createStoryScript.SaveStoryState();
+            await SaveBackgroundAsync();
+            CanQuit = true;
+        }
+        oneSave = false;
     }
 
     private async Task SaveBackgroundAsync()
