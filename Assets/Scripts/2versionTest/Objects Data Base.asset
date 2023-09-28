@@ -1327,3 +1327,21 @@ MonoBehaviour:
     <MiniatureScale>k__BackingField: 60
     <MiniatureRotation>k__BackingField: {x: -0.25881904, y: 0, z: 0, w: 0.9659258}
     <MinaturePosition>k__BackingField: {x: 0, y: -10, z: 0}
+  - <Name>k__BackingField: SM_Prop_Food_Croissant_01
+    <ID>k__BackingField: 147
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 1869067507750076, guid: 09577ef52a09ea94cad80ea2159d363a, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 1
+    <MiniatureScale>k__BackingField: 115
+    <MiniatureRotation>k__BackingField: {x: -0.13088544, y: 0.86816275, z: -0.3596048, w: -0.31598538}
+    <MinaturePosition>k__BackingField: {x: 0, y: -10, z: 0}
+  - <Name>k__BackingField: SM_Icon_Key_04
+    <ID>k__BackingField: 148
+    <Size>k__BackingField: {x: 1, y: 1}
+    <Prefab>k__BackingField: {fileID: 2576501838069819755, guid: ec4e38e252be8f847b4c20ee0fae1aab, type: 3}
+    <Types>k__BackingField: 2
+    <Environments>k__BackingField: 0
+    <MiniatureScale>k__BackingField: 65
+    <MiniatureRotation>k__BackingField: {x: 0.34202015, y: 0.9396926, z: -0.000000014950176, w: -0.000000041075268}
+    <MinaturePosition>k__BackingField: {x: -10, y: -15, z: 0}
