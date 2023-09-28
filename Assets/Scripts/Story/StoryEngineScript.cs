@@ -213,13 +213,7 @@ public class StoryEngineScript : MonoBehaviour
 
     public string getCharacterSkin()
     {
-        //Santa, FWorker, MWorker, FAttendant, MAttendant, FClerk, MClerk
-        //FGym, MGym, MHunter, FMusician, MMusician, FShopper, MShopper
-        //EnglishCaptain, EnglishGovernor, EnglishSoldier, FPirate, FWench
-        //Gentleman, GovernorsDaughter, PirateBlackbeard, PirateCaptain
-        //PirateDeckHand, PirateFirstMate, PirateSeaman
-        //Skeleton1, Skeleton2, Skeleton3
-        return "MClerk";
+        return "Character_Pirate_Gentleman_01";
     }
 
     public void ClearStoryElements()

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4855092820269131146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.01, z: -1.5}
+  m_LocalPosition: {x: 3.5, y: 0.01, z: 4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8254827457987313891, guid: 6cb22d2c69cdf5048b8d7849d543dc73, type: 3}
       propertyPath: m_Name
-      value: SM_Bld_Floor_Carpet_01
+      value: SM_Bld_Floor_Carpet_01_Parent
       objectReference: {fileID: 0}
     - target: {fileID: 8258133199489287545, guid: 6cb22d2c69cdf5048b8d7849d543dc73, type: 3}
       propertyPath: m_RootOrder

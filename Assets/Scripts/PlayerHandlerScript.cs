@@ -63,11 +63,12 @@ public class PlayerHandlerScript : MonoBehaviour
     public void ProcessEntry(RaycastHit hit, string itemName)
     {
         float distance = Vector3.Distance(_player.transform.position, hit.collider.transform.position);
-        if (_storyEngineScript.IsStoryStep(hit.transform.name))
+        if (_storyEngineScript.IsStoryStep(hit.collider.name))
         {
             if (distance < 3)
             {
-                _player.transform.LookAt(new Vector3(hit.transform.position.x, 0, hit.transform.position.z));
+                if(transform.position != hit.transform.position)
+                    _player.transform.LookAt(new Vector3(hit.transform.position.x, 0, hit.transform.position.z));
                 int animation = _storyEngineScript.ProcessEntry(hit.collider, itemName);
                 if (animation > -1)
                 {
