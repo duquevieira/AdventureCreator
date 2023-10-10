@@ -13,6 +13,9 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
     protected static string CAMERA_NAME = "UICamera";
     protected static string STEP_PREFAB_NAME = "Step";
     protected static string PARENTHESIS = "(";
+    protected static string COLLIDER_NAME = "StepCollider";
+    protected static string OBTAINED_NAME = "ObtainedCollider";
+    protected static string OBTAINED_SPOT = "ObtainedSpot";
 
     void Start()
     {
@@ -36,18 +39,36 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
         bool noStep = true;
         foreach (RaycastResult hit in hits)
         {
-            GameObject current = hit.gameObject;
-            if (current.name.Split(PARENTHESIS)[0].Equals(STEP_PREFAB_NAME))
+            string name = hit.gameObject.name;
+            if (name.Split(PARENTHESIS)[0].Equals(OBTAINED_NAME))
             {
+                Transform current = hit.gameObject.transform.parent.GetChild(0);
+                current.GetComponent<StepColourScript>().ToggleStepColor();
+                noStep = false;
+                setAsChild(current.transform.GetChild(5));
+                break;
+            }
+            if (name.Split(PARENTHESIS)[0].Equals(OBTAINED_SPOT))
+            {
+                Transform current = hit.gameObject.transform.parent;
+                current.GetComponent<StepColourScript>().ToggleStepColor();
+                noStep = false;
+                setAsChild(current.transform.GetChild(5));
+                break;
+            }
+            if (name.Split(PARENTHESIS)[0].Equals(STEP_PREFAB_NAME))
+            {
+                Transform current = hit.gameObject.transform;
                 noStep = false;
                 if(_clone.GetComponent<LoopAnimationScript>() == null)
                 {
-                    setAsChild(current.transform.GetChild(2));
+                    setAsChild(current.GetChild(2));
                 }
                 else
                 {
-                    setAsChild(current.transform.GetChild(4));
+                    setAsChild(current.GetChild(4));
                 }
+                break;
             }
         }
         if (noStep)

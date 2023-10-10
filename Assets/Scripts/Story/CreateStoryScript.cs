@@ -1,8 +1,7 @@
 using MeadowGames.UINodeConnect4;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.AssemblyQualifiedNameParser;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -30,7 +29,7 @@ public class CreateStoryScript : MonoBehaviour
     [SerializeField] ObjectsDataBase _database;
 
 
-    private List<GameObject> _allSteps;
+    private List<Transform> _allSteps;
     private bool _firstSwapUpdate;
 
     [SerializeField]
@@ -44,7 +43,7 @@ public class CreateStoryScript : MonoBehaviour
     void Start()
     {
         ClearUI();
-        _allSteps = new List<GameObject>();
+        _allSteps = new List<Transform>();
         _firstSwapUpdate = false;
         _buttonNewStep.onClick.AddListener(AddNewStoryStep);
         defaultAnimationPosition = getDatabaseAnimationIndex("10");
@@ -52,16 +51,16 @@ public class CreateStoryScript : MonoBehaviour
 
     private void AddNewStoryStep()
     {
-        GameObject newStep = Instantiate(_prefabNewStep, _stepParent.transform);
-        newStep.transform.localPosition = Vector3.zero;
-        Node nodeScript = newStep.GetComponent<Node>();
+        Transform newStep = Instantiate(_prefabNewStep, _stepParent.transform).transform;
+        newStep.localPosition = Vector3.zero;
+        Node nodeScript = newStep.GetChild(0).GetComponent<Node>();
         nodeScript.ID = (_allSteps.Count).ToString();
         nodeScript.ports[0].ID = IN + nodeScript.ID;
         nodeScript.ports[1].ID = OUT + nodeScript.ID;
 
         var obj = _database.objectsDatabase[defaultAnimationPosition];
         GameObject defaultAnimation = obj.Prefab;
-        GameObject instantiated = Instantiate(defaultAnimation, newStep.transform.GetChild(4), false);
+        GameObject instantiated = Instantiate(defaultAnimation, newStep.GetChild(0).GetChild(4), false);
         instantiated.transform.rotation = obj.MiniatureRotation;
         instantiated.transform.position += obj.MinaturePosition;
         instantiated.transform.localPosition = new Vector3(0, 0, -10);
@@ -93,13 +92,14 @@ public class CreateStoryScript : MonoBehaviour
     public void SaveStoryState()
     {
         List<StoryboardStep> story = new List<StoryboardStep>();
-        foreach (GameObject step in _allSteps)
+        foreach (Transform step in _allSteps)
         {
-            int stepID = int.Parse(step.GetComponent<Node>().ID);
+            Debug.Log(Time.realtimeSinceStartup + " " + step.transform.GetComponent<Node>().ID);
+            int stepID = int.Parse(step.transform.GetComponent<Node>().ID);
             string colliderName = "";
             if (step.transform.GetChild(2).childCount > 0)
                 colliderName = step.transform.GetChild(2).GetChild(0).name.Split(PARENTHESIS)[0];
-            StoryboardStep storyboardStep = new StoryboardStep(stepID, colliderName, step.transform.localPosition);
+            StoryboardStep storyboardStep = new StoryboardStep(stepID, colliderName, step.parent.transform.localPosition);
             int animation = int.Parse(step.transform.GetChild(4).GetChild(0).name.Split(ANIMATION)[1].Split(PARENTHESIS)[0]);
             storyboardStep.addAnimation(animation);
             story.Add(storyboardStep);
@@ -108,17 +108,18 @@ public class CreateStoryScript : MonoBehaviour
         List<Port> portList = new List<Port>();
         for (int i = 0; i < _allSteps.Count; i++)
         {
-            GameObject step = _allSteps[i];
+            Transform step = _allSteps[i];
             Node nodeScript = step.GetComponent<Node>();
-            StepToggleScript toggleScript = step.GetComponent<StepToggleScript>();
             StoryboardStep storyboardStep = story[i];
+            bool getsItem = false;
             foreach (Connection connection in nodeScript.ports[0].Connections)
             {
                 string[] name = connection.port0.ID.Split(OUT);
                 int pos = int.Parse(name[1].Split(PARENTHESIS)[0]);
-                if (_allSteps[pos].GetComponent<StepToggleScript>().ItemMode)
+                getsItem = _allSteps[pos].transform.GetChild(5).GetChild(0).name != null;
+                if (getsItem)
                 {
-                    storyboardStep.addRequirement(new ItemGroup(_allSteps[pos].transform.GetChild(2).GetChild(0).name.Split(PARENTHESIS)[0], 1));
+                    storyboardStep.addRequirement(new ItemGroup(_allSteps[pos].transform.GetChild(5).GetChild(0).name.Split(PARENTHESIS)[0], 1));
                 }
                 else
                 {
@@ -126,11 +127,11 @@ public class CreateStoryScript : MonoBehaviour
                 }
             }
             int itemAmount = 0;
-            if (toggleScript.ItemMode)
+            if (getsItem)
             {
                 itemAmount = nodeScript.ports[1].ConnectionsCount;
                 if(itemAmount != 0)
-                    storyboardStep.addAcquires(new ItemGroup(step.transform.GetChild(2).GetChild(0).name.Split(PARENTHESIS)[0], itemAmount));
+                    storyboardStep.addAcquires(new ItemGroup(step.transform.GetChild(5).GetChild(0).name.Split(PARENTHESIS)[0], itemAmount));
                 foreach (Connection connection in nodeScript.ports[1].Connections)
                 {
                     storyboardStep.addItemDependentStep(int.Parse(connection.port1.ID.Split(IN)[1]));
@@ -139,7 +140,7 @@ public class CreateStoryScript : MonoBehaviour
             List<Node> next = nodeScript.GetNodesConnectedToPolarity(Port.PolarityType._out);
             storyboardStep.addAcquires(new ItemGroup(nodeScript.ID, next.Count - itemAmount));
             portList.AddRange(nodeScript.ports);
-            Destroy(step);
+            Destroy(step.parent.gameObject);
         }
         _allSteps.Clear();
         foreach (Port port in portList)
@@ -153,12 +154,13 @@ public class CreateStoryScript : MonoBehaviour
     private void LoadStoryState()
     {
 
-        _allSteps = new List<GameObject>();
+        _allSteps = new List<Transform>();
         List<StoryboardStep> storySteps = _storyEngineScript.Storyboard;
         foreach (StoryboardStep step in storySteps)
         {
-            GameObject stepPrefab = Instantiate(_prefabNewStep, _stepParent.transform);
-
+            GameObject step2Prefab = Instantiate(_prefabNewStep, _stepParent.transform);
+            var stepPrefab = step2Prefab.transform.GetChild(0);
+            
             var objAnimation = _database.objectsDatabase[getDatabaseAnimationIndex(step.getAnimation().ToString())];
             GameObject objectAnimation = objAnimation.Prefab;
             GameObject instantiatedAnimation = Instantiate(objectAnimation, stepPrefab.transform.GetChild(4), false);
@@ -172,23 +174,26 @@ public class CreateStoryScript : MonoBehaviour
                 child.gameObject.layer = UILAYER;
 
             List<float> coords = step.getStepCoordinates();
-            stepPrefab.transform.localPosition = new Vector3(coords[0], coords[1], coords[2]);
+            step2Prefab.transform.localPosition = new Vector3(coords[0], coords[1], coords[2]);
             Node nodeScript = stepPrefab.GetComponent<Node>();
             nodeScript.ID = step.getId().ToString();
             nodeScript.ports[0].ID = IN + nodeScript.ID;
             nodeScript.ports[1].ID = OUT + nodeScript.ID;
+            bool getItems = false;
             foreach (ItemGroup acquired in step.getAcquired())
             {
                 if (!int.TryParse(acquired.getItemName(), out int number))
                 {
-                    stepPrefab.GetComponent<StepToggleScript>().ToggleStepItem();
+                    stepPrefab.GetComponent<StepColourScript>().ToggleStepColor();
+                    getItems = true;
                     break;
                 }
             }
+            bool foundCollider = false;
             foreach (var obj in _database.objectsDatabase)
             {
                 GameObject prefab = obj.Prefab;
-                if (prefab.gameObject.name.Split(PARENTHESIS)[0].Equals(step.getColliderName()))
+                if (!foundCollider && prefab.gameObject.name.Split(PARENTHESIS)[0].Equals(step.getColliderName()))
                 {
                     GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(2), false);
                     instantiated.transform.rotation = obj.MiniatureRotation;
@@ -199,14 +204,29 @@ public class CreateStoryScript : MonoBehaviour
                     instantiated.layer = UILAYER;
                     foreach (Transform child in instantiated.transform)
                         child.gameObject.layer = UILAYER;
-                    break;
+                    foundCollider = true;
                 }
+                if(getItems && prefab.gameObject.name.Split(PARENTHESIS)[0].Equals(step.getAcquired()[0].getItemName()))
+                {
+                    GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(5), false);
+                    instantiated.transform.rotation = obj.MiniatureRotation;
+                    instantiated.transform.position += obj.MinaturePosition;
+                    instantiated.transform.localPosition = new Vector3(0, 0, -10);
+                    int scale = obj.MiniatureScale;
+                    instantiated.transform.localScale = new Vector3(scale, scale, scale);
+                    instantiated.layer = UILAYER;
+                    foreach (Transform child in instantiated.transform)
+                        child.gameObject.layer = UILAYER;
+                    getItems = false;
+                }
+                if (foundCollider && !getItems)
+                    break;
             }
             _allSteps.Add(stepPrefab);
         }
         for (int i = 0; i < _allSteps.Count; i++)
         {
-            GameObject step = _allSteps[i];
+            Transform step = _allSteps[i];
             Node nodeScript = step.GetComponent<Node>();
             StoryboardStep storyboardStep = storySteps[i];
             List<ItemGroup> requirements = storyboardStep.getRequirements();
@@ -261,7 +281,7 @@ public class CreateStoryScript : MonoBehaviour
         {
             SaveStoryState();
             _storyEngineScript.Storyboard = new List<StoryboardStep>();
-            _allSteps = new List<GameObject>();
+            _allSteps = new List<Transform>();
         }
     }
 }
