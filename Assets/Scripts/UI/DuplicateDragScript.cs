@@ -13,6 +13,7 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
     protected static string CAMERA_NAME = "UICamera";
     protected static string STEP_PREFAB_NAME = "Step";
     protected static string PARENTHESIS = "(";
+    protected static string OBTAINED_SPOT = "ObtainedSpot";
 
     void Start()
     {
@@ -36,18 +37,33 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
         bool noStep = true;
         foreach (RaycastResult hit in hits)
         {
-            GameObject current = hit.gameObject;
-            if (current.name.Split(PARENTHESIS)[0].Equals(STEP_PREFAB_NAME))
+            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(OBTAINED_SPOT))
             {
+                Transform current = hit.gameObject.transform.parent;
+                current.GetComponent<StepHandlerScript>().ToggleStepItem();
                 noStep = false;
-                if(_clone.GetComponent<LoopAnimationScript>() == null)
+                if (_clone.GetComponent<LoopAnimationScript>() == null)
                 {
-                    setAsChild(current.transform.GetChild(2));
+                    setAsChild(current.transform.GetChild(5));
                 }
                 else
                 {
                     setAsChild(current.transform.GetChild(4));
                 }
+                break;
+            }
+            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(STEP_PREFAB_NAME))
+            {
+                noStep = false;
+                if(_clone.GetComponent<LoopAnimationScript>() == null)
+                {
+                    setAsChild(hit.gameObject.transform.GetChild(2));
+                }
+                else
+                {
+                    setAsChild(hit.gameObject.transform.GetChild(4));
+                }
+                break;
             }
         }
         if (noStep)

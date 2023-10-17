@@ -54,10 +54,10 @@ public class CreateStoryScript : MonoBehaviour
     {
         GameObject newStep = Instantiate(_prefabNewStep, _stepParent.transform);
         newStep.transform.localPosition = Vector3.zero;
-        Node nodeScript = newStep.GetComponent<Node>();
+        /*Node nodeScript = newStep.GetComponent<Node>();
         nodeScript.ID = (_allSteps.Count).ToString();
         nodeScript.ports[0].ID = IN + nodeScript.ID;
-        nodeScript.ports[1].ID = OUT + nodeScript.ID;
+        nodeScript.ports[1].ID = OUT + nodeScript.ID;*/
 
         var obj = _database.objectsDatabase[defaultAnimationPosition];
         GameObject defaultAnimation = obj.Prefab;
@@ -93,6 +93,21 @@ public class CreateStoryScript : MonoBehaviour
     public void SaveStoryState()
     {
         List<StoryboardStep> story = new List<StoryboardStep>();
+        List<GameObject> allStepsClone = new List<GameObject>(_allSteps);
+        foreach (GameObject step in allStepsClone)
+        {
+            if (!step.activeSelf)
+            {
+                _allSteps.Remove(step);
+            }
+        }
+        for (int i = 0; i < _allSteps.Count; i++)
+        {
+            Node nodeScript = _allSteps[i].GetComponent<Node>();
+            nodeScript.ID = (i).ToString();
+            nodeScript.ports[0].ID = IN + nodeScript.ID;
+            nodeScript.ports[1].ID = OUT + nodeScript.ID;
+        }
         foreach (GameObject step in _allSteps)
         {
             int stepID = int.Parse(step.GetComponent<Node>().ID);
@@ -110,15 +125,16 @@ public class CreateStoryScript : MonoBehaviour
         {
             GameObject step = _allSteps[i];
             Node nodeScript = step.GetComponent<Node>();
-            StepToggleScript toggleScript = step.GetComponent<StepToggleScript>();
+            StepHandlerScript toggleScript = step.GetComponent<StepHandlerScript>();
             StoryboardStep storyboardStep = story[i];
             foreach (Connection connection in nodeScript.ports[0].Connections)
             {
                 string[] name = connection.port0.ID.Split(OUT);
                 int pos = int.Parse(name[1].Split(PARENTHESIS)[0]);
-                if (_allSteps[pos].GetComponent<StepToggleScript>().ItemMode)
+                bool getsItem = _allSteps[pos].transform.GetChild(5).childCount > 0;
+                if (getsItem)
                 {
-                    storyboardStep.addRequirement(new ItemGroup(_allSteps[pos].transform.GetChild(2).GetChild(0).name.Split(PARENTHESIS)[0], 1));
+                    storyboardStep.addRequirement(new ItemGroup(_allSteps[pos].transform.GetChild(5).GetChild(0).name.Split(PARENTHESIS)[0], 1));
                 }
                 else
                 {
@@ -126,11 +142,11 @@ public class CreateStoryScript : MonoBehaviour
                 }
             }
             int itemAmount = 0;
-            if (toggleScript.ItemMode)
+            if (step.transform.GetChild(5).childCount > 0)
             {
                 itemAmount = nodeScript.ports[1].ConnectionsCount;
-                if(itemAmount != 0)
-                    storyboardStep.addAcquires(new ItemGroup(step.transform.GetChild(2).GetChild(0).name.Split(PARENTHESIS)[0], itemAmount));
+                if (itemAmount != 0)
+                    storyboardStep.addAcquires(new ItemGroup(step.transform.GetChild(5).GetChild(0).name.Split(PARENTHESIS)[0], itemAmount));
                 foreach (Connection connection in nodeScript.ports[1].Connections)
                 {
                     storyboardStep.addItemDependentStep(int.Parse(connection.port1.ID.Split(IN)[1]));
@@ -177,18 +193,21 @@ public class CreateStoryScript : MonoBehaviour
             nodeScript.ID = step.getId().ToString();
             nodeScript.ports[0].ID = IN + nodeScript.ID;
             nodeScript.ports[1].ID = OUT + nodeScript.ID;
+            bool getItems = false;
             foreach (ItemGroup acquired in step.getAcquired())
             {
                 if (!int.TryParse(acquired.getItemName(), out int number))
                 {
-                    stepPrefab.GetComponent<StepToggleScript>().ToggleStepItem();
+                    stepPrefab.GetComponent<StepHandlerScript>().ToggleStepItem();
+                    getItems = true;
                     break;
                 }
             }
+            bool foundCollider = false;
             foreach (var obj in _database.objectsDatabase)
             {
                 GameObject prefab = obj.Prefab;
-                if (prefab.gameObject.name.Split(PARENTHESIS)[0].Equals(step.getColliderName()))
+                if (!foundCollider && prefab.gameObject.name.Split(PARENTHESIS)[0].Equals(step.getColliderName()))
                 {
                     GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(2), false);
                     instantiated.transform.rotation = obj.MiniatureRotation;
@@ -199,8 +218,23 @@ public class CreateStoryScript : MonoBehaviour
                     instantiated.layer = UILAYER;
                     foreach (Transform child in instantiated.transform)
                         child.gameObject.layer = UILAYER;
-                    break;
+                    foundCollider = true;
                 }
+                if (getItems && prefab.gameObject.name.Split(PARENTHESIS)[0].Equals(step.getAcquired()[0].getItemName()))
+                {
+                    GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(5), false);
+                    instantiated.transform.rotation = obj.MiniatureRotation;
+                    instantiated.transform.position += obj.MinaturePosition;
+                    instantiated.transform.localPosition = new Vector3(0, 0, -10);
+                    int scale = obj.MiniatureScale;
+                    instantiated.transform.localScale = new Vector3(scale, scale, scale);
+                    instantiated.layer = UILAYER;
+                    foreach (Transform child in instantiated.transform)
+                        child.gameObject.layer = UILAYER;
+                    getItems = false;
+                }
+                if (foundCollider && !getItems)
+                    break;
             }
             _allSteps.Add(stepPrefab);
         }
