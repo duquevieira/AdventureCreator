@@ -1020,7 +1020,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 100
     <MiniatureRotation>k__BackingField: {x: -0.2418448, y: -0.664463, z: -0.2418448, w: 0.664463}
-    <MinaturePosition>k__BackingField: {x: 20, y: -20, z: 0}
+    <MinaturePosition>k__BackingField: {x: 20, y: -20, z: -10}
   - <Name>k__BackingField: SM_Prop_Food_Bacon_Raw_01
     <ID>k__BackingField: 113
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1029,7 +1029,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 170
     <MiniatureRotation>k__BackingField: {x: 0.65328145, y: 0.27059796, z: 0.27059796, w: 0.65328145}
-    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: -5}
   - <Name>k__BackingField: SM_Prop_Food_Cheese_Stack_01
     <ID>k__BackingField: 114
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1046,8 +1046,8 @@ MonoBehaviour:
     <Types>k__BackingField: 2
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 150
-    <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
-    <MinaturePosition>k__BackingField: {x: -10, y: 0, z: 0}
+    <MiniatureRotation>k__BackingField: {x: 0, y: 0, z: 0, w: 1}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: -10}
   - <Name>k__BackingField: SM_Prop_Food_Fish_Fillet_01
     <ID>k__BackingField: 116
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1056,7 +1056,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 100
     <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
-    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: -10}
   - <Name>k__BackingField: SM_Prop_Food_Fish_Shrimp_01
     <ID>k__BackingField: 117
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1065,7 +1065,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 180
     <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
-    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: -10}
   - <Name>k__BackingField: SM_Prop_Food_Luncheon_Sliced_01
     <ID>k__BackingField: 118
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1074,7 +1074,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 240
     <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
-    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: -10}
   - <Name>k__BackingField: SM_Prop_Food_Mushroom_Sliced_01
     <ID>k__BackingField: 119
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1083,7 +1083,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 200
     <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
-    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: -10}
   - <Name>k__BackingField: SM_Prop_Food_Onion_Sliced_01
     <ID>k__BackingField: 120
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1092,7 +1092,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 170
     <MiniatureRotation>k__BackingField: {x: -0.4481868, y: 0.2680837, z: -0.097543076, w: 0.8471983}
-    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: -10}
   - <Name>k__BackingField: SM_Prop_Food_Pickle_Slices_01
     <ID>k__BackingField: 121
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1101,7 +1101,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 270
     <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
-    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: -10}
   - <Name>k__BackingField: SM_Prop_Food_Pineapple_Sliced_01
     <ID>k__BackingField: 122
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1110,7 +1110,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 225
     <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
-    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: -10}
   - <Name>k__BackingField: SM_Prop_Food_Pizza_Raw_01
     <ID>k__BackingField: 123
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1119,7 +1119,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 100
     <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
-    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: -30}
   - <Name>k__BackingField: SM_Prop_Food_Pizza_Raw_04
     <ID>k__BackingField: 124
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1128,7 +1128,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 100
     <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
-    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: -30}
   - <Name>k__BackingField: SM_Prop_Food_Salami_Sliced_01
     <ID>k__BackingField: 125
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1137,7 +1137,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 240
     <MiniatureRotation>k__BackingField: {x: 0.277816, y: -0.3649717, z: -0.11507516, w: -0.88111955}
-    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: -10}
   - <Name>k__BackingField: SM_Prop_Food_Sauce_Ketchup_01
     <ID>k__BackingField: 126
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1146,7 +1146,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 230
     <MiniatureRotation>k__BackingField: {x: 0.3826835, y: 0, z: 0, w: -0.9238795}
-    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: -10}
   - <Name>k__BackingField: SM_Prop_Kitchen_CounterSink_01
     <ID>k__BackingField: 127
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1155,7 +1155,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 25
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
-    <MinaturePosition>k__BackingField: {x: 0, y: -25, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: -25, z: -10}
   - <Name>k__BackingField: SM_Prop_Blender_01
     <ID>k__BackingField: 128
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1164,7 +1164,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 90
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.3826834}
-    <MinaturePosition>k__BackingField: {x: 0, y: -25, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: -25, z: -10}
   - <Name>k__BackingField: SM_Prop_Cafe_Bin_01
     <ID>k__BackingField: 129
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1209,7 +1209,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 60
     <MiniatureRotation>k__BackingField: {x: -0.19349346, y: -0.2921594, z: 0.29215932, w: 0.8898573}
-    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: 0, z: -10}
   - <Name>k__BackingField: SM_Prop_Kitchen_Deep_Fryer_01
     <ID>k__BackingField: 134
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1245,7 +1245,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 20
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
-    <MinaturePosition>k__BackingField: {x: 0, y: -30, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: -30, z: -10}
   - <Name>k__BackingField: SM_Prop_Market_Fruit_Basket_01
     <ID>k__BackingField: 138
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1254,7 +1254,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 60
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
-    <MinaturePosition>k__BackingField: {x: 0, y: -25, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: -25, z: -10}
   - <Name>k__BackingField: SM_Prop_Market_Shelf_Checkout_01
     <ID>k__BackingField: 139
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1290,7 +1290,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 140
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
-    <MinaturePosition>k__BackingField: {x: 0, y: -20, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: -20, z: -10}
   - <Name>k__BackingField: SM_Prop_Shop_Cash_Register_01
     <ID>k__BackingField: 143
     <Size>k__BackingField: {x: 1, y: 1}
@@ -1335,7 +1335,7 @@ MonoBehaviour:
     <Environments>k__BackingField: 1
     <MiniatureScale>k__BackingField: 115
     <MiniatureRotation>k__BackingField: {x: -0.13088544, y: 0.86816275, z: -0.3596048, w: -0.31598538}
-    <MinaturePosition>k__BackingField: {x: 0, y: -10, z: 0}
+    <MinaturePosition>k__BackingField: {x: 0, y: -10, z: -10}
   - <Name>k__BackingField: SM_Icon_Key_04
     <ID>k__BackingField: 148
     <Size>k__BackingField: {x: 1, y: 1}

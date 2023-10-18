@@ -13,9 +13,9 @@ public class LoadMenuScript : MonoBehaviour
     private const int REFERENCE_WIDTH = 1366;
     private const string CREATE_SCENE = "CreateScene";
     private const string GAME_SCENE = "GameScene";
-    public Image LoadingBar;
-    public GameObject Character;
-    public GameObject LoadingScreenText;
+    //public Image LoadingBar;
+    //public GameObject Character;
+    //public GameObject LoadingScreenText;
 
     [HideInInspector]
     public static string SaveId;
@@ -23,8 +23,8 @@ public class LoadMenuScript : MonoBehaviour
     public static string GameId;
     [HideInInspector]
     public static string SceneToLoad;
-    [SerializeField]
-    private Camera _mainCamera;
+    //[SerializeField]
+    //private Camera _mainCamera;
 
     void Start() {
         START_CHAR = new Vector3(25,135,0);
@@ -35,15 +35,15 @@ public class LoadMenuScript : MonoBehaviour
 
     public void loadScene(string scene)
     {
-        LoadingScreenText.SetActive(false);
+        //LoadingScreenText.SetActive(false);
         CAM_POS = new Vector3(Screen.width/2, Screen.height/2, CAM_Z_OFFSET);
-        _mainCamera.transform.position = CAM_POS;
-        _mainCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
-        _mainCamera.backgroundColor = Color.black;
-        _mainCamera.orthographic = true;
+        //_mainCamera.transform.position = CAM_POS;
+        //_mainCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
+        //_mainCamera.backgroundColor = Color.black;
+        //_mainCamera.orthographic = true;
         float scaledSize = CalculateScale();
-        LoadingBar.fillAmount = 0;
-        _mainCamera.orthographicSize = scaledSize;
+        //LoadingBar.fillAmount = 0;
+        //_mainCamera.orthographicSize = scaledSize;
         CaculateCharacterScale();
         StartCoroutine(LoadSceneAsync(scene));
     }
@@ -56,28 +56,25 @@ public class LoadMenuScript : MonoBehaviour
         {
             float progressValue = Mathf.Clamp01(operation.progress / 0.9F);
 
-            LoadingBar.fillAmount = progressValue;
+            //LoadingBar.fillAmount = progressValue;
 
             Vector3 CharacterPos = Vector3.Lerp(START_CHAR, END_CHAR, progressValue);
             Debug.Log("Start: " + START_CHAR + " End: " + END_CHAR + " Progress: " + progressValue);
             Debug.Log(CharacterPos);
-            Character.transform.position = CharacterPos;
+            //Character.transform.position = CharacterPos;
 
             if (progressValue >= 0.9f)
             {
-                LoadingScreenText.SetActive(true);
+                //LoadingScreenText.SetActive(true);
                 // Wait for user input to activate the scene
-                if (Input.anyKeyDown)
-                {
-                    operation.allowSceneActivation = true;
-                    if(scene.Equals(CREATE_SCENE)) loadCreatorScene();
-                    else if(scene.Equals(GAME_SCENE)) loadPlayScene();
-                }
+                operation.allowSceneActivation = true;
+                if (scene.Equals(CREATE_SCENE)) loadCreatorScene();
+                else if (scene.Equals(GAME_SCENE)) loadPlayScene();
             }
 
             yield return null;
         }
-        Character.transform.position = END_CHAR;
+        //Character.transform.position = END_CHAR;
         yield return null;
     }
 
