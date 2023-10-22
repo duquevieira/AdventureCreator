@@ -1,7 +1,11 @@
+using MeadowGames.UINodeConnect4;
 using MoreMountains.Feedbacks;
 using MoreMountains.InventoryEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerHandlerScript : MonoBehaviour
 {
@@ -12,6 +16,8 @@ public class PlayerHandlerScript : MonoBehaviour
     private float _speed;
     [SerializeField]
     private StoryEngineScript _storyEngineScript;
+    [SerializeField]
+    private Image _dialogBox;
 
     protected Camera _camera;
     private GameObject _player;
@@ -35,10 +41,19 @@ public class PlayerHandlerScript : MonoBehaviour
         _canMove = true;
     }
 
+    public void CanMove()
+    {
+        _canMove = true;
+    }
+
     public virtual void Update()
     {
-       if (Input.GetMouseButtonDown(1))
-       {
+        if(_dialogBox.IsActive())
+        {
+            _canMove = false;
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))

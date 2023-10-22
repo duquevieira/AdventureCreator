@@ -16,10 +16,6 @@ public class SaveLevel : AbstractSave
     [SerializeField] private Camera _screenshotCamera;
     [SerializeField] private TMP_InputField _inputfield;
     private string _saveName = null;
-    [SerializeField]
-    private CreateStoryScript createStoryScript;
-    [SerializeField]
-    private SwitchCreateMode switchMode;
     private float saveTimer;
 
     void Start() {
@@ -39,8 +35,6 @@ public class SaveLevel : AbstractSave
     {
         if(saveTimer + 5f < Time.realtimeSinceStartup) {
             saveTimer = Time.realtimeSinceStartup;
-            if (switchMode.currentMode == SwitchCreateMode.CreateMode.StoryBoardMode)
-                createStoryScript.SaveStoryState();
             CanQuit = false;
             await SaveBackgroundAsync();
             CanQuit = true;

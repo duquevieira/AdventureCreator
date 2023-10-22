@@ -1,6 +1,7 @@
 using MeadowGames.UINodeConnect4;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.AssemblyQualifiedNameParser;
 using UnityEngine;
@@ -117,6 +118,8 @@ public class CreateStoryScript : MonoBehaviour
             StoryboardStep storyboardStep = new StoryboardStep(stepID, colliderName, step.transform.localPosition);
             int animation = int.Parse(step.transform.GetChild(4).GetChild(0).name.Split(ANIMATION)[1].Split(PARENTHESIS)[0]);
             storyboardStep.addAnimation(animation);
+            TextMeshProUGUI dialogText = step.transform.GetChild(6).GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>();
+            storyboardStep.addDialog(dialogText.text);
             story.Add(storyboardStep);
 
         }
@@ -180,12 +183,12 @@ public class CreateStoryScript : MonoBehaviour
             GameObject instantiatedAnimation = Instantiate(objectAnimation, stepPrefab.transform.GetChild(4), false);
             instantiatedAnimation.transform.rotation = objAnimation.MiniatureRotation;
             instantiatedAnimation.transform.position += objAnimation.MinaturePosition;
-            instantiatedAnimation.transform.localPosition = new Vector3(0, 0, -10);
             int scaleAnimation = objAnimation.MiniatureScale;
             instantiatedAnimation.transform.localScale = new Vector3(scaleAnimation, scaleAnimation, scaleAnimation);
             instantiatedAnimation.layer = UILAYER;
             foreach (Transform child in instantiatedAnimation.transform)
                 child.gameObject.layer = UILAYER;
+            instantiatedAnimation.transform.localPosition = new Vector3(0, 0, -10);
 
             List<float> coords = step.getStepCoordinates();
             stepPrefab.transform.localPosition = new Vector3(coords[0], coords[1], coords[2]);
@@ -193,6 +196,8 @@ public class CreateStoryScript : MonoBehaviour
             nodeScript.ID = step.getId().ToString();
             nodeScript.ports[0].ID = IN + nodeScript.ID;
             nodeScript.ports[1].ID = OUT + nodeScript.ID;
+            TMP_InputField dialogText = stepPrefab.transform.GetChild(6).GetComponent<TMP_InputField>();
+            dialogText.text = step.getDialog();
             bool getItems = false;
             foreach (ItemGroup acquired in step.getAcquired())
             {
@@ -212,12 +217,12 @@ public class CreateStoryScript : MonoBehaviour
                     GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(2), false);
                     instantiated.transform.rotation = obj.MiniatureRotation;
                     instantiated.transform.position += obj.MinaturePosition;
-                    instantiated.transform.localPosition = new Vector3(0, 0, -10);
                     int scale = obj.MiniatureScale;
                     instantiated.transform.localScale = new Vector3(scale, scale, scale);
                     instantiated.layer = UILAYER;
                     foreach (Transform child in instantiated.transform)
                         child.gameObject.layer = UILAYER;
+                    instantiated.transform.localPosition = new Vector3(0, 0, -10);
                     foundCollider = true;
                 }
                 if (getItems && prefab.gameObject.name.Split(PARENTHESIS)[0].Equals(step.getAcquired()[0].getItemName()))
@@ -225,12 +230,12 @@ public class CreateStoryScript : MonoBehaviour
                     GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(5), false);
                     instantiated.transform.rotation = obj.MiniatureRotation;
                     instantiated.transform.position += obj.MinaturePosition;
-                    instantiated.transform.localPosition = new Vector3(0, 0, -10);
                     int scale = obj.MiniatureScale;
                     instantiated.transform.localScale = new Vector3(scale, scale, scale);
                     instantiated.layer = UILAYER;
                     foreach (Transform child in instantiated.transform)
                         child.gameObject.layer = UILAYER;
+                    instantiated.transform.localPosition = new Vector3(0, 0, -10);
                     getItems = false;
                 }
                 if (foundCollider && !getItems)

@@ -7,6 +7,8 @@ using Unity.VisualScripting;
 using UnityEngine.UI;
 using UnityEditor;
 using System.Linq;
+using TMPro;
+using System.Text.RegularExpressions;
 
 public class StoryEngineScript : MonoBehaviour
 {
@@ -24,7 +26,8 @@ public class StoryEngineScript : MonoBehaviour
     public List<StoryboardStep> Storyboard;
     [SerializeField]
     private InventoryItemsManager _itemsManager;
-
+    [SerializeField]
+    private Image _dialogBox;
 
     void Awake()
     {
@@ -50,6 +53,7 @@ public class StoryEngineScript : MonoBehaviour
                 Debug.Log(Time.realtimeSinceStartup + "-----------------------------");
                 Debug.Log(Time.realtimeSinceStartup + " ID " + step.getId());
                 Debug.Log(Time.realtimeSinceStartup + " COLLIDER " + step.getColliderName());
+                Debug.Log(Time.realtimeSinceStartup + " DIALOG " + step.getDialog());
                 Debug.Log(Time.realtimeSinceStartup + " REQUIREMENTS");
                 foreach (ItemGroup requirement in step.getRequirements())
                 {
@@ -128,6 +132,20 @@ public class StoryEngineScript : MonoBehaviour
                     completable = true;
                 if (completable)
                 {
+                    bool valid = false;
+                    for (int i = 0; i < iteratedStep.getDialog().Length && !valid; i++)
+                    {
+                        char c = iteratedStep.getDialog()[i];
+                        if(char.IsLetterOrDigit(c) || char.IsPunctuation(c))
+                        {
+                            valid = true;
+                        }
+                    }
+                    if (valid)
+                    {
+                        _dialogBox.gameObject.SetActive(true);
+                        StartCoroutine(TypeSentence(iteratedStep.getDialog()));
+                    }
                     foreach (ItemGroup requirement in requirements)
                     {
                         foreach (ItemGroup storyItem in StoryItems)
@@ -189,7 +207,8 @@ public class StoryEngineScript : MonoBehaviour
                                 InventoryItems.Add(item);
                                 _itemsManager.AddItem(item);
                             }
-                            Destroy(collider.gameObject);
+                            if(acquires.getItemName() == iteratedStep.getColliderName())
+                                Destroy(collider.gameObject);
                         }
                     }
                     Animator animator = collider.gameObject.GetComponent<Animator>();
@@ -225,5 +244,16 @@ public class StoryEngineScript : MonoBehaviour
         }
         InventoryItems = new List<ItemGroup>();
         Storyboard = new List<StoryboardStep>();
+    }
+
+    IEnumerator TypeSentence (string sentence)
+    {
+        TextMeshProUGUI dialogText = _dialogBox.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        dialogText.text = "";
+        foreach(char letter in sentence.ToCharArray())
+        {
+            dialogText.text += letter;
+            yield return null;
+        }
     }
 }
