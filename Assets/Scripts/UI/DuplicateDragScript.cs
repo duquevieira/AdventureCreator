@@ -11,9 +11,10 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
     protected GameObject _clone;
 
     protected static string CAMERA_NAME = "UICamera";
-    protected static string STEP_PREFAB_NAME = "Step";
     protected static string PARENTHESIS = "(";
+    protected static string COLLIDER_SPOT = "ColliderSpot";
     protected static string OBTAINED_SPOT = "ObtainedSpot";
+    protected static string ANIMATION_SPOT = "AnimationSpot";
 
     void Start()
     {
@@ -37,32 +38,36 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
         bool noStep = true;
         foreach (RaycastResult hit in hits)
         {
-            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(OBTAINED_SPOT))
+            Transform current = hit.gameObject.transform.parent;
+            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(COLLIDER_SPOT))
             {
-                Transform current = hit.gameObject.transform.parent;
-                current.GetComponent<StepHandlerScript>().ToggleStepItem();
-                noStep = false;
-                if (_clone.GetComponent<LoopAnimationScript>() == null)
+                if (_clone.GetComponent<LoopAnimationScript>() != null)
                 {
-                    setAsChild(current.transform.GetChild(5));
+                    Transform colliderTransform = current.gameObject.transform.GetChild(2);
+                    if (colliderTransform.childCount != 0 && colliderTransform.GetChild(0).gameObject.name.Contains("Character_"))
+                    {
+                        Animator NPCAnimator = colliderTransform.GetChild(0).gameObject.GetComponent<Animator>();
+                        NPCAnimator.SetInteger("targetAnimation", int.Parse(_clone.gameObject.name.Split(" ")[1]));
+                    }
                 }
                 else
                 {
-                    setAsChild(current.transform.GetChild(4));
+                    setAsChild(current.transform.GetChild(2));
+                    noStep = false;
                 }
                 break;
             }
-            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(STEP_PREFAB_NAME))
+            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(ANIMATION_SPOT) && _clone.GetComponent<LoopAnimationScript>() != null)
             {
+                setAsChild(current.gameObject.transform.GetChild(4));
                 noStep = false;
-                if(_clone.GetComponent<LoopAnimationScript>() == null)
-                {
-                    setAsChild(hit.gameObject.transform.GetChild(2));
-                }
-                else
-                {
-                    setAsChild(hit.gameObject.transform.GetChild(4));
-                }
+                break;
+            }
+            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(OBTAINED_SPOT) && _clone.GetComponent<LoopAnimationScript>() == null)
+            {
+                current.GetComponent<StepHandlerScript>().ToggleStepItem();
+                setAsChild(current.transform.GetChild(5));
+                noStep = false;
                 break;
             }
         }

@@ -48,7 +48,7 @@ public class PlayerHandlerScript : MonoBehaviour
 
     public virtual void Update()
     {
-        if(_dialogBox.IsActive())
+        if(_dialogBox != null && _dialogBox.IsActive())
         {
             _canMove = false;
         }

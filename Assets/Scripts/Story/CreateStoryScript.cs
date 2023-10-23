@@ -55,10 +55,6 @@ public class CreateStoryScript : MonoBehaviour
     {
         GameObject newStep = Instantiate(_prefabNewStep, _stepParent.transform);
         newStep.transform.localPosition = Vector3.zero;
-        /*Node nodeScript = newStep.GetComponent<Node>();
-        nodeScript.ID = (_allSteps.Count).ToString();
-        nodeScript.ports[0].ID = IN + nodeScript.ID;
-        nodeScript.ports[1].ID = OUT + nodeScript.ID;*/
 
         var obj = _database.objectsDatabase[defaultAnimationPosition];
         GameObject defaultAnimation = obj.Prefab;
@@ -120,6 +116,13 @@ public class CreateStoryScript : MonoBehaviour
             storyboardStep.addAnimation(animation);
             TextMeshProUGUI dialogText = step.transform.GetChild(6).GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>();
             storyboardStep.addDialog(dialogText.text);
+            int npcAnimation = 0;
+            if(colliderName.Contains("Character_"))
+            {
+                Animator NPCAnimator = step.transform.GetChild(2).GetChild(0).gameObject.GetComponent<Animator>();
+                npcAnimation = NPCAnimator.GetInteger("targetAnimation");
+            }
+            storyboardStep.addNPCAnimation(npcAnimation);
             story.Add(storyboardStep);
 
         }
@@ -224,6 +227,12 @@ public class CreateStoryScript : MonoBehaviour
                         child.gameObject.layer = UILAYER;
                     instantiated.transform.localPosition = new Vector3(0, 0, -10);
                     foundCollider = true;
+
+                    if (step.getColliderName().Contains("Character_"))
+                    {
+                        Animator NPCAnimator = instantiated.gameObject.GetComponent<Animator>();
+                        NPCAnimator.SetInteger("targetAnimation", step.getNPCAnimation());
+                    }
                 }
                 if (getItems && prefab.gameObject.name.Split(PARENTHESIS)[0].Equals(step.getAcquired()[0].getItemName()))
                 {

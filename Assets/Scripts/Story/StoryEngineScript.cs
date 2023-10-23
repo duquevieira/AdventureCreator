@@ -146,6 +146,11 @@ public class StoryEngineScript : MonoBehaviour
                         _dialogBox.gameObject.SetActive(true);
                         StartCoroutine(TypeSentence(iteratedStep.getDialog()));
                     }
+                    if (colliderName.Contains("Character_"))
+                    {
+                        Animator NPCAnimator = collider.GetComponent<Animator>();
+                        NPCAnimator.SetInteger("targetAnimation", iteratedStep.getNPCAnimation());
+                    }
                     foreach (ItemGroup requirement in requirements)
                     {
                         foreach (ItemGroup storyItem in StoryItems)
