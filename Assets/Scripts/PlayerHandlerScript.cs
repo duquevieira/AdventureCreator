@@ -1,4 +1,5 @@
 using MeadowGames.UINodeConnect4;
+using MeadowGames.UINodeConnect4.GraphicRenderer;
 using MoreMountains.Feedbacks;
 using MoreMountains.InventoryEngine;
 using System.Collections;
@@ -33,7 +34,7 @@ public class PlayerHandlerScript : MonoBehaviour
         _camera = _storyEngineScript.Camera;
         _player = _storyEngineScript.Player;
         //TODO DELETE
-        _player.transform.position = new Vector3(0, 2, 0);
+        _player.transform.position = new Vector3(0, 3, 0);
         _character = _player.transform.Find(_storyEngineScript.getCharacterSkin()).gameObject;
         _character.SetActive(true);
         _playerAnimator = _character.GetComponent<Animator>();

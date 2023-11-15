@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,6 +16,9 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
     protected static string COLLIDER_SPOT = "ColliderSpot";
     protected static string OBTAINED_SPOT = "ObtainedSpot";
     protected static string ANIMATION_SPOT = "AnimationSpot";
+    protected static string REQUIREMENT_SPOT = "RequirementSpot";
+    protected static string PORT_SPOT = "Port In";
+    protected static string CHARACTER_SPOT = "MainCharacterSpot";
 
     void Start()
     {
@@ -32,12 +36,19 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
     }
 
     public virtual void OnEndDrag(PointerEventData eventData)
-    {   
+    {
         var hits = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, hits);
         bool noStep = true;
         foreach (RaycastResult hit in hits)
         {
+            if (hit.gameObject.name.Equals(CHARACTER_SPOT) && _clone.gameObject.name.Contains("Character_"))
+            {
+                setAsChild(hit.gameObject.transform);
+                _clone.transform.localScale = new Vector3(32f, 32f, 32f);
+                noStep = false;
+                break;
+            }
             Transform current = hit.gameObject.transform.parent;
             if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(COLLIDER_SPOT))
             {
@@ -67,6 +78,18 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
             {
                 current.GetComponent<StepHandlerScript>().ToggleStepItem();
                 setAsChild(current.transform.GetChild(5));
+                noStep = false;
+                break;
+            }
+            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(REQUIREMENT_SPOT) && _clone.GetComponent<LoopAnimationScript>() == null)
+            {
+                setAsChild(current.transform.GetChild(7));
+                noStep = false;
+                break;
+            }
+            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(PORT_SPOT) && _clone.GetComponent<LoopAnimationScript>() == null)
+            {
+                setAsChild(current.parent.transform.GetChild(7));
                 noStep = false;
                 break;
             }

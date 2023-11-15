@@ -1,9 +1,13 @@
 using MeadowGames.UINodeConnect4;
+using MeadowGames.UINodeConnect4.GraphicRenderer;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.AssemblyQualifiedNameParser;
+using UnityEditor;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -29,7 +33,6 @@ public class CreateStoryScript : MonoBehaviour
     [SerializeField]
     private SwitchCreateMode switchMode;
     [SerializeField] ObjectsDataBase _database;
-
 
     private List<GameObject> _allSteps;
     private bool _firstSwapUpdate;
@@ -133,33 +136,30 @@ public class CreateStoryScript : MonoBehaviour
             Node nodeScript = step.GetComponent<Node>();
             StepHandlerScript toggleScript = step.GetComponent<StepHandlerScript>();
             StoryboardStep storyboardStep = story[i];
+            if (step.transform.GetChild(7).childCount > 0)
+            {
+                storyboardStep.addRequirement(new ItemGroup(step.transform.GetChild(7).GetChild(0).name.Split(PARENTHESIS)[0], 1));
+            }
+            if (step.transform.GetChild(5).childCount > 0)
+            {
+                storyboardStep.addAcquires(new ItemGroup(step.transform.GetChild(5).GetChild(0).name.Split(PARENTHESIS)[0], 1));
+            }
             foreach (Connection connection in nodeScript.ports[0].Connections)
             {
                 string[] name = connection.port0.ID.Split(OUT);
-                int pos = int.Parse(name[1].Split(PARENTHESIS)[0]);
-                bool getsItem = _allSteps[pos].transform.GetChild(5).childCount > 0;
-                if (getsItem)
-                {
-                    storyboardStep.addRequirement(new ItemGroup(_allSteps[pos].transform.GetChild(5).GetChild(0).name.Split(PARENTHESIS)[0], 1));
-                }
-                else
-                {
-                    storyboardStep.addRequirement(new ItemGroup(name[1].Split(PARENTHESIS)[0], 1));
-                }
+                string connectionName = name[1] + ":" + nodeScript.ID;
+                if (connection.line.color == Color.red)
+                    connectionName += "Mandatory";
+                storyboardStep.addRequirement(new ItemGroup(connectionName, 1));
             }
-            int itemAmount = 0;
-            if (step.transform.GetChild(5).childCount > 0)
+            foreach (Connection connection in nodeScript.ports[1].Connections)
             {
-                itemAmount = nodeScript.ports[1].ConnectionsCount;
-                if (itemAmount != 0)
-                    storyboardStep.addAcquires(new ItemGroup(step.transform.GetChild(5).GetChild(0).name.Split(PARENTHESIS)[0], itemAmount));
-                foreach (Connection connection in nodeScript.ports[1].Connections)
-                {
-                    storyboardStep.addItemDependentStep(int.Parse(connection.port1.ID.Split(IN)[1]));
-                }
+                string[] name = connection.port1.ID.Split(IN);
+                string connectionName = nodeScript.ID + ":" + name[1];
+                if (connection.line.color == Color.red)
+                    connectionName += "Mandatory";
+                storyboardStep.addAcquires(new ItemGroup(connectionName, 1));
             }
-            List<Node> next = nodeScript.GetNodesConnectedToPolarity(Port.PolarityType._out);
-            storyboardStep.addAcquires(new ItemGroup(nodeScript.ID, next.Count - itemAmount));
             portList.AddRange(nodeScript.ports);
             Destroy(step);
         }
@@ -204,10 +204,45 @@ public class CreateStoryScript : MonoBehaviour
             bool getItems = false;
             foreach (ItemGroup acquired in step.getAcquired())
             {
-                if (!int.TryParse(acquired.getItemName(), out int number))
+                string[] names = acquired.getItemName().Split(":");
+                string[] mandatoryCheck = names;
+                if (names.Length > 1)
+                {
+                    mandatoryCheck = names[1].Split("Mandatory");
+                }
+                if(acquired.getItemName().Contains("Finish"))
+                {
+                    Node connectedNode = _stepParent.transform.GetChild(2).GetComponent<Node>();
+                    Connection connection = nodeScript.ports[1].ConnectTo(connectedNode.ports[0]);
+                    if (acquired.getItemName().Contains("Mandatory"))
+                        connection.line.color = Color.red;
+                }
+                else if (!int.TryParse(mandatoryCheck[0], out int number))
                 {
                     stepPrefab.GetComponent<StepHandlerScript>().ToggleStepItem();
                     getItems = true;
+                    break;
+                }
+            }
+            bool hasRequirement = false;
+            foreach (ItemGroup requirement in step.getRequirements())
+            {
+                string[] names = requirement.getItemName().Split(":");
+                string[] mandatoryCheck = names;
+                if (names.Length > 1)
+                {
+                    mandatoryCheck = names[0].Split("Mandatory");
+                }
+                if (names[0].Contains("Start"))
+                {
+                    Node connectedNode = _stepParent.transform.GetChild(1).GetComponent<Node>();
+                    Connection connection = nodeScript.ports[0].ConnectTo(connectedNode.ports[0]);
+                    if (requirement.getItemName().Contains("Mandatory"))
+                        connection.line.color = Color.red;
+                }
+                else if (!int.TryParse(mandatoryCheck[0], out int number))
+                {
+                    hasRequirement = true;
                     break;
                 }
             }
@@ -247,7 +282,20 @@ public class CreateStoryScript : MonoBehaviour
                     instantiated.transform.localPosition = new Vector3(0, 0, -10);
                     getItems = false;
                 }
-                if (foundCollider && !getItems)
+                if (hasRequirement && prefab.gameObject.name.Split(PARENTHESIS)[0].Equals(step.getRequirements()[0].getItemName()))
+                {
+                    GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(7), false);
+                    instantiated.transform.rotation = obj.MiniatureRotation;
+                    instantiated.transform.position += obj.MinaturePosition;
+                    int scale = obj.MiniatureScale;
+                    instantiated.transform.localScale = new Vector3(scale, scale, scale);
+                    instantiated.layer = UILAYER;
+                    foreach (Transform child in instantiated.transform)
+                        child.gameObject.layer = UILAYER;
+                    instantiated.transform.localPosition = new Vector3(0, 0, -10);
+                    hasRequirement = false;
+                }
+                if (foundCollider && !getItems && !hasRequirement)
                     break;
             }
             _allSteps.Add(stepPrefab);
@@ -260,16 +308,19 @@ public class CreateStoryScript : MonoBehaviour
             List<ItemGroup> requirements = storyboardStep.getRequirements();
             foreach (ItemGroup itemGroup in requirements)
             {
-                if (int.TryParse(itemGroup.getItemName(), out int result))
+                string[] names = itemGroup.getItemName().Split(":");
+                string[] mandatoryCheck = names;
+                if (names.Length > 1)
+                {
+                    mandatoryCheck = names[0].Split("Mandatory");
+                }
+                if (int.TryParse(mandatoryCheck[0], out int result))
                 {
                     Node connectedNode = _allSteps[result].GetComponent<Node>();
-                    nodeScript.ports[0].ConnectTo(connectedNode.ports[1]);
+                    Connection connection = nodeScript.ports[0].ConnectTo(connectedNode.ports[1]);
+                    if (itemGroup.getItemName().Contains("Mandatory"))
+                        connection.line.color = Color.red;
                 }
-            }
-            foreach (int itemDependentStep in storyboardStep.getItemDependentSteps())
-            {
-                Node connectedNode = _allSteps[itemDependentStep].GetComponent<Node>();
-                nodeScript.ports[1].ConnectTo(connectedNode.ports[0]);
             }
         }
     }
@@ -287,6 +338,19 @@ public class CreateStoryScript : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetMouseButtonUp(0))
+        {
+            foreach(Connection connection in UICSystemManager.Connections)
+            {
+                if(UICSystemManager.selectedElements.Contains(connection))
+                {
+                    if(connection.line.color == Color.red)
+                        connection.line.color = connection.defaultColor;
+                    else
+                        connection.line.color = Color.red;
+                }
+            }
+        }
         if (switchMode.currentMode == SwitchCreateMode.CreateMode.StoryBoardMode)
         {
             ShowUI();

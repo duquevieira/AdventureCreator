@@ -170,7 +170,7 @@ namespace MeadowGames.UINodeConnect4
         {
             if (EnableSelect)
             {
-                line.color = selectedColor;
+                //line.color = selectedColor;
                 if (!UICSystemManager.selectedElements.Contains(this))
                 {
                     UICSystemManager.selectedElements.Add(this);
@@ -183,7 +183,7 @@ namespace MeadowGames.UINodeConnect4
         {
             if (EnableSelect)
             {
-                line.color = defaultColor;
+                //line.color = defaultColor;
                 if (UICSystemManager.selectedElements.Contains(this))
                 {
                     UICSystemManager.selectedElements.Remove(this);
@@ -259,17 +259,17 @@ namespace MeadowGames.UINodeConnect4
         {
             if (EnableHover)
             {
-                line.color = hoverColor;
+                //line.color = hoverColor;
             }
         }
         public void OnPointerHoverExit()
         {
             if (EnableHover)
             {
-                if (UICSystemManager.selectedElements.Contains(this))
+                /*if (UICSystemManager.selectedElements.Contains(this))
                     line.color = selectedColor;
                 else
-                    line.color = defaultColor;
+                    line.color = defaultColor;*/
             }
         }
 
