@@ -1,5 +1,6 @@
 using MeadowGames.UINodeConnect4;
 using MeadowGames.UINodeConnect4.GraphicRenderer;
+using MoreMountains.TopDownEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,8 @@ public class CreateStoryScript : MonoBehaviour
     [SerializeField]
     private SwitchCreateMode switchMode;
     [SerializeField] ObjectsDataBase _database;
+    [SerializeField]
+    private Transform characterSkinSpot;
 
     private List<GameObject> _allSteps;
     private bool _firstSwapUpdate;
@@ -170,6 +173,11 @@ public class CreateStoryScript : MonoBehaviour
         }
         _storyEngineScript.ClearStoryElements();
         _storyEngineScript.Storyboard = story;
+        if (characterSkinSpot.childCount > 0)
+        {
+            _storyEngineScript.PlayerSkin = characterSkinSpot.GetChild(0).name.Split(PARENTHESIS)[0];
+            Destroy(characterSkinSpot.GetChild(0).gameObject);
+        }
     }
 
     private void LoadStoryState()
@@ -247,9 +255,23 @@ public class CreateStoryScript : MonoBehaviour
                 }
             }
             bool foundCollider = false;
+            bool foundCharacterSkin = false;
             foreach (var obj in _database.objectsDatabase)
             {
                 GameObject prefab = obj.Prefab;
+                if (!foundCharacterSkin && prefab.gameObject.name.Split(PARENTHESIS)[0].Equals(_storyEngineScript.PlayerSkin))
+                {
+                    GameObject instantiated = Instantiate(prefab, characterSkinSpot, false);
+                    instantiated.transform.rotation = obj.MiniatureRotation;
+                    instantiated.transform.position += obj.MinaturePosition;
+                    int scale = obj.MiniatureScale;
+                    instantiated.transform.localScale = new Vector3(scale, scale, scale);
+                    instantiated.layer = UILAYER;
+                    foreach (Transform child in instantiated.transform)
+                        child.gameObject.layer = UILAYER;
+                    instantiated.transform.localPosition = new Vector3(0, 0, -10);
+                    foundCharacterSkin = true;
+                }
                 if (!foundCollider && prefab.gameObject.name.Split(PARENTHESIS)[0].Equals(step.getColliderName()))
                 {
                     GameObject instantiated = Instantiate(prefab, stepPrefab.transform.GetChild(2), false);
@@ -295,7 +317,7 @@ public class CreateStoryScript : MonoBehaviour
                     instantiated.transform.localPosition = new Vector3(0, 0, -10);
                     hasRequirement = false;
                 }
-                if (foundCollider && !getItems && !hasRequirement)
+                if (foundCharacterSkin && foundCollider && !getItems && !hasRequirement)
                     break;
             }
             _allSteps.Add(stepPrefab);

@@ -19,7 +19,7 @@ public class StoryEngineScript : MonoBehaviour
     public GameObject Player;
 
     [HideInInspector]
-    public string playerSkin = "Character_Pirate_Gentleman_01";
+    public string PlayerSkin;
 
     [HideInInspector]
     public List<ItemGroup> StoryItems;
@@ -264,7 +264,7 @@ public class StoryEngineScript : MonoBehaviour
 
     public string getCharacterSkin()
     {
-        return playerSkin;
+        return PlayerSkin;
     }
 
     public void ClearStoryElements()

@@ -45,7 +45,6 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
             if (hit.gameObject.name.Equals(CHARACTER_SPOT) && _clone.gameObject.name.Contains("Character_"))
             {
                 setAsChild(hit.gameObject.transform);
-                _clone.transform.localScale = new Vector3(32f, 32f, 32f);
                 noStep = false;
                 break;
             }
@@ -100,8 +99,8 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
 
     private void setAsChild (Transform parent)
     {
-        if (parent.childCount != 0)
-            Destroy(parent.GetChild(0).gameObject);
+        foreach(Transform child in parent)
+            Destroy(child.gameObject);
         _clone.transform.SetParent(parent, false);
         _clone.transform.localPosition = new Vector3(0, 0, -10);
     }

@@ -79,6 +79,7 @@ public class SaveLevel : AbstractSave
         Debug.Log(tale);
         _saveName = tale.Name;
         _inputfield.text = _saveName;
+        Story.PlayerSkin = tale.CharacterSkin;
         Story.Player.transform.position = new Vector3(tale.Player.getRow(), 0, tale.Player.getColumn());
         Story.Storyboard = tale.Storyboard;
         int index = 0;
