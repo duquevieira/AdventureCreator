@@ -59,7 +59,7 @@ public class ObjectData
 {
     //[HideInInspector] public enum ObjectTypes { Chair, Shelf, Table, Rug, Prop, Wall, Default, Floor };
     [HideInInspector] public enum ObjectTypes { Furniture, Floor, Prop, Wall, WallProp, NPC, Animation};
-    [HideInInspector] public enum ObjectEnvironemnts { Office, Kitchen};
+    [HideInInspector] public enum ObjectEnvironemnts { Office, Kitchen, Ancient};
 
     [field: SerializeField]
     public string Name { get; private set; }

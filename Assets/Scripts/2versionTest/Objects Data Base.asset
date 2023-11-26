@@ -261,7 +261,7 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 169462, guid: b9305c82d89caf44f87bd001e8f35334, type: 3}
     <Types>k__BackingField: 2
-    <Environments>k__BackingField: 0
+    <Environments>k__BackingField: 2
     <MiniatureScale>k__BackingField: 50
     <MiniatureRotation>k__BackingField: {x: 0.24184474, y: 0.664463, z: 0.24184474, w: -0.664463}
     <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
@@ -270,7 +270,7 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 161422, guid: eb48223ed880cc94e96250f79c0c8cea, type: 3}
     <Types>k__BackingField: 2
-    <Environments>k__BackingField: 0
+    <Environments>k__BackingField: 2
     <MiniatureScale>k__BackingField: 170
     <MiniatureRotation>k__BackingField: {x: 0.56486267, y: -0.14224425, z: -0.09960055, w: -0.8067071}
     <MinaturePosition>k__BackingField: {x: 0, y: 0, z: 0}
@@ -279,7 +279,7 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 178976, guid: 6f245fd7a64f1694db04aaa83367d059, type: 3}
     <Types>k__BackingField: 0
-    <Environments>k__BackingField: 0
+    <Environments>k__BackingField: 2
     <MiniatureScale>k__BackingField: 70
     <MiniatureRotation>k__BackingField: {x: 0, y: 1, z: 0, w: -0.00000004371139}
     <MinaturePosition>k__BackingField: {x: 0, y: -20, z: 0}
@@ -1305,7 +1305,7 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 169560, guid: a646c5740d5675a429aae4c8f68bf514, type: 3}
     <Types>k__BackingField: 0
-    <Environments>k__BackingField: 0
+    <Environments>k__BackingField: 2
     <MiniatureScale>k__BackingField: 27
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
     <MinaturePosition>k__BackingField: {x: 15, y: -20, z: 0}
@@ -1314,7 +1314,7 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 154712, guid: 8055edb26f397b349b640dd64a972f2e, type: 3}
     <Types>k__BackingField: 0
-    <Environments>k__BackingField: 0
+    <Environments>k__BackingField: 2
     <MiniatureScale>k__BackingField: 85
     <MiniatureRotation>k__BackingField: {x: 0, y: 0.92387956, z: 0, w: -0.38268328}
     <MinaturePosition>k__BackingField: {x: 0, y: -20, z: 0}
@@ -1323,7 +1323,7 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 109254, guid: fb0d85962f5d9be4c90bf0da0b78bb06, type: 3}
     <Types>k__BackingField: 0
-    <Environments>k__BackingField: 0
+    <Environments>k__BackingField: 2
     <MiniatureScale>k__BackingField: 60
     <MiniatureRotation>k__BackingField: {x: -0.25881904, y: 0, z: 0, w: 0.9659258}
     <MinaturePosition>k__BackingField: {x: 0, y: -10, z: 0}
@@ -1341,7 +1341,7 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 2576501838069819755, guid: ec4e38e252be8f847b4c20ee0fae1aab, type: 3}
     <Types>k__BackingField: 2
-    <Environments>k__BackingField: 0
+    <Environments>k__BackingField: 2
     <MiniatureScale>k__BackingField: 65
     <MiniatureRotation>k__BackingField: {x: 0.34202015, y: 0.9396926, z: -0.000000014950176, w: -0.000000041075268}
     <MinaturePosition>k__BackingField: {x: -10, y: -15, z: 0}

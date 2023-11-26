@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PrefabMenuScript : MonoBehaviour
@@ -19,8 +20,8 @@ public class PrefabMenuScript : MonoBehaviour
     [SerializeField] ObjectsDataBase _database;
     [HideInInspector]
     public List<GameObject> AllPrefabs;//substituir
-    [SerializeField] private TMP_Dropdown _environmentDropdown;
-    [SerializeField] private TMP_Dropdown _objectTypesDropdown;
+    //[SerializeField] private TMP_Dropdown _environmentDropdown;
+    //[SerializeField] private TMP_Dropdown _objectTypesDropdown;
     //public List<List<GameObject>> AllPrefabs;
     private string _selectedEnvironment;
     private string _selectedObjectType;
@@ -33,23 +34,48 @@ public class PrefabMenuScript : MonoBehaviour
 
     public void Start()
     {
-        _selectedEnvironment = _environmentDropdown.options[_environmentDropdown.value].text;
-        _selectedObjectType = _objectTypesDropdown.options[_objectTypesDropdown.value].text;
-        _environmentDropdown.onValueChanged.AddListener(delegate { OnEnvironmentDropDownChange(_environmentDropdown); });
-        _objectTypesDropdown.onValueChanged.AddListener(delegate { OnObjectTypeDropDownChange(_objectTypesDropdown); });
+        _selectedEnvironment = "Office";
+        _selectedObjectType = "Wall";
         ShowObjects();      
     }
 
-   public void OnEnvironmentDropDownChange(TMP_Dropdown _dropdown)
+    private void Update()
     {
-        _selectedEnvironment = _dropdown.options[_dropdown.value].text;
-        ShowObjects();
-    }
-
-    public void OnObjectTypeDropDownChange(TMP_Dropdown _dropdown)
-    {
-        _selectedObjectType = _dropdown.options[_dropdown.value].text;
-        ShowObjects();
+        if (Input.GetMouseButtonDown(0))
+        {
+            PointerEventData eventData = new PointerEventData(EventSystem.current)
+            {
+                pointerId = -1,
+            };
+            eventData.position = Input.mousePosition;
+            var hits = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, hits);
+            foreach (RaycastResult hit in hits)
+            {
+                bool found = true;
+                switch(hit.gameObject.name)
+                {
+                    case "Wall":
+                    case "Floor":
+                    case "Furniture":
+                    case "Prop":
+                    case "NPC":
+                    case "Animation":
+                        _selectedObjectType = hit.gameObject.name;
+                        break;
+                    case "Office":
+                    case "Kitchen":
+                    case "Ancient":
+                        _selectedEnvironment = hit.gameObject.name;
+                        break;
+                    default:
+                        found = false;
+                        break;
+                }
+                if(found)
+                    ShowObjects();
+            }
+        }
     }
 
     private void ShowObjects()
@@ -60,7 +86,7 @@ public class PrefabMenuScript : MonoBehaviour
         }
         foreach (var obj in _database.objectsDatabase)
         {
-            if (_selectedObjectType == "Animation")
+            if (_selectedObjectType == "Animation" || _selectedObjectType == "NPC")
             {
                 if (obj.Types.ToString() == _selectedObjectType)
                 {
