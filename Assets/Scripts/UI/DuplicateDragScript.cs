@@ -51,13 +51,16 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
             Transform current = hit.gameObject.transform.parent;
             if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(COLLIDER_SPOT))
             {
-                if (_clone.GetComponent<LoopAnimationScript>() != null)
+                if (_clone.gameObject.name.Contains("Animation"))
                 {
                     Transform colliderTransform = current.gameObject.transform.GetChild(2);
                     if (colliderTransform.childCount != 0 && colliderTransform.GetChild(0).gameObject.name.Contains("Character_"))
                     {
-                        Animator NPCAnimator = colliderTransform.GetChild(0).gameObject.GetComponent<Animator>();
-                        NPCAnimator.SetInteger("targetAnimation", int.Parse(_clone.gameObject.name.Split(" ")[1]));
+                        LoopAnimationScript loopAnimationScript = colliderTransform.GetChild(0).gameObject.GetComponent<LoopAnimationScript>();
+                        loopAnimationScript._animation = int.Parse(_clone.gameObject.name.Split(" ")[1]);
+
+                        //Animator NPCAnimator = colliderTransform.GetChild(0).gameObject.GetComponent<Animator>();
+                        //NPCAnimator.SetInteger("targetAnimation", int.Parse(_clone.gameObject.name.Split(" ")[1]));
                     }
                 }
                 else
@@ -67,26 +70,26 @@ public class DuplicateDragScript : MonoBehaviour, IBeginDragHandler, IDragHandle
                 }
                 break;
             }
-            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(ANIMATION_SPOT) && _clone.GetComponent<LoopAnimationScript>() != null)
+            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(ANIMATION_SPOT) && _clone.gameObject.name.Contains("Animation"))
             {
                 setAsChild(current.gameObject.transform.GetChild(4));
                 noStep = false;
                 break;
             }
-            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(OBTAINED_SPOT) && _clone.GetComponent<LoopAnimationScript>() == null)
+            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(OBTAINED_SPOT) && !_clone.gameObject.name.Contains("Animation"))
             {
                 current.GetComponent<StepHandlerScript>().ToggleStepItem();
                 setAsChild(current.transform.GetChild(5));
                 noStep = false;
                 break;
             }
-            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(REQUIREMENT_SPOT) && _clone.GetComponent<LoopAnimationScript>() == null)
+            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(REQUIREMENT_SPOT) && !_clone.gameObject.name.Contains("Animation"))
             {
                 setAsChild(current.transform.GetChild(7));
                 noStep = false;
                 break;
             }
-            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(PORT_SPOT) && _clone.GetComponent<LoopAnimationScript>() == null)
+            if (hit.gameObject.name.Split(PARENTHESIS)[0].Equals(PORT_SPOT) && !_clone.gameObject.name.Contains("Animation"))
             {
                 setAsChild(current.parent.transform.GetChild(7));
                 noStep = false;

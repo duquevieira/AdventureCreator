@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 449574}
   - component: {fileID: 9518016}
   - component: {fileID: -1720858317678114493}
+  - component: {fileID: 4872333599000425409}
   m_Layer: 0
   m_Name: Character_City_Female_Jacket_01
   m_TagString: Untagged
@@ -286,7 +287,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 5a176dbdedc923d4e9c625f7a00811ce, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -306,6 +307,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4872333599000425409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208f1c54a8eec424d8610c18318c56fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animation: -1
 --- !u!1 &107650
 GameObject:
   m_ObjectHideFlags: 0

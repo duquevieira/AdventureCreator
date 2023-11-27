@@ -125,8 +125,8 @@ public class CreateStoryScript : MonoBehaviour
             int npcAnimation = 0;
             if(colliderName.Contains("Character_"))
             {
-                Animator NPCAnimator = step.transform.GetChild(2).GetChild(0).gameObject.GetComponent<Animator>();
-                npcAnimation = NPCAnimator.GetInteger("targetAnimation");
+                LoopAnimationScript NPCAnimator = step.transform.GetChild(2).GetChild(0).gameObject.GetComponent<LoopAnimationScript>();
+                npcAnimation = NPCAnimator._animation;
             }
             storyboardStep.addNPCAnimation(npcAnimation);
             story.Add(storyboardStep);
@@ -287,8 +287,8 @@ public class CreateStoryScript : MonoBehaviour
 
                     if (step.getColliderName().Contains("Character_"))
                     {
-                        Animator NPCAnimator = instantiated.gameObject.GetComponent<Animator>();
-                        NPCAnimator.SetInteger("targetAnimation", step.getNPCAnimation());
+                        LoopAnimationScript NPCAnimator = instantiated.gameObject.GetComponent<LoopAnimationScript>();
+                        NPCAnimator._animation = step.getNPCAnimation();
                     }
                 }
                 if (getItems && prefab.gameObject.name.Split(PARENTHESIS)[0].Equals(step.getAcquired()[0].getItemName()))

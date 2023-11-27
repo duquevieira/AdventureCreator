@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoopAnimationScript : MonoBehaviour
 {
-    [SerializeField]
-    private int _animation;
+    public int _animation;
     private static string ANIMATION_EMOTION = "targetAnimation";
     private Animator NPCAnimator;
     private int currentAnimation;
@@ -18,7 +18,7 @@ public class LoopAnimationScript : MonoBehaviour
 
     void Update()
     {
-        if(currentAnimation == 0)
+        if(currentAnimation == 0 && SceneManager.GetActiveScene().name.Equals("CreateScene"))
         {
             NPCAnimator.SetInteger(ANIMATION_EMOTION, _animation);
             currentAnimation = _animation;

@@ -26,6 +26,14 @@ public class PrefabMenuScript : MonoBehaviour
     private string _selectedEnvironment;
     private string _selectedObjectType;
 
+    public Color defaultColour;
+    public Color selectedColour;
+
+    [SerializeField]
+    private List<GameObject> _typeSelectors;
+    [SerializeField]
+    private List<GameObject> _environmentSelectors;
+
     private static int UILAYER = 5;
 
     private static string[] foldersToSearch = {"Assets/Resources/Prefabs"/*//, "Assets/Resources/Items"
@@ -61,11 +69,15 @@ public class PrefabMenuScript : MonoBehaviour
                     case "Prop":
                     case "NPC":
                     case "Animation":
+                        foreach (GameObject obj in _typeSelectors)
+                            obj.GetComponent<Image>().color = defaultColour;
                         _selectedObjectType = hit.gameObject.name;
                         break;
                     case "Office":
                     case "Kitchen":
                     case "Ancient":
+                        foreach (GameObject obj in _environmentSelectors)
+                            obj.GetComponent<Image>().color = defaultColour;
                         _selectedEnvironment = hit.gameObject.name;
                         break;
                     default:
@@ -73,7 +85,10 @@ public class PrefabMenuScript : MonoBehaviour
                         break;
                 }
                 if(found)
+                {
                     ShowObjects();
+                    hit.gameObject.GetComponent<Image>().color = selectedColour;
+                }
             }
         }
     }
