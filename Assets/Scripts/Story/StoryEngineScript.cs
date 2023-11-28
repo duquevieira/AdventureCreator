@@ -31,6 +31,8 @@ public class StoryEngineScript : MonoBehaviour
     private InventoryItemsManager _itemsManager;
     [SerializeField]
     private Image _dialogBox;
+    [SerializeField]
+    private Image _endScreen;
 
     void Awake()
     {
@@ -203,6 +205,11 @@ public class StoryEngineScript : MonoBehaviour
                     }
                     foreach (ItemGroup acquires in iteratedStep.getAcquired())
                     {
+                        if(acquires.getItemName().Contains("Finish"))
+                        {
+                            _itemsManager.DeleteAll();
+                            StartCoroutine(FadeInEndScreen());
+                        }
                         bool newItem = true;
                         string[] itemNames = acquires.getItemName().Split(":");
                         if (itemNames.Length > 1)
@@ -285,6 +292,16 @@ public class StoryEngineScript : MonoBehaviour
         foreach(char letter in sentence.ToCharArray())
         {
             dialogText.text += letter;
+            yield return null;
+        }
+    }
+
+    IEnumerator FadeInEndScreen()
+    {
+        CanvasGroup canvasGroup = _endScreen.GetComponent<CanvasGroup>();
+        while(canvasGroup.alpha <= 1)
+        {
+            canvasGroup.alpha += Time.deltaTime * 0.3f;
             yield return null;
         }
     }

@@ -49,6 +49,16 @@ public class InventoryItemsManager : MonoBehaviour
             }
     }
 
+    public void DeleteAll()
+    {
+        List<GameObject> itemsToDelete = new List<GameObject>(_displayedItems);
+        foreach (GameObject itemSlot in itemsToDelete)
+        {
+            _displayedItems.Remove(itemSlot);
+            Destroy(itemSlot);
+        }
+    }
+
     public void AddItem(ItemGroup item)
     {
         foreach (var obj in _database.objectsDatabase)
