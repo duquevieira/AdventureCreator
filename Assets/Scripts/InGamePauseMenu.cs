@@ -13,12 +13,17 @@ public class InGamePauseMenu : MonoBehaviour
     public CanvasGroup PauseMenu;
     public GameObject MenuObjects;
 
+    [SerializeField]
+    private SwitchCreateMode switchMode;
+
     private bool _pauseMenuOpen;
 
     // Start is called before the first frame update
     void Start()
     {
         _pauseMenuOpen = false;
+        if (switchMode == null)
+            switchMode = new SwitchCreateMode();
     }
 
     // Update is called once per frame
@@ -53,7 +58,11 @@ public class InGamePauseMenu : MonoBehaviour
     }
 
     private void OpenPauseMenu()
-    {        
+    {
+        if(switchMode.currentMode == SwitchCreateMode.CreateMode.StoryBoardMode)
+        {
+            switchMode.ToggleMode();
+        }
         PauseMenu.blocksRaycasts = true;
         _pauseMenuOpen = true;
         GameManager.Current.Pause(PauseMethods.PauseMenu);

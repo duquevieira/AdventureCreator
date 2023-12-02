@@ -7,6 +7,8 @@ using Unity.VisualScripting;
 using UnityEngine.UI;
 using UnityEditor;
 using System.Linq;
+using TMPro;
+using System.Text.RegularExpressions;
 
 public class StoryEngineScript : MonoBehaviour
 {
@@ -17,6 +19,9 @@ public class StoryEngineScript : MonoBehaviour
     public GameObject Player;
 
     [HideInInspector]
+    public string PlayerSkin;
+
+    [HideInInspector]
     public List<ItemGroup> StoryItems;
     [HideInInspector]
     public List<ItemGroup> InventoryItems;
@@ -24,12 +29,29 @@ public class StoryEngineScript : MonoBehaviour
     public List<StoryboardStep> Storyboard;
     [SerializeField]
     private InventoryItemsManager _itemsManager;
-
+    [SerializeField]
+    private Image _dialogBox;
+    [SerializeField]
+    private Image _endScreen;
 
     void Awake()
     {
         ClearStoryElements();
         _itemsManager.setPlayerScript(Player.GetComponent<PlayerHandlerScript>());
+    }
+
+    void Start()
+    {
+        foreach(StoryboardStep step in Storyboard)
+        {
+            foreach(ItemGroup requirement in step.getRequirements())
+            {
+                if(requirement.getItemName().Contains("Start"))
+                {
+                    StoryItems.Add(requirement);
+                }
+            }
+        }
     }
 
     void Update()
@@ -40,7 +62,7 @@ public class StoryEngineScript : MonoBehaviour
             {
                 Debug.Log(Time.realtimeSinceStartup + " Name " + storyItem.getItemName() + " Amount " + storyItem.getItemAmount());
             }
-            foreach (ItemGroup inventoryItem in StoryItems)
+            foreach (ItemGroup inventoryItem in InventoryItems)
             {
                 Debug.Log(Time.realtimeSinceStartup + " Name " + inventoryItem.getItemName() + " Amount " + inventoryItem.getItemAmount());
             }
@@ -50,6 +72,7 @@ public class StoryEngineScript : MonoBehaviour
                 Debug.Log(Time.realtimeSinceStartup + "-----------------------------");
                 Debug.Log(Time.realtimeSinceStartup + " ID " + step.getId());
                 Debug.Log(Time.realtimeSinceStartup + " COLLIDER " + step.getColliderName());
+                Debug.Log(Time.realtimeSinceStartup + " DIALOG " + step.getDialog());
                 Debug.Log(Time.realtimeSinceStartup + " REQUIREMENTS");
                 foreach (ItemGroup requirement in step.getRequirements())
                 {
@@ -76,14 +99,16 @@ public class StoryEngineScript : MonoBehaviour
                 foreach (ItemGroup requirement in requirements)
                 {
                     int amount = -1;
-                    if (int.TryParse(requirement.getItemName(), out int number))
+                    string[] names = requirement.getItemName().Split(":");
+                    if (names[0].Contains("Start") || int.TryParse(names[0], out int number))
                     {
-                        foreach (ItemGroup storyItem in StoryItems)
+                        foreach (ItemGroup storyItem in StoryItems) {
                             if (storyItem.getItemName() == requirement.getItemName())
                             {
                                 amount = storyItem.getItemAmount();
                                 break;
                             }
+                        }
                     }
                     else
                     {
@@ -99,10 +124,19 @@ public class StoryEngineScript : MonoBehaviour
                         }
 
                     }
+
+                    if (requirement.getItemName().Contains("Mandatory"))
+                    {
+                        completable = false;
+                        foreach (ItemGroup item in StoryItems)
+                            if(item.getItemName().Equals(requirement.getItemName()))
+                                completable = true;
+                        if(!completable)
+                            goto breakLoop;
+                    }
                     if(requirement.getItemAmount() <= amount)
                     {
                         completable = true;
-                        break;
                     }
                 }
                 if(completable && dependentItems.Count > 0 && InventoryItems.Count > 0)
@@ -124,10 +158,27 @@ public class StoryEngineScript : MonoBehaviour
                     }
                 }
             breakLoop:
-                if (requirements.Count == 0)
-                    completable = true;
                 if (completable)
                 {
+                    bool valid = false;
+                    for (int i = 0; i < iteratedStep.getDialog().Length && !valid; i++)
+                    {
+                        char c = iteratedStep.getDialog()[i];
+                        if(char.IsLetterOrDigit(c) || char.IsPunctuation(c))
+                        {
+                            valid = true;
+                        }
+                    }
+                    if (valid)
+                    {
+                        _dialogBox.gameObject.SetActive(true);
+                        StartCoroutine(TypeSentence(iteratedStep.getDialog()));
+                    }
+                    if (colliderName.Contains("Character_"))
+                    {
+                        Animator NPCAnimator = collider.GetComponent<Animator>();
+                        NPCAnimator.SetInteger("targetAnimation", iteratedStep.getNPCAnimation());
+                    }
                     foreach (ItemGroup requirement in requirements)
                     {
                         foreach (ItemGroup storyItem in StoryItems)
@@ -154,8 +205,14 @@ public class StoryEngineScript : MonoBehaviour
                     }
                     foreach (ItemGroup acquires in iteratedStep.getAcquired())
                     {
+                        if(acquires.getItemName().Contains("Finish"))
+                        {
+                            _itemsManager.DeleteAll();
+                            StartCoroutine(FadeInEndScreen());
+                        }
                         bool newItem = true;
-                        if (int.TryParse(acquires.getItemName(), out int number))
+                        string[] itemNames = acquires.getItemName().Split(":");
+                        if (itemNames.Length > 1)
                         {
                             foreach (ItemGroup storyItem in StoryItems)
                             {
@@ -189,7 +246,8 @@ public class StoryEngineScript : MonoBehaviour
                                 InventoryItems.Add(item);
                                 _itemsManager.AddItem(item);
                             }
-                            Destroy(collider.gameObject);
+                            if(acquires.getItemName() == iteratedStep.getColliderName())
+                                Destroy(collider.gameObject);
                         }
                     }
                     Animator animator = collider.gameObject.GetComponent<Animator>();
@@ -213,7 +271,7 @@ public class StoryEngineScript : MonoBehaviour
 
     public string getCharacterSkin()
     {
-        return "Character_Pirate_Gentleman_01";
+        return PlayerSkin;
     }
 
     public void ClearStoryElements()
@@ -225,5 +283,26 @@ public class StoryEngineScript : MonoBehaviour
         }
         InventoryItems = new List<ItemGroup>();
         Storyboard = new List<StoryboardStep>();
+    }
+
+    IEnumerator TypeSentence (string sentence)
+    {
+        TextMeshProUGUI dialogText = _dialogBox.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        dialogText.text = "";
+        foreach(char letter in sentence.ToCharArray())
+        {
+            dialogText.text += letter;
+            yield return null;
+        }
+    }
+
+    IEnumerator FadeInEndScreen()
+    {
+        CanvasGroup canvasGroup = _endScreen.GetComponent<CanvasGroup>();
+        while(canvasGroup.alpha <= 1)
+        {
+            canvasGroup.alpha += Time.deltaTime * 0.3f;
+            yield return null;
+        }
     }
 }

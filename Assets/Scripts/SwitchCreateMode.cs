@@ -9,6 +9,7 @@ public class SwitchCreateMode : MonoBehaviour
     [HideInInspector] public enum CreateMode {MapMode, StoryBoardMode, TestingMode};
     public CreateMode currentMode;
     public SimplePressAnimation[] Icons;
+    public TextMeshProUGUI SwitchText;
     private const int TOGGLE = 0;
     private const int TEST = 1;
     //[SerializeField] private TMP_Dropdown dropdown;
@@ -57,9 +58,11 @@ public class SwitchCreateMode : MonoBehaviour
         if(currentMode.Equals(CreateMode.MapMode)) {
             currentMode = CreateMode.StoryBoardMode;
             Icons[TOGGLE].PlayAnimation();
+            SwitchText.SetText("Story Mode");
         } else {
             currentMode = CreateMode.MapMode;
             Icons[TOGGLE].PlayAnimation();
+            SwitchText.SetText("Build Mode");
         }
     }
 

@@ -11,6 +11,7 @@ public class Tale
     //The Tale class represents the story and player info
     public string Name;
     public string Screenshot;
+    public string CharacterSkin;
     public PositionCoordinates Player;
     public List<StoryboardStep> Storyboard;
     public World TaleWorld;
@@ -20,6 +21,7 @@ public class Tale
         GameObject playerObject = storyEngine.Player;
         Player = new PositionCoordinates(playerObject.transform.position.x, playerObject.transform.position.z, playerObject.transform.position.y);
         Storyboard = storyEngine.Storyboard;
+        CharacterSkin = storyEngine.getCharacterSkin();
         Debug.Log(Storyboard);
         TaleWorld = world;
         CaptureScreenshot(camera);

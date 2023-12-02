@@ -49,6 +49,16 @@ public class InventoryItemsManager : MonoBehaviour
             }
     }
 
+    public void DeleteAll()
+    {
+        List<GameObject> itemsToDelete = new List<GameObject>(_displayedItems);
+        foreach (GameObject itemSlot in itemsToDelete)
+        {
+            _displayedItems.Remove(itemSlot);
+            Destroy(itemSlot);
+        }
+    }
+
     public void AddItem(ItemGroup item)
     {
         foreach (var obj in _database.objectsDatabase)
@@ -58,6 +68,7 @@ public class InventoryItemsManager : MonoBehaviour
             {
                 var itemSlot = Instantiate(_itemSlotPrefab, _panel.transform);
                 itemSlot.name = prefab.name.Split("(")[0];
+                itemSlot.transform.localPosition = obj.MinaturePosition;
                 _displayedItems.Add(itemSlot);
                 itemSlot.GetComponent<InventoryItemDragScript>().setPlayerScript(_playerHandlerScript);
                 var instantiated = Instantiate(prefab, itemSlot.transform);

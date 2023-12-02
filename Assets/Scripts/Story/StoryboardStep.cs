@@ -14,6 +14,8 @@ public class StoryboardStep
     public List<int> ItemDependentSteps;
     public List<float> StepCoordinates;
     public int Animation;
+    public string Dialog;
+    public int NPCAnimation;
 
     public StoryboardStep(int id, string colliderName, Vector3 stepCoordinates)
     {
@@ -29,11 +31,21 @@ public class StoryboardStep
         Acquired = new List<ItemGroup>();
         ItemDependentSteps = new List<int>();
         Animation = -1;
+        NPCAnimation = -1;
     }
 
     public void addAnimation(int animation)
     {
         Animation = animation;
+    }
+    public void addNPCAnimation(int npcanimation)
+    {
+        NPCAnimation = npcanimation;
+    }
+
+    public void addDialog(string dialog)
+    {
+        Dialog = dialog;
     }
 
     public void addRequirement(ItemGroup requirement)
@@ -84,5 +96,15 @@ public class StoryboardStep
     public int getAnimation()
     {
         return Animation;
+    }
+
+    public int getNPCAnimation()
+    {
+        return NPCAnimation;
+    }
+
+    public string getDialog()
+    {
+        return Dialog;
     }
 }

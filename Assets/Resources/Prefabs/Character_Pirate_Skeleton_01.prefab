@@ -6102,6 +6102,7 @@ GameObject:
   - component: {fileID: 407176}
   - component: {fileID: 9575238}
   - component: {fileID: -3633973738198526635}
+  - component: {fileID: -1828395235631896503}
   m_Layer: 0
   m_Name: Character_Pirate_Skeleton_01
   m_TagString: Untagged
@@ -6153,7 +6154,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 5a176dbdedc923d4e9c625f7a00811ce, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -6173,3 +6174,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &-1828395235631896503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208f1c54a8eec424d8610c18318c56fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animation: -1

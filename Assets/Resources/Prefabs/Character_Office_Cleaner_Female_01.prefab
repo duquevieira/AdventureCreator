@@ -870,6 +870,7 @@ GameObject:
   - component: {fileID: 4851776647047086}
   - component: {fileID: 95802126141898186}
   - component: {fileID: -1070094860634136157}
+  - component: {fileID: -7353698061744983799}
   m_Layer: 0
   m_Name: Character_Office_Cleaner_Female_01
   m_TagString: Untagged
@@ -924,7 +925,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 5a176dbdedc923d4e9c625f7a00811ce, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -944,6 +945,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &-7353698061744983799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207000675054372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208f1c54a8eec424d8610c18318c56fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animation: -1
 --- !u!1 &1231856054891762
 GameObject:
   m_ObjectHideFlags: 0

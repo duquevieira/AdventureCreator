@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PlacementUI : MonoBehaviour
@@ -14,8 +15,8 @@ public class PlacementUI : MonoBehaviour
     [SerializeField] private PlacementSystem _placementSys;
     [SerializeField] private PlacementSystemV2 _placementSys2;
     [SerializeField] private SwitchCreateMode _createMode;
-    [SerializeField] private TMP_Dropdown _environmentDropdown;
-    [SerializeField] private TMP_Dropdown _objectTypesDropdown;
+    //[SerializeField] private TMP_Dropdown _environmentDropdown;
+    //[SerializeField] private TMP_Dropdown _objectTypesDropdown;
     [SerializeField] private ObjectsDataBase _database;
     private List<GameObject> _mainObjects;
 
@@ -32,20 +33,20 @@ public class PlacementUI : MonoBehaviour
         _mainObjects = _placementSys._mainObjects;
         string[] _environmentOptions = System.Enum.GetNames(typeof(ObjectData.ObjectEnvironemnts));
         string[] _objectTypesOptions = System.Enum.GetNames(typeof(ObjectData.ObjectTypes));
-        _environmentDropdown.AddOptions(_environmentOptions.ToList());
-        _objectTypesDropdown.AddOptions(_objectTypesOptions.ToList());
+        //_environmentDropdown.AddOptions(_environmentOptions.ToList());
+        //_objectTypesDropdown.AddOptions(_objectTypesOptions.ToList());
 
     }
 
     private void Update()
     {
-        if (_objectTypesDropdown.options[_objectTypesDropdown.value].text == "Animation")
+        /*if (_objectTypesDropdown.options[_objectTypesDropdown.value].text == "Animation")
         {
             _environmentDropdown.interactable = false;
         }
 
         else
-            _environmentDropdown.interactable = true;
+            _environmentDropdown.interactable = true;*/
         //if (_dropdown.options.Count > 0)
         //{
         //    _addButton.interactable = true;

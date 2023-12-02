@@ -1,7 +1,12 @@
+using MeadowGames.UINodeConnect4;
+using MeadowGames.UINodeConnect4.GraphicRenderer;
 using MoreMountains.Feedbacks;
 using MoreMountains.InventoryEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerHandlerScript : MonoBehaviour
 {
@@ -12,6 +17,8 @@ public class PlayerHandlerScript : MonoBehaviour
     private float _speed;
     [SerializeField]
     private StoryEngineScript _storyEngineScript;
+    [SerializeField]
+    private Image _dialogBox;
 
     protected Camera _camera;
     private GameObject _player;
@@ -27,7 +34,7 @@ public class PlayerHandlerScript : MonoBehaviour
         _camera = _storyEngineScript.Camera;
         _player = _storyEngineScript.Player;
         //TODO DELETE
-        _player.transform.position = new Vector3(0, 2, 0);
+        _player.transform.position = new Vector3(0, 3, 0);
         _character = _player.transform.Find(_storyEngineScript.getCharacterSkin()).gameObject;
         _character.SetActive(true);
         _playerAnimator = _character.GetComponent<Animator>();
@@ -35,10 +42,19 @@ public class PlayerHandlerScript : MonoBehaviour
         _canMove = true;
     }
 
+    public void CanMove()
+    {
+        _canMove = true;
+    }
+
     public virtual void Update()
     {
-       if (Input.GetMouseButtonDown(1))
-       {
+        if(_dialogBox != null && _dialogBox.IsActive())
+        {
+            _canMove = false;
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))

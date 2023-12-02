@@ -72,6 +72,7 @@ public class SaveGame : AbstractSave
     private void LoadLevel(bool isNew)
     {
         Tale tale = GetTaleProcess(GetSave(SaveId));
+        Story.PlayerSkin = tale.CharacterSkin;
         foreach (ObjectInfo o in tale.TaleWorld.ObjectsInWorld)
         {
             GameObject toAdd = Resources.Load<GameObject>(_prefabPath + o.Name.Split("(")[0]);
